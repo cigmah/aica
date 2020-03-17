@@ -3,6 +3,11 @@ module Cases.Case exposing (..)
 {-| Type definitions for interactive medical cases.
 -}
 
+import Array exposing (Array)
+import Diagnosis exposing (Diagnosis)
+import Investigations.Investigation as Investigation exposing (Investigation)
+import Prescription exposing (Prescription)
+import Questions.Question as Question exposing (Question)
 import Time exposing (Posix)
 
 
@@ -47,6 +52,13 @@ type alias Details =
 
 
 type alias Case =
-    { details : Details
-    , 
+    { details : Details -- basic patient details
+    , script :
+        Question
+        -> String -- the script is a (generated) function which converts a question into a string response
+    , exemplarNote : String -- the exemplar clinical note for the case
+    , exemplarDiagnosis : Diagnosis
+    , exemplarInvestigation : Array Investigation
+    , exemplarPrescription : Array Prescription
+    , commentary : String
     }
