@@ -4,6 +4,16 @@ An Interactive Case Archive, or AICA, consists of a number of interactive medica
 
 Early work in progress.
 
+# Build CSS
+
+Currently using `tailwindcss` for functional component styles and `purgecss` to reduce css size. 
+
+Run:
+
+```
+npm run build-css
+```
+
 # Important Note on Code Generation
 
 To save on boilerplate, some of the Elm code is generated using Python scripts. 

@@ -1,0 +1,21 @@
+{
+  "name": "aica",
+  "version": "1.0.0",
+  "description": "An Interactive Case Archive, or AICA, consists of a number of interactive medical cases for revision.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "tailwindcss": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "elm-app start",
+    "build-and-purge-css": "npx tailwindcss build src/styles.css -o src/main.css & purgecss --css ./src/main.css --content ./src/**/*.elm -o ./src",
+    "build-css": "npx tailwindcss build src/styles.css -o src/main.css"
+  },
+  "author": "",
+  "license": "ISC"
+}

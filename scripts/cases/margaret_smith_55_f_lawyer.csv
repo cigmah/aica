@@ -1,0 +1,77 @@
+core,firstName,Margaret
+core,lastName,Smith
+core,age,55
+core,gender,F
+core,occupation,Lawyer
+answer,exemplarNote,"Presented to ED with sudden-onset severe headache on b/g HTN and FHx of PCKD.\n \n HOPC:\n - Severe 10/10 headache onset several hours ago\n -\n \n PMHx:\n - HTN\n \n FHx:\n - Mother had PCKD, passed away from stroke in 50s\n \n Medications\n "
+answer,exemplarDiagnosis,Subarachnoid haemorrhage
+answer,exemplarInvestigations,Bloods FBE | Imaging CTBrain
+answer,exemplarPrescriptions,Aspirin 300mg po mane
+answer,commentary,This is some sample commentary on the case and needs to be modified. 
+Alcohol,Quantity,"Oh I'd say I'm just an occasional drinker. A glass of wine occasionally at night, that sort of thing. "
+Alcohol,YesNo,"A little bit, yes."
+Details,OccupationBrief,I work as a solicitor. It's a fine job. 
+Details,Age,"I'm 55 years old. Goodness, I'm getting old!"
+Details,Name,My name's Margaret Smith. Pleasure to meet you.
+Details,OccupationDescription,"It's mostly office work, though sometimes it does get very stressful. My clients often have very high expectations you know!"
+Drugs,Recreational,"Oh no, I would never take recreational drugs. "
+Drugs,Regular,"I'm not on anything, no."
+Drugs,Otc,Oh I take a multivitamin every day. Just the ones you get from the supermarket. 
+Drugs,Allergies,Not that I know of.
+Examine,General,"You see a middle-aged lady with normal body habitus in bed, looking tired but conscious. "
+Examine,Weight,Margaret currently weighs 64kg.
+Examine,EyeMovements,The left eye does not abduct. Other eye movements are normal.
+Examine,Vitals,"HR 90bpm, BP 170/130, RR 18, T 37.2"
+Examine,Fundus,The optic disc looks a bit swollen.
+Examine,Surroundings,There's a book on the table. 
+Examine,MentalState,"You notice Margaret appears somewhat distractible. She scores 22/30 on an MMSE, losing points for serial sevens (1/5), recall (1/3) and three-stage command (1/3)."
+Fhx,Siblings,I have an older brother and a younger sister. 
+LocFeature,When,"It was just a bit earlier today. I don't know how long I was out for, but it couldn't have been too long."
+Open,Symptoms,"My head's a bit fuzzy at the moment, could you name some sympoms? "
+Open,Fhx,Well what would you like to know?
+Open,Phx,I think I've got high blood pressure or something like that. 
+Open,Opening,"Well, I've got this absolutely terrible headache. Really terrible."
+PainFeature,Quality,It sort of feels like a thumping.
+PainFeature,Quantity,"It's 10/10. I mean, I've had headaches before but this is something else - definitely the worst headache of my life."
+PainFeature,Triggers,I've noticed it seems to be worse when I look into the lights. That really sets it off.
+PainFeature,Timing,The damn thing has been there for about an hour now. I really can't concentrate. 
+PainFeature,Radiation,"It doesn't seem to go anywhere, no."
+PainFeature,Side,I couldn't point to one side in particular.
+PainFeature,Where,"I feel it strongest at the back of my head, but it's everywhere. It feels like my head is bursting. "
+PainFeature,Onset,It started very suddenly just a few hours ago.
+PainFeature,Before,Well I've had a couple of headaches in the past week. Nothing like this though.
+Phx,Surgery,"No, I've never had surgery before."
+Phx,Hypertension,Nope.
+Phx,Diabetes,"Not me, no."
+Phx,Immunisation,"I think I've had them all. I mean, what should I be having? That's a rhetorical question, you don't have to answer. "
+Shx,Diet,"I eat takeaway quite a lot, especially at the sushi place just down the street. They've got some really good fusion sushi."
+Shx,Driving,"I do drive, yes, but why do you ask?"
+Shx,LivingPeople,I live with my husband and my two children.
+Shx,Mood,"I've been stressed with a few of my clients this week, but honestly, who isn't. "
+Shx,PhysicalExercise,The girls and I sometimes go down for a walk along the beach. 
+Shx,LivingPlace,We live in a house near the beach. It's quite lovely.
+Sign,Papilloedema,Present.
+Smoke,History,Well I still smoke.
+Smoke,Quantity,About 10 cigarettes a day I'd say.
+Smoke,Duration,I've smoked on and off since my twenties.
+Smoke,YesNo,"Yes, I do smoke."
+Symptom,Photophobia,"Yes, the lights are terrible here. Why are they so bright?"
+Symptom,Diplopia,"Yes, I think I'm seeing double. Especially when I try looking to you on my left. I see two of your faces."
+Symptom,Fatigue,"I mean, I'm always tired. Who isn't always tired?"
+Symptom,NeckStiff,"Yes, my neck does seem awfully stiff."
+Symptom,Pain,"Yes, my headache. "
+Symptom,Loc,"Yes, I think I must have fainted at some point or something."
+Symptom,VisualChange,I think I'm seeing double. Especially when I try looking to you on my left. I see two of your faces.
+Symptom,Headache,"Yes, I have a headache. Didn't I tell you that?"
+SymptomFeature,Where,In my head mostly.
+SymptomFeature,Aggravating,"I really can't focus, I'm sorry. I'm not really sure."
+SymptomFeature,Quantity,"Terrible, I feel absolutely terrible."
+SymptomFeature,Alleviating,Nothing.
+Feelings,Expectations,I just want to get rid of my bloody headache. It's really getting to me.
+Feelings,Beliefs,I have no idea. 
+Feelings,Impact,I can't do anything with this headache. I can barely think straight.
+Feelings,Concerns,I hope there's a way to fix this. 
+Fhx,Children,"I've got a daughter, she's 20, and a son, he's 12. "
+Fhx,ChildrenHealth,"My children are fairly well. My youngest had asthma for a while, but that went away."
+Fhx,ParentHealth,"My mom had some problem with her kidneys. Something like polycystic kidney disease? She passed away from a stroke in her 50s. My dad's still with us though, he's going strong."
+Fhx,SiblingsHealth,I think they're okay. I don�t talk to them much.
