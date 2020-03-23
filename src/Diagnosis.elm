@@ -1556,315 +1556,315 @@ list =
     , Conductdisorder
     , Substanceusedisorder ]
 
-optionList : (Diagnosis -> msg) -> List (Option.Data Diagnosis msg)
+optionList : (Diagnosis -> String -> msg) -> List (Option.Data Diagnosis msg) 
 optionList msg = 
-    [ { value = Sicksinussyndrome, string = "Sick sinus syndrome", onClick = msg, tags = "" }
-    , { value = Bradyarrythmia, string = "Bradyarrythmia", onClick = msg, tags = "" }
-    , { value = SupraventricularTachycardia, string = "Supraventricular Tachycardia", onClick = msg, tags = "" }
-    , { value = Ventriculartachycardia, string = "Ventricular tachycardia", onClick = msg, tags = "" }
-    , { value = AcutecoronarysyndromeMyocardialinfarction, string = "Acute coronary syndrome / Myocardial infarction", onClick = msg, tags = "" }
-    , { value = Stableangina, string = "Stable angina", onClick = msg, tags = "" }
-    , { value = Peripheralvasculardisease, string = "Peripheral vascular disease", onClick = msg, tags = "" }
-    , { value = Aorticaneurysm, string = "Aortic aneurysm", onClick = msg, tags = "" }
-    , { value = Aorticdissection, string = "Aortic dissection", onClick = msg, tags = "" }
-    , { value = Hypertension, string = "Hypertension", onClick = msg, tags = "" }
-    , { value = Pulmonaryhypertension, string = "Pulmonary hypertension", onClick = msg, tags = "" }
-    , { value = Varicoseveinschronicvenousinsufficiency, string = "Varicose veins / chronic venous insufficiency", onClick = msg, tags = "" }
-    , { value = Vascularinjury, string = "Vascular injury", onClick = msg, tags = "" }
-    , { value = Mitralstenosis, string = "Mitral stenosis", onClick = msg, tags = "" }
-    , { value = Aorticstenosis, string = "Aortic stenosis", onClick = msg, tags = "" }
-    , { value = Aorticregurgitation, string = "Aortic regurgitation", onClick = msg, tags = "" }
-    , { value = Mitralregurgitation, string = "Mitral regurgitation", onClick = msg, tags = "" }
-    , { value = Tricuspidstenosis, string = "Tricuspid stenosis", onClick = msg, tags = "" }
-    , { value = Tricuspidregurgitation, string = "Tricuspid regurgitation", onClick = msg, tags = "" }
-    , { value = Pulmonicstenosis, string = "Pulmonic stenosis", onClick = msg, tags = "" }
-    , { value = Rheumaticfever, string = "Rheumatic fever", onClick = msg, tags = "" }
-    , { value = Infectiveendocarditis, string = "Infective endocarditis", onClick = msg, tags = "" }
-    , { value = Congestivecardiacfailure, string = "Congestive cardiac failure", onClick = msg, tags = "" }
-    , { value = Cardiomyopathy, string = "Cardiomyopathy", onClick = msg, tags = "" }
-    , { value = Myocarditis, string = "Myocarditis", onClick = msg, tags = "" }
-    , { value = Acutepericarditis, string = "Acute pericarditis", onClick = msg, tags = "" }
-    , { value = Pericardialeffusion, string = "Pericardial effusion", onClick = msg, tags = "" }
-    , { value = Cardiactamponade, string = "Cardiac tamponade", onClick = msg, tags = "" }
-    , { value = Asthma, string = "Asthma", onClick = msg, tags = "" }
-    , { value = COPD, string = "COPD", onClick = msg, tags = "" }
-    , { value = Chronicbronchitis, string = "Chronic bronchitis", onClick = msg, tags = "" }
-    , { value = Emphysema, string = "Emphysema", onClick = msg, tags = "" }
-    , { value = Bronchiectasis, string = "Bronchiectasis", onClick = msg, tags = "" }
-    , { value = Cysticfibrosis, string = "Cystic fibrosis", onClick = msg, tags = "" }
-    , { value = Pneumonia, string = "Pneumonia", onClick = msg, tags = "" }
-    , { value = Tuberculosis, string = "Tuberculosis", onClick = msg, tags = "" }
-    , { value = Lungcancer, string = "Lung cancer", onClick = msg, tags = "" }
-    , { value = Pulmonaryfibrosis, string = "Pulmonary fibrosis", onClick = msg, tags = "" }
-    , { value = Sarcoidosis, string = "Sarcoidosis", onClick = msg, tags = "" }
-    , { value = Ribfracture, string = "Rib fracture", onClick = msg, tags = "" }
-    , { value = Obstructivesleepapnoea, string = "Obstructive sleep apnoea", onClick = msg, tags = "" }
-    , { value = Pneumothorax, string = "Pneumothorax", onClick = msg, tags = "" }
-    , { value = Pleuraleffusion, string = "Pleural effusion", onClick = msg, tags = "" }
-    , { value = Empyema, string = "Empyema", onClick = msg, tags = "" }
-    , { value = Breastcancer, string = "Breast cancer", onClick = msg, tags = "" }
-    , { value = Breastfibroadenoma, string = "Breast fibroadenoma", onClick = msg, tags = "" }
-    , { value = Mastitis, string = "Mastitis", onClick = msg, tags = "" }
-    , { value = GORD, string = "GORD", onClick = msg, tags = "" }
-    , { value = Oesophagealcancer, string = "Oesophageal cancer", onClick = msg, tags = "" }
-    , { value = Gastriccancer, string = "Gastric cancer", onClick = msg, tags = "" }
-    , { value = Achalasia, string = "Achalasia", onClick = msg, tags = "" }
-    , { value = Acutepancreatitis, string = "Acute pancreatitis", onClick = msg, tags = "" }
-    , { value = Chronicpancreatitis, string = "Chronic pancreatitis", onClick = msg, tags = "" }
-    , { value = Pancreatictumour, string = "Pancreatic tumour", onClick = msg, tags = "" }
-    , { value = Gastroenteritis, string = "Gastroenteritis", onClick = msg, tags = "" }
-    , { value = Acuteappendicitis, string = "Acute appendicitis", onClick = msg, tags = "" }
-    , { value = Acuteperitonitis, string = "Acute peritonitis", onClick = msg, tags = "" }
-    , { value = Bowelobstruction, string = "Bowel obstruction", onClick = msg, tags = "" }
-    , { value = Ischaemicbowel, string = "Ischaemic bowel", onClick = msg, tags = "" }
-    , { value = Crohnsdisease, string = "Crohn's disease", onClick = msg, tags = "" }
-    , { value = Ulcerativecolitis, string = "Ulcerative colitis", onClick = msg, tags = "" }
-    , { value = Inflammatoryboweldisease, string = "Inflammatory bowel disease", onClick = msg, tags = "" }
-    , { value = Colorectalcancer, string = "Colorectal cancer", onClick = msg, tags = "" }
-    , { value = Diverticulardisease, string = "Diverticular disease", onClick = msg, tags = "" }
-    , { value = Abdominalhernia, string = "Abdominal hernia", onClick = msg, tags = "" }
-    , { value = Coeliacdisease, string = "Coeliac disease", onClick = msg, tags = "" }
-    , { value = Irritablebowelsyndrome, string = "Irritable bowel syndrome", onClick = msg, tags = "" }
-    , { value = GIST, string = "GIST", onClick = msg, tags = "" }
-    , { value = Angiodysplasia, string = "Angiodysplasia", onClick = msg, tags = "" }
-    , { value = Haemorrhoids, string = "Haemorrhoids", onClick = msg, tags = "" }
-    , { value = Perianalfistula, string = "Perianal fistula", onClick = msg, tags = "" }
-    , { value = Perianalabscess, string = "Perianal abscess", onClick = msg, tags = "" }
-    , { value = Analfissure, string = "Anal fissure", onClick = msg, tags = "" }
-    , { value = Rectalprolapse, string = "Rectal prolapse", onClick = msg, tags = "" }
-    , { value = Analcancer, string = "Anal cancer", onClick = msg, tags = "" }
-    , { value = Abdominalinjury, string = "Abdominal injury", onClick = msg, tags = "" }
-    , { value = HepatitisA, string = "Hepatitis A", onClick = msg, tags = "" }
-    , { value = HepatitisB, string = "Hepatitis B", onClick = msg, tags = "" }
-    , { value = HepatitisC, string = "Hepatitis C", onClick = msg, tags = "" }
-    , { value = Hepaticabscess, string = "Hepatic abscess", onClick = msg, tags = "" }
-    , { value = Cirrhosis, string = "Cirrhosis", onClick = msg, tags = "" }
-    , { value = Alcoholicliverdisease, string = "Alcoholic liver disease", onClick = msg, tags = "" }
-    , { value = NAFLD, string = "NAFLD", onClick = msg, tags = "" }
-    , { value = Portalhypertension, string = "Portal hypertension", onClick = msg, tags = "" }
-    , { value = Wilsonsdisease, string = "Wilson's disease", onClick = msg, tags = "" }
-    , { value = Alpha1antitrypsindeficiency, string = "Alpha-1 antitrypsin deficiency", onClick = msg, tags = "" }
-    , { value = Hepatocellularcarcinoma, string = "Hepatocellular carcinoma", onClick = msg, tags = "" }
-    , { value = Cholelithiasisgallstones, string = "Cholelithiasis / gallstones", onClick = msg, tags = "" }
-    , { value = Cholecystitis, string = "Cholecystitis", onClick = msg, tags = "" }
-    , { value = Acutekidneyinjury, string = "Acute kidney injury", onClick = msg, tags = "" }
-    , { value = Urinarytractinfection, string = "Urinary tract infection", onClick = msg, tags = "" }
-    , { value = Urolithiasiskidneystones, string = "Urolithiasis / kidney stones", onClick = msg, tags = "" }
-    , { value = Nephroticsyndrome, string = "Nephrotic syndrome", onClick = msg, tags = "" }
-    , { value = Nephriticsyndrome, string = "Nephritic syndrome", onClick = msg, tags = "" }
-    , { value = Pyelonephritis, string = "Pyelonephritis", onClick = msg, tags = "" }
-    , { value = Chronicrenalfailure, string = "Chronic renal failure", onClick = msg, tags = "" }
-    , { value = Diabetickidneydisease, string = "Diabetic kidney disease", onClick = msg, tags = "" }
-    , { value = Polycystickidneydisease, string = "Polycystic kidney disease", onClick = msg, tags = "" }
-    , { value = Glomerulonephritis, string = "Glomerulonephritis", onClick = msg, tags = "" }
-    , { value = Renaltractcarcinoma, string = "Renal tract carcinoma", onClick = msg, tags = "" }
-    , { value = Bladdercancer, string = "Bladder cancer", onClick = msg, tags = "" }
-    , { value = Benignprostatichypertrophy, string = "Benign prostatic hypertrophy", onClick = msg, tags = "" }
-    , { value = Prostatecancer, string = "Prostate cancer", onClick = msg, tags = "" }
-    , { value = Testiculartumour, string = "Testicular tumour", onClick = msg, tags = "" }
-    , { value = Hydrocoele, string = "Hydrocoele", onClick = msg, tags = "" }
-    , { value = Testiculartorsion, string = "Testicular torsion", onClick = msg, tags = "" }
-    , { value = Epididymoorchitis, string = "Epididymoorchitis", onClick = msg, tags = "" }
-    , { value = Type2diabetesmellitus, string = "Type 2 diabetes mellitus", onClick = msg, tags = "" }
-    , { value = Type1diabetesmellitus, string = "Type 1 diabetes mellitus", onClick = msg, tags = "" }
-    , { value = Hyperthyroidism, string = "Hyperthyroidism", onClick = msg, tags = "" }
-    , { value = Hypothyroidism, string = "Hypothyroidism", onClick = msg, tags = "" }
-    , { value = Nontoxicthyroidnodule, string = "Non-toxic thyroid nodule", onClick = msg, tags = "" }
-    , { value = Thyroidcancer, string = "Thyroid cancer", onClick = msg, tags = "" }
-    , { value = Cushingssyndrome, string = "Cushing's syndrome", onClick = msg, tags = "" }
-    , { value = Addisonsdisease, string = "Addison's disease", onClick = msg, tags = "" }
-    , { value = Hyperaldosteronism, string = "Hyperaldosteronism", onClick = msg, tags = "" }
-    , { value = Phaeochromocytoma, string = "Phaeochromocytoma", onClick = msg, tags = "" }
-    , { value = Hypopituatarism, string = "Hypopituatarism", onClick = msg, tags = "" }
-    , { value = Pituiaryadenoma, string = "Pituiary adenoma", onClick = msg, tags = "" }
-    , { value = Diabetesinsipidus, string = "Diabetes insipidus", onClick = msg, tags = "" }
-    , { value = Pituiarycancer, string = "Pituiary cancer", onClick = msg, tags = "" }
-    , { value = Hyperparathyroidism, string = "Hyperparathyroidism", onClick = msg, tags = "" }
-    , { value = Hypoparathyroidism, string = "Hypoparathyroidism", onClick = msg, tags = "" }
-    , { value = Obestiy, string = "Obestiy", onClick = msg, tags = "" }
-    , { value = Hyperlipidaemia, string = "Hyperlipidaemia", onClick = msg, tags = "" }
-    , { value = Osteoporosis, string = "Osteoporosis", onClick = msg, tags = "" }
-    , { value = Osteomalacia, string = "Osteomalacia", onClick = msg, tags = "" }
-    , { value = Migraine, string = "Migraine", onClick = msg, tags = "" }
-    , { value = Stroke, string = "Stroke", onClick = msg, tags = "" }
-    , { value = Intracranialhaemorrhage, string = "intracranial haemorrhage", onClick = msg, tags = "" }
-    , { value = Epilepsy, string = "Epilepsy", onClick = msg, tags = "" }
-    , { value = Braintumour, string = "Brain tumour", onClick = msg, tags = "" }
-    , { value = Meningioma, string = "Meningioma", onClick = msg, tags = "" }
-    , { value = Glioblastoma, string = "Glioblastoma", onClick = msg, tags = "" }
-    , { value = Meningitis, string = "Meningitis", onClick = msg, tags = "" }
-    , { value = Bacterialmeningitis, string = "Bacterial meningitis", onClick = msg, tags = "" }
-    , { value = Viralmeningitis, string = "Viral meningitis", onClick = msg, tags = "" }
-    , { value = Encephalitis, string = "Encephalitis", onClick = msg, tags = "" }
-    , { value = Degenerativediscdisease, string = "Degenerative disc disease", onClick = msg, tags = "" }
-    , { value = Spinalcordinjury, string = "Spinal cord injury", onClick = msg, tags = "" }
-    , { value = Myelitis, string = "Myelitis", onClick = msg, tags = "" }
-    , { value = Peripheralneuropathy, string = "Peripheral neuropathy", onClick = msg, tags = "" }
-    , { value = Subduralhaemorrhage, string = "Subdural haemorrhage", onClick = msg, tags = "" }
-    , { value = Subarachnoidhaemorrhage, string = "Subarachnoid haemorrhage", onClick = msg, tags = "" }
-    , { value = Epiduralhaematoma, string = "Epidural haematoma", onClick = msg, tags = "" }
-    , { value = Alzheimersdisease, string = "Alzheimer's disease", onClick = msg, tags = "" }
-    , { value = Lewybodydementia, string = "Lewy body dementia", onClick = msg, tags = "" }
-    , { value = FrontotemporaldementiaPicksdisease, string = "Frontotemporal dementia / Pick's disease", onClick = msg, tags = "" }
-    , { value = CreutzfeldtJakobdisease, string = "Creutzfeldt-Jakob disease", onClick = msg, tags = "" }
-    , { value = Vasculardementia, string = "Vascular dementia", onClick = msg, tags = "" }
-    , { value = Parkinsonsdisease, string = "Parkinson's disease", onClick = msg, tags = "" }
-    , { value = Carpaltunnelsyndrome, string = "Carpal tunnel syndrome", onClick = msg, tags = "" }
-    , { value = Multiplesclerosis, string = "Multiple sclerosis", onClick = msg, tags = "" }
-    , { value = Tensionheadache, string = "Tension headache", onClick = msg, tags = "" }
-    , { value = Clusterheadache, string = "Cluster headache", onClick = msg, tags = "" }
-    , { value = TemporalarteritisGiantcellarteritis, string = "Temporal arteritis / Giant cell arteritis", onClick = msg, tags = "" }
-    , { value = GuillainBarresyndrome, string = "Guillain-Barre syndrome", onClick = msg, tags = "" }
-    , { value = Motorneurondisease, string = "Motor neuron disease", onClick = msg, tags = "" }
-    , { value = Myastheniagravis, string = "Myasthenia gravis", onClick = msg, tags = "" }
-    , { value = Myopathy, string = "Myopathy", onClick = msg, tags = "" }
-    , { value = Osteoarthritis, string = "Osteoarthritis", onClick = msg, tags = "" }
-    , { value = Gout, string = "Gout", onClick = msg, tags = "" }
-    , { value = Septicarthritis, string = "Septic arthritis", onClick = msg, tags = "" }
-    , { value = Rheumatoidarthritis, string = "Rheumatoid arthritis", onClick = msg, tags = "" }
-    , { value = Systemiclupuserythematosus, string = "Systemic lupus erythematosus", onClick = msg, tags = "" }
-    , { value = Scleroderma, string = "Scleroderma", onClick = msg, tags = "" }
-    , { value = Ankylosingspondylitis, string = "Ankylosing spondylitis", onClick = msg, tags = "" }
-    , { value = Polymyalgiarheumatica, string = "Polymyalgia rheumatica", onClick = msg, tags = "" }
-    , { value = ANCAassociatedvasculitis, string = "ANCA-associated vasculitis", onClick = msg, tags = "" }
-    , { value = Skullfracture, string = "Skull fracture", onClick = msg, tags = "" }
-    , { value = Fractureofhumerus, string = "Fracture of humerus", onClick = msg, tags = "" }
-    , { value = Fractureofradius, string = "Fracture of radius", onClick = msg, tags = "" }
-    , { value = Fractureofulna, string = "Fracture of ulna", onClick = msg, tags = "" }
-    , { value = Fractureoffemur, string = "Fracture of femur", onClick = msg, tags = "" }
-    , { value = Fractureoftibia, string = "Fracture of tibia", onClick = msg, tags = "" }
-    , { value = Fractureoffibula, string = "Fracture of fibula", onClick = msg, tags = "" }
-    , { value = Fractureofscaphoid, string = "Fracture of scaphoid", onClick = msg, tags = "" }
-    , { value = Softtissueinjury, string = "Soft tissue injury", onClick = msg, tags = "" }
-    , { value = Irondeficiencyanaemia, string = "Iron deficiency anaemia", onClick = msg, tags = "" }
-    , { value = VitaminB12deficiency, string = "Vitamin B12 deficiency", onClick = msg, tags = "" }
-    , { value = Folatedeficiency, string = "Folate deficiency", onClick = msg, tags = "" }
-    , { value = Haemolyticanaemia, string = "Haemolytic anaemia", onClick = msg, tags = "" }
-    , { value = Aplasticanaemia, string = "Aplastic anaemia", onClick = msg, tags = "" }
-    , { value = Sicklecelldisease, string = "Sickle cell disease", onClick = msg, tags = "" }
-    , { value = Hereditaryspherocytosis, string = "Hereditary spherocytosis", onClick = msg, tags = "" }
-    , { value = G6PDdeficiency, string = "G6PD deficiency", onClick = msg, tags = "" }
-    , { value = AcutelymphoblasticleukaemiaALL, string = "Acute lymphoblastic leukaemia (ALL)", onClick = msg, tags = "" }
-    , { value = AcutemyeloidleukaemiaAML, string = "Acute myeloid leukaemia (AML)", onClick = msg, tags = "" }
-    , { value = ChroniclymphocyticleukaemiaCLL, string = "Chronic lymphocytic leukaemia (CLL)", onClick = msg, tags = "" }
-    , { value = ChronicmyeloidleukaemiaCML, string = "Chronic myeloid leukaemia (CML)", onClick = msg, tags = "" }
-    , { value = Hodgkinlymphoma, string = "Hodgkin lymphoma", onClick = msg, tags = "" }
-    , { value = Lymphoma, string = "Lymphoma", onClick = msg, tags = "" }
-    , { value = NonHodgkinlymphoma, string = "Non-Hodgkin lymphoma", onClick = msg, tags = "" }
-    , { value = Multiplemyeloma, string = "Multiple myeloma", onClick = msg, tags = "" }
-    , { value = VonWillebranddisease, string = "Von Willebrand disease", onClick = msg, tags = "" }
-    , { value = HaemophiliaA, string = "Haemophilia A", onClick = msg, tags = "" }
-    , { value = HaemophiliaB, string = "Haemophilia B", onClick = msg, tags = "" }
-    , { value = Haemophilia, string = "Haemophilia", onClick = msg, tags = "" }
-    , { value = Deepveinthrombosis, string = "Deep vein thrombosis", onClick = msg, tags = "" }
-    , { value = Pulmonaryembolus, string = "Pulmonary embolus", onClick = msg, tags = "" }
-    , { value = Myelofibrosis, string = "Myelofibrosis", onClick = msg, tags = "" }
-    , { value = Myelodysplasia, string = "Myelodysplasia", onClick = msg, tags = "" }
-    , { value = HIVAIDS, string = "HIV/AIDS", onClick = msg, tags = "" }
-    , { value = Influenza, string = "Influenza", onClick = msg, tags = "" }
-    , { value = EpsteinBarrvirusEBV, string = "Epstein-Barr virus (EBV)", onClick = msg, tags = "" }
-    , { value = Denguefever, string = "Dengue fever", onClick = msg, tags = "" }
-    , { value = Cytomegalovirus, string = "Cytomegalovirus", onClick = msg, tags = "" }
-    , { value = Typhoidfever, string = "Typhoid fever", onClick = msg, tags = "" }
-    , { value = Malaria, string = "Malaria", onClick = msg, tags = "" }
-    , { value = Psoriasis, string = "Psoriasis", onClick = msg, tags = "" }
-    , { value = Eczema, string = "Eczema", onClick = msg, tags = "" }
-    , { value = Cellulitis, string = "Cellulitis", onClick = msg, tags = "" }
-    , { value = Abscess, string = "Abscess", onClick = msg, tags = "" }
-    , { value = HPV, string = "HPV", onClick = msg, tags = "" }
-    , { value = Genitalwarts, string = "Genital warts", onClick = msg, tags = "" }
-    , { value = Melanoma, string = "Melanoma", onClick = msg, tags = "" }
-    , { value = SquamouscellcarcinomaSCC, string = "Squamous cell carcinoma (SCC)", onClick = msg, tags = "" }
-    , { value = Basalcellcarcinoma, string = "Basal cell carcinoma", onClick = msg, tags = "" }
-    , { value = Burns, string = "Burns", onClick = msg, tags = "" }
-    , { value = Pressureulcer, string = "Pressure ulcer", onClick = msg, tags = "" }
-    , { value = Conjunctivitis, string = "Conjunctivitis", onClick = msg, tags = "" }
-    , { value = Blepharitis, string = "Blepharitis", onClick = msg, tags = "" }
-    , { value = Keratitis, string = "Keratitis", onClick = msg, tags = "" }
-    , { value = Uveitis, string = "Uveitis", onClick = msg, tags = "" }
-    , { value = Episcleritis, string = "Episcleritis", onClick = msg, tags = "" }
-    , { value = Cataract, string = "Cataract", onClick = msg, tags = "" }
-    , { value = Acuteangleclosureglaucoma, string = "Acute angle-closure glaucoma", onClick = msg, tags = "" }
-    , { value = Chronicglaucoma, string = "Chronic glaucoma", onClick = msg, tags = "" }
-    , { value = Retinaldetachment, string = "Retinal detachment", onClick = msg, tags = "" }
-    , { value = Kawasakisdisease, string = "Kawasaki's disease", onClick = msg, tags = "" }
-    , { value = TetralogyofFallot, string = "Tetralogy of Fallot", onClick = msg, tags = "" }
-    , { value = TranspositionoftheGreatArteries, string = "Transposition of the Great Arteries", onClick = msg, tags = "" }
-    , { value = Patentductusarteriosus, string = "Patent ductus arteriosus", onClick = msg, tags = "" }
-    , { value = Ventricularseptaldefect, string = "Ventricular septal defect", onClick = msg, tags = "" }
-    , { value = Coarctationoftheaorta, string = "Coarctation of the aorta", onClick = msg, tags = "" }
-    , { value = Allergicrhinitis, string = "Allergic rhinitis", onClick = msg, tags = "" }
-    , { value = Upperairwayobstruction, string = "Upper airway obstruction", onClick = msg, tags = "" }
-    , { value = Anaphylaxis, string = "Anaphylaxis", onClick = msg, tags = "" }
-    , { value = Bronchiolitis, string = "Bronchiolitis", onClick = msg, tags = "" }
-    , { value = Croup, string = "Croup", onClick = msg, tags = "" }
-    , { value = Osteomyelitis, string = "Osteomyelitis", onClick = msg, tags = "" }
-    , { value = Febrileconvulsions, string = "Febrile convulsions", onClick = msg, tags = "" }
-    , { value = Intusussception, string = "Intusussception", onClick = msg, tags = "" }
-    , { value = Pyloricstenosis, string = "Pyloric stenosis", onClick = msg, tags = "" }
-    , { value = Appendicitis, string = "Appendicitis", onClick = msg, tags = "" }
-    , { value = Childabuse, string = "Child abuse", onClick = msg, tags = "" }
-    , { value = Domesticviolence, string = "Domestic violence", onClick = msg, tags = "" }
-    , { value = ImmunethrombocytopenicpurpuraITP, string = "Immune thrombocytopenic purpura (ITP)", onClick = msg, tags = "" }
-    , { value = Idiopathicthrombocytopenia, string = "Idiopathic thrombocytopenia", onClick = msg, tags = "" }
-    , { value = HenochSchonleinpurpuraHSP, string = "Henoch-Schonlein purpura (HSP)", onClick = msg, tags = "" }
-    , { value = Thalassaemia, string = "Thalassaemia", onClick = msg, tags = "" }
-    , { value = Autism, string = "Autism", onClick = msg, tags = "" }
-    , { value = Downsyndrome, string = "Down syndrome", onClick = msg, tags = "" }
-    , { value = Seborrheicdermatitis, string = "Seborrheic dermatitis", onClick = msg, tags = "" }
-    , { value = Measles, string = "Measles", onClick = msg, tags = "" }
-    , { value = Rubella, string = "Rubella", onClick = msg, tags = "" }
-    , { value = Scabies, string = "Scabies", onClick = msg, tags = "" }
-    , { value = Varicellazoster, string = "Varicella zoster", onClick = msg, tags = "" }
-    , { value = Menieresdisease, string = "Meniere's disease", onClick = msg, tags = "" }
-    , { value = Presbycusis, string = "Presbycusis", onClick = msg, tags = "" }
-    , { value = Labyrinthitis, string = "Labyrinthitis", onClick = msg, tags = "" }
-    , { value = Otitismedia, string = "Otitis media", onClick = msg, tags = "" }
-    , { value = Otitisexterna, string = "Otitis externa", onClick = msg, tags = "" }
-    , { value = Acnevulgaris, string = "Acne vulgaris", onClick = msg, tags = "" }
-    , { value = Acnerosacea, string = "Acne rosacea", onClick = msg, tags = "" }
-    , { value = Hypoglycaemia, string = "Hypoglycaemia", onClick = msg, tags = "" }
-    , { value = Suicideattempt, string = "Suicide attempt", onClick = msg, tags = "" }
-    , { value = Chlamydia, string = "Chlamydia", onClick = msg, tags = "" }
-    , { value = Gonorrhoea, string = "Gonorrhoea", onClick = msg, tags = "" }
-    , { value = Bacterialvaginosis, string = "Bacterial vaginosis", onClick = msg, tags = "" }
-    , { value = Polycysticoveriansyndrome, string = "Polycystic overian syndrome", onClick = msg, tags = "" }
-    , { value = Pelvicinflammatorydisease, string = "Pelvic inflammatory disease", onClick = msg, tags = "" }
-    , { value = Endometriosis, string = "Endometriosis", onClick = msg, tags = "" }
-    , { value = Endometritis, string = "Endometritis", onClick = msg, tags = "" }
-    , { value = Miscarriage, string = "Miscarriage", onClick = msg, tags = "" }
-    , { value = Ectopicpregnancy, string = "Ectopic pregnancy", onClick = msg, tags = "" }
-    , { value = Pregnancy, string = "Pregnancy", onClick = msg, tags = "" }
-    , { value = Schizophrenia, string = "Schizophrenia", onClick = msg, tags = "" }
-    , { value = Schizoaffectivedisorder, string = "Schizoaffective disorder", onClick = msg, tags = "" }
-    , { value = Delusionaldisorder, string = "Delusional disorder", onClick = msg, tags = "" }
-    , { value = Bipolardisorder, string = "Bipolar disorder", onClick = msg, tags = "" }
-    , { value = Majordepressivedisorderdepression, string = "Major depressive disorder / depression", onClick = msg, tags = "" }
-    , { value = Generalisedanxietydisorderanxiety, string = "Generalised anxiety disorder / anxiety", onClick = msg, tags = "" }
-    , { value = Panicdisorder, string = "Panic disorder", onClick = msg, tags = "" }
-    , { value = Agoraphobia, string = "Agoraphobia", onClick = msg, tags = "" }
-    , { value = ObssessivecompulsivedisorderOCD, string = "Obssessive-compulsive disorder (OCD)", onClick = msg, tags = "" }
-    , { value = Anorexianervosa, string = "Anorexia nervosa", onClick = msg, tags = "" }
-    , { value = Bulimianervosa, string = "Bulimia nervosa", onClick = msg, tags = "" }
-    , { value = Schizoidpersonalitydisorder, string = "Schizoid personality disorder", onClick = msg, tags = "" }
-    , { value = Paranoidpersonalitydisorder, string = "Paranoid personality disorder", onClick = msg, tags = "" }
-    , { value = Borderlinepersonalitydisorder, string = "Borderline personality disorder", onClick = msg, tags = "" }
-    , { value = Histrionicpersonalitydisorder, string = "Histrionic personality disorder", onClick = msg, tags = "" }
-    , { value = Narcissticpersonalitydisorder, string = "Narcisstic personality disorder", onClick = msg, tags = "" }
-    , { value = Avoidantpersonalitydisorder, string = "Avoidant personality disorder", onClick = msg, tags = "" }
-    , { value = Schizotypalpersonalitydisorder, string = "Schizotypal personality disorder", onClick = msg, tags = "" }
-    , { value = Antisocialpersonalitydisorder, string = "Antisocial personality disorder", onClick = msg, tags = "" }
-    , { value = Dependentpersonalitydisorder, string = "Dependent personality disorder", onClick = msg, tags = "" }
-    , { value = Obsessivecompulsivepersonalitydisorder, string = "Obsessive-compulsive personality disorder", onClick = msg, tags = "" }
-    , { value = Delirium, string = "Delirium", onClick = msg, tags = "" }
-    , { value = Somaticsymptomdisorder, string = "Somatic symptom disorder", onClick = msg, tags = "" }
-    , { value = Factitiousdisorder, string = "Factitious disorder", onClick = msg, tags = "" }
-    , { value = Malingering, string = "Malingering", onClick = msg, tags = "" }
-    , { value = Autismspectrumdisorder, string = "Autism spectrum disorder", onClick = msg, tags = "" }
-    , { value = AttentiondeficithyperactivitydisorderADHD, string = "Attention-deficit/hyperactivity disorder (ADHD)", onClick = msg, tags = "" }
-    , { value = Oppositionaldefiantdisorder, string = "Oppositional defiant disorder", onClick = msg, tags = "" }
-    , { value = Conductdisorder, string = "Conduct disorder", onClick = msg, tags = "" }
-    , { value = Substanceusedisorder, string = "Substance use disorder", onClick = msg, tags = "" } ]
+    [ { value = Sicksinussyndrome, string = "Sick sinus syndrome", onClick = msg (Sicksinussyndrome) "Sick sinus syndrome", tags = "" }
+    , { value = Bradyarrythmia, string = "Bradyarrythmia", onClick = msg (Bradyarrythmia) "Bradyarrythmia", tags = "" }
+    , { value = SupraventricularTachycardia, string = "Supraventricular Tachycardia", onClick = msg (SupraventricularTachycardia) "Supraventricular Tachycardia", tags = "" }
+    , { value = Ventriculartachycardia, string = "Ventricular tachycardia", onClick = msg (Ventriculartachycardia) "Ventricular tachycardia", tags = "" }
+    , { value = AcutecoronarysyndromeMyocardialinfarction, string = "Acute coronary syndrome / Myocardial infarction", onClick = msg (AcutecoronarysyndromeMyocardialinfarction) "Acute coronary syndrome / Myocardial infarction", tags = "" }
+    , { value = Stableangina, string = "Stable angina", onClick = msg (Stableangina) "Stable angina", tags = "" }
+    , { value = Peripheralvasculardisease, string = "Peripheral vascular disease", onClick = msg (Peripheralvasculardisease) "Peripheral vascular disease", tags = "" }
+    , { value = Aorticaneurysm, string = "Aortic aneurysm", onClick = msg (Aorticaneurysm) "Aortic aneurysm", tags = "" }
+    , { value = Aorticdissection, string = "Aortic dissection", onClick = msg (Aorticdissection) "Aortic dissection", tags = "" }
+    , { value = Hypertension, string = "Hypertension", onClick = msg (Hypertension) "Hypertension", tags = "" }
+    , { value = Pulmonaryhypertension, string = "Pulmonary hypertension", onClick = msg (Pulmonaryhypertension) "Pulmonary hypertension", tags = "" }
+    , { value = Varicoseveinschronicvenousinsufficiency, string = "Varicose veins / chronic venous insufficiency", onClick = msg (Varicoseveinschronicvenousinsufficiency) "Varicose veins / chronic venous insufficiency", tags = "" }
+    , { value = Vascularinjury, string = "Vascular injury", onClick = msg (Vascularinjury) "Vascular injury", tags = "" }
+    , { value = Mitralstenosis, string = "Mitral stenosis", onClick = msg (Mitralstenosis) "Mitral stenosis", tags = "" }
+    , { value = Aorticstenosis, string = "Aortic stenosis", onClick = msg (Aorticstenosis) "Aortic stenosis", tags = "" }
+    , { value = Aorticregurgitation, string = "Aortic regurgitation", onClick = msg (Aorticregurgitation) "Aortic regurgitation", tags = "" }
+    , { value = Mitralregurgitation, string = "Mitral regurgitation", onClick = msg (Mitralregurgitation) "Mitral regurgitation", tags = "" }
+    , { value = Tricuspidstenosis, string = "Tricuspid stenosis", onClick = msg (Tricuspidstenosis) "Tricuspid stenosis", tags = "" }
+    , { value = Tricuspidregurgitation, string = "Tricuspid regurgitation", onClick = msg (Tricuspidregurgitation) "Tricuspid regurgitation", tags = "" }
+    , { value = Pulmonicstenosis, string = "Pulmonic stenosis", onClick = msg (Pulmonicstenosis) "Pulmonic stenosis", tags = "" }
+    , { value = Rheumaticfever, string = "Rheumatic fever", onClick = msg (Rheumaticfever) "Rheumatic fever", tags = "" }
+    , { value = Infectiveendocarditis, string = "Infective endocarditis", onClick = msg (Infectiveendocarditis) "Infective endocarditis", tags = "" }
+    , { value = Congestivecardiacfailure, string = "Congestive cardiac failure", onClick = msg (Congestivecardiacfailure) "Congestive cardiac failure", tags = "" }
+    , { value = Cardiomyopathy, string = "Cardiomyopathy", onClick = msg (Cardiomyopathy) "Cardiomyopathy", tags = "" }
+    , { value = Myocarditis, string = "Myocarditis", onClick = msg (Myocarditis) "Myocarditis", tags = "" }
+    , { value = Acutepericarditis, string = "Acute pericarditis", onClick = msg (Acutepericarditis) "Acute pericarditis", tags = "" }
+    , { value = Pericardialeffusion, string = "Pericardial effusion", onClick = msg (Pericardialeffusion) "Pericardial effusion", tags = "" }
+    , { value = Cardiactamponade, string = "Cardiac tamponade", onClick = msg (Cardiactamponade) "Cardiac tamponade", tags = "" }
+    , { value = Asthma, string = "Asthma", onClick = msg (Asthma) "Asthma", tags = "" }
+    , { value = COPD, string = "COPD", onClick = msg (COPD) "COPD", tags = "" }
+    , { value = Chronicbronchitis, string = "Chronic bronchitis", onClick = msg (Chronicbronchitis) "Chronic bronchitis", tags = "" }
+    , { value = Emphysema, string = "Emphysema", onClick = msg (Emphysema) "Emphysema", tags = "" }
+    , { value = Bronchiectasis, string = "Bronchiectasis", onClick = msg (Bronchiectasis) "Bronchiectasis", tags = "" }
+    , { value = Cysticfibrosis, string = "Cystic fibrosis", onClick = msg (Cysticfibrosis) "Cystic fibrosis", tags = "" }
+    , { value = Pneumonia, string = "Pneumonia", onClick = msg (Pneumonia) "Pneumonia", tags = "" }
+    , { value = Tuberculosis, string = "Tuberculosis", onClick = msg (Tuberculosis) "Tuberculosis", tags = "" }
+    , { value = Lungcancer, string = "Lung cancer", onClick = msg (Lungcancer) "Lung cancer", tags = "" }
+    , { value = Pulmonaryfibrosis, string = "Pulmonary fibrosis", onClick = msg (Pulmonaryfibrosis) "Pulmonary fibrosis", tags = "" }
+    , { value = Sarcoidosis, string = "Sarcoidosis", onClick = msg (Sarcoidosis) "Sarcoidosis", tags = "" }
+    , { value = Ribfracture, string = "Rib fracture", onClick = msg (Ribfracture) "Rib fracture", tags = "" }
+    , { value = Obstructivesleepapnoea, string = "Obstructive sleep apnoea", onClick = msg (Obstructivesleepapnoea) "Obstructive sleep apnoea", tags = "" }
+    , { value = Pneumothorax, string = "Pneumothorax", onClick = msg (Pneumothorax) "Pneumothorax", tags = "" }
+    , { value = Pleuraleffusion, string = "Pleural effusion", onClick = msg (Pleuraleffusion) "Pleural effusion", tags = "" }
+    , { value = Empyema, string = "Empyema", onClick = msg (Empyema) "Empyema", tags = "" }
+    , { value = Breastcancer, string = "Breast cancer", onClick = msg (Breastcancer) "Breast cancer", tags = "" }
+    , { value = Breastfibroadenoma, string = "Breast fibroadenoma", onClick = msg (Breastfibroadenoma) "Breast fibroadenoma", tags = "" }
+    , { value = Mastitis, string = "Mastitis", onClick = msg (Mastitis) "Mastitis", tags = "" }
+    , { value = GORD, string = "GORD", onClick = msg (GORD) "GORD", tags = "" }
+    , { value = Oesophagealcancer, string = "Oesophageal cancer", onClick = msg (Oesophagealcancer) "Oesophageal cancer", tags = "" }
+    , { value = Gastriccancer, string = "Gastric cancer", onClick = msg (Gastriccancer) "Gastric cancer", tags = "" }
+    , { value = Achalasia, string = "Achalasia", onClick = msg (Achalasia) "Achalasia", tags = "" }
+    , { value = Acutepancreatitis, string = "Acute pancreatitis", onClick = msg (Acutepancreatitis) "Acute pancreatitis", tags = "" }
+    , { value = Chronicpancreatitis, string = "Chronic pancreatitis", onClick = msg (Chronicpancreatitis) "Chronic pancreatitis", tags = "" }
+    , { value = Pancreatictumour, string = "Pancreatic tumour", onClick = msg (Pancreatictumour) "Pancreatic tumour", tags = "" }
+    , { value = Gastroenteritis, string = "Gastroenteritis", onClick = msg (Gastroenteritis) "Gastroenteritis", tags = "" }
+    , { value = Acuteappendicitis, string = "Acute appendicitis", onClick = msg (Acuteappendicitis) "Acute appendicitis", tags = "" }
+    , { value = Acuteperitonitis, string = "Acute peritonitis", onClick = msg (Acuteperitonitis) "Acute peritonitis", tags = "" }
+    , { value = Bowelobstruction, string = "Bowel obstruction", onClick = msg (Bowelobstruction) "Bowel obstruction", tags = "" }
+    , { value = Ischaemicbowel, string = "Ischaemic bowel", onClick = msg (Ischaemicbowel) "Ischaemic bowel", tags = "" }
+    , { value = Crohnsdisease, string = "Crohn's disease", onClick = msg (Crohnsdisease) "Crohn's disease", tags = "" }
+    , { value = Ulcerativecolitis, string = "Ulcerative colitis", onClick = msg (Ulcerativecolitis) "Ulcerative colitis", tags = "" }
+    , { value = Inflammatoryboweldisease, string = "Inflammatory bowel disease", onClick = msg (Inflammatoryboweldisease) "Inflammatory bowel disease", tags = "" }
+    , { value = Colorectalcancer, string = "Colorectal cancer", onClick = msg (Colorectalcancer) "Colorectal cancer", tags = "" }
+    , { value = Diverticulardisease, string = "Diverticular disease", onClick = msg (Diverticulardisease) "Diverticular disease", tags = "" }
+    , { value = Abdominalhernia, string = "Abdominal hernia", onClick = msg (Abdominalhernia) "Abdominal hernia", tags = "" }
+    , { value = Coeliacdisease, string = "Coeliac disease", onClick = msg (Coeliacdisease) "Coeliac disease", tags = "" }
+    , { value = Irritablebowelsyndrome, string = "Irritable bowel syndrome", onClick = msg (Irritablebowelsyndrome) "Irritable bowel syndrome", tags = "" }
+    , { value = GIST, string = "GIST", onClick = msg (GIST) "GIST", tags = "" }
+    , { value = Angiodysplasia, string = "Angiodysplasia", onClick = msg (Angiodysplasia) "Angiodysplasia", tags = "" }
+    , { value = Haemorrhoids, string = "Haemorrhoids", onClick = msg (Haemorrhoids) "Haemorrhoids", tags = "" }
+    , { value = Perianalfistula, string = "Perianal fistula", onClick = msg (Perianalfistula) "Perianal fistula", tags = "" }
+    , { value = Perianalabscess, string = "Perianal abscess", onClick = msg (Perianalabscess) "Perianal abscess", tags = "" }
+    , { value = Analfissure, string = "Anal fissure", onClick = msg (Analfissure) "Anal fissure", tags = "" }
+    , { value = Rectalprolapse, string = "Rectal prolapse", onClick = msg (Rectalprolapse) "Rectal prolapse", tags = "" }
+    , { value = Analcancer, string = "Anal cancer", onClick = msg (Analcancer) "Anal cancer", tags = "" }
+    , { value = Abdominalinjury, string = "Abdominal injury", onClick = msg (Abdominalinjury) "Abdominal injury", tags = "" }
+    , { value = HepatitisA, string = "Hepatitis A", onClick = msg (HepatitisA) "Hepatitis A", tags = "" }
+    , { value = HepatitisB, string = "Hepatitis B", onClick = msg (HepatitisB) "Hepatitis B", tags = "" }
+    , { value = HepatitisC, string = "Hepatitis C", onClick = msg (HepatitisC) "Hepatitis C", tags = "" }
+    , { value = Hepaticabscess, string = "Hepatic abscess", onClick = msg (Hepaticabscess) "Hepatic abscess", tags = "" }
+    , { value = Cirrhosis, string = "Cirrhosis", onClick = msg (Cirrhosis) "Cirrhosis", tags = "" }
+    , { value = Alcoholicliverdisease, string = "Alcoholic liver disease", onClick = msg (Alcoholicliverdisease) "Alcoholic liver disease", tags = "" }
+    , { value = NAFLD, string = "NAFLD", onClick = msg (NAFLD) "NAFLD", tags = "" }
+    , { value = Portalhypertension, string = "Portal hypertension", onClick = msg (Portalhypertension) "Portal hypertension", tags = "" }
+    , { value = Wilsonsdisease, string = "Wilson's disease", onClick = msg (Wilsonsdisease) "Wilson's disease", tags = "" }
+    , { value = Alpha1antitrypsindeficiency, string = "Alpha-1 antitrypsin deficiency", onClick = msg (Alpha1antitrypsindeficiency) "Alpha-1 antitrypsin deficiency", tags = "" }
+    , { value = Hepatocellularcarcinoma, string = "Hepatocellular carcinoma", onClick = msg (Hepatocellularcarcinoma) "Hepatocellular carcinoma", tags = "" }
+    , { value = Cholelithiasisgallstones, string = "Cholelithiasis / gallstones", onClick = msg (Cholelithiasisgallstones) "Cholelithiasis / gallstones", tags = "" }
+    , { value = Cholecystitis, string = "Cholecystitis", onClick = msg (Cholecystitis) "Cholecystitis", tags = "" }
+    , { value = Acutekidneyinjury, string = "Acute kidney injury", onClick = msg (Acutekidneyinjury) "Acute kidney injury", tags = "" }
+    , { value = Urinarytractinfection, string = "Urinary tract infection", onClick = msg (Urinarytractinfection) "Urinary tract infection", tags = "" }
+    , { value = Urolithiasiskidneystones, string = "Urolithiasis / kidney stones", onClick = msg (Urolithiasiskidneystones) "Urolithiasis / kidney stones", tags = "" }
+    , { value = Nephroticsyndrome, string = "Nephrotic syndrome", onClick = msg (Nephroticsyndrome) "Nephrotic syndrome", tags = "" }
+    , { value = Nephriticsyndrome, string = "Nephritic syndrome", onClick = msg (Nephriticsyndrome) "Nephritic syndrome", tags = "" }
+    , { value = Pyelonephritis, string = "Pyelonephritis", onClick = msg (Pyelonephritis) "Pyelonephritis", tags = "" }
+    , { value = Chronicrenalfailure, string = "Chronic renal failure", onClick = msg (Chronicrenalfailure) "Chronic renal failure", tags = "" }
+    , { value = Diabetickidneydisease, string = "Diabetic kidney disease", onClick = msg (Diabetickidneydisease) "Diabetic kidney disease", tags = "" }
+    , { value = Polycystickidneydisease, string = "Polycystic kidney disease", onClick = msg (Polycystickidneydisease) "Polycystic kidney disease", tags = "" }
+    , { value = Glomerulonephritis, string = "Glomerulonephritis", onClick = msg (Glomerulonephritis) "Glomerulonephritis", tags = "" }
+    , { value = Renaltractcarcinoma, string = "Renal tract carcinoma", onClick = msg (Renaltractcarcinoma) "Renal tract carcinoma", tags = "" }
+    , { value = Bladdercancer, string = "Bladder cancer", onClick = msg (Bladdercancer) "Bladder cancer", tags = "" }
+    , { value = Benignprostatichypertrophy, string = "Benign prostatic hypertrophy", onClick = msg (Benignprostatichypertrophy) "Benign prostatic hypertrophy", tags = "" }
+    , { value = Prostatecancer, string = "Prostate cancer", onClick = msg (Prostatecancer) "Prostate cancer", tags = "" }
+    , { value = Testiculartumour, string = "Testicular tumour", onClick = msg (Testiculartumour) "Testicular tumour", tags = "" }
+    , { value = Hydrocoele, string = "Hydrocoele", onClick = msg (Hydrocoele) "Hydrocoele", tags = "" }
+    , { value = Testiculartorsion, string = "Testicular torsion", onClick = msg (Testiculartorsion) "Testicular torsion", tags = "" }
+    , { value = Epididymoorchitis, string = "Epididymoorchitis", onClick = msg (Epididymoorchitis) "Epididymoorchitis", tags = "" }
+    , { value = Type2diabetesmellitus, string = "Type 2 diabetes mellitus", onClick = msg (Type2diabetesmellitus) "Type 2 diabetes mellitus", tags = "" }
+    , { value = Type1diabetesmellitus, string = "Type 1 diabetes mellitus", onClick = msg (Type1diabetesmellitus) "Type 1 diabetes mellitus", tags = "" }
+    , { value = Hyperthyroidism, string = "Hyperthyroidism", onClick = msg (Hyperthyroidism) "Hyperthyroidism", tags = "" }
+    , { value = Hypothyroidism, string = "Hypothyroidism", onClick = msg (Hypothyroidism) "Hypothyroidism", tags = "" }
+    , { value = Nontoxicthyroidnodule, string = "Non-toxic thyroid nodule", onClick = msg (Nontoxicthyroidnodule) "Non-toxic thyroid nodule", tags = "" }
+    , { value = Thyroidcancer, string = "Thyroid cancer", onClick = msg (Thyroidcancer) "Thyroid cancer", tags = "" }
+    , { value = Cushingssyndrome, string = "Cushing's syndrome", onClick = msg (Cushingssyndrome) "Cushing's syndrome", tags = "" }
+    , { value = Addisonsdisease, string = "Addison's disease", onClick = msg (Addisonsdisease) "Addison's disease", tags = "" }
+    , { value = Hyperaldosteronism, string = "Hyperaldosteronism", onClick = msg (Hyperaldosteronism) "Hyperaldosteronism", tags = "" }
+    , { value = Phaeochromocytoma, string = "Phaeochromocytoma", onClick = msg (Phaeochromocytoma) "Phaeochromocytoma", tags = "" }
+    , { value = Hypopituatarism, string = "Hypopituatarism", onClick = msg (Hypopituatarism) "Hypopituatarism", tags = "" }
+    , { value = Pituiaryadenoma, string = "Pituiary adenoma", onClick = msg (Pituiaryadenoma) "Pituiary adenoma", tags = "" }
+    , { value = Diabetesinsipidus, string = "Diabetes insipidus", onClick = msg (Diabetesinsipidus) "Diabetes insipidus", tags = "" }
+    , { value = Pituiarycancer, string = "Pituiary cancer", onClick = msg (Pituiarycancer) "Pituiary cancer", tags = "" }
+    , { value = Hyperparathyroidism, string = "Hyperparathyroidism", onClick = msg (Hyperparathyroidism) "Hyperparathyroidism", tags = "" }
+    , { value = Hypoparathyroidism, string = "Hypoparathyroidism", onClick = msg (Hypoparathyroidism) "Hypoparathyroidism", tags = "" }
+    , { value = Obestiy, string = "Obestiy", onClick = msg (Obestiy) "Obestiy", tags = "" }
+    , { value = Hyperlipidaemia, string = "Hyperlipidaemia", onClick = msg (Hyperlipidaemia) "Hyperlipidaemia", tags = "" }
+    , { value = Osteoporosis, string = "Osteoporosis", onClick = msg (Osteoporosis) "Osteoporosis", tags = "" }
+    , { value = Osteomalacia, string = "Osteomalacia", onClick = msg (Osteomalacia) "Osteomalacia", tags = "" }
+    , { value = Migraine, string = "Migraine", onClick = msg (Migraine) "Migraine", tags = "" }
+    , { value = Stroke, string = "Stroke", onClick = msg (Stroke) "Stroke", tags = "" }
+    , { value = Intracranialhaemorrhage, string = "intracranial haemorrhage", onClick = msg (Intracranialhaemorrhage) "intracranial haemorrhage", tags = "" }
+    , { value = Epilepsy, string = "Epilepsy", onClick = msg (Epilepsy) "Epilepsy", tags = "" }
+    , { value = Braintumour, string = "Brain tumour", onClick = msg (Braintumour) "Brain tumour", tags = "" }
+    , { value = Meningioma, string = "Meningioma", onClick = msg (Meningioma) "Meningioma", tags = "" }
+    , { value = Glioblastoma, string = "Glioblastoma", onClick = msg (Glioblastoma) "Glioblastoma", tags = "" }
+    , { value = Meningitis, string = "Meningitis", onClick = msg (Meningitis) "Meningitis", tags = "" }
+    , { value = Bacterialmeningitis, string = "Bacterial meningitis", onClick = msg (Bacterialmeningitis) "Bacterial meningitis", tags = "" }
+    , { value = Viralmeningitis, string = "Viral meningitis", onClick = msg (Viralmeningitis) "Viral meningitis", tags = "" }
+    , { value = Encephalitis, string = "Encephalitis", onClick = msg (Encephalitis) "Encephalitis", tags = "" }
+    , { value = Degenerativediscdisease, string = "Degenerative disc disease", onClick = msg (Degenerativediscdisease) "Degenerative disc disease", tags = "" }
+    , { value = Spinalcordinjury, string = "Spinal cord injury", onClick = msg (Spinalcordinjury) "Spinal cord injury", tags = "" }
+    , { value = Myelitis, string = "Myelitis", onClick = msg (Myelitis) "Myelitis", tags = "" }
+    , { value = Peripheralneuropathy, string = "Peripheral neuropathy", onClick = msg (Peripheralneuropathy) "Peripheral neuropathy", tags = "" }
+    , { value = Subduralhaemorrhage, string = "Subdural haemorrhage", onClick = msg (Subduralhaemorrhage) "Subdural haemorrhage", tags = "" }
+    , { value = Subarachnoidhaemorrhage, string = "Subarachnoid haemorrhage", onClick = msg (Subarachnoidhaemorrhage) "Subarachnoid haemorrhage", tags = "" }
+    , { value = Epiduralhaematoma, string = "Epidural haematoma", onClick = msg (Epiduralhaematoma) "Epidural haematoma", tags = "" }
+    , { value = Alzheimersdisease, string = "Alzheimer's disease", onClick = msg (Alzheimersdisease) "Alzheimer's disease", tags = "" }
+    , { value = Lewybodydementia, string = "Lewy body dementia", onClick = msg (Lewybodydementia) "Lewy body dementia", tags = "" }
+    , { value = FrontotemporaldementiaPicksdisease, string = "Frontotemporal dementia / Pick's disease", onClick = msg (FrontotemporaldementiaPicksdisease) "Frontotemporal dementia / Pick's disease", tags = "" }
+    , { value = CreutzfeldtJakobdisease, string = "Creutzfeldt-Jakob disease", onClick = msg (CreutzfeldtJakobdisease) "Creutzfeldt-Jakob disease", tags = "" }
+    , { value = Vasculardementia, string = "Vascular dementia", onClick = msg (Vasculardementia) "Vascular dementia", tags = "" }
+    , { value = Parkinsonsdisease, string = "Parkinson's disease", onClick = msg (Parkinsonsdisease) "Parkinson's disease", tags = "" }
+    , { value = Carpaltunnelsyndrome, string = "Carpal tunnel syndrome", onClick = msg (Carpaltunnelsyndrome) "Carpal tunnel syndrome", tags = "" }
+    , { value = Multiplesclerosis, string = "Multiple sclerosis", onClick = msg (Multiplesclerosis) "Multiple sclerosis", tags = "" }
+    , { value = Tensionheadache, string = "Tension headache", onClick = msg (Tensionheadache) "Tension headache", tags = "" }
+    , { value = Clusterheadache, string = "Cluster headache", onClick = msg (Clusterheadache) "Cluster headache", tags = "" }
+    , { value = TemporalarteritisGiantcellarteritis, string = "Temporal arteritis / Giant cell arteritis", onClick = msg (TemporalarteritisGiantcellarteritis) "Temporal arteritis / Giant cell arteritis", tags = "" }
+    , { value = GuillainBarresyndrome, string = "Guillain-Barre syndrome", onClick = msg (GuillainBarresyndrome) "Guillain-Barre syndrome", tags = "" }
+    , { value = Motorneurondisease, string = "Motor neuron disease", onClick = msg (Motorneurondisease) "Motor neuron disease", tags = "" }
+    , { value = Myastheniagravis, string = "Myasthenia gravis", onClick = msg (Myastheniagravis) "Myasthenia gravis", tags = "" }
+    , { value = Myopathy, string = "Myopathy", onClick = msg (Myopathy) "Myopathy", tags = "" }
+    , { value = Osteoarthritis, string = "Osteoarthritis", onClick = msg (Osteoarthritis) "Osteoarthritis", tags = "" }
+    , { value = Gout, string = "Gout", onClick = msg (Gout) "Gout", tags = "" }
+    , { value = Septicarthritis, string = "Septic arthritis", onClick = msg (Septicarthritis) "Septic arthritis", tags = "" }
+    , { value = Rheumatoidarthritis, string = "Rheumatoid arthritis", onClick = msg (Rheumatoidarthritis) "Rheumatoid arthritis", tags = "" }
+    , { value = Systemiclupuserythematosus, string = "Systemic lupus erythematosus", onClick = msg (Systemiclupuserythematosus) "Systemic lupus erythematosus", tags = "" }
+    , { value = Scleroderma, string = "Scleroderma", onClick = msg (Scleroderma) "Scleroderma", tags = "" }
+    , { value = Ankylosingspondylitis, string = "Ankylosing spondylitis", onClick = msg (Ankylosingspondylitis) "Ankylosing spondylitis", tags = "" }
+    , { value = Polymyalgiarheumatica, string = "Polymyalgia rheumatica", onClick = msg (Polymyalgiarheumatica) "Polymyalgia rheumatica", tags = "" }
+    , { value = ANCAassociatedvasculitis, string = "ANCA-associated vasculitis", onClick = msg (ANCAassociatedvasculitis) "ANCA-associated vasculitis", tags = "" }
+    , { value = Skullfracture, string = "Skull fracture", onClick = msg (Skullfracture) "Skull fracture", tags = "" }
+    , { value = Fractureofhumerus, string = "Fracture of humerus", onClick = msg (Fractureofhumerus) "Fracture of humerus", tags = "" }
+    , { value = Fractureofradius, string = "Fracture of radius", onClick = msg (Fractureofradius) "Fracture of radius", tags = "" }
+    , { value = Fractureofulna, string = "Fracture of ulna", onClick = msg (Fractureofulna) "Fracture of ulna", tags = "" }
+    , { value = Fractureoffemur, string = "Fracture of femur", onClick = msg (Fractureoffemur) "Fracture of femur", tags = "" }
+    , { value = Fractureoftibia, string = "Fracture of tibia", onClick = msg (Fractureoftibia) "Fracture of tibia", tags = "" }
+    , { value = Fractureoffibula, string = "Fracture of fibula", onClick = msg (Fractureoffibula) "Fracture of fibula", tags = "" }
+    , { value = Fractureofscaphoid, string = "Fracture of scaphoid", onClick = msg (Fractureofscaphoid) "Fracture of scaphoid", tags = "" }
+    , { value = Softtissueinjury, string = "Soft tissue injury", onClick = msg (Softtissueinjury) "Soft tissue injury", tags = "" }
+    , { value = Irondeficiencyanaemia, string = "Iron deficiency anaemia", onClick = msg (Irondeficiencyanaemia) "Iron deficiency anaemia", tags = "" }
+    , { value = VitaminB12deficiency, string = "Vitamin B12 deficiency", onClick = msg (VitaminB12deficiency) "Vitamin B12 deficiency", tags = "" }
+    , { value = Folatedeficiency, string = "Folate deficiency", onClick = msg (Folatedeficiency) "Folate deficiency", tags = "" }
+    , { value = Haemolyticanaemia, string = "Haemolytic anaemia", onClick = msg (Haemolyticanaemia) "Haemolytic anaemia", tags = "" }
+    , { value = Aplasticanaemia, string = "Aplastic anaemia", onClick = msg (Aplasticanaemia) "Aplastic anaemia", tags = "" }
+    , { value = Sicklecelldisease, string = "Sickle cell disease", onClick = msg (Sicklecelldisease) "Sickle cell disease", tags = "" }
+    , { value = Hereditaryspherocytosis, string = "Hereditary spherocytosis", onClick = msg (Hereditaryspherocytosis) "Hereditary spherocytosis", tags = "" }
+    , { value = G6PDdeficiency, string = "G6PD deficiency", onClick = msg (G6PDdeficiency) "G6PD deficiency", tags = "" }
+    , { value = AcutelymphoblasticleukaemiaALL, string = "Acute lymphoblastic leukaemia (ALL)", onClick = msg (AcutelymphoblasticleukaemiaALL) "Acute lymphoblastic leukaemia (ALL)", tags = "" }
+    , { value = AcutemyeloidleukaemiaAML, string = "Acute myeloid leukaemia (AML)", onClick = msg (AcutemyeloidleukaemiaAML) "Acute myeloid leukaemia (AML)", tags = "" }
+    , { value = ChroniclymphocyticleukaemiaCLL, string = "Chronic lymphocytic leukaemia (CLL)", onClick = msg (ChroniclymphocyticleukaemiaCLL) "Chronic lymphocytic leukaemia (CLL)", tags = "" }
+    , { value = ChronicmyeloidleukaemiaCML, string = "Chronic myeloid leukaemia (CML)", onClick = msg (ChronicmyeloidleukaemiaCML) "Chronic myeloid leukaemia (CML)", tags = "" }
+    , { value = Hodgkinlymphoma, string = "Hodgkin lymphoma", onClick = msg (Hodgkinlymphoma) "Hodgkin lymphoma", tags = "" }
+    , { value = Lymphoma, string = "Lymphoma", onClick = msg (Lymphoma) "Lymphoma", tags = "" }
+    , { value = NonHodgkinlymphoma, string = "Non-Hodgkin lymphoma", onClick = msg (NonHodgkinlymphoma) "Non-Hodgkin lymphoma", tags = "" }
+    , { value = Multiplemyeloma, string = "Multiple myeloma", onClick = msg (Multiplemyeloma) "Multiple myeloma", tags = "" }
+    , { value = VonWillebranddisease, string = "Von Willebrand disease", onClick = msg (VonWillebranddisease) "Von Willebrand disease", tags = "" }
+    , { value = HaemophiliaA, string = "Haemophilia A", onClick = msg (HaemophiliaA) "Haemophilia A", tags = "" }
+    , { value = HaemophiliaB, string = "Haemophilia B", onClick = msg (HaemophiliaB) "Haemophilia B", tags = "" }
+    , { value = Haemophilia, string = "Haemophilia", onClick = msg (Haemophilia) "Haemophilia", tags = "" }
+    , { value = Deepveinthrombosis, string = "Deep vein thrombosis", onClick = msg (Deepveinthrombosis) "Deep vein thrombosis", tags = "" }
+    , { value = Pulmonaryembolus, string = "Pulmonary embolus", onClick = msg (Pulmonaryembolus) "Pulmonary embolus", tags = "" }
+    , { value = Myelofibrosis, string = "Myelofibrosis", onClick = msg (Myelofibrosis) "Myelofibrosis", tags = "" }
+    , { value = Myelodysplasia, string = "Myelodysplasia", onClick = msg (Myelodysplasia) "Myelodysplasia", tags = "" }
+    , { value = HIVAIDS, string = "HIV/AIDS", onClick = msg (HIVAIDS) "HIV/AIDS", tags = "" }
+    , { value = Influenza, string = "Influenza", onClick = msg (Influenza) "Influenza", tags = "" }
+    , { value = EpsteinBarrvirusEBV, string = "Epstein-Barr virus (EBV)", onClick = msg (EpsteinBarrvirusEBV) "Epstein-Barr virus (EBV)", tags = "" }
+    , { value = Denguefever, string = "Dengue fever", onClick = msg (Denguefever) "Dengue fever", tags = "" }
+    , { value = Cytomegalovirus, string = "Cytomegalovirus", onClick = msg (Cytomegalovirus) "Cytomegalovirus", tags = "" }
+    , { value = Typhoidfever, string = "Typhoid fever", onClick = msg (Typhoidfever) "Typhoid fever", tags = "" }
+    , { value = Malaria, string = "Malaria", onClick = msg (Malaria) "Malaria", tags = "" }
+    , { value = Psoriasis, string = "Psoriasis", onClick = msg (Psoriasis) "Psoriasis", tags = "" }
+    , { value = Eczema, string = "Eczema", onClick = msg (Eczema) "Eczema", tags = "" }
+    , { value = Cellulitis, string = "Cellulitis", onClick = msg (Cellulitis) "Cellulitis", tags = "" }
+    , { value = Abscess, string = "Abscess", onClick = msg (Abscess) "Abscess", tags = "" }
+    , { value = HPV, string = "HPV", onClick = msg (HPV) "HPV", tags = "" }
+    , { value = Genitalwarts, string = "Genital warts", onClick = msg (Genitalwarts) "Genital warts", tags = "" }
+    , { value = Melanoma, string = "Melanoma", onClick = msg (Melanoma) "Melanoma", tags = "" }
+    , { value = SquamouscellcarcinomaSCC, string = "Squamous cell carcinoma (SCC)", onClick = msg (SquamouscellcarcinomaSCC) "Squamous cell carcinoma (SCC)", tags = "" }
+    , { value = Basalcellcarcinoma, string = "Basal cell carcinoma", onClick = msg (Basalcellcarcinoma) "Basal cell carcinoma", tags = "" }
+    , { value = Burns, string = "Burns", onClick = msg (Burns) "Burns", tags = "" }
+    , { value = Pressureulcer, string = "Pressure ulcer", onClick = msg (Pressureulcer) "Pressure ulcer", tags = "" }
+    , { value = Conjunctivitis, string = "Conjunctivitis", onClick = msg (Conjunctivitis) "Conjunctivitis", tags = "" }
+    , { value = Blepharitis, string = "Blepharitis", onClick = msg (Blepharitis) "Blepharitis", tags = "" }
+    , { value = Keratitis, string = "Keratitis", onClick = msg (Keratitis) "Keratitis", tags = "" }
+    , { value = Uveitis, string = "Uveitis", onClick = msg (Uveitis) "Uveitis", tags = "" }
+    , { value = Episcleritis, string = "Episcleritis", onClick = msg (Episcleritis) "Episcleritis", tags = "" }
+    , { value = Cataract, string = "Cataract", onClick = msg (Cataract) "Cataract", tags = "" }
+    , { value = Acuteangleclosureglaucoma, string = "Acute angle-closure glaucoma", onClick = msg (Acuteangleclosureglaucoma) "Acute angle-closure glaucoma", tags = "" }
+    , { value = Chronicglaucoma, string = "Chronic glaucoma", onClick = msg (Chronicglaucoma) "Chronic glaucoma", tags = "" }
+    , { value = Retinaldetachment, string = "Retinal detachment", onClick = msg (Retinaldetachment) "Retinal detachment", tags = "" }
+    , { value = Kawasakisdisease, string = "Kawasaki's disease", onClick = msg (Kawasakisdisease) "Kawasaki's disease", tags = "" }
+    , { value = TetralogyofFallot, string = "Tetralogy of Fallot", onClick = msg (TetralogyofFallot) "Tetralogy of Fallot", tags = "" }
+    , { value = TranspositionoftheGreatArteries, string = "Transposition of the Great Arteries", onClick = msg (TranspositionoftheGreatArteries) "Transposition of the Great Arteries", tags = "" }
+    , { value = Patentductusarteriosus, string = "Patent ductus arteriosus", onClick = msg (Patentductusarteriosus) "Patent ductus arteriosus", tags = "" }
+    , { value = Ventricularseptaldefect, string = "Ventricular septal defect", onClick = msg (Ventricularseptaldefect) "Ventricular septal defect", tags = "" }
+    , { value = Coarctationoftheaorta, string = "Coarctation of the aorta", onClick = msg (Coarctationoftheaorta) "Coarctation of the aorta", tags = "" }
+    , { value = Allergicrhinitis, string = "Allergic rhinitis", onClick = msg (Allergicrhinitis) "Allergic rhinitis", tags = "" }
+    , { value = Upperairwayobstruction, string = "Upper airway obstruction", onClick = msg (Upperairwayobstruction) "Upper airway obstruction", tags = "" }
+    , { value = Anaphylaxis, string = "Anaphylaxis", onClick = msg (Anaphylaxis) "Anaphylaxis", tags = "" }
+    , { value = Bronchiolitis, string = "Bronchiolitis", onClick = msg (Bronchiolitis) "Bronchiolitis", tags = "" }
+    , { value = Croup, string = "Croup", onClick = msg (Croup) "Croup", tags = "" }
+    , { value = Osteomyelitis, string = "Osteomyelitis", onClick = msg (Osteomyelitis) "Osteomyelitis", tags = "" }
+    , { value = Febrileconvulsions, string = "Febrile convulsions", onClick = msg (Febrileconvulsions) "Febrile convulsions", tags = "" }
+    , { value = Intusussception, string = "Intusussception", onClick = msg (Intusussception) "Intusussception", tags = "" }
+    , { value = Pyloricstenosis, string = "Pyloric stenosis", onClick = msg (Pyloricstenosis) "Pyloric stenosis", tags = "" }
+    , { value = Appendicitis, string = "Appendicitis", onClick = msg (Appendicitis) "Appendicitis", tags = "" }
+    , { value = Childabuse, string = "Child abuse", onClick = msg (Childabuse) "Child abuse", tags = "" }
+    , { value = Domesticviolence, string = "Domestic violence", onClick = msg (Domesticviolence) "Domestic violence", tags = "" }
+    , { value = ImmunethrombocytopenicpurpuraITP, string = "Immune thrombocytopenic purpura (ITP)", onClick = msg (ImmunethrombocytopenicpurpuraITP) "Immune thrombocytopenic purpura (ITP)", tags = "" }
+    , { value = Idiopathicthrombocytopenia, string = "Idiopathic thrombocytopenia", onClick = msg (Idiopathicthrombocytopenia) "Idiopathic thrombocytopenia", tags = "" }
+    , { value = HenochSchonleinpurpuraHSP, string = "Henoch-Schonlein purpura (HSP)", onClick = msg (HenochSchonleinpurpuraHSP) "Henoch-Schonlein purpura (HSP)", tags = "" }
+    , { value = Thalassaemia, string = "Thalassaemia", onClick = msg (Thalassaemia) "Thalassaemia", tags = "" }
+    , { value = Autism, string = "Autism", onClick = msg (Autism) "Autism", tags = "" }
+    , { value = Downsyndrome, string = "Down syndrome", onClick = msg (Downsyndrome) "Down syndrome", tags = "" }
+    , { value = Seborrheicdermatitis, string = "Seborrheic dermatitis", onClick = msg (Seborrheicdermatitis) "Seborrheic dermatitis", tags = "" }
+    , { value = Measles, string = "Measles", onClick = msg (Measles) "Measles", tags = "" }
+    , { value = Rubella, string = "Rubella", onClick = msg (Rubella) "Rubella", tags = "" }
+    , { value = Scabies, string = "Scabies", onClick = msg (Scabies) "Scabies", tags = "" }
+    , { value = Varicellazoster, string = "Varicella zoster", onClick = msg (Varicellazoster) "Varicella zoster", tags = "" }
+    , { value = Menieresdisease, string = "Meniere's disease", onClick = msg (Menieresdisease) "Meniere's disease", tags = "" }
+    , { value = Presbycusis, string = "Presbycusis", onClick = msg (Presbycusis) "Presbycusis", tags = "" }
+    , { value = Labyrinthitis, string = "Labyrinthitis", onClick = msg (Labyrinthitis) "Labyrinthitis", tags = "" }
+    , { value = Otitismedia, string = "Otitis media", onClick = msg (Otitismedia) "Otitis media", tags = "" }
+    , { value = Otitisexterna, string = "Otitis externa", onClick = msg (Otitisexterna) "Otitis externa", tags = "" }
+    , { value = Acnevulgaris, string = "Acne vulgaris", onClick = msg (Acnevulgaris) "Acne vulgaris", tags = "" }
+    , { value = Acnerosacea, string = "Acne rosacea", onClick = msg (Acnerosacea) "Acne rosacea", tags = "" }
+    , { value = Hypoglycaemia, string = "Hypoglycaemia", onClick = msg (Hypoglycaemia) "Hypoglycaemia", tags = "" }
+    , { value = Suicideattempt, string = "Suicide attempt", onClick = msg (Suicideattempt) "Suicide attempt", tags = "" }
+    , { value = Chlamydia, string = "Chlamydia", onClick = msg (Chlamydia) "Chlamydia", tags = "" }
+    , { value = Gonorrhoea, string = "Gonorrhoea", onClick = msg (Gonorrhoea) "Gonorrhoea", tags = "" }
+    , { value = Bacterialvaginosis, string = "Bacterial vaginosis", onClick = msg (Bacterialvaginosis) "Bacterial vaginosis", tags = "" }
+    , { value = Polycysticoveriansyndrome, string = "Polycystic overian syndrome", onClick = msg (Polycysticoveriansyndrome) "Polycystic overian syndrome", tags = "" }
+    , { value = Pelvicinflammatorydisease, string = "Pelvic inflammatory disease", onClick = msg (Pelvicinflammatorydisease) "Pelvic inflammatory disease", tags = "" }
+    , { value = Endometriosis, string = "Endometriosis", onClick = msg (Endometriosis) "Endometriosis", tags = "" }
+    , { value = Endometritis, string = "Endometritis", onClick = msg (Endometritis) "Endometritis", tags = "" }
+    , { value = Miscarriage, string = "Miscarriage", onClick = msg (Miscarriage) "Miscarriage", tags = "" }
+    , { value = Ectopicpregnancy, string = "Ectopic pregnancy", onClick = msg (Ectopicpregnancy) "Ectopic pregnancy", tags = "" }
+    , { value = Pregnancy, string = "Pregnancy", onClick = msg (Pregnancy) "Pregnancy", tags = "" }
+    , { value = Schizophrenia, string = "Schizophrenia", onClick = msg (Schizophrenia) "Schizophrenia", tags = "" }
+    , { value = Schizoaffectivedisorder, string = "Schizoaffective disorder", onClick = msg (Schizoaffectivedisorder) "Schizoaffective disorder", tags = "" }
+    , { value = Delusionaldisorder, string = "Delusional disorder", onClick = msg (Delusionaldisorder) "Delusional disorder", tags = "" }
+    , { value = Bipolardisorder, string = "Bipolar disorder", onClick = msg (Bipolardisorder) "Bipolar disorder", tags = "" }
+    , { value = Majordepressivedisorderdepression, string = "Major depressive disorder / depression", onClick = msg (Majordepressivedisorderdepression) "Major depressive disorder / depression", tags = "" }
+    , { value = Generalisedanxietydisorderanxiety, string = "Generalised anxiety disorder / anxiety", onClick = msg (Generalisedanxietydisorderanxiety) "Generalised anxiety disorder / anxiety", tags = "" }
+    , { value = Panicdisorder, string = "Panic disorder", onClick = msg (Panicdisorder) "Panic disorder", tags = "" }
+    , { value = Agoraphobia, string = "Agoraphobia", onClick = msg (Agoraphobia) "Agoraphobia", tags = "" }
+    , { value = ObssessivecompulsivedisorderOCD, string = "Obssessive-compulsive disorder (OCD)", onClick = msg (ObssessivecompulsivedisorderOCD) "Obssessive-compulsive disorder (OCD)", tags = "" }
+    , { value = Anorexianervosa, string = "Anorexia nervosa", onClick = msg (Anorexianervosa) "Anorexia nervosa", tags = "" }
+    , { value = Bulimianervosa, string = "Bulimia nervosa", onClick = msg (Bulimianervosa) "Bulimia nervosa", tags = "" }
+    , { value = Schizoidpersonalitydisorder, string = "Schizoid personality disorder", onClick = msg (Schizoidpersonalitydisorder) "Schizoid personality disorder", tags = "" }
+    , { value = Paranoidpersonalitydisorder, string = "Paranoid personality disorder", onClick = msg (Paranoidpersonalitydisorder) "Paranoid personality disorder", tags = "" }
+    , { value = Borderlinepersonalitydisorder, string = "Borderline personality disorder", onClick = msg (Borderlinepersonalitydisorder) "Borderline personality disorder", tags = "" }
+    , { value = Histrionicpersonalitydisorder, string = "Histrionic personality disorder", onClick = msg (Histrionicpersonalitydisorder) "Histrionic personality disorder", tags = "" }
+    , { value = Narcissticpersonalitydisorder, string = "Narcisstic personality disorder", onClick = msg (Narcissticpersonalitydisorder) "Narcisstic personality disorder", tags = "" }
+    , { value = Avoidantpersonalitydisorder, string = "Avoidant personality disorder", onClick = msg (Avoidantpersonalitydisorder) "Avoidant personality disorder", tags = "" }
+    , { value = Schizotypalpersonalitydisorder, string = "Schizotypal personality disorder", onClick = msg (Schizotypalpersonalitydisorder) "Schizotypal personality disorder", tags = "" }
+    , { value = Antisocialpersonalitydisorder, string = "Antisocial personality disorder", onClick = msg (Antisocialpersonalitydisorder) "Antisocial personality disorder", tags = "" }
+    , { value = Dependentpersonalitydisorder, string = "Dependent personality disorder", onClick = msg (Dependentpersonalitydisorder) "Dependent personality disorder", tags = "" }
+    , { value = Obsessivecompulsivepersonalitydisorder, string = "Obsessive-compulsive personality disorder", onClick = msg (Obsessivecompulsivepersonalitydisorder) "Obsessive-compulsive personality disorder", tags = "" }
+    , { value = Delirium, string = "Delirium", onClick = msg (Delirium) "Delirium", tags = "" }
+    , { value = Somaticsymptomdisorder, string = "Somatic symptom disorder", onClick = msg (Somaticsymptomdisorder) "Somatic symptom disorder", tags = "" }
+    , { value = Factitiousdisorder, string = "Factitious disorder", onClick = msg (Factitiousdisorder) "Factitious disorder", tags = "" }
+    , { value = Malingering, string = "Malingering", onClick = msg (Malingering) "Malingering", tags = "" }
+    , { value = Autismspectrumdisorder, string = "Autism spectrum disorder", onClick = msg (Autismspectrumdisorder) "Autism spectrum disorder", tags = "" }
+    , { value = AttentiondeficithyperactivitydisorderADHD, string = "Attention-deficit/hyperactivity disorder (ADHD)", onClick = msg (AttentiondeficithyperactivitydisorderADHD) "Attention-deficit/hyperactivity disorder (ADHD)", tags = "" }
+    , { value = Oppositionaldefiantdisorder, string = "Oppositional defiant disorder", onClick = msg (Oppositionaldefiantdisorder) "Oppositional defiant disorder", tags = "" }
+    , { value = Conductdisorder, string = "Conduct disorder", onClick = msg (Conductdisorder) "Conduct disorder", tags = "" }
+    , { value = Substanceusedisorder, string = "Substance use disorder", onClick = msg (Substanceusedisorder) "Substance use disorder", tags = "" } ]
 
 
 

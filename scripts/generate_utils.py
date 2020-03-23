@@ -36,7 +36,7 @@ list : List {enum_name}
 list = 
 {enum_list}
 
-optionList : ({enum_name} -> msg) -> List (Option.Data {enum_name} msg)
+optionList : ({enum_name} -> String -> msg) -> List (Option.Data {enum_name} msg) 
 optionList msg = 
 {option_list}
 
@@ -89,7 +89,7 @@ def generate_enum_to_string(unprocessed: List[str], processed: List[str]) -> str
     return "\n".join(templates)
 
 
-OPTION_TEMPLATE = """{{ value = {value}, string = "{option_string}", onClick = msg, tags = "{tags}" }}"""
+OPTION_TEMPLATE = """{{ value = {value}, string = "{option_string}", onClick = msg ({value}) "{option_string}", tags = "{tags}" }}"""
 
 
 def generate_option_list(unprocessed: List[str], processed: List[str]) -> str:
@@ -135,6 +135,7 @@ type {enum_name} = {enum_types}
 PARENT_ENUM_TEMPLATE = """module {directory}.{parent_enum} exposing (..)
 
 import Option
+import Array exposing (Array)
 
 {enum_imports}
 
@@ -159,8 +160,8 @@ list : List {parent_enum}
 list = 
 {enum_list}
 
-optionList : ({parent_enum} -> msg) -> List (Option.Data {parent_enum} msg)
-optionList msg = 
+optionList : ({parent_enum} -> String -> msg) -> Array (Option.Data {parent_enum} msg)
+optionList msg = Array.fromList
 {option_list}
 
 """
@@ -190,7 +191,10 @@ def generate_option_list_with_parent(parent_enum: str, data: pd.DataFrame) -> st
             + process_string(row.subcategory)
         )
         string = row.option_string
-        tags = row.tags
+        if row.tags:
+            tags = row.tags
+        else:
+            tags = ""
         templates.append(
             OPTION_TEMPLATE.format(value=value, option_string=string, tags=tags)
         )

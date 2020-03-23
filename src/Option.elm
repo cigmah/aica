@@ -4,6 +4,6 @@ module Option exposing (..)
 type alias Data value msg =
     { value : value
     , string : String
-    , onClick : value -> msg
+    , onClick : msg
     , tags : String
     }

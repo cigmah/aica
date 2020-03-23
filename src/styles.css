@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: 0.2s fade-in;
+}
+
 .trans-all {
     transition: 0.2s all;
+}
+
+.markdown h1 {
+    @apply text-2xl font-bold mt-8; 
+}
+
+.markdown h2 {
+    @apply text-xl font-bold mt-4;
+}
+
+.markdown h3 {
+    @apply text-lg font-bold mt-2;
+}
+
+.markdown p {
+    @apply mt-2;
+}
+
+.markdown ul {
+    @apply my-2 ml-8;
+    list-style-type: circle;
 }

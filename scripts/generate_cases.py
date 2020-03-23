@@ -28,27 +28,33 @@ import Prescription exposing (..)
 {question_imports}
 import Questions.Question as Question exposing (..)
 import Set exposing (Set)
-import Dict
+import Dict exposing (Dict)
 
-script : Question -> Set Question -> String
-script question asked =
-    case question of
-{script_cases}
-        QuestionOpen _ ->
-            "Well, you'll need to be a bit more specific."
+script : Int -> String
+script questionId =
+    case (Dict.get questionId scriptDict) of
+        Just response -> 
+            response
+        Nothing -> 
+            case (Question.fromInt questionId) of
+                QuestionOpen _ ->
+                    "Well, you'll need to be a bit more specific."
 
-        QuestionSymptom _ ->
-            "No."
+                QuestionSymptom _ ->
+                    "No."
 
-        QuestionExamine _ ->
-            "It seems grossly normal."
+                QuestionExamine _ ->
+                    "It seems grossly normal."
 
-        QuestionSign _ ->
-            "It seems normal."
+                QuestionSign _ ->
+                    "It seems normal."
 
-        _ ->
-            "Sorry, I'm not sure."
+                _ ->
+                    "Sorry, I'm not sure about that."
 
+scriptDict : Dict Int String
+scriptDict = Dict.fromList 
+    {script_dict}
 
 details : Case.Details
 details =
@@ -65,6 +71,7 @@ patient : Case
 patient =
     {{ details = details
     , script = script
+    , stem = "{stem}"
     , exemplarNote = "{exemplar_note}"
     , exemplarDiagnosis = {exemplar_diagnosis}
     , exemplarPrescriptions =
@@ -87,7 +94,9 @@ def generate_question_imports(categories: List[str]) -> str:
 
 def generate_script_case(category: str, subcategory: str, value: str) -> str:
     """ Generate a single case for the script function. """
-    case_template = """        {parent_enum} {category}.{subcategory} -> "{value}" """
+    case_template = (
+        """(Question.toInt ({parent_enum} {category}.{subcategory}), "{value}")"""
+    )
     parent_enum = "Question" + category
     return case_template.format(
         parent_enum=parent_enum,
@@ -104,7 +113,7 @@ def generate_script_cases(data_dict, categories: List[str]) -> str:
         subcategory_dict = data_dict[category]
         for subcategory, value in subcategory_dict.items():
             case_lines.append(generate_script_case(category, subcategory, value))
-    return "\n".join(case_lines)
+    return "[ " + "\n    , ".join(case_lines) + " ]"
 
 
 def process_exemplar_investigations(investigation_string: str) -> str:
@@ -145,6 +154,7 @@ def generate_case(patient_id, data):
     """ Generate case from data dict with category as keys, and subcategory dicts as values. """
     name = utils.process_string(data["core"]["firstName"] + data["core"]["lastName"])
     gender_string = data["core"]["gender"]
+    stem = data["core"]["stem"]
     question_categories = [k for k in data.keys() if k[0].isupper()]
     question_imports = generate_question_imports(question_categories)
     script_cases = generate_script_cases(data, question_categories)
@@ -172,13 +182,14 @@ def generate_case(patient_id, data):
     output = TEMPLATE.format(
         name=filename,
         question_imports=question_imports,
-        script_cases=script_cases,
+        script_dict=script_cases,
         patient_id=patient_id,
         first_name=first_name,
         last_name=last_name,
         age=age,
         gender=gender,
         occupation=occupation,
+        stem=stem,
         exemplar_note=exemplar_note,
         exemplar_diagnosis=exemplar_diagnosis,
         exemplar_investigations=exemplar_investigations,
@@ -238,19 +249,23 @@ def generate_case_list_file(cases: List[str]) -> str:
     )
 
 
-cases = []
+def run_generate_cases():
+    " Run the generate cases function and script."
+    cases = []
 
-case_files = glob("./cases/*.csv")
-case_files.sort(key=os.path.getmtime)
-for i, case_file in enumerate(case_files):
-    df = pd.read_csv(
-        case_file, header=None, names=["category", "subcategory", "value"],
-    )
-    data = dfToDict(df)
-    filename, output = generate_case(i, data)
-    cases.append(filename)
-    with open("../src/Cases/{filename}.elm".format(filename=filename), "wb") as outfile:
-        outfile.write(output.encode("utf-8"))
+    case_files = glob("./cases/*.csv")
+    case_files.sort(key=os.path.getmtime)
+    for i, case_file in enumerate(case_files):
+        df = pd.read_csv(
+            case_file, header=None, names=["category", "subcategory", "value"],
+        )
+        data = dfToDict(df)
+        filename, output = generate_case(i, data)
+        cases.append(filename)
+        with open(
+            "../src/Cases/{filename}.elm".format(filename=filename), "wb"
+        ) as outfile:
+            outfile.write(output.encode("utf-8"))
 
-with open("../src/Cases/List.elm", "w") as outfile:
-    outfile.write(generate_case_list_file(cases))
+    with open("../src/Cases/List.elm", "w") as outfile:
+        outfile.write(generate_case_list_file(cases))

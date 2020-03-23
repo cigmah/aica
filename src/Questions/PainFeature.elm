@@ -1,8 +1,6 @@
 module Questions.PainFeature exposing (..)
 
-
-type PainFeature
-    = Where
+type PainFeature = Where
     | Side
     | Onset
     | Timing
@@ -11,3 +9,4 @@ type PainFeature
     | Before
     | Triggers
     | Radiation
+

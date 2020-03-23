@@ -33,9 +33,9 @@ type alias Details =
 type alias Case =
     { details : Details -- basic patient details
     , script :
-        Question
-        -> Set Question
+        Int -- the question Id
         -> String -- the script is a (generated) function which converts a question into a string response
+    , stem : String
     , exemplarNote : String -- the exemplar clinical note for the case
     , exemplarDiagnosis : Diagnosis
     , exemplarInvestigations : Array Investigation

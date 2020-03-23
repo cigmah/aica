@@ -1,8 +1,6 @@
 module Questions.Symptom exposing (..)
 
-
-type Symptom
-    = Pain
+type Symptom = Pain
     | Nausea
     | Vomiting
     | NeckStiff
@@ -33,3 +31,4 @@ type Symptom
     | Diaphoresis
     | JawClaudication
     | VIsualChange
+
