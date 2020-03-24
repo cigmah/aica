@@ -12,6 +12,7 @@ import Browser
 import Cases.Case as Case exposing (..)
 import Cases.List
 import Diagnosis exposing (..)
+import Dict exposing (Dict)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -175,20 +176,27 @@ updateScreen model screen =
 
 type alias Flags =
     { logo : String
-    , profiles : Array String
+    , profiles : Dict String String
     }
+
+
+profileDecoder : Decoder ( String, String )
+profileDecoder =
+    Decode.map2 (\x y -> ( x, y ))
+        (Decode.field "id" Decode.string)
+        (Decode.field "path" Decode.string)
 
 
 decoderFlags : Decoder Flags
 decoderFlags =
     Decode.map2 Flags
         (Decode.field "logo" Decode.string)
-        (Decode.field "profiles" (Decode.array Decode.string))
+        (Decode.field "profiles" (Decode.list profileDecoder |> Decode.map Dict.fromList))
 
 
 defaultFlags =
     { logo = ""
-    , profiles = Array.empty
+    , profiles = Dict.empty
     }
 
 
@@ -216,7 +224,7 @@ init rawValue =
 
 type Msg
     = NoOp
-    | ClickedPatient Int
+    | ClickedPatient String
     | ClickedGoHome
     | ClickedAssessPatient Case
     | ChangedCurrentSearch String
@@ -256,7 +264,7 @@ oneOrNone list =
             Nothing
 
 
-findCase : Int -> Maybe Case
+findCase : String -> Maybe Case
 findCase id =
     Cases.List.list
         |> List.filter (\patient -> patient.details.id == id)
@@ -816,24 +824,24 @@ viewHeader =
         ]
 
 
-viewBasicItem : Array String -> Case.Details -> Html Msg
+viewBasicItem : Dict String String -> Case.Details -> Html Msg
 viewBasicItem profiles patient =
     let
         profileImg =
             profiles
-                |> Array.get patient.id
+                |> Dict.get patient.id
                 |> Maybe.withDefault ""
     in
     article
-        [ tailwind "m-4 group cursor-pointer shadow rounded-lg hover:bg-gray-200 h-48 w-48 relative trans-all overflow-hidden border-gray-300 border active:shadow-inner"
+        [ tailwind "m-4 group cursor-pointer hover:shadow-lg border border-gray-200 rounded h-48 w-48 relative trans-all overflow-hidden active:shadow-inner"
         , onClick (ClickedPatient patient.id)
         ]
-        [ img [ src profileImg, tailwind "absolute" ] []
-        , section [ tailwind "absolute bottom-0 p-2 bg-white group-hover:bg-black group-hover:text-white w-full trans-all rounded-b-lg" ]
-            [ h1 [ tailwind "font-bold" ] [ text (patient.firstName ++ " " ++ patient.lastName) ]
-            , div [ tailwind "flex between" ]
-                [ h2 [ tailwind "mr-4" ] [ text (patientAgeGender patient) ]
-                , h3 [] [ text patient.occupation ]
+        [ img [ src profileImg, tailwind "absolute p-2" ] []
+        , section [ tailwind "absolute bottom-0 px-2 py-1 text-sm border-t border-gray-200 bg-white group-hover:bg-black group-hover:text-white w-full trans-all rounded-b-lg" ]
+            [ h1 [ tailwind "font-bold mt-0" ] [ text (patient.firstName ++ " " ++ patient.lastName) ]
+            , div [ tailwind "flex between text-xs" ]
+                [ h2 [ tailwind "mr-2 mt-0" ] [ text (patientAgeGender patient) ]
+                , h3 [ tailwind "mt-0" ] [ text patient.occupation ]
                 ]
             ]
         ]
@@ -842,20 +850,21 @@ viewBasicItem profiles patient =
 viewScreenStart : Model -> ScreenStartData -> Html Msg
 viewScreenStart model patients =
     section [ tailwind "fade-in" ]
-        [ section [ tailwind "lg:hidden h-screen w-full bg-green-500 p-4 flex flex-col items-center justify-center" ]
-            [ img [ src model.flags.logo, tailwind "w-3/4 md:w-1/2 m-4" ] []
-            , h1 [ tailwind "text-white text-lg font-bold text-center w-3/4 md:w-1/2" ]
-                [ text "AICA is designed for desktop use. For your mobile revision needs, try our question bank, "
-                , a [ href "https://aorta.cigmah.org", tailwind "underline" ] [ text "AORTA" ]
+        [ section [ tailwind "lg:hidden h-screen w-full bg-white p-4 flex flex-col items-center justify-center" ]
+            [ img [ src model.flags.logo, tailwind "w-1/2 md:w-1/3 m-8" ] []
+            , h1 [ tailwind "text-lg text-center w-2/3 md:w-1/2" ]
+                [ span [ tailwind "font-bold" ] [ text "AICA " ]
+                , text "is designed for desktop use. For your mobile revision needs, try our question bank, "
+                , a [ href "https://aorta.cigmah.org", tailwind "underline font-bold" ] [ text "AORTA" ]
                 , text "."
                 ]
             ]
-        , section [ tailwind "h-screen w-full bg-green-500 hidden lg:flex" ]
-            [ section [ tailwind "w-1/3 p-8 flex flex-col items-center justify-center bg-green-500" ]
-                [ img [ src model.flags.logo, tailwind "w-3/4 mb-8" ] []
+        , section [ tailwind "h-screen w-full bg-white hidden lg:flex" ]
+            [ section [ tailwind "w-1/3 p-8 flex flex-col items-center justify-center shadow-inner" ]
+                [ img [ src model.flags.logo, tailwind "w-1/2 mb-16" ] []
                 , section [ tailwind "w-3/4 mb-8" ]
-                    [ h1 [ tailwind "text-5xl text-white font-bold mb-2" ] [ text "AICA" ]
-                    , p [ tailwind "text-lg text-white" ]
+                    [ h1 [ tailwind "text-5xl" ] [ text "AICA" ]
+                    , p [ tailwind "" ]
                         [ span [ tailwind "font-bold" ] [ text "AICA" ]
                         , text " is "
                         , span [ tailwind "font-bold" ] [ text "An Interactive Case Archive" ]
@@ -864,7 +873,7 @@ viewScreenStart model patients =
                     ]
                 ]
             , section [ tailwind "w-2/3 p-8" ]
-                [ section [ tailwind "bg-white h-full w-full overflow-auto shadow rounded" ]
+                [ section [ tailwind "bg-white h-full w-full overflow-auto rounded" ]
                     [ div [ tailwind "p-4 flex flex-wrap" ]
                         (List.map (viewBasicItem model.flags.profiles) patients)
                     ]
@@ -878,32 +887,34 @@ viewScreenCaseStart model data =
     let
         profileImg =
             model.flags.profiles
-                |> Array.get data.patient.details.id
+                |> Dict.get data.patient.details.id
                 |> Maybe.withDefault ""
     in
-    section [ tailwind "flex p-12 bg-gray-200 w-screen h-screen" ]
-        [ section [ tailwind "flex flex-col mr-12 w-1/3 items-center" ]
-            [ div [ tailwind "bg-white w-full xl:w-3/4 rounded-b-none rounded shadow p-12" ] [ img [ tailwind "w-full", src profileImg ] [] ]
-            , div [ tailwind "bg-white rounded rounded-t-none shadow text-xl w-full xl:w-3/4 p-4 mb-2" ]
+    section [ tailwind "flex bg-white w-screen h-screen" ]
+        [ section [ tailwind "p-8 flex flex-col w-1/3 items-center fade-in shadow-inner justify-center pb-24" ]
+            [ div [ tailwind "bg-white w-1/2 mb-8 rounded-b-none rounded" ] [ img [ tailwind "w-full", src profileImg ] [] ]
+            , div [ tailwind "bg-white rounded rounded-t-none text-xl w-full xl:w-3/4 mb-8 justify-center items-center flex flex-col" ]
                 [ h1 [ tailwind "font-bold" ] [ text (data.patient.details.firstName ++ " " ++ data.patient.details.lastName) ]
-                , div [ tailwind "flex between" ]
-                    [ h2 [ tailwind "mr-4" ] [ text (patientAgeGender data.patient.details) ]
-                    , h3 [] [ text data.patient.details.occupation ]
+                , div [ tailwind "flex" ]
+                    [ h2 [ tailwind "mr-4 mt-0" ] [ text (patientAgeGender data.patient.details) ]
+                    , h3 [ tailwind "mt-0" ] [ text data.patient.details.occupation ]
                     ]
                 ]
             , button
                 [ onClick ClickedGoHome
-                , tailwind "w-full xl:w-3/4 cursor-pointer p-2 bg-white border-2 border-gray-500 rounded hover:bg-gray-300   trans-all mb-2 text-lg"
+                , tailwind "w-full xl:w-3/4 cursor-pointer p-2 border-l-8 border-gray-400 text-gray-700 shadow hover:shadow-lg active:shadow-inner trans-all mb-2 text-lg"
                 ]
                 [ text "Go Back" ]
             , button
                 [ onClick (ClickedAssessPatient data.patient)
-                , tailwind "w-full xl:w-3/4 cursor-pointer p-2 bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 rounded trans-all text-lg"
+                , tailwind "w-full xl:w-3/4 cursor-pointer p-2 border-l-8 border-olive-600 shadow hover:shadow-lg active:shadow-inner trans-all text-lg"
                 ]
                 [ text "Assess Patient" ]
             ]
-        , section [ tailwind "bg-white rounded-lg shadow w-2/3 p-8" ]
-            [ Markdown.toHtml [ class "markdown" ] data.patient.stem ]
+        , section [ tailwind "bg-white rounded-lg w-2/3 p-24 fade-in overflow-auto h-full" ]
+            [ h1 [ tailwind "font-bold mt-0 text-4xl mb-6" ] [ text "Referral Letter" ]
+            , Markdown.toHtml [ class "markdown" ] data.patient.stem
+            ]
         ]
 
 
@@ -924,7 +935,7 @@ isTypingText data =
 viewConversationItem : Interaction.Item -> Html Msg
 viewConversationItem item =
     article
-        [ tailwind "w-full flex pb-3"
+        [ tailwind "w-full flex pt-3"
         , classList
             [ ( "justify-start", isYou item.speaker )
             , ( "justify-end", isMe item.speaker )
@@ -934,7 +945,7 @@ viewConversationItem item =
             [ tailwind "px-4 py-2"
             , classList
                 [ ( "bg-gray-200 text-gray-700 rounded-r-lg rounded-tl-lg", isYou item.speaker )
-                , ( "bg-blue-500 text-white rounded-l-lg rounded-tr-lg", isMe item.speaker )
+                , ( "bg-olive-600 text-white rounded-l-lg rounded-tr-lg", isMe item.speaker )
                 ]
             ]
             [ text item.value ]
@@ -943,8 +954,8 @@ viewConversationItem item =
 
 viewScreenCaseInteract : Model -> CaseInteractData -> Html Msg
 viewScreenCaseInteract model data =
-    section [ tailwind "flex p-12 bg-gray-200 w-screen h-screen" ]
-        [ section [ tailwind "flex flex-col mr-12 w-1/3 items-center" ]
+    section [ tailwind "flex bg-white w-screen h-screen" ]
+        [ section [ tailwind "flex flex-col p-8 w-1/3 items-center shadow-inner" ]
             [ section [ tailwind "text-sm text-gray-600 mb-2 w-full" ]
                 [ div [ tailwind "w-full" ]
                     [ viewTimer data ]
@@ -953,20 +964,20 @@ viewScreenCaseInteract model data =
                 [ type_ "text"
                 , value data.currentSearch
                 , onInput ChangedCurrentSearch
-                , tailwind "w-full bg-white rounded shadow text-lg p-4 focus:border-blue-400 border-2 border-gray-700"
+                , tailwind "w-full font-bold bg-white shadow-inner text-lg px-3 py-2 focus:border-olive-500 border-b-2 trans-all border-gray-300 bg-gray-100 focus:bg-white"
                 ]
                 []
             , section [ tailwind "mt-4 w-full overflow-auto mb-4 h-full" ] [ viewFilteredQuestions data ]
             , button
                 [ onClick ClickedFinishInteraction
-                , tailwind "bg-white border border-gray-300 p-2 w-full cursor-pointer hover:bg-blue-500 hover:text-white rounded"
+                , tailwind "bg-white border-l-4 border-gray-400 trans-all p-2 w-full cursor-pointer hover:shadow-lg shadow active:shadow-inner"
                 ]
                 [ text "Finish Interaction" ]
             ]
         , section [ tailwind "bg-white rounded-lg shadow w-2/3 p-8 pt-4 flex flex-col" ]
             [ section [ tailwind "text-sm text-gray-500 w-full border-b border-gray-300 text-center bg-white h-12 flex justify-center items-center" ]
                 [ text (isTypingText data) ]
-            , section [ tailwind "flex flex-col-reverse overflow-hidden p-2" ]
+            , section [ tailwind "flex flex-col-reverse overflow-hidden pl-8 pr-8 pb-8" ]
                 (List.map viewConversationItem data.interaction.conversation)
             ]
         ]
@@ -980,17 +991,18 @@ viewFilteredQuestions data =
                 (List.map viewFilteredOption data.filteredOptions)
 
         else
-            div [] [ text "There no questions matching what you've typed. Try typing something less specific, like 'when' or 'where', or a symptom like 'fever' or 'rash'!" ]
+            div [ tailwind "text-gray-600" ]
+                [ text "There no questions matching what you've typed. Try typing something less specific, like 'when' or 'where', or a symptom like 'fever' or 'rash'!" ]
 
     else
-        div []
+        div [ tailwind "text-gray-600 text-sm" ]
             [ text "Type in at least 4 characters to search possible questions you can ask or examination findings you can check." ]
 
 
 viewFilteredOption : Option.Data Question Msg -> Html Msg
 viewFilteredOption data =
     button
-        [ tailwind "mb-1 w-full text-left shadow p-3 bg-white hover:bg-blue-500 cursor-pointer hover:text-white focus:border-blue-400 border-2"
+        [ tailwind "mb-2 w-full text-left shadow p-3 border-l-4 border-white hover:border-black hover:font-bold hover:shadow-lg cursor-pointer focus:border-olive-500 active:shadow-inner trans-all"
         , onClick data.onClick
         ]
         [ text data.string ]
@@ -1041,7 +1053,7 @@ viewTimer data =
 
 viewOption : Option.Data a Msg -> Html Msg
 viewOption option =
-    button [ onClick option.onClick, tailwind "text-left p-1 hover:bg-blue-500 hover:text-white px-2 py-1 text-sm" ]
+    button [ onClick option.onClick, tailwind "text-left p-1 hover:bg-olive-600 hover:text-white px-2 py-1 text-sm" ]
         [ text option.string ]
 
 
@@ -1052,7 +1064,7 @@ viewDiagnosisOptions data =
             div [] []
 
         diagnoses ->
-            section [ tailwind "absolute bg-white flex flex-col h-64 z-50 w-full shadow-lg overflow-auto" ]
+            section [ tailwind "absolute bg-white flex flex-col h-64 z-50 w-full shadow-lg overflow-auto border-gray-300 border-l border-r border-b" ]
                 (List.map viewOption diagnoses)
 
 
@@ -1062,7 +1074,7 @@ viewDiagnosisSearch model data =
         Nothing ->
             section [ tailwind "w-full relative" ]
                 [ input
-                    [ tailwind "text-sm py-1 px-2 shadow-inner w-full mt-2 border border-gray-300 focus:border-blue-400"
+                    [ tailwind "text-sm p-2 shadow-inner w-full mt-2 border-b-2 border-gray-400 focus:border-olive-500 bg-gray-100 focus:bg-white"
                     , placeholder "Search for a diagnosis here."
                     , onInput ChangedDiagnosisSearch
                     , value data.diagnosisSearch
@@ -1073,7 +1085,7 @@ viewDiagnosisSearch model data =
 
         Just diagnosis ->
             article [ tailwind "w-full mt-2 rounded flex justify-between border border-black" ]
-                [ div [ tailwind "bg-white font-bold text-sm py-1 px-2 flex-grow border-r border-black" ] [ text (Diagnosis.toString diagnosis) ]
+                [ div [ tailwind "bg-white font-bold text-sm p-2 flex-grow border-r border-black" ] [ text (Diagnosis.toString diagnosis) ]
                 , button [ onClick ClickedDeleteDiagnosis, tailwind "w-8 hover:bg-red-500 hover:text-white" ] [ text "🗑" ]
                 ]
 
@@ -1085,7 +1097,7 @@ viewInvestigationOptions data =
             div [] []
 
         investigations ->
-            section [ tailwind "absolute bg-white flex flex-col h-64 z-50 w-full shadow-lg overflow-auto" ]
+            section [ tailwind "absolute bg-white flex flex-col h-64 z-50 w-full shadow-lg overflow-auto border-l border-r border-b border-gray-300" ]
                 (List.map viewOption investigations)
 
 
@@ -1096,14 +1108,14 @@ viewMedicationOptions data =
             div [] []
 
         medications ->
-            section [ tailwind "absolute bg-white flex flex-col h-64 z-50 w-full shadow-lg overflow-auto" ]
+            section [ tailwind "absolute bg-white flex flex-col h-64 z-50 w-full shadow-lg overflow-auto border-l border-r border-b border-gray-300" ]
                 (List.map viewOption medications)
 
 
 viewChosenInvestigation : Int -> Investigation -> Html Msg
 viewChosenInvestigation index investigation =
     article [ tailwind "border border-black rounded font-bold mr-1 mb-1 flex" ]
-        [ div [ tailwind "px-2 py-1 border-r border-black" ] [ text (Investigation.toString investigation) ]
+        [ div [ tailwind "py-1 px-2 border-r border-black" ] [ text (Investigation.toString investigation) ]
         , button [ tailwind "px-1 hover:bg-red-500 hover:text-white", onClick (ClickedDeleteInvestigation index) ] [ text "🗑" ]
         ]
 
@@ -1112,7 +1124,7 @@ viewInvestigationSearch : Model -> CaseFinishData -> Html Msg
 viewInvestigationSearch model data =
     section [ tailwind "w-full relative" ]
         [ input
-            [ tailwind "text-sm p-1 shadow-inner w-full mt-2 border border-gray-300 focus:border-blue-400"
+            [ tailwind "text-sm p-2 shadow-inner w-full mt-2 border-b-2 border-gray-400 focus:border-olive-500 trans-all bg-gray-100 focus:bg-white"
             , placeholder "Search for investigations here."
             , onInput ChangedInvestigationSearch
             , value data.investigationSearch
@@ -1148,7 +1160,7 @@ viewPrescriptionAdder model data =
         Nothing ->
             section [ tailwind "w-full relative mt-2 text-sm" ]
                 [ input
-                    [ tailwind "w-full shadow-inner border border-gray-300 p-1 focus:border-blue-400"
+                    [ tailwind "w-full shadow-inner border-b-2 border-gray-400 p-2 focus:border-olive-500 trans-all bg-gray-100 focus:bg-white"
                     , placeholder "Medication name"
                     , onInput ChangedMedicationSearch
                     , value data.medicationSearch
@@ -1161,23 +1173,23 @@ viewPrescriptionAdder model data =
         Just medication ->
             section [ tailwind "flex-grow flex flex-col" ]
                 [ section [ tailwind "text-sm flex mt-2 relative w-full" ]
-                    [ article [ tailwind "w-5/12 border border-black font-bold p-1 overflow-auto" ] [ text (String.toUpper (Medication.toString medication)) ]
+                    [ article [ tailwind "w-5/12 border border-black font-bold p-2 overflow-auto" ] [ text (String.toUpper (Medication.toString medication)) ]
                     , input
-                        [ tailwind "w-1/6 shadow-inner border border-gray-300 p-1 ml-2"
+                        [ tailwind "w-1/6 shadow-inner border-b-2 border-gray-300 p-2 ml-2 bg-gray-100 focus:bg-white focus:border-olive-500 trans-all"
                         , placeholder "Dose"
                         , value data.prescriptionDose
                         , onInput ChangedDose
                         ]
                         []
                     , input
-                        [ tailwind "w-1/6 shadow-inner border border-gray-300 p-1 ml-2"
+                        [ tailwind "w-1/6 shadow-inner border-b-2 border-gray-300 p-2 ml-2 bg-gray-100 focus:bg-white focus:border-olive-500 trans-all"
                         , placeholder "Route"
                         , value data.prescriptionRoute
                         , onInput ChangedRoute
                         ]
                         []
                     , input
-                        [ tailwind "w-1/6 shadow-inner border border-gray-300 p-1 ml-2"
+                        [ tailwind "w-1/6 shadow-inner border-b-2 border-gray-300 p-2 ml-2 bg-gray-100 focus:bg-white focus:border-olive-500 trans-all"
                         , placeholder "Freq."
                         , value data.prescriptionFreq
                         , onInput ChangedFreq
@@ -1185,7 +1197,7 @@ viewPrescriptionAdder model data =
                         []
                     , button
                         [ onClick ClickedAddPrescription
-                        , tailwind "w-1/12 border-2 border-blue-500 text-blue-500 flex justify-center items-center font-bold ml-2 hover:bg-blue-500 hover:text-white"
+                        , tailwind "w-1/12 border-2 border-olive-500 text-olive-500 flex justify-center items-center font-bold ml-2 hover:bg-olive-500 hover:text-white trans-all"
                         ]
                         [ text "+" ]
                     ]
@@ -1198,30 +1210,31 @@ viewScreenCaseFinish model data =
     let
         profileImg =
             model.flags.profiles
-                |> Array.get data.patient.details.id
+                |> Dict.get data.patient.details.id
                 |> Maybe.withDefault ""
 
         bold string =
             span [ tailwind "font-bold" ] [ text string ]
     in
-    section [ tailwind "flex p-12 bg-gray-200 w-screen h-screen" ]
-        [ section [ tailwind "bg-white rounded-lg shadow w-1/3 p-8 pt-4 h-full flex flex-col" ]
-            [ section [ tailwind "flex" ]
-                [ img [ src profileImg, tailwind "w-48" ] []
-                , section []
-                    [ h1 [ tailwind "font-bold text-2xl" ] [ text (data.patient.details.firstName ++ " " ++ data.patient.details.lastName) ]
-                    , h2 [ tailwind "mt-0" ] [ text (patientAgeGender data.patient.details) ]
+    section [ tailwind "flex bg-white w-screen h-screen" ]
+        [ section [ tailwind "bg-white rounded-lg shadow w-1/3 p-8 pb-16 pt-4 h-full flex flex-col shadow-inner fade-in" ]
+            [ section [ tailwind "flex p-8" ]
+                [ img [ src profileImg, tailwind "hidden xl:block xl:w-48 xl:h-48 mr-2 xl:mr-8" ] []
+                , section [ tailwind "flex-grow" ]
+                    [ div [ tailwind "flex items-center " ]
+                        [ h1 [ tailwind "mt-0 font-bold xl:text-xl mr-4" ] [ text (data.patient.details.firstName ++ " " ++ data.patient.details.lastName) ]
+                        , h2 [ tailwind "mt-0 xl:text-xl" ] [ text (patientAgeGender data.patient.details) ]
+                        ]
+                    , p [ tailwind "text-gray-700 text-sm" ] [ text "Thanks for seeing the patient - please document your assessment on the right and specify a provisional primary diagnosis and any investigations & prescriptions you'd like to order." ]
                     ]
                 ]
-            , p [ tailwind "text-gray-700 text-sm my-2" ]
-                [ text "Patient interaction transcript:" ]
-            , section [ tailwind "overflow-auto p-4 text-xs border border-gray-300 rounded" ]
-                [ section [ tailwind "text-xs flex-col-reverse flex" ]
+            , section [ tailwind "overflow-auto p-4 pt-2 text-xs shadow-inner rounded mt-4" ]
+                [ section [ tailwind "text-xs flex-col-reverse flex pb-8" ]
                     (List.map viewConversationItem data.interaction.conversation)
                 ]
             ]
-        , section [ tailwind "ml-8 w-2/3 h-full flex flex-col max-h-full" ]
-            [ section [ tailwind "bg-white shadow w-full p-4 flex-grow mb-4 flex overflow-auto" ]
+        , section [ tailwind "w-2/3 h-full flex flex-col max-h-full fade-in" ]
+            [ section [ tailwind "bg-white w-full p-12 pb-4 flex-grow mb-4 flex overflow-auto" ]
                 [ section [ tailwind "w-1/2 flex flex-col mr-6" ]
                     [ section [ tailwind "mb-2 w-full" ]
                         [ text "Type your clinical note for "
@@ -1231,7 +1244,7 @@ viewScreenCaseFinish model data =
                         , text ") below:"
                         ]
                     , textarea
-                        [ tailwind "shadow-inner border border-gray-300 h-full p-4 focus:border-blue-400 leading-tight w-full overflow-auto font-mono"
+                        [ tailwind "shadow-inner border-b-4 h-full p-4 focus:border-olive-500 leading-tight w-full overflow-auto font-mono trans-all bg-gray-100 focus:bg-white"
                         , value data.note
                         , style "resize" "none"
                         , placeholder "Type your clinical note for this encounter here."
@@ -1254,8 +1267,103 @@ viewScreenCaseFinish model data =
                         ]
                     ]
                 ]
-            , button [ onClick ClickedFinishNote, tailwind "w-full p-2 text-lg bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700" ]
-                [ text "Finish Note" ]
+            , div [ tailwind "px-12 pb-16 w-full" ]
+                [ button [ onClick ClickedFinishNote, tailwind "w-full p-2 text-lg bg-olive-500 font-bold text-white rounded hover:bg-olive-600 active:bg-olive-700 trans-all" ]
+                    [ text "Finish Note" ]
+                ]
+            ]
+        ]
+
+
+viewRequestedInvestigation : Bool -> Set Int -> Investigation -> Html Msg
+viewRequestedInvestigation isUser exemplar item =
+    let
+        newClass =
+            if Set.member (Investigation.toInt item) exemplar then
+                ""
+
+            else
+                "line-through text-red-400"
+    in
+    article
+        [ classList [ ( newClass, isUser ) ]
+        ]
+        [ text (Investigation.toString item) ]
+
+
+viewRequestedPrescription : Bool -> Set Int -> Prescription -> Html Msg
+viewRequestedPrescription isUser exemplar item =
+    let
+        newClass =
+            if Set.member (Medication.toInt item.medication) exemplar then
+                ""
+
+            else
+                "line-through text-red-400"
+    in
+    article
+        [ classList [ ( newClass, isUser ) ] ]
+        [ text (Medication.toString item.medication)
+        , text " "
+        , text item.dosage
+        , text " "
+        , text item.route
+        , text " "
+        , text item.frequency
+        ]
+
+
+viewScreenCaseFeedback : Model -> CaseFeedbackData -> Html Msg
+viewScreenCaseFeedback model data =
+    section [ tailwind "w-screen overflow-x-hidden" ]
+        [ section [ tailwind "h-screen w-full bg-white flex justify-center items-center fade-in" ]
+            [ section [ tailwind "w-2/3 flex justify-center flex-col items-center", style "height" "75%" ]
+                [ h1 [ tailwind "text-5xl font-bold" ] [ text "Thank you for helping ", text data.patient.details.firstName, text "." ]
+                , section [ tailwind "bg-white w-2/3 overflow-auto border border-gray-300 rounded p-4 my-8", style "height" "70%" ]
+                    [ Markdown.toHtml [ class "markdown" ] data.patient.commentary ]
+                , button [ onClick ClickedGoHome, tailwind "w-2/3 shadow border-l-4 border-olive-500 hover:shadow-lg active:shadow-inner trans-all text-lg p-2 mb-4" ] [ text "Return Home" ]
+                , h3 [ tailwind "text-sm text-gray-800" ] [ text "Or compare your answers with the exemplar below." ]
+                ]
+            ]
+        , section [ tailwind "bg-white flex" ]
+            [ section [ tailwind "w-1/2 p-16 border-r border-gray-300" ]
+                [ h1 [ tailwind "font-bold" ] [ text "Your response:" ]
+                , section [ tailwind "mb-6" ]
+                    [ text data.note ]
+                , section [ tailwind "mb-6" ]
+                    [ h1 [ tailwind "font-bold" ] [ text "Your provisional diagnosis:" ]
+                    , div [] [ text (data.diagnosis |> Maybe.map Diagnosis.toString |> Maybe.withDefault "No diagnosis provided.") ]
+                    ]
+                , section [ tailwind "mb-6" ]
+                    [ h1 [ tailwind "font-bold" ] [ text "Your requested investigations:" ]
+                    , section []
+                        (List.map (viewRequestedInvestigation True data.exemplarInvestigationIntSet) data.investigations)
+                    ]
+                , section [ tailwind "mb-6" ]
+                    [ h1 [ tailwind "font-bold" ] [ text "Your prescription orders:" ]
+                    , section []
+                        (List.map (viewRequestedPrescription True data.exemplarPrescriptionIntSet) data.prescriptions)
+                    ]
+                ]
+            , section [ tailwind "w-1/2 p-16" ]
+                [ h1 [ tailwind "font-bold" ] [ text "Exemplar response:" ]
+                , section [ tailwind "mb-6" ]
+                    [ text data.patient.exemplarNote ]
+                , section [ tailwind "mb-6" ]
+                    [ h1 [ tailwind "font-bold" ] [ text "Exemplar provisional diagnosis:" ]
+                    , div [] [ text (Diagnosis.toString data.patient.exemplarDiagnosis) ]
+                    ]
+                , section [ tailwind "mb-6" ]
+                    [ h1 [ tailwind "font-bold" ] [ text "Exemplar requested investigations:" ]
+                    , section []
+                        (List.map (viewRequestedInvestigation False data.exemplarInvestigationIntSet) data.patient.exemplarInvestigations)
+                    ]
+                , section [ tailwind "mb-6" ]
+                    [ h1 [ tailwind "font-bold" ] [ text "Exemplar prescription orders:" ]
+                    , section []
+                        (List.map (viewRequestedPrescription False data.exemplarPrescriptionIntSet) data.patient.exemplarPrescriptions)
+                    ]
+                ]
             ]
         ]
 
@@ -1275,8 +1383,8 @@ view model =
         ScreenCaseFinish data ->
             viewScreenCaseFinish model data
 
-        _ ->
-            div [] []
+        ScreenCaseFeedback data ->
+            viewScreenCaseFeedback model data
 
 
 

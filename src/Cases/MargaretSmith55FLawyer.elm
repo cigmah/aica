@@ -123,7 +123,7 @@ scriptDict = Dict.fromList
 
 details : Case.Details
 details =
-    { id = 0
+    { id = "margaret_smith_55_f_lawyer"
     , firstName = "Margaret"
     , lastName = "Smith"
     , age = 55

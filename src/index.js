@@ -10,7 +10,7 @@ Elm.Main.init({
   flags: {
     logo: iconPath,
     profiles: [
-      margaretSmith
+      { id: "margaret_smith_55_f_lawyer" , path: margaretSmith }
     ],
   }
 });

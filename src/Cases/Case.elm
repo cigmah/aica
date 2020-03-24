@@ -21,7 +21,7 @@ type Gender
 
 
 type alias Details =
-    { id : Int
+    { id : String
     , firstName : String
     , lastName : String
     , age : Int

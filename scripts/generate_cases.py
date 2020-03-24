@@ -58,7 +58,7 @@ scriptDict = Dict.fromList
 
 details : Case.Details
 details =
-    {{ id = {patient_id}
+    {{ id = "{patient_id}"
     , firstName = "{first_name}"
     , lastName = "{last_name}"
     , age = {age}
@@ -148,9 +148,10 @@ def process_gender(gender_string: str) -> str:
     return gender
 
 
-def generate_case(patient_id, data):
+def generate_case(data):
     """ Generate case from data dict with category as keys, and subcategory dicts as values. """
     name = utils.process_string(data["core"]["firstName"] + data["core"]["lastName"])
+    patient_id = data["core"]["id"]
     gender_string = data["core"]["gender"]
     stem = data["core"]["stem"]
     question_categories = [k for k in data.keys() if k[0].isupper()]
@@ -253,17 +254,22 @@ def run_generate_cases():
 
     case_files = glob("./cases/*.csv")
     case_files.sort(key=os.path.getmtime)
-    for i, case_file in enumerate(case_files):
+    case_ids = []
+    for _, case_file in enumerate(case_files):
         df = pd.read_csv(
             case_file, header=None, names=["category", "subcategory", "value"],
         )
         data = dfToDict(df)
-        filename, output = generate_case(i, data)
+        filename, output = generate_case(data)
         cases.append(filename)
+        case_ids.append(data["core"]["id"])
         with open(
             "../src/Cases/{filename}.elm".format(filename=filename), "wb"
         ) as outfile:
             outfile.write(output.encode("utf-8"))
+
+    # Assert that all case ids are unique
+    assert(len(set(case_ids)) == len(case_ids))
 
     with open("../src/Cases/List.elm", "w") as outfile:
         outfile.write(generate_case_list_file(cases))

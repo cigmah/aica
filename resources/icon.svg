@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="49.552845"
-     inkscape:cy="42.829151"
+     inkscape:zoom="2.0270394"
+     inkscape:cx="-33.206079"
+     inkscape:cy="15.15171"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -89,56 +89,83 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-265.24999)">
-    <rect
-       style="opacity:1;fill:#48bb78;fill-opacity:1;stroke:none;stroke-width:3.175;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect4749"
-       width="31.75"
-       height="31.75"
-       x="-3.3839596e-14"
-       y="265.25"
-       rx="1.3229166"
-       ry="1.3229166" />
     <path
-       style="fill:none;stroke:#ffffff;stroke-width:3.4029367;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 15.874999,270.91618 v 10.20881 2.64583 h -3.402936 v 6.42867"
+       style="fill:none;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 15.874999,270.91618 v 10.20881 2.64583"
        id="path4829"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
     <path
-       style="fill:none;stroke:#ffffff;stroke-width:3.4029367;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 15.874999,270.91618 h -9.0744973 2.5e-6"
        id="path4835"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
     <path
        inkscape:connector-curvature="0"
        id="path4861"
        d="M 15.874999,276.58774 H 6.8005017 v 14.74606"
-       style="fill:none;stroke:#ffffff;stroke-width:3.4029367;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       sodipodi:nodetypes="ccc" />
+       style="fill:none;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
     <path
-       style="fill:none;stroke:#ffffff;stroke-width:3.4029367;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 12.472063,291.3338 h 6.805874"
-       id="path4863"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <path
-       sodipodi:nodetypes="ccccc"
+       sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
        id="path4865"
-       d="m 15.875,270.91618 v 10.20881 2.64583 h 3.402937 v 7.56298"
-       style="fill:none;stroke:#ffffff;stroke-width:3.4029367;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       d="m 15.875,270.91618 v 10.20881"
+       style="fill:none;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
     <path
        sodipodi:nodetypes="ccc"
        inkscape:connector-curvature="0"
        id="path4867"
        d="m 15.875,270.91618 h 9.074498 -2e-6"
-       style="fill:none;stroke:#ffffff;stroke-width:3.4029367;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:none;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
     <path
        sodipodi:nodetypes="ccc"
-       style="fill:none;stroke:#ffffff;stroke-width:3.4029367;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 15.875,276.58774 h 9.074498 v 14.74606"
        id="path4869"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect9261"
+       width="31.75"
+       height="31.75"
+       x="0"
+       y="265.25"
+       rx="1.3229166"
+       ry="1.3229166"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
+    <rect
+       ry="0.79374999"
+       rx="0.79374999"
+       y="283.77081"
+       x="12.472063"
+       height="7.5630031"
+       width="6.8058734"
+       id="rect9263"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.32291667;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\inkq\projects\aica\src\Resources\rect9263.png"
+       inkscape:export-xdpi="449.60001"
+       inkscape:export-ydpi="449.60001" />
   </g>
 </svg>
