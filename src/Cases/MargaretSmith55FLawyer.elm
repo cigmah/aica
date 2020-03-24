@@ -112,7 +112,7 @@ scriptDict = Dict.fromList
     , (Question.toInt (QuestionSymptom Symptom.Loc), "Yes, I think I must have fainted at some point or something.")
     , (Question.toInt (QuestionSymptom Symptom.VisualChange), "I think I'm seeing double. Especially when I try looking to you on my left. I see two of your faces.")
     , (Question.toInt (QuestionSymptom Symptom.Headache), "Yes, I have a headache. Didn't I tell you that?")
-    , (Question.toInt (QuestionSymptomFeature SymptomFeature.Where), "In my head mostly.")
+    , (Question.toInt (QuestionSymptomFeature SymptomFeature.When), "About an hour ago.")
     , (Question.toInt (QuestionSymptomFeature SymptomFeature.Aggravating), "I really can't focus, I'm sorry. I'm not really sure.")
     , (Question.toInt (QuestionSymptomFeature SymptomFeature.Quantity), "Terrible, I feel absolutely terrible.")
     , (Question.toInt (QuestionSymptomFeature SymptomFeature.Alleviating), "Nothing.")
@@ -140,11 +140,9 @@ patient =
     , exemplarNote = "Presented to ED with sudden-onset severe headache on b/g HTN and FHx of PCKD.\n \n HOPC:\n - Severe 10/10 headache onset several hours ago\n -\n \n PMHx:\n - HTN\n \n FHx:\n - Mother had PCKD, passed away from stroke in 50s\n \n Medications\n "
     , exemplarDiagnosis = Subarachnoidhaemorrhage
     , exemplarPrescriptions =
-        Array.fromList
-            [{ medication = Aspirin, dosage = "300mg", route = "po", frequency = "mane" }]
+        [{ medication = Aspirin, dosage = "300mg", route = "po", frequency = "mane" }]
     , exemplarInvestigations =
-        Array.fromList
-            [InvestigationBloods FBE, InvestigationImaging CTBrain]
+        [InvestigationBloods FBE, InvestigationImaging CTBrain]
     , commentary = "This is some sample commentary on the case and needs to be modified. "
     }
 

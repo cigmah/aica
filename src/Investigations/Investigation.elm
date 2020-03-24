@@ -131,8 +131,8 @@ list =
     , InvestigationOther Other.Echocardiogram
     , InvestigationOther Other.EEG ]
 
-optionList : (Investigation -> String -> msg) -> Array (Option.Data Investigation msg)
-optionList msg = Array.fromList
+optionList : (Investigation -> String -> msg) -> List (Option.Data Investigation msg)
+optionList msg =
     [ { value = InvestigationBloods Bloods.FBE, string = "FBE", onClick = msg (InvestigationBloods Bloods.FBE) "FBE", tags = "" }
     , { value = InvestigationBloods Bloods.UEC, string = "UEC", onClick = msg (InvestigationBloods Bloods.UEC) "UEC", tags = "" }
     , { value = InvestigationBloods Bloods.LFT, string = "LFT", onClick = msg (InvestigationBloods Bloods.LFT) "LFT", tags = "" }

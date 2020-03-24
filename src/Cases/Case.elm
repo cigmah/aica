@@ -38,7 +38,7 @@ type alias Case =
     , stem : String
     , exemplarNote : String -- the exemplar clinical note for the case
     , exemplarDiagnosis : Diagnosis
-    , exemplarInvestigations : Array Investigation
-    , exemplarPrescriptions : Array Prescription
+    , exemplarInvestigations : List Investigation
+    , exemplarPrescriptions : List Prescription
     , commentary : String
     }

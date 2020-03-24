@@ -32,10 +32,19 @@
 }
 
 .markdown p {
-    @apply mt-2;
+    @apply mb-2;
 }
 
 .markdown ul {
     @apply my-2 ml-8;
     list-style-type: circle;
+}
+
+.markdown ol {
+    @apply my-2 ml-8;
+    list-style-type: decimal;
+}
+
+.markdown.low-headings h1, h2, h3 {
+    @apply mt-2;
 }

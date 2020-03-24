@@ -24,6 +24,6 @@ To regenerate the types and related functions:
 
 1. `cd ./scripts` from the home directory
 2. Make additions and edits as required to the `questions.csv`, `investigations.csv`, `diagnosis.csv`, or `medications.csv` files.
-3. `python ./generate_questions.py` or `python ./generate_investigations.py` or `python ./generate_diagnosis.py` or `python ./generate_medications.py` as required. `pandas` must be installed.
+3. `python generate_all.py` to generate all code files at once. 
 
 Once the code is generated, any breaking changes will throw a compile error on the next attempt to build or run the app.

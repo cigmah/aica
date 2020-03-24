@@ -160,8 +160,8 @@ list : List {parent_enum}
 list = 
 {enum_list}
 
-optionList : ({parent_enum} -> String -> msg) -> Array (Option.Data {parent_enum} msg)
-optionList msg = Array.fromList
+optionList : ({parent_enum} -> String -> msg) -> List (Option.Data {parent_enum} msg)
+optionList msg =
 {option_list}
 
 """

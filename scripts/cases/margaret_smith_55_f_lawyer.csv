@@ -64,7 +64,7 @@ Symptom,Pain,"Yes, my headache. "
 Symptom,Loc,"Yes, I think I must have fainted at some point or something."
 Symptom,VisualChange,I think I'm seeing double. Especially when I try looking to you on my left. I see two of your faces.
 Symptom,Headache,"Yes, I have a headache. Didn't I tell you that?"
-SymptomFeature,Where,In my head mostly.
+SymptomFeature,When,About an hour ago.
 SymptomFeature,Aggravating,"I really can't focus, I'm sorry. I'm not really sure."
 SymptomFeature,Quantity,"Terrible, I feel absolutely terrible."
 SymptomFeature,Alleviating,Nothing.

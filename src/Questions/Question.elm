@@ -61,7 +61,7 @@ fromInt int =
         14 -> QuestionPainFeature PainFeature.Before
         15 -> QuestionPainFeature PainFeature.Triggers
         16 -> QuestionPainFeature PainFeature.Radiation
-        17 -> QuestionSymptomFeature SymptomFeature.Where
+        17 -> QuestionSymptomFeature SymptomFeature.When
         18 -> QuestionSymptomFeature SymptomFeature.Quantity
         19 -> QuestionSymptomFeature SymptomFeature.Alleviating
         20 -> QuestionSymptomFeature SymptomFeature.Aggravating
@@ -188,7 +188,7 @@ toInt enum =
         QuestionPainFeature PainFeature.Before -> 14
         QuestionPainFeature PainFeature.Triggers -> 15
         QuestionPainFeature PainFeature.Radiation -> 16
-        QuestionSymptomFeature SymptomFeature.Where -> 17
+        QuestionSymptomFeature SymptomFeature.When -> 17
         QuestionSymptomFeature SymptomFeature.Quantity -> 18
         QuestionSymptomFeature SymptomFeature.Alleviating -> 19
         QuestionSymptomFeature SymptomFeature.Aggravating -> 20
@@ -314,10 +314,10 @@ toString enum =
         QuestionPainFeature PainFeature.Before -> "Timing"
         QuestionPainFeature PainFeature.Triggers -> "Quality"
         QuestionPainFeature PainFeature.Radiation -> "Quantity"
-        QuestionSymptomFeature SymptomFeature.Where -> "Before"
+        QuestionSymptomFeature SymptomFeature.When -> "Before"
         QuestionSymptomFeature SymptomFeature.Quantity -> "Triggers"
         QuestionSymptomFeature SymptomFeature.Alleviating -> "Radiation"
-        QuestionSymptomFeature SymptomFeature.Aggravating -> "Where"
+        QuestionSymptomFeature SymptomFeature.Aggravating -> "When"
         QuestionFeelings Feelings.Beliefs -> "Quantity"
         QuestionFeelings Feelings.Impact -> "Alleviating"
         QuestionFeelings Feelings.Expectations -> "Aggravating"
@@ -439,7 +439,7 @@ list =
     , QuestionPainFeature PainFeature.Before
     , QuestionPainFeature PainFeature.Triggers
     , QuestionPainFeature PainFeature.Radiation
-    , QuestionSymptomFeature SymptomFeature.Where
+    , QuestionSymptomFeature SymptomFeature.When
     , QuestionSymptomFeature SymptomFeature.Quantity
     , QuestionSymptomFeature SymptomFeature.Alleviating
     , QuestionSymptomFeature SymptomFeature.Aggravating
@@ -545,8 +545,8 @@ list =
     , QuestionSign Sign.Dysdiado
     , QuestionSign Sign.IntentionTremo ]
 
-optionList : (Question -> String -> msg) -> Array (Option.Data Question msg)
-optionList msg = Array.fromList
+optionList : (Question -> String -> msg) -> List (Option.Data Question msg)
+optionList msg =
     [ { value = QuestionDetails Details.Name, string = "What is your name?", onClick = msg (QuestionDetails Details.Name) "What is your name?", tags = "name" }
     , { value = QuestionDetails Details.Age, string = "How old are you?", onClick = msg (QuestionDetails Details.Age) "How old are you?", tags = "nan" }
     , { value = QuestionDetails Details.Age, string = "When were you born?", onClick = msg (QuestionDetails Details.Age) "When were you born?", tags = "date of birth dob" }
@@ -564,7 +564,7 @@ optionList msg = Array.fromList
     , { value = QuestionPainFeature PainFeature.Before, string = "Have you had this pain before?", onClick = msg (QuestionPainFeature PainFeature.Before) "Have you had this pain before?", tags = "nan" }
     , { value = QuestionPainFeature PainFeature.Triggers, string = "What triggers the pain?", onClick = msg (QuestionPainFeature PainFeature.Triggers) "What triggers the pain?", tags = "nan" }
     , { value = QuestionPainFeature PainFeature.Radiation, string = "Does the pain radiate or go anywhere else?", onClick = msg (QuestionPainFeature PainFeature.Radiation) "Does the pain radiate or go anywhere else?", tags = "nan" }
-    , { value = QuestionSymptomFeature SymptomFeature.Where, string = "When did your symptoms start?", onClick = msg (QuestionSymptomFeature SymptomFeature.Where) "When did your symptoms start?", tags = "nan" }
+    , { value = QuestionSymptomFeature SymptomFeature.When, string = "When did your symptoms start?", onClick = msg (QuestionSymptomFeature SymptomFeature.When) "When did your symptoms start?", tags = "nan" }
     , { value = QuestionSymptomFeature SymptomFeature.Quantity, string = "How severe are your symptoms?", onClick = msg (QuestionSymptomFeature SymptomFeature.Quantity) "How severe are your symptoms?", tags = "nan" }
     , { value = QuestionSymptomFeature SymptomFeature.Alleviating, string = "Does anything make it better?", onClick = msg (QuestionSymptomFeature SymptomFeature.Alleviating) "Does anything make it better?", tags = "nan" }
     , { value = QuestionSymptomFeature SymptomFeature.Aggravating, string = "Does anything make it worse?", onClick = msg (QuestionSymptomFeature SymptomFeature.Aggravating) "Does anything make it worse?", tags = "nan" }

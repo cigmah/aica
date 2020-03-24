@@ -16,7 +16,7 @@ How would you rate the pain out of 10?,PainFeature,Quantity,severity severe quan
 Have you had this pain before?,PainFeature,Before,
 What triggers the pain?,PainFeature,Triggers,
 Does the pain radiate or go anywhere else?,PainFeature,Radiation,
-When did your symptoms start?,SymptomFeature,Where,
+When did your symptoms start?,SymptomFeature,When,
 How severe are your symptoms?,SymptomFeature,Quantity,
 Does anything make it better?,SymptomFeature,Alleviating,
 Does anything make it worse?,SymptomFeature,Aggravating,

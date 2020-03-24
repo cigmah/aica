@@ -1,6 +1,6 @@
 module Questions.SymptomFeature exposing (..)
 
-type SymptomFeature = Where
+type SymptomFeature = When
     | Quantity
     | Alleviating
     | Aggravating

@@ -75,11 +75,9 @@ patient =
     , exemplarNote = "{exemplar_note}"
     , exemplarDiagnosis = {exemplar_diagnosis}
     , exemplarPrescriptions =
-        Array.fromList
-            {exemplar_prescriptions}
+        {exemplar_prescriptions}
     , exemplarInvestigations =
-        Array.fromList
-            {exemplar_investigations}
+        {exemplar_investigations}
     , commentary = "{commentary}"
     }}
 
