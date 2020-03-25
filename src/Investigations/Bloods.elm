@@ -1,20 +1,22 @@
 module Investigations.Bloods exposing (..)
 
-type Bloods = FBE
-    | UEC
-    | LFT
+type Bloods = FBEFullBloodExamination
+    | UECUreaElectrolytesandCreatinine
+    | LFTLiverFunctionTests
     | Troponin
-    | CMP
-    | CRP
+    | CMPCalciumMagnesiumPhosphate
+    | CRPCReactiveProtein
     | Amylase
-    | ANA
+    | ANAAntiNuclearAntibodies
     | Bilirubin
-    | CK
-    | ESR
-    | FBG
-    | Ironstudies
+    | CKCreatineKinase
+    | ESRErythrocyteSedimentationRate
+    | FBGFastingBloodGlucose
+    | Iron
     | Lactate
-    | LDH
+    | LDHLactateDehydrogenase
     | Lipids
-    | TFT
+    | TFTThyroidFunctionTests
+    | APTTActivatedpartialthromboplastintime
+    | PTProthrombintime
 

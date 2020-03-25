@@ -4,6 +4,7 @@ How old are you?,Details,Age,
 When were you born?,Details,Age,date of birth dob
 Do you work?,Details,OccupationBrief,employed job
 What do you work as?,Details,OccupationDescription,job
+Hi. It's nice to meet you.,Open,Greeting,hi hello nice to meet you
 What's brought you in today?,Open,Opening,
 Why have you come to see us today?,Open,Opening,
 How can I help you today?,Open,Opening,

@@ -14,149 +14,159 @@ type Investigation = InvestigationBloods Bloods
 fromInt : Int -> Investigation
 fromInt int = 
     case int of
-        0 -> InvestigationBloods Bloods.FBE
-        1 -> InvestigationBloods Bloods.UEC
-        2 -> InvestigationBloods Bloods.LFT
+        0 -> InvestigationBloods Bloods.FBEFullBloodExamination
+        1 -> InvestigationBloods Bloods.UECUreaElectrolytesandCreatinine
+        2 -> InvestigationBloods Bloods.LFTLiverFunctionTests
         3 -> InvestigationBloods Bloods.Troponin
-        4 -> InvestigationBloods Bloods.CMP
-        5 -> InvestigationBloods Bloods.CRP
+        4 -> InvestigationBloods Bloods.CMPCalciumMagnesiumPhosphate
+        5 -> InvestigationBloods Bloods.CRPCReactiveProtein
         6 -> InvestigationBloods Bloods.Amylase
-        7 -> InvestigationBloods Bloods.ANA
+        7 -> InvestigationBloods Bloods.ANAAntiNuclearAntibodies
         8 -> InvestigationBloods Bloods.Bilirubin
-        9 -> InvestigationBloods Bloods.CK
-        10 -> InvestigationBloods Bloods.ESR
-        11 -> InvestigationBloods Bloods.FBG
-        12 -> InvestigationBloods Bloods.Ironstudies
+        9 -> InvestigationBloods Bloods.CKCreatineKinase
+        10 -> InvestigationBloods Bloods.ESRErythrocyteSedimentationRate
+        11 -> InvestigationBloods Bloods.FBGFastingBloodGlucose
+        12 -> InvestigationBloods Bloods.Iron
         13 -> InvestigationBloods Bloods.Lactate
-        14 -> InvestigationBloods Bloods.LDH
+        14 -> InvestigationBloods Bloods.LDHLactateDehydrogenase
         15 -> InvestigationBloods Bloods.Lipids
-        16 -> InvestigationBloods Bloods.TFT
-        17 -> InvestigationImaging Imaging.CXR
-        18 -> InvestigationImaging Imaging.AXR
-        19 -> InvestigationImaging Imaging.CTBrain
-        20 -> InvestigationImaging Imaging.MRIBrain
-        21 -> InvestigationImaging Imaging.CTAbdoPelvis
-        22 -> InvestigationOther Other.ECG
-        23 -> InvestigationOther Other.Spirometry
-        24 -> InvestigationOther Other.Echocardiogram
-        25 -> InvestigationOther Other.EEG
-        _ -> InvestigationBloods Bloods.FBE
+        16 -> InvestigationBloods Bloods.TFTThyroidFunctionTests
+        17 -> InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime
+        18 -> InvestigationBloods Bloods.PTProthrombintime
+        19 -> InvestigationImaging Imaging.CXRChestXray
+        20 -> InvestigationImaging Imaging.AXRAbdominalXray
+        21 -> InvestigationImaging Imaging.CTBCTBrain
+        22 -> InvestigationImaging Imaging.MRIBrain
+        23 -> InvestigationImaging Imaging.CTAbdoPelvis
+        24 -> InvestigationOther Other.ECGElectrocardiogram
+        25 -> InvestigationOther Other.Spirometry
+        26 -> InvestigationOther Other.Echocardiogram
+        27 -> InvestigationOther Other.EEGElectroencephalography
+        _ -> InvestigationBloods Bloods.FBEFullBloodExamination
 
 toInt : Investigation -> Int
 toInt enum = 
     case enum of 
-        InvestigationBloods Bloods.FBE -> 0
-        InvestigationBloods Bloods.UEC -> 1
-        InvestigationBloods Bloods.LFT -> 2
+        InvestigationBloods Bloods.FBEFullBloodExamination -> 0
+        InvestigationBloods Bloods.UECUreaElectrolytesandCreatinine -> 1
+        InvestigationBloods Bloods.LFTLiverFunctionTests -> 2
         InvestigationBloods Bloods.Troponin -> 3
-        InvestigationBloods Bloods.CMP -> 4
-        InvestigationBloods Bloods.CRP -> 5
+        InvestigationBloods Bloods.CMPCalciumMagnesiumPhosphate -> 4
+        InvestigationBloods Bloods.CRPCReactiveProtein -> 5
         InvestigationBloods Bloods.Amylase -> 6
-        InvestigationBloods Bloods.ANA -> 7
+        InvestigationBloods Bloods.ANAAntiNuclearAntibodies -> 7
         InvestigationBloods Bloods.Bilirubin -> 8
-        InvestigationBloods Bloods.CK -> 9
-        InvestigationBloods Bloods.ESR -> 10
-        InvestigationBloods Bloods.FBG -> 11
-        InvestigationBloods Bloods.Ironstudies -> 12
+        InvestigationBloods Bloods.CKCreatineKinase -> 9
+        InvestigationBloods Bloods.ESRErythrocyteSedimentationRate -> 10
+        InvestigationBloods Bloods.FBGFastingBloodGlucose -> 11
+        InvestigationBloods Bloods.Iron -> 12
         InvestigationBloods Bloods.Lactate -> 13
-        InvestigationBloods Bloods.LDH -> 14
+        InvestigationBloods Bloods.LDHLactateDehydrogenase -> 14
         InvestigationBloods Bloods.Lipids -> 15
-        InvestigationBloods Bloods.TFT -> 16
-        InvestigationImaging Imaging.CXR -> 17
-        InvestigationImaging Imaging.AXR -> 18
-        InvestigationImaging Imaging.CTBrain -> 19
-        InvestigationImaging Imaging.MRIBrain -> 20
-        InvestigationImaging Imaging.CTAbdoPelvis -> 21
-        InvestigationOther Other.ECG -> 22
-        InvestigationOther Other.Spirometry -> 23
-        InvestigationOther Other.Echocardiogram -> 24
-        InvestigationOther Other.EEG -> 25
+        InvestigationBloods Bloods.TFTThyroidFunctionTests -> 16
+        InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime -> 17
+        InvestigationBloods Bloods.PTProthrombintime -> 18
+        InvestigationImaging Imaging.CXRChestXray -> 19
+        InvestigationImaging Imaging.AXRAbdominalXray -> 20
+        InvestigationImaging Imaging.CTBCTBrain -> 21
+        InvestigationImaging Imaging.MRIBrain -> 22
+        InvestigationImaging Imaging.CTAbdoPelvis -> 23
+        InvestigationOther Other.ECGElectrocardiogram -> 24
+        InvestigationOther Other.Spirometry -> 25
+        InvestigationOther Other.Echocardiogram -> 26
+        InvestigationOther Other.EEGElectroencephalography -> 27
 
 toString : Investigation -> String
 toString enum = 
     case enum of
-        InvestigationBloods Bloods.FBE -> "FBE"
-        InvestigationBloods Bloods.UEC -> "UEC"
-        InvestigationBloods Bloods.LFT -> "LFT"
+        InvestigationBloods Bloods.FBEFullBloodExamination -> "FBE (Full Blood Examination)"
+        InvestigationBloods Bloods.UECUreaElectrolytesandCreatinine -> "UEC (Urea, Electrolytes and Creatinine)"
+        InvestigationBloods Bloods.LFTLiverFunctionTests -> "LFT (Liver Function Tests)"
         InvestigationBloods Bloods.Troponin -> "Troponin"
-        InvestigationBloods Bloods.CMP -> "CMP"
-        InvestigationBloods Bloods.CRP -> "CRP"
+        InvestigationBloods Bloods.CMPCalciumMagnesiumPhosphate -> "CMP (Calcium Magnesium Phosphate)"
+        InvestigationBloods Bloods.CRPCReactiveProtein -> "CRP (C-Reactive Protein)"
         InvestigationBloods Bloods.Amylase -> "Amylase"
-        InvestigationBloods Bloods.ANA -> "ANA"
+        InvestigationBloods Bloods.ANAAntiNuclearAntibodies -> "ANA (Anti-Nuclear Antibodies)"
         InvestigationBloods Bloods.Bilirubin -> "Bilirubin"
-        InvestigationBloods Bloods.CK -> "CK"
-        InvestigationBloods Bloods.ESR -> "ESR"
-        InvestigationBloods Bloods.FBG -> "FBG"
-        InvestigationBloods Bloods.Ironstudies -> "Iron studies"
+        InvestigationBloods Bloods.CKCreatineKinase -> "CK (Creatine Kinase)"
+        InvestigationBloods Bloods.ESRErythrocyteSedimentationRate -> "ESR (Erythrocyte Sedimentation Rate)"
+        InvestigationBloods Bloods.FBGFastingBloodGlucose -> "FBG (Fasting Blood Glucose)"
+        InvestigationBloods Bloods.Iron -> "Iron"
         InvestigationBloods Bloods.Lactate -> "Lactate"
-        InvestigationBloods Bloods.LDH -> "LDH"
+        InvestigationBloods Bloods.LDHLactateDehydrogenase -> "LDH (Lactate Dehydrogenase)"
         InvestigationBloods Bloods.Lipids -> "Lipids"
-        InvestigationBloods Bloods.TFT -> "TFT"
-        InvestigationImaging Imaging.CXR -> "CXR"
-        InvestigationImaging Imaging.AXR -> "AXR"
-        InvestigationImaging Imaging.CTBrain -> "CT Brain"
+        InvestigationBloods Bloods.TFTThyroidFunctionTests -> "TFT (Thyroid Function Tests)"
+        InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime -> "aPTT (Activated partial thromboplastin time)"
+        InvestigationBloods Bloods.PTProthrombintime -> "PT (Prothrombin time)"
+        InvestigationImaging Imaging.CXRChestXray -> "CXR (Chest X-ray)"
+        InvestigationImaging Imaging.AXRAbdominalXray -> "AXR (Abdominal X-ray)"
+        InvestigationImaging Imaging.CTBCTBrain -> "CTB (CT Brain)"
         InvestigationImaging Imaging.MRIBrain -> "MRI Brain"
         InvestigationImaging Imaging.CTAbdoPelvis -> "CT Abdo Pelvis"
-        InvestigationOther Other.ECG -> "ECG"
+        InvestigationOther Other.ECGElectrocardiogram -> "ECG (Electrocardiogram)"
         InvestigationOther Other.Spirometry -> "Spirometry"
         InvestigationOther Other.Echocardiogram -> "Echocardiogram"
-        InvestigationOther Other.EEG -> "EEG"
+        InvestigationOther Other.EEGElectroencephalography -> "EEG (Electroencephalography)"
 
 list : List Investigation
 list = 
-    [ InvestigationBloods Bloods.FBE
-    , InvestigationBloods Bloods.UEC
-    , InvestigationBloods Bloods.LFT
+    [ InvestigationBloods Bloods.FBEFullBloodExamination
+    , InvestigationBloods Bloods.UECUreaElectrolytesandCreatinine
+    , InvestigationBloods Bloods.LFTLiverFunctionTests
     , InvestigationBloods Bloods.Troponin
-    , InvestigationBloods Bloods.CMP
-    , InvestigationBloods Bloods.CRP
+    , InvestigationBloods Bloods.CMPCalciumMagnesiumPhosphate
+    , InvestigationBloods Bloods.CRPCReactiveProtein
     , InvestigationBloods Bloods.Amylase
-    , InvestigationBloods Bloods.ANA
+    , InvestigationBloods Bloods.ANAAntiNuclearAntibodies
     , InvestigationBloods Bloods.Bilirubin
-    , InvestigationBloods Bloods.CK
-    , InvestigationBloods Bloods.ESR
-    , InvestigationBloods Bloods.FBG
-    , InvestigationBloods Bloods.Ironstudies
+    , InvestigationBloods Bloods.CKCreatineKinase
+    , InvestigationBloods Bloods.ESRErythrocyteSedimentationRate
+    , InvestigationBloods Bloods.FBGFastingBloodGlucose
+    , InvestigationBloods Bloods.Iron
     , InvestigationBloods Bloods.Lactate
-    , InvestigationBloods Bloods.LDH
+    , InvestigationBloods Bloods.LDHLactateDehydrogenase
     , InvestigationBloods Bloods.Lipids
-    , InvestigationBloods Bloods.TFT
-    , InvestigationImaging Imaging.CXR
-    , InvestigationImaging Imaging.AXR
-    , InvestigationImaging Imaging.CTBrain
+    , InvestigationBloods Bloods.TFTThyroidFunctionTests
+    , InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime
+    , InvestigationBloods Bloods.PTProthrombintime
+    , InvestigationImaging Imaging.CXRChestXray
+    , InvestigationImaging Imaging.AXRAbdominalXray
+    , InvestigationImaging Imaging.CTBCTBrain
     , InvestigationImaging Imaging.MRIBrain
     , InvestigationImaging Imaging.CTAbdoPelvis
-    , InvestigationOther Other.ECG
+    , InvestigationOther Other.ECGElectrocardiogram
     , InvestigationOther Other.Spirometry
     , InvestigationOther Other.Echocardiogram
-    , InvestigationOther Other.EEG ]
+    , InvestigationOther Other.EEGElectroencephalography ]
 
 optionList : (Investigation -> String -> msg) -> List (Option.Data Investigation msg)
 optionList msg =
-    [ { value = InvestigationBloods Bloods.FBE, string = "FBE", onClick = msg (InvestigationBloods Bloods.FBE) "FBE", tags = "" }
-    , { value = InvestigationBloods Bloods.UEC, string = "UEC", onClick = msg (InvestigationBloods Bloods.UEC) "UEC", tags = "" }
-    , { value = InvestigationBloods Bloods.LFT, string = "LFT", onClick = msg (InvestigationBloods Bloods.LFT) "LFT", tags = "" }
+    [ { value = InvestigationBloods Bloods.FBEFullBloodExamination, string = "FBE (Full Blood Examination)", onClick = msg (InvestigationBloods Bloods.FBEFullBloodExamination) "FBE (Full Blood Examination)", tags = "" }
+    , { value = InvestigationBloods Bloods.UECUreaElectrolytesandCreatinine, string = "UEC (Urea, Electrolytes and Creatinine)", onClick = msg (InvestigationBloods Bloods.UECUreaElectrolytesandCreatinine) "UEC (Urea, Electrolytes and Creatinine)", tags = "" }
+    , { value = InvestigationBloods Bloods.LFTLiverFunctionTests, string = "LFT (Liver Function Tests)", onClick = msg (InvestigationBloods Bloods.LFTLiverFunctionTests) "LFT (Liver Function Tests)", tags = "" }
     , { value = InvestigationBloods Bloods.Troponin, string = "Troponin", onClick = msg (InvestigationBloods Bloods.Troponin) "Troponin", tags = "" }
-    , { value = InvestigationBloods Bloods.CMP, string = "CMP", onClick = msg (InvestigationBloods Bloods.CMP) "CMP", tags = "" }
-    , { value = InvestigationBloods Bloods.CRP, string = "CRP", onClick = msg (InvestigationBloods Bloods.CRP) "CRP", tags = "" }
+    , { value = InvestigationBloods Bloods.CMPCalciumMagnesiumPhosphate, string = "CMP (Calcium Magnesium Phosphate)", onClick = msg (InvestigationBloods Bloods.CMPCalciumMagnesiumPhosphate) "CMP (Calcium Magnesium Phosphate)", tags = "" }
+    , { value = InvestigationBloods Bloods.CRPCReactiveProtein, string = "CRP (C-Reactive Protein)", onClick = msg (InvestigationBloods Bloods.CRPCReactiveProtein) "CRP (C-Reactive Protein)", tags = "" }
     , { value = InvestigationBloods Bloods.Amylase, string = "Amylase", onClick = msg (InvestigationBloods Bloods.Amylase) "Amylase", tags = "" }
-    , { value = InvestigationBloods Bloods.ANA, string = "ANA", onClick = msg (InvestigationBloods Bloods.ANA) "ANA", tags = "" }
+    , { value = InvestigationBloods Bloods.ANAAntiNuclearAntibodies, string = "ANA (Anti-Nuclear Antibodies)", onClick = msg (InvestigationBloods Bloods.ANAAntiNuclearAntibodies) "ANA (Anti-Nuclear Antibodies)", tags = "" }
     , { value = InvestigationBloods Bloods.Bilirubin, string = "Bilirubin", onClick = msg (InvestigationBloods Bloods.Bilirubin) "Bilirubin", tags = "" }
-    , { value = InvestigationBloods Bloods.CK, string = "CK", onClick = msg (InvestigationBloods Bloods.CK) "CK", tags = "" }
-    , { value = InvestigationBloods Bloods.ESR, string = "ESR", onClick = msg (InvestigationBloods Bloods.ESR) "ESR", tags = "" }
-    , { value = InvestigationBloods Bloods.FBG, string = "FBG", onClick = msg (InvestigationBloods Bloods.FBG) "FBG", tags = "" }
-    , { value = InvestigationBloods Bloods.Ironstudies, string = "Iron studies", onClick = msg (InvestigationBloods Bloods.Ironstudies) "Iron studies", tags = "" }
+    , { value = InvestigationBloods Bloods.CKCreatineKinase, string = "CK (Creatine Kinase)", onClick = msg (InvestigationBloods Bloods.CKCreatineKinase) "CK (Creatine Kinase)", tags = "" }
+    , { value = InvestigationBloods Bloods.ESRErythrocyteSedimentationRate, string = "ESR (Erythrocyte Sedimentation Rate)", onClick = msg (InvestigationBloods Bloods.ESRErythrocyteSedimentationRate) "ESR (Erythrocyte Sedimentation Rate)", tags = "" }
+    , { value = InvestigationBloods Bloods.FBGFastingBloodGlucose, string = "FBG (Fasting Blood Glucose)", onClick = msg (InvestigationBloods Bloods.FBGFastingBloodGlucose) "FBG (Fasting Blood Glucose)", tags = "" }
+    , { value = InvestigationBloods Bloods.Iron, string = "Iron", onClick = msg (InvestigationBloods Bloods.Iron) "Iron", tags = "" }
     , { value = InvestigationBloods Bloods.Lactate, string = "Lactate", onClick = msg (InvestigationBloods Bloods.Lactate) "Lactate", tags = "" }
-    , { value = InvestigationBloods Bloods.LDH, string = "LDH", onClick = msg (InvestigationBloods Bloods.LDH) "LDH", tags = "" }
+    , { value = InvestigationBloods Bloods.LDHLactateDehydrogenase, string = "LDH (Lactate Dehydrogenase)", onClick = msg (InvestigationBloods Bloods.LDHLactateDehydrogenase) "LDH (Lactate Dehydrogenase)", tags = "" }
     , { value = InvestigationBloods Bloods.Lipids, string = "Lipids", onClick = msg (InvestigationBloods Bloods.Lipids) "Lipids", tags = "" }
-    , { value = InvestigationBloods Bloods.TFT, string = "TFT", onClick = msg (InvestigationBloods Bloods.TFT) "TFT", tags = "" }
-    , { value = InvestigationImaging Imaging.CXR, string = "CXR", onClick = msg (InvestigationImaging Imaging.CXR) "CXR", tags = "" }
-    , { value = InvestigationImaging Imaging.AXR, string = "AXR", onClick = msg (InvestigationImaging Imaging.AXR) "AXR", tags = "" }
-    , { value = InvestigationImaging Imaging.CTBrain, string = "CT Brain", onClick = msg (InvestigationImaging Imaging.CTBrain) "CT Brain", tags = "" }
+    , { value = InvestigationBloods Bloods.TFTThyroidFunctionTests, string = "TFT (Thyroid Function Tests)", onClick = msg (InvestigationBloods Bloods.TFTThyroidFunctionTests) "TFT (Thyroid Function Tests)", tags = "" }
+    , { value = InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime, string = "aPTT (Activated partial thromboplastin time)", onClick = msg (InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime) "aPTT (Activated partial thromboplastin time)", tags = "" }
+    , { value = InvestigationBloods Bloods.PTProthrombintime, string = "PT (Prothrombin time)", onClick = msg (InvestigationBloods Bloods.PTProthrombintime) "PT (Prothrombin time)", tags = "" }
+    , { value = InvestigationImaging Imaging.CXRChestXray, string = "CXR (Chest X-ray)", onClick = msg (InvestigationImaging Imaging.CXRChestXray) "CXR (Chest X-ray)", tags = "" }
+    , { value = InvestigationImaging Imaging.AXRAbdominalXray, string = "AXR (Abdominal X-ray)", onClick = msg (InvestigationImaging Imaging.AXRAbdominalXray) "AXR (Abdominal X-ray)", tags = "" }
+    , { value = InvestigationImaging Imaging.CTBCTBrain, string = "CTB (CT Brain)", onClick = msg (InvestigationImaging Imaging.CTBCTBrain) "CTB (CT Brain)", tags = "" }
     , { value = InvestigationImaging Imaging.MRIBrain, string = "MRI Brain", onClick = msg (InvestigationImaging Imaging.MRIBrain) "MRI Brain", tags = "" }
     , { value = InvestigationImaging Imaging.CTAbdoPelvis, string = "CT Abdo Pelvis", onClick = msg (InvestigationImaging Imaging.CTAbdoPelvis) "CT Abdo Pelvis", tags = "" }
-    , { value = InvestigationOther Other.ECG, string = "ECG", onClick = msg (InvestigationOther Other.ECG) "ECG", tags = "" }
+    , { value = InvestigationOther Other.ECGElectrocardiogram, string = "ECG (Electrocardiogram)", onClick = msg (InvestigationOther Other.ECGElectrocardiogram) "ECG (Electrocardiogram)", tags = "" }
     , { value = InvestigationOther Other.Spirometry, string = "Spirometry", onClick = msg (InvestigationOther Other.Spirometry) "Spirometry", tags = "" }
     , { value = InvestigationOther Other.Echocardiogram, string = "Echocardiogram", onClick = msg (InvestigationOther Other.Echocardiogram) "Echocardiogram", tags = "" }
-    , { value = InvestigationOther Other.EEG, string = "EEG", onClick = msg (InvestigationOther Other.EEG) "EEG", tags = "" } ]
+    , { value = InvestigationOther Other.EEGElectroencephalography, string = "EEG (Electroencephalography)", onClick = msg (InvestigationOther Other.EEGElectroencephalography) "EEG (Electroencephalography)", tags = "" } ]
 

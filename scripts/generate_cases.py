@@ -13,7 +13,7 @@ from glob import glob
 from collections import defaultdict
 from typing import List, Dict
 
-TEMPLATE = """
+TEMPLATE = '''
 module Cases.{name} exposing (..)
 
 import Array exposing (..)
@@ -72,17 +72,17 @@ patient =
     {{ details = details
     , script = script
     , stem = "{stem}"
-    , openingGreeting = "{opening_greeting}"
-    , exemplarNote = "{exemplar_note}"
+    , openingGreeting = """{opening_greeting}"""
+    , exemplarNote = """{exemplar_note}"""
     , exemplarDiagnosis = {exemplar_diagnosis}
     , exemplarPrescriptions =
         {exemplar_prescriptions}
     , exemplarInvestigations =
         {exemplar_investigations}
-    , commentary = "{commentary}"
+    , commentary = """{commentary}"""
     }}
 
-"""
+'''
 
 
 def generate_question_imports(categories: List[str]) -> str:
@@ -94,7 +94,7 @@ def generate_question_imports(categories: List[str]) -> str:
 def generate_script_case(category: str, subcategory: str, value: str) -> str:
     """ Generate a single case for the script function. """
     case_template = (
-        """(Question.toInt ({parent_enum} {category}.{subcategory}), "{value}")"""
+        '''(Question.toInt ({parent_enum} {category}.{subcategory}), """{value}""")'''
     )
     parent_enum = "Question" + category
     return case_template.format(

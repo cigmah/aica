@@ -171,6 +171,7 @@ type Medication = Acarbose
     | Verapamil
     | Warfarin
     | Zolpidem
+    | Nimodipine
 
 fromInt : Int -> Medication
 fromInt int = 
@@ -342,6 +343,7 @@ fromInt int =
         164 -> Verapamil
         165 -> Warfarin
         166 -> Zolpidem
+        167 -> Nimodipine
         _ -> Acarbose
 
 toInt : Medication -> Int
@@ -514,6 +516,7 @@ toInt enum =
         Verapamil -> 164
         Warfarin -> 165
         Zolpidem -> 166
+        Nimodipine -> 167
 
 toString : Medication -> String
 toString enum = 
@@ -685,6 +688,7 @@ toString enum =
         Verapamil -> "Verapamil"
         Warfarin -> "Warfarin "
         Zolpidem -> "Zolpidem"
+        Nimodipine -> "Nimodipine"
 
 list : List Medication
 list = 
@@ -854,7 +858,8 @@ list =
     , Venlafaxine
     , Verapamil
     , Warfarin
-    , Zolpidem ]
+    , Zolpidem
+    , Nimodipine ]
 
 optionList : (Medication -> String -> msg) -> List (Option.Data Medication msg) 
 optionList msg = 
@@ -1024,7 +1029,8 @@ optionList msg =
     , { value = Venlafaxine, string = "Venlafaxine", onClick = msg (Venlafaxine) "Venlafaxine", tags = "" }
     , { value = Verapamil, string = "Verapamil", onClick = msg (Verapamil) "Verapamil", tags = "" }
     , { value = Warfarin, string = "Warfarin ", onClick = msg (Warfarin) "Warfarin ", tags = "" }
-    , { value = Zolpidem, string = "Zolpidem", onClick = msg (Zolpidem) "Zolpidem", tags = "" } ]
+    , { value = Zolpidem, string = "Zolpidem", onClick = msg (Zolpidem) "Zolpidem", tags = "" }
+    , { value = Nimodipine, string = "Nimodipine", onClick = msg (Nimodipine) "Nimodipine", tags = "" } ]
 
 
 

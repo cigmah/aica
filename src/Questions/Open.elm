@@ -1,6 +1,7 @@
 module Questions.Open exposing (..)
 
-type Open = Opening
+type Open = Greeting
+    | Opening
     | Symptoms
     | Phx
     | Fhx

@@ -1,8 +1,8 @@
 module Investigations.Imaging exposing (..)
 
-type Imaging = CXR
-    | AXR
-    | CTBrain
+type Imaging = CXRChestXray
+    | AXRAbdominalXray
+    | CTBCTBrain
     | MRIBrain
     | CTAbdoPelvis
 

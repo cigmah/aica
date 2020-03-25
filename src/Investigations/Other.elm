@@ -1,7 +1,7 @@
 module Investigations.Other exposing (..)
 
-type Other = ECG
+type Other = ECGElectrocardiogram
     | Spirometry
     | Echocardiogram
-    | EEG
+    | EEGElectroencephalography
 

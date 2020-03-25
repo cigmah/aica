@@ -1,26 +1,28 @@
-Bloods,FBE
-Bloods,UEC
-Bloods,LFT
+Bloods,FBE (Full Blood Examination)
+Bloods,"UEC (Urea, Electrolytes and Creatinine)"
+Bloods,LFT (Liver Function Tests)
 Bloods,Troponin
-Bloods,CMP
-Bloods,CRP
+Bloods,CMP (Calcium Magnesium Phosphate)
+Bloods,CRP (C-Reactive Protein)
 Bloods,Amylase
-Bloods,ANA
+Bloods,ANA (Anti-Nuclear Antibodies)
 Bloods,Bilirubin
-Bloods,CK
-Bloods,ESR
-Bloods,FBG
-Bloods,Iron studies
+Bloods,CK (Creatine Kinase)
+Bloods,ESR (Erythrocyte Sedimentation Rate)
+Bloods,FBG (Fasting Blood Glucose)
+Bloods,Iron
 Bloods,Lactate
-Bloods,LDH
+Bloods,LDH (Lactate Dehydrogenase)
 Bloods,Lipids
-Bloods,TFT
-Imaging,CXR
-Imaging,AXR
-Imaging,CT Brain
+Bloods,TFT (Thyroid Function Tests)
+Bloods,aPTT (Activated partial thromboplastin time)
+Bloods,PT (Prothrombin time)
+Imaging,CXR (Chest X-ray)
+Imaging,AXR (Abdominal X-ray)
+Imaging,CTB (CT Brain)
 Imaging,MRI Brain
 Imaging,CT Abdo Pelvis
-Other,ECG
+Other,ECG (Electrocardiogram)
 Other,Spirometry
 Other,Echocardiogram
-Other,EEG
+Other,EEG (Electroencephalography)

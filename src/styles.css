@@ -20,7 +20,7 @@
 }
 
 .markdown h1 {
-    @apply text-2xl font-bold mt-8; 
+    @apply text-2xl font-bold mt-8 mb-2;
 }
 
 .markdown h2 {
@@ -37,12 +37,16 @@
 
 .markdown ul {
     @apply my-2 ml-8;
-    list-style-type: circle;
+    list-style-type: disc;
 }
 
 .markdown ol {
     @apply my-2 ml-8;
     list-style-type: decimal;
+}
+
+.markdown hr {
+    @apply my-8;
 }
 
 .markdown.low-headings h1, h2, h3 {

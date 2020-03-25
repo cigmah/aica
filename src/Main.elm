@@ -967,9 +967,9 @@ viewScreenCaseStart model data =
                 ]
                 [ text "Assess Patient" ]
             ]
-        , section [ tailwind "bg-white rounded-lg w-2/3 p-24 fade-in overflow-auto h-full" ]
+        , section [ tailwind "bg-white rounded-lg w-2/3 p-24 fade-in overflow-auto" ]
             [ h1 [ tailwind "font-bold mt-0 text-4xl mb-6" ] [ text "Referral Letter" ]
-            , Markdown.toHtml [ class "markdown" ] data.patient.stem
+            , Markdown.toHtml [ class "markdown pb-32" ] data.patient.stem
             ]
         ]
 
