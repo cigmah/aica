@@ -38,16 +38,16 @@ script questionId =
         Nothing -> 
             case (Question.fromInt questionId) of
                 QuestionOpen _ ->
-                    "Well, you'll need to be a bit more specific."
+                    "What exactly would you like to know?"
 
                 QuestionSymptom _ ->
                     "No."
 
                 QuestionExamine _ ->
-                    "It seems grossly normal."
+                    "On gross examination, you didn't notice anything abnormal. But you might need to be more specific."
 
                 QuestionSign _ ->
-                    "It seems normal."
+                    "No abnormality detected."
 
                 _ ->
                     "Sorry, I'm not sure about that."
@@ -72,6 +72,7 @@ patient =
     {{ details = details
     , script = script
     , stem = "{stem}"
+    , openingGreeting = "{opening_greeting}"
     , exemplarNote = "{exemplar_note}"
     , exemplarDiagnosis = {exemplar_diagnosis}
     , exemplarPrescriptions =
@@ -148,10 +149,10 @@ def process_gender(gender_string: str) -> str:
     return gender
 
 
-def generate_case(data):
-    """ Generate case from data dict with category as keys, and subcategory dicts as values. """
+def generate_case(case_file, data):
+    """ Generate case from data dict with category as keys, and subcategory dicts as values. Case_file is the filename of the case, used as its ID."""
     name = utils.process_string(data["core"]["firstName"] + data["core"]["lastName"])
-    patient_id = data["core"]["id"]
+    patient_id = case_file.split("/")[-1].split("\\")[-1].strip(".csv")
     gender_string = data["core"]["gender"]
     stem = data["core"]["stem"]
     question_categories = [k for k in data.keys() if k[0].isupper()]
@@ -163,6 +164,7 @@ def generate_case(data):
     age = data["core"]["age"]
     gender = process_gender(gender_string)
     occupation = data["core"]["occupation"].title()
+    opening_greeting = data["core"]["openingGreeting"]
 
     filename = "{name}{age}{gender_string}{occupation}".format(
         name=name, age=str(age), gender_string=gender_string, occupation=occupation,
@@ -188,6 +190,7 @@ def generate_case(data):
         age=age,
         gender=gender,
         occupation=occupation,
+        opening_greeting=opening_greeting,
         stem=stem,
         exemplar_note=exemplar_note,
         exemplar_diagnosis=exemplar_diagnosis,
@@ -260,7 +263,7 @@ def run_generate_cases():
             case_file, header=None, names=["category", "subcategory", "value"],
         )
         data = dfToDict(df)
-        filename, output = generate_case(data)
+        filename, output = generate_case(case_file, data)
         cases.append(filename)
         case_ids.append(data["core"]["id"])
         with open(

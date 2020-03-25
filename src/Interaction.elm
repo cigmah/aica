@@ -61,7 +61,7 @@ type alias Response =
 -}
 initResponseQueue : Case -> List Response
 initResponseQueue patient =
-    [ createQueueItem "..." "Hi there Doc...I'm not feeling too good." ]
+    [ createQueueItem "..." patient.openingGreeting ]
 
 
 {-| Calculates the reading delay for a question. Using 1000 milliseconds per 40 characters.

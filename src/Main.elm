@@ -1,4 +1,4 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 {-| AICA: An Interactive Case Archive
 
@@ -177,7 +177,27 @@ updateScreen model screen =
 type alias Flags =
     { logo : String
     , profiles : Dict String String
+    , storage : Storage
     }
+
+
+type alias Storage =
+    { completed : Set String }
+
+
+port cache : Value -> Cmd msg
+
+
+encodeStorage : Storage -> Value
+encodeStorage storage =
+    Encode.object
+        [ ( "completed", storage.completed |> Set.toList |> Encode.list Encode.string ) ]
+
+
+storageDecoder : Decoder Storage
+storageDecoder =
+    Decode.map Storage
+        (Decode.field "completed" (Decode.list Decode.string |> Decode.map Set.fromList))
 
 
 profileDecoder : Decoder ( String, String )
@@ -189,14 +209,16 @@ profileDecoder =
 
 decoderFlags : Decoder Flags
 decoderFlags =
-    Decode.map2 Flags
+    Decode.map3 Flags
         (Decode.field "logo" Decode.string)
         (Decode.field "profiles" (Decode.list profileDecoder |> Decode.map Dict.fromList))
+        (Decode.field "storage" storageDecoder)
 
 
 defaultFlags =
     { logo = ""
     , profiles = Dict.empty
+    , storage = { completed = Set.empty }
     }
 
 
@@ -464,6 +486,11 @@ updateChosenPrescriptions data medication =
 deleteChosenPrescription : CaseFinishData -> Int -> CaseFinishData
 deleteChosenPrescription data index =
     { data | chosenPrescriptions = Array.Extra.removeAt index data.chosenPrescriptions }
+
+
+updateStorage : Case -> Storage -> Storage
+updateStorage patient storage =
+    { storage | completed = Set.insert patient.details.id storage.completed }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -778,11 +805,25 @@ update msg model =
         ClickedFinishNote ->
             case model.screen of
                 ScreenCaseFinish data ->
+                    let
+                        newStorage =
+                            model.flags.storage
+                                |> updateStorage data.patient
+
+                        oldFlags =
+                            model.flags
+
+                        newFlags =
+                            { oldFlags | storage = newStorage }
+
+                        newModel =
+                            { model | flags = newFlags }
+                    in
                     data
                         |> caseFeedbackDataInit
                         |> ScreenCaseFeedback
-                        |> updateScreen model
-                        |> withCmd Cmd.none
+                        |> updateScreen newModel
+                        |> withCmd (cache (encodeStorage newStorage))
 
                 _ ->
                     model |> withCmd Cmd.none
@@ -824,20 +865,35 @@ viewHeader =
         ]
 
 
-viewBasicItem : Dict String String -> Case.Details -> Html Msg
-viewBasicItem profiles patient =
+viewBasicItem : Set String -> Dict String String -> Case.Details -> Html Msg
+viewBasicItem completed profiles patient =
     let
         profileImg =
             profiles
                 |> Dict.get patient.id
                 |> Maybe.withDefault ""
+
+        isCompleted =
+            Set.member patient.id completed
     in
     article
         [ tailwind "m-4 group cursor-pointer hover:shadow-lg border border-gray-200 rounded h-48 w-48 relative trans-all overflow-hidden active:shadow-inner"
         , onClick (ClickedPatient patient.id)
         ]
-        [ img [ src profileImg, tailwind "absolute p-2" ] []
-        , section [ tailwind "absolute bottom-0 px-2 py-1 text-sm border-t border-gray-200 bg-white group-hover:bg-black group-hover:text-white w-full trans-all rounded-b-lg" ]
+        [ img
+            [ src profileImg
+            , tailwind "absolute p-2"
+            , classList [ ( "opacity-25", isCompleted ) ]
+            ]
+            []
+        , section
+            [ tailwind "absolute top-0 px-2 py-1 text-sm bg-black text-white font-bold w-full text-center"
+            , classList [ ( "hidden", not isCompleted ) ]
+            ]
+            [ div [] [ text "COMPLETED" ] ]
+        , section
+            [ tailwind "absolute bottom-0 px-2 py-1 text-sm border-t border-gray-200 bg-white group-hover:bg-black group-hover:text-white w-full trans-all rounded-b-lg"
+            ]
             [ h1 [ tailwind "font-bold mt-0" ] [ text (patient.firstName ++ " " ++ patient.lastName) ]
             , div [ tailwind "flex between text-xs" ]
                 [ h2 [ tailwind "mr-2 mt-0" ] [ text (patientAgeGender patient) ]
@@ -875,7 +931,7 @@ viewScreenStart model patients =
             , section [ tailwind "w-2/3 p-8" ]
                 [ section [ tailwind "bg-white h-full w-full overflow-auto rounded" ]
                     [ div [ tailwind "p-4 flex flex-wrap" ]
-                        (List.map (viewBasicItem model.flags.profiles) patients)
+                        (List.map (viewBasicItem model.flags.storage.completed model.flags.profiles) patients)
                     ]
                 ]
             ]
@@ -1275,34 +1331,47 @@ viewScreenCaseFinish model data =
         ]
 
 
-viewRequestedInvestigation : Bool -> Set Int -> Investigation -> Html Msg
-viewRequestedInvestigation isUser exemplar item =
+viewRequestedInvestigation : Bool -> Set Int -> Set Int -> Investigation -> Html Msg
+viewRequestedInvestigation isUser exemplar user item =
     let
         newClass =
-            if Set.member (Investigation.toInt item) exemplar then
+            if isUser then
+                if Set.member (Investigation.toInt item) exemplar then
+                    ""
+
+                else
+                    "line-through text-red-400"
+
+            else if Set.member (Investigation.toInt item) user then
                 ""
 
             else
-                "line-through text-red-400"
+                "underline text-olive-600"
     in
     article
-        [ classList [ ( newClass, isUser ) ]
-        ]
+        [ class newClass ]
         [ text (Investigation.toString item) ]
 
 
-viewRequestedPrescription : Bool -> Set Int -> Prescription -> Html Msg
-viewRequestedPrescription isUser exemplar item =
+viewRequestedPrescription : Bool -> Set Int -> Set Int -> Prescription -> Html Msg
+viewRequestedPrescription isUser exemplar user item =
     let
         newClass =
-            if Set.member (Medication.toInt item.medication) exemplar then
+            if isUser then
+                if Set.member (Medication.toInt item.medication) exemplar then
+                    ""
+
+                else
+                    "line-through text-red-400"
+
+            else if Set.member (Medication.toInt item.medication) user then
                 ""
 
             else
-                "line-through text-red-400"
+                "underline text-olive-600"
     in
     article
-        [ classList [ ( newClass, isUser ) ] ]
+        [ class newClass ]
         [ text (Medication.toString item.medication)
         , text " "
         , text item.dosage
@@ -1315,7 +1384,26 @@ viewRequestedPrescription isUser exemplar item =
 
 viewScreenCaseFeedback : Model -> CaseFeedbackData -> Html Msg
 viewScreenCaseFeedback model data =
-    section [ tailwind "w-screen overflow-x-hidden" ]
+    let
+        providedInvestigationIntSet =
+            data.investigations |> List.map Investigation.toInt |> Set.fromList
+
+        providedPrescriptionIntSet =
+            data.prescriptions |> List.map (.medication >> Medication.toInt) |> Set.fromList
+
+        ( userDiagnosisClass, exemplarDiagnosisClass ) =
+            case data.diagnosis of
+                Just diagnosis ->
+                    if diagnosis == data.patient.exemplarDiagnosis then
+                        ( "", "" )
+
+                    else
+                        ( "line-through text-red-400", "underline text-olive-600" )
+
+                Nothing ->
+                    ( "text-red-400", "underline-text-olive-600" )
+    in
+    section [ tailwind "overflow-x-hidden" ]
         [ section [ tailwind "h-screen w-full bg-white flex justify-center items-center fade-in" ]
             [ section [ tailwind "w-2/3 flex justify-center flex-col items-center", style "height" "75%" ]
                 [ h1 [ tailwind "text-5xl font-bold" ] [ text "Thank you for helping ", text data.patient.details.firstName, text "." ]
@@ -1325,43 +1413,44 @@ viewScreenCaseFeedback model data =
                 , h3 [ tailwind "text-sm text-gray-800" ] [ text "Or compare your answers with the exemplar below." ]
                 ]
             ]
-        , section [ tailwind "bg-white flex" ]
+        , section [ tailwind "bg-white flex pb-16" ]
             [ section [ tailwind "w-1/2 p-16 border-r border-gray-300" ]
                 [ h1 [ tailwind "font-bold" ] [ text "Your response:" ]
                 , section [ tailwind "mb-6" ]
-                    [ text data.note ]
+                    [ pre [ tailwind "font-sans leading-tight" ] [ text data.note ] ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Your provisional diagnosis:" ]
-                    , div [] [ text (data.diagnosis |> Maybe.map Diagnosis.toString |> Maybe.withDefault "No diagnosis provided.") ]
+                    , div [ class userDiagnosisClass ]
+                        [ text (data.diagnosis |> Maybe.map Diagnosis.toString |> Maybe.withDefault "No diagnosis provided.") ]
                     ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Your requested investigations:" ]
                     , section []
-                        (List.map (viewRequestedInvestigation True data.exemplarInvestigationIntSet) data.investigations)
+                        (List.map (viewRequestedInvestigation True data.exemplarInvestigationIntSet providedInvestigationIntSet) data.investigations)
                     ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Your prescription orders:" ]
                     , section []
-                        (List.map (viewRequestedPrescription True data.exemplarPrescriptionIntSet) data.prescriptions)
+                        (List.map (viewRequestedPrescription True data.exemplarPrescriptionIntSet providedPrescriptionIntSet) data.prescriptions)
                     ]
                 ]
             , section [ tailwind "w-1/2 p-16" ]
                 [ h1 [ tailwind "font-bold" ] [ text "Exemplar response:" ]
                 , section [ tailwind "mb-6" ]
-                    [ text data.patient.exemplarNote ]
+                    [ pre [ tailwind "font-sans leading-tight" ] [ text data.patient.exemplarNote ] ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Exemplar provisional diagnosis:" ]
-                    , div [] [ text (Diagnosis.toString data.patient.exemplarDiagnosis) ]
+                    , div [ class exemplarDiagnosisClass ] [ text (Diagnosis.toString data.patient.exemplarDiagnosis) ]
                     ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Exemplar requested investigations:" ]
                     , section []
-                        (List.map (viewRequestedInvestigation False data.exemplarInvestigationIntSet) data.patient.exemplarInvestigations)
+                        (List.map (viewRequestedInvestigation False data.exemplarInvestigationIntSet providedInvestigationIntSet) data.patient.exemplarInvestigations)
                     ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Exemplar prescription orders:" ]
                     , section []
-                        (List.map (viewRequestedPrescription False data.exemplarPrescriptionIntSet) data.patient.exemplarPrescriptions)
+                        (List.map (viewRequestedPrescription False data.exemplarPrescriptionIntSet providedPrescriptionIntSet) data.patient.exemplarPrescriptions)
                     ]
                 ]
             ]

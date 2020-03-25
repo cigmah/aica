@@ -15,6 +15,7 @@ def run_generate_case_template():
         ("core", "gender"),
         ("core", "stem"),
         ("core", "occupation"),
+        ("core", "openingGreeting"),
         ("answer", "exemplarNote"),
         ("answer", "exemplarDiagnosis"),
         (

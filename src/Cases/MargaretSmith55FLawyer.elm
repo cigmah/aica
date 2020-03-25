@@ -37,16 +37,16 @@ script questionId =
         Nothing -> 
             case (Question.fromInt questionId) of
                 QuestionOpen _ ->
-                    "Well, you'll need to be a bit more specific."
+                    "What exactly would you like to know?"
 
                 QuestionSymptom _ ->
                     "No."
 
                 QuestionExamine _ ->
-                    "It seems grossly normal."
+                    "On gross examination, you didn't notice anything abnormal. But you might need to be more specific."
 
                 QuestionSign _ ->
-                    "It seems normal."
+                    "No abnormality detected."
 
                 _ ->
                     "Sorry, I'm not sure about that."
@@ -137,6 +137,7 @@ patient =
     { details = details
     , script = script
     , stem = "Margaret Smith has come to the ED with a severe headache.\n\n# Vitals\nHer vital signs on presentation were:\n\n- HR: 90bpm\n- BP: 170/130\n- RR: 23\n- Temp: 37.0C\n\nPlease assess Margaret's headache."
+    , openingGreeting = "Hey there doc. I'm not feeling too good."
     , exemplarNote = "Presented to ED with sudden-onset severe headache on b/g HTN and FHx of PCKD.\n \n HOPC:\n - Severe 10/10 headache onset several hours ago\n -\n \n PMHx:\n - HTN\n \n FHx:\n - Mother had PCKD, passed away from stroke in 50s\n \n Medications\n "
     , exemplarDiagnosis = Subarachnoidhaemorrhage
     , exemplarPrescriptions =

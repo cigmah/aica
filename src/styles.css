@@ -16,7 +16,7 @@
 }
 
 .trans-all {
-    transition: 0.2s all;
+    transition: all 0.3s ease;
 }
 
 .markdown h1 {

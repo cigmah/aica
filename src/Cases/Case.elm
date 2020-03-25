@@ -35,6 +35,7 @@ type alias Case =
     , script :
         Int -- the question Id
         -> String -- the script is a (generated) function which converts a question into a string response
+    , openingGreeting : String
     , stem : String
     , exemplarNote : String -- the exemplar clinical note for the case
     , exemplarDiagnosis : Diagnosis
