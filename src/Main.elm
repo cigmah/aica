@@ -892,7 +892,7 @@ viewBasicItem completed profiles patient =
         ]
         [ img
             [ src profileImg
-            , tailwind "absolute p-2"
+            , tailwind "absolute pt-2 p-4"
             , classList [ ( "opacity-25", isCompleted ) ]
             ]
             []
@@ -1289,11 +1289,11 @@ viewScreenCaseFinish model data =
     section [ tailwind "flex bg-white w-screen h-screen" ]
         [ section [ tailwind "bg-white rounded-lg shadow w-1/3 p-8 pb-16 pt-4 h-full flex flex-col shadow-inner fade-in" ]
             [ section [ tailwind "flex p-8" ]
-                [ img [ src profileImg, tailwind "hidden xl:block xl:w-48 xl:h-48 mr-2 xl:mr-8" ] []
+                [ img [ src profileImg, tailwind "hidden xl:block xl:w-32 xl:h-32 mr-2 xl:mr-4" ] []
                 , section [ tailwind "flex-grow" ]
                     [ div [ tailwind "flex items-center " ]
-                        [ h1 [ tailwind "mt-0 font-bold xl:text-xl mr-4" ] [ text (data.patient.details.firstName ++ " " ++ data.patient.details.lastName) ]
-                        , h2 [ tailwind "mt-0 xl:text-xl" ] [ text (patientAgeGender data.patient.details) ]
+                        [ h1 [ tailwind "mt-0 font-bold text-sm xl:text-xl mr-4" ] [ text (data.patient.details.firstName ++ " " ++ data.patient.details.lastName) ]
+                        , h2 [ tailwind "mt-0 text-sm xl:text-xl" ] [ text (patientAgeGender data.patient.details) ]
                         ]
                     , p [ tailwind "text-gray-700 text-sm" ] [ text "Thanks for seeing the patient - please document your assessment on the right and specify a provisional primary diagnosis and any investigations & prescriptions you'd like to order." ]
                     ]
@@ -1303,7 +1303,7 @@ viewScreenCaseFinish model data =
                     (List.map viewConversationItem data.interaction.conversation)
                 ]
             ]
-        , section [ tailwind "w-2/3 h-full flex flex-col max-h-full fade-in" ]
+        , section [ tailwind "w-2/3 h-full flex flex-col max-h-full fade-in text-sm" ]
             [ section [ tailwind "bg-white w-full p-12 pb-4 flex-grow mb-4 flex overflow-auto" ]
                 [ section [ tailwind "w-1/2 flex flex-col mr-6" ]
                     [ section [ tailwind "mb-2 w-full" ]
@@ -1431,7 +1431,7 @@ viewScreenCaseFeedback model data =
             [ section [ tailwind "w-1/2 p-16 border-r border-gray-300" ]
                 [ h1 [ tailwind "font-bold" ] [ text "Your response:" ]
                 , section [ tailwind "mb-6" ]
-                    [ pre [ tailwind "font-sans leading-tight" ] [ text data.note ] ]
+                    [ pre [ tailwind "font-sans leading-tight pre-wrap" ] [ text data.note ] ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Your provisional diagnosis:" ]
                     , div [ class userDiagnosisClass ]
@@ -1451,7 +1451,7 @@ viewScreenCaseFeedback model data =
             , section [ tailwind "w-1/2 p-16" ]
                 [ h1 [ tailwind "font-bold" ] [ text "Exemplar response:" ]
                 , section [ tailwind "mb-6" ]
-                    [ pre [ tailwind "font-sans leading-tight" ] [ text data.patient.exemplarNote ] ]
+                    [ pre [ tailwind "font-sans leading-tight pre-wrap" ] [ text data.patient.exemplarNote ] ]
                 , section [ tailwind "mb-6" ]
                     [ h1 [ tailwind "font-bold" ] [ text "Exemplar provisional diagnosis:" ]
                     , div [ class exemplarDiagnosisClass ] [ text (Diagnosis.toString data.patient.exemplarDiagnosis) ]

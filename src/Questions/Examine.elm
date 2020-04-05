@@ -7,6 +7,7 @@ type Examine = Rash
     | Oxygen
     | GCS
     | Weight
+    | Height
     | Surroundings
     | Nails
     | Arms
@@ -15,6 +16,7 @@ type Examine = Rash
     | HandMovements
     | Fundus
     | Snellen
+    | ECG
     | Pupils
     | FacialExpression
     | Mastication

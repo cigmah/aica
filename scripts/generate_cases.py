@@ -119,6 +119,8 @@ def generate_script_cases(data_dict, categories: List[str]) -> str:
 
 def process_exemplar_investigations(investigation_string: str) -> str:
     """ Processes an exemplar investigation string. Short-term temporary measure until better solution for encoding these..."""
+    if investigation_string is None:
+        return "[]"
     investigations_separated = map(lambda s: s.strip(), investigation_string.split("|"))
     investigations = []
     for i in investigations_separated:
@@ -131,6 +133,8 @@ def process_exemplar_investigations(investigation_string: str) -> str:
 
 def process_exemplar_prescriptions(prescriptions_string: str) -> str:
     """ Processes an exemplar prescriptions string. Short-term temporary measure until better solution for encoding these..."""
+    if prescriptions_string is None:
+        return "[]"
     prescr_separated = map(lambda s: s.strip(), prescriptions_string.split("|"))
     prescriptions = []
     prescr_template = """{{ medication = {med}, dosage = "{dose}", route = "{route}", frequency = "{freq}" }}"""
@@ -213,11 +217,12 @@ def dfToDict(df):
     """ Converts pandas dataframe with keys category, subcategory, value into nested defaultdict."""
     data = defaultdict(dict)
     for _, row in df.iterrows():
+        value = None if pd.isna(row.value) else row.value
         if row.category in data.keys():
-            data[row.category][row.subcategory] = row.value
+            data[row.category][row.subcategory] = value
         else:
             data[row.category] = defaultdict(str)
-            data[row.category][row.subcategory] = row.value
+            data[row.category][row.subcategory] = value
     return data
 
 
@@ -274,14 +279,13 @@ def run_generate_cases():
         data = dfToDict(df)
         filename, output = generate_case(case_file, data)
         cases.append(filename)
-        case_ids.append(data["core"]["id"])
         with open(
             "../src/Cases/{filename}.elm".format(filename=filename), "wb"
         ) as outfile:
             outfile.write(output.encode("utf-8"))
 
     # Assert that all case ids are unique
-    assert len(set(case_ids)) == len(case_ids)
+    assert len(set(cases)) == len(cases)
 
     with open("../src/Cases/List.elm", "w") as outfile:
         outfile.write(generate_case_list_file(cases))

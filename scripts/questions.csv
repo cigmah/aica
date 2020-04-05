@@ -46,14 +46,15 @@ Do you have a rash?,Symptom,Rash,
 Where is the rash?,RashFeature,Where,
 Examine the rash.,Examine,Rash,
 Do you have any chest pain?,Symptom,ChestPain,
-Do you feel short of breath?,Symptom,Dyspnoea,
-Do you feel like your heartbeat is abnormal?,Symptom,Palpitations,
+Do you feel short of breath?,Symptom,Dyspnoea,short of breath sob soboe dyspnoea dyspnea
+What makes you short of breath?,DyspnoeaFeature,Precipitants,precipitate
+Do you feel like your heartbeat is abnormal?,Symptom,Palpitations,palpitations
 Have your ankles been swollen?,Symptom,AnkleSwelling,
-Do you have pain in your legs when you walk?,Symptom,IntermittentClaudication,
-Do you feel short of breath when you lie down?,Symptom,Orthopnoea,
-Do you wake up at night gasping for breath?,Symptom,Pnd,
-Have you fainted?,Symptom,Loc,
-Have you lost consciousness?,Symptom,Loc,
+Do you have pain in your legs when you walk?,Symptom,IntermittentClaudication,intermittent claudication
+Do you feel short of breath when you lie down?,Symptom,Orthopnoea,orthopnoea
+Do you wake up at night gasping for breath?,Symptom,Pnd,pnd paroxysmal nocturnal dyspnoea
+Have you fainted?,Symptom,Loc,syncope
+Have you lost consciousness?,Symptom,Loc,syncope
 When did you lose consciousness?,LocFeature,When,
 Did you have a seizure?,Symptom,Seizure,
 Have you had a seizure before?,SeizureFeature,Before,
@@ -70,24 +71,25 @@ How is your vision?,Symptom,VIsualChange,
 Do you have any medical conditions?,Open,Phx,
 Do you have high blood pressure?,Phx,Hypertension,
 Do you have diabetes?,Phx,Diabetes,
+What type of diabetes do you have?,Phx,DiabetesType,
 Have you had any surgeries in the past?,Phx,Surgery,
 Are your immunisations up to date?,Phx,Immunisation,
-Are you taking any regular medications?,Drugs,Regular,
-Are you taking any over the counter medications?,Drugs,Otc,
+Are you taking any regular medications?,Drugs,Regular,drugs
+Are you taking any over the counter medications?,Drugs,Otc,drugs
 Do you use any recreational drugs?,Drugs,Recreational,
 "Do you have any allergies, and what reactions do you get?",Drugs,Allergies,
 Do you drink alcohol?,Alcohol,YesNo,
 How much alcohol do you drink?,Alcohol,Quantity,
-Do you smoke?,Smoke,YesNo,
+Do you smoke?,Smoke,YesNo,smoking
 How long have you smoked for?,Smoke,Duration,
 Have you ever smoked?,Smoke,History,
 How many cigarettes a day do you or did you smoke?,Smoke,Quantity,
-Do any conditions run through the family?,Open,Fhx,
-How are your parents' health?,Fhx,ParentHealth,
-Do you have any children?,Fhx,Children,
-How are your children's health?,Fhx,ChildrenHealth,
-Do you have any siblings?,Fhx,Siblings,
-How are your siblings' health?,Fhx,SiblingsHealth,
+Do any conditions run through the family?,Open,Fhx,mom mum dad father mother brother sister 
+How are your parents' health?,Fhx,ParentHealth,mom mum dad father mother
+Do you have any children?,Fhx,Children,kids 
+How are your children's health?,Fhx,ChildrenHealth,kids 
+Do you have any siblings?,Fhx,Siblings,brother sister 
+How are your siblings' health?,Fhx,SiblingsHealth,brother sister 
 Where do you live at the moment?,Shx,LivingPlace,
 Who do you live with at the moment?,Shx,LivingPeople,
 Do you live by yourself?,Shx,LivingPeople,
@@ -95,12 +97,15 @@ How is your mood?,Shx,Mood,
 What are do you usually eat day to day?,Shx,Diet,
 Do you do physical exercise?,Shx,PhysicalExercise,
 Do you drive?,Shx,Driving,
+What do you get up to in your spare time?,Shx,Hobbies,hobbies what do you like interests interested
+Who is your regular GP?,Shx,GP,general practitioner doctor primary practitioner usually see
 Examine the hands. ,Examine,Hands,
 Examine with general inspection.,Examine,General,
-Examine the vital signs.,Examine,Vitals,
+Examine the vital signs.,Examine,Vitals,vitals hr heart rate bp blood pressure temperature rr respiratory rate
 Examine the oxygen saturation (SpO2).,Examine,Oxygen,
 Examine the patient using the Glasgow Coma Scale (GCS).,Examine,GCS,
 Examine weight.,Examine,Weight,
+Examine height.,Examine,Height,
 Examine the surroundings.,Examine,Surroundings,
 Examine the nails.,Examine,Nails,
 Examine the skin overlying the arms.,Examine,Arms,
@@ -109,6 +114,7 @@ Examine the visual fields with a confrontation test.,Examine,VisualFields,
 Examine hand movements.,Examine,HandMovements,
 Examine the fundus with an ophthalmoscope.,Examine,Fundus,
 Examine visual acuity with a Snellen chart.,Examine,Snellen,
+Examine electrocardiogram (ECG). ,Examine,ECG,
 Check for Brudzinski's sign.,Sign,Brudzinski,
 Check for papilloedema.,Sign,Papilloedema,
 Check for Kernig's sign.,Sign,Kernig,

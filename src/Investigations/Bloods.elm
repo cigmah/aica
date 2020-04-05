@@ -19,4 +19,5 @@ type Bloods = FBEFullBloodExamination
     | TFTThyroidFunctionTests
     | APTTActivatedpartialthromboplastintime
     | PTProthrombintime
+    | Hba1c
 

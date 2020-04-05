@@ -17,6 +17,7 @@ Bloods,Lipids
 Bloods,TFT (Thyroid Function Tests)
 Bloods,aPTT (Activated partial thromboplastin time)
 Bloods,PT (Prothrombin time)
+Bloods,Hba1c
 Imaging,CXR (Chest X-ray)
 Imaging,AXR (Abdominal X-ray)
 Imaging,CTB (CT Brain)

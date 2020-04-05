@@ -11,6 +11,7 @@ import Questions.Feelings as Feelings exposing (..)
 import Questions.Symptom as Symptom exposing (..)
 import Questions.RashFeature as RashFeature exposing (..)
 import Questions.Examine as Examine exposing (..)
+import Questions.DyspnoeaFeature as DyspnoeaFeature exposing (..)
 import Questions.LocFeature as LocFeature exposing (..)
 import Questions.SeizureFeature as SeizureFeature exposing (..)
 import Questions.SputumFeature as SputumFeature exposing (..)
@@ -30,6 +31,7 @@ type Question = QuestionDetails Details
     | QuestionSymptom Symptom
     | QuestionRashFeature RashFeature
     | QuestionExamine Examine
+    | QuestionDyspnoeaFeature DyspnoeaFeature
     | QuestionLocFeature LocFeature
     | QuestionSeizureFeature SeizureFeature
     | QuestionSputumFeature SputumFeature
@@ -111,66 +113,72 @@ fromInt int =
         64 -> QuestionExamine Examine.Oxygen
         65 -> QuestionExamine Examine.GCS
         66 -> QuestionExamine Examine.Weight
-        67 -> QuestionExamine Examine.Surroundings
-        68 -> QuestionExamine Examine.Nails
-        69 -> QuestionExamine Examine.Arms
-        70 -> QuestionExamine Examine.EyeMovements
-        71 -> QuestionExamine Examine.VisualFields
-        72 -> QuestionExamine Examine.HandMovements
-        73 -> QuestionExamine Examine.Fundus
-        74 -> QuestionExamine Examine.Snellen
-        75 -> QuestionExamine Examine.Pupils
-        76 -> QuestionExamine Examine.FacialExpression
-        77 -> QuestionExamine Examine.Mastication
-        78 -> QuestionExamine Examine.Tongue
-        79 -> QuestionExamine Examine.OralMucosa
-        80 -> QuestionExamine Examine.HeartAuscultate
-        81 -> QuestionExamine Examine.LungsAuscultate
-        82 -> QuestionExamine Examine.LungsPercussion
-        83 -> QuestionExamine Examine.Chest
-        84 -> QuestionExamine Examine.Neck
-        85 -> QuestionExamine Examine.PowerArms
-        86 -> QuestionExamine Examine.PowerLegs
-        87 -> QuestionExamine Examine.SensationArms
-        88 -> QuestionExamine Examine.SensationLegs
-        89 -> QuestionExamine Examine.MentalState
-        90 -> QuestionLocFeature LocFeature.When
-        91 -> QuestionSeizureFeature SeizureFeature.Before
-        92 -> QuestionSputumFeature SputumFeature.Volume
-        93 -> QuestionSputumFeature SputumFeature.Colour
-        94 -> QuestionPhx Phx.Hypertension
-        95 -> QuestionPhx Phx.Diabetes
-        96 -> QuestionPhx Phx.Surgery
-        97 -> QuestionPhx Phx.Immunisation
-        98 -> QuestionDrugs Drugs.Regular
-        99 -> QuestionDrugs Drugs.Otc
-        100 -> QuestionDrugs Drugs.Recreational
-        101 -> QuestionDrugs Drugs.Allergies
-        102 -> QuestionAlcohol Alcohol.YesNo
-        103 -> QuestionAlcohol Alcohol.Quantity
-        104 -> QuestionSmoke Smoke.YesNo
-        105 -> QuestionSmoke Smoke.Duration
-        106 -> QuestionSmoke Smoke.History
-        107 -> QuestionSmoke Smoke.Quantity
-        108 -> QuestionFhx Fhx.ParentHealth
-        109 -> QuestionFhx Fhx.Children
-        110 -> QuestionFhx Fhx.ChildrenHealth
-        111 -> QuestionFhx Fhx.Siblings
-        112 -> QuestionFhx Fhx.SiblingsHealth
-        113 -> QuestionShx Shx.LivingPlace
-        114 -> QuestionShx Shx.LivingPeople
-        115 -> QuestionShx Shx.Mood
-        116 -> QuestionShx Shx.Diet
-        117 -> QuestionShx Shx.PhysicalExercise
-        118 -> QuestionShx Shx.Driving
-        119 -> QuestionSign Sign.Brudzinski
-        120 -> QuestionSign Sign.Papilloedema
-        121 -> QuestionSign Sign.Kernig
-        122 -> QuestionSign Sign.PeripheralCyanosis
-        123 -> QuestionSign Sign.CentralCyanosis
-        124 -> QuestionSign Sign.CarotidBruits
-        125 -> QuestionSign Sign.Dysdiado
-        126 -> QuestionSign Sign.IntentionTremo
+        67 -> QuestionExamine Examine.Height
+        68 -> QuestionExamine Examine.Surroundings
+        69 -> QuestionExamine Examine.Nails
+        70 -> QuestionExamine Examine.Arms
+        71 -> QuestionExamine Examine.EyeMovements
+        72 -> QuestionExamine Examine.VisualFields
+        73 -> QuestionExamine Examine.HandMovements
+        74 -> QuestionExamine Examine.Fundus
+        75 -> QuestionExamine Examine.Snellen
+        76 -> QuestionExamine Examine.ECG
+        77 -> QuestionExamine Examine.Pupils
+        78 -> QuestionExamine Examine.FacialExpression
+        79 -> QuestionExamine Examine.Mastication
+        80 -> QuestionExamine Examine.Tongue
+        81 -> QuestionExamine Examine.OralMucosa
+        82 -> QuestionExamine Examine.HeartAuscultate
+        83 -> QuestionExamine Examine.LungsAuscultate
+        84 -> QuestionExamine Examine.LungsPercussion
+        85 -> QuestionExamine Examine.Chest
+        86 -> QuestionExamine Examine.Neck
+        87 -> QuestionExamine Examine.PowerArms
+        88 -> QuestionExamine Examine.PowerLegs
+        89 -> QuestionExamine Examine.SensationArms
+        90 -> QuestionExamine Examine.SensationLegs
+        91 -> QuestionExamine Examine.MentalState
+        92 -> QuestionDyspnoeaFeature DyspnoeaFeature.Precipitants
+        93 -> QuestionLocFeature LocFeature.When
+        94 -> QuestionSeizureFeature SeizureFeature.Before
+        95 -> QuestionSputumFeature SputumFeature.Volume
+        96 -> QuestionSputumFeature SputumFeature.Colour
+        97 -> QuestionPhx Phx.Hypertension
+        98 -> QuestionPhx Phx.Diabetes
+        99 -> QuestionPhx Phx.DiabetesType
+        100 -> QuestionPhx Phx.Surgery
+        101 -> QuestionPhx Phx.Immunisation
+        102 -> QuestionDrugs Drugs.Regular
+        103 -> QuestionDrugs Drugs.Otc
+        104 -> QuestionDrugs Drugs.Recreational
+        105 -> QuestionDrugs Drugs.Allergies
+        106 -> QuestionAlcohol Alcohol.YesNo
+        107 -> QuestionAlcohol Alcohol.Quantity
+        108 -> QuestionSmoke Smoke.YesNo
+        109 -> QuestionSmoke Smoke.Duration
+        110 -> QuestionSmoke Smoke.History
+        111 -> QuestionSmoke Smoke.Quantity
+        112 -> QuestionFhx Fhx.ParentHealth
+        113 -> QuestionFhx Fhx.Children
+        114 -> QuestionFhx Fhx.ChildrenHealth
+        115 -> QuestionFhx Fhx.Siblings
+        116 -> QuestionFhx Fhx.SiblingsHealth
+        117 -> QuestionShx Shx.LivingPlace
+        118 -> QuestionShx Shx.LivingPeople
+        119 -> QuestionShx Shx.Mood
+        120 -> QuestionShx Shx.Diet
+        121 -> QuestionShx Shx.PhysicalExercise
+        122 -> QuestionShx Shx.Driving
+        123 -> QuestionShx Shx.Hobbies
+        124 -> QuestionShx Shx.GP
+        125 -> QuestionSign Sign.Brudzinski
+        126 -> QuestionSign Sign.Papilloedema
+        127 -> QuestionSign Sign.Kernig
+        128 -> QuestionSign Sign.PeripheralCyanosis
+        129 -> QuestionSign Sign.CentralCyanosis
+        130 -> QuestionSign Sign.CarotidBruits
+        131 -> QuestionSign Sign.Dysdiado
+        132 -> QuestionSign Sign.IntentionTremo
         _ -> QuestionDetails Details.Name
 
 toInt : Question -> Int
@@ -243,66 +251,72 @@ toInt enum =
         QuestionExamine Examine.Oxygen -> 64
         QuestionExamine Examine.GCS -> 65
         QuestionExamine Examine.Weight -> 66
-        QuestionExamine Examine.Surroundings -> 67
-        QuestionExamine Examine.Nails -> 68
-        QuestionExamine Examine.Arms -> 69
-        QuestionExamine Examine.EyeMovements -> 70
-        QuestionExamine Examine.VisualFields -> 71
-        QuestionExamine Examine.HandMovements -> 72
-        QuestionExamine Examine.Fundus -> 73
-        QuestionExamine Examine.Snellen -> 74
-        QuestionExamine Examine.Pupils -> 75
-        QuestionExamine Examine.FacialExpression -> 76
-        QuestionExamine Examine.Mastication -> 77
-        QuestionExamine Examine.Tongue -> 78
-        QuestionExamine Examine.OralMucosa -> 79
-        QuestionExamine Examine.HeartAuscultate -> 80
-        QuestionExamine Examine.LungsAuscultate -> 81
-        QuestionExamine Examine.LungsPercussion -> 82
-        QuestionExamine Examine.Chest -> 83
-        QuestionExamine Examine.Neck -> 84
-        QuestionExamine Examine.PowerArms -> 85
-        QuestionExamine Examine.PowerLegs -> 86
-        QuestionExamine Examine.SensationArms -> 87
-        QuestionExamine Examine.SensationLegs -> 88
-        QuestionExamine Examine.MentalState -> 89
-        QuestionLocFeature LocFeature.When -> 90
-        QuestionSeizureFeature SeizureFeature.Before -> 91
-        QuestionSputumFeature SputumFeature.Volume -> 92
-        QuestionSputumFeature SputumFeature.Colour -> 93
-        QuestionPhx Phx.Hypertension -> 94
-        QuestionPhx Phx.Diabetes -> 95
-        QuestionPhx Phx.Surgery -> 96
-        QuestionPhx Phx.Immunisation -> 97
-        QuestionDrugs Drugs.Regular -> 98
-        QuestionDrugs Drugs.Otc -> 99
-        QuestionDrugs Drugs.Recreational -> 100
-        QuestionDrugs Drugs.Allergies -> 101
-        QuestionAlcohol Alcohol.YesNo -> 102
-        QuestionAlcohol Alcohol.Quantity -> 103
-        QuestionSmoke Smoke.YesNo -> 104
-        QuestionSmoke Smoke.Duration -> 105
-        QuestionSmoke Smoke.History -> 106
-        QuestionSmoke Smoke.Quantity -> 107
-        QuestionFhx Fhx.ParentHealth -> 108
-        QuestionFhx Fhx.Children -> 109
-        QuestionFhx Fhx.ChildrenHealth -> 110
-        QuestionFhx Fhx.Siblings -> 111
-        QuestionFhx Fhx.SiblingsHealth -> 112
-        QuestionShx Shx.LivingPlace -> 113
-        QuestionShx Shx.LivingPeople -> 114
-        QuestionShx Shx.Mood -> 115
-        QuestionShx Shx.Diet -> 116
-        QuestionShx Shx.PhysicalExercise -> 117
-        QuestionShx Shx.Driving -> 118
-        QuestionSign Sign.Brudzinski -> 119
-        QuestionSign Sign.Papilloedema -> 120
-        QuestionSign Sign.Kernig -> 121
-        QuestionSign Sign.PeripheralCyanosis -> 122
-        QuestionSign Sign.CentralCyanosis -> 123
-        QuestionSign Sign.CarotidBruits -> 124
-        QuestionSign Sign.Dysdiado -> 125
-        QuestionSign Sign.IntentionTremo -> 126
+        QuestionExamine Examine.Height -> 67
+        QuestionExamine Examine.Surroundings -> 68
+        QuestionExamine Examine.Nails -> 69
+        QuestionExamine Examine.Arms -> 70
+        QuestionExamine Examine.EyeMovements -> 71
+        QuestionExamine Examine.VisualFields -> 72
+        QuestionExamine Examine.HandMovements -> 73
+        QuestionExamine Examine.Fundus -> 74
+        QuestionExamine Examine.Snellen -> 75
+        QuestionExamine Examine.ECG -> 76
+        QuestionExamine Examine.Pupils -> 77
+        QuestionExamine Examine.FacialExpression -> 78
+        QuestionExamine Examine.Mastication -> 79
+        QuestionExamine Examine.Tongue -> 80
+        QuestionExamine Examine.OralMucosa -> 81
+        QuestionExamine Examine.HeartAuscultate -> 82
+        QuestionExamine Examine.LungsAuscultate -> 83
+        QuestionExamine Examine.LungsPercussion -> 84
+        QuestionExamine Examine.Chest -> 85
+        QuestionExamine Examine.Neck -> 86
+        QuestionExamine Examine.PowerArms -> 87
+        QuestionExamine Examine.PowerLegs -> 88
+        QuestionExamine Examine.SensationArms -> 89
+        QuestionExamine Examine.SensationLegs -> 90
+        QuestionExamine Examine.MentalState -> 91
+        QuestionDyspnoeaFeature DyspnoeaFeature.Precipitants -> 92
+        QuestionLocFeature LocFeature.When -> 93
+        QuestionSeizureFeature SeizureFeature.Before -> 94
+        QuestionSputumFeature SputumFeature.Volume -> 95
+        QuestionSputumFeature SputumFeature.Colour -> 96
+        QuestionPhx Phx.Hypertension -> 97
+        QuestionPhx Phx.Diabetes -> 98
+        QuestionPhx Phx.DiabetesType -> 99
+        QuestionPhx Phx.Surgery -> 100
+        QuestionPhx Phx.Immunisation -> 101
+        QuestionDrugs Drugs.Regular -> 102
+        QuestionDrugs Drugs.Otc -> 103
+        QuestionDrugs Drugs.Recreational -> 104
+        QuestionDrugs Drugs.Allergies -> 105
+        QuestionAlcohol Alcohol.YesNo -> 106
+        QuestionAlcohol Alcohol.Quantity -> 107
+        QuestionSmoke Smoke.YesNo -> 108
+        QuestionSmoke Smoke.Duration -> 109
+        QuestionSmoke Smoke.History -> 110
+        QuestionSmoke Smoke.Quantity -> 111
+        QuestionFhx Fhx.ParentHealth -> 112
+        QuestionFhx Fhx.Children -> 113
+        QuestionFhx Fhx.ChildrenHealth -> 114
+        QuestionFhx Fhx.Siblings -> 115
+        QuestionFhx Fhx.SiblingsHealth -> 116
+        QuestionShx Shx.LivingPlace -> 117
+        QuestionShx Shx.LivingPeople -> 118
+        QuestionShx Shx.Mood -> 119
+        QuestionShx Shx.Diet -> 120
+        QuestionShx Shx.PhysicalExercise -> 121
+        QuestionShx Shx.Driving -> 122
+        QuestionShx Shx.Hobbies -> 123
+        QuestionShx Shx.GP -> 124
+        QuestionSign Sign.Brudzinski -> 125
+        QuestionSign Sign.Papilloedema -> 126
+        QuestionSign Sign.Kernig -> 127
+        QuestionSign Sign.PeripheralCyanosis -> 128
+        QuestionSign Sign.CentralCyanosis -> 129
+        QuestionSign Sign.CarotidBruits -> 130
+        QuestionSign Sign.Dysdiado -> 131
+        QuestionSign Sign.IntentionTremo -> 132
 
 toString : Question -> String
 toString enum = 
@@ -374,19 +388,21 @@ toString enum =
         QuestionExamine Examine.Oxygen -> "Where"
         QuestionExamine Examine.GCS -> "Rash"
         QuestionExamine Examine.Weight -> "Hands"
-        QuestionExamine Examine.Surroundings -> "General"
-        QuestionExamine Examine.Nails -> "Vitals"
-        QuestionExamine Examine.Arms -> "Oxygen"
-        QuestionExamine Examine.EyeMovements -> "GCS"
-        QuestionExamine Examine.VisualFields -> "Weight"
+        QuestionExamine Examine.Height -> "General"
+        QuestionExamine Examine.Surroundings -> "Vitals"
+        QuestionExamine Examine.Nails -> "Oxygen"
+        QuestionExamine Examine.Arms -> "GCS"
+        QuestionExamine Examine.EyeMovements -> "Weight"
+        QuestionExamine Examine.VisualFields -> "Height"
         QuestionExamine Examine.HandMovements -> "Surroundings"
         QuestionExamine Examine.Fundus -> "Nails"
         QuestionExamine Examine.Snellen -> "Arms"
-        QuestionExamine Examine.Pupils -> "EyeMovements"
-        QuestionExamine Examine.FacialExpression -> "VisualFields"
-        QuestionExamine Examine.Mastication -> "HandMovements"
-        QuestionExamine Examine.Tongue -> "Fundus"
-        QuestionExamine Examine.OralMucosa -> "Snellen"
+        QuestionExamine Examine.ECG -> "EyeMovements"
+        QuestionExamine Examine.Pupils -> "VisualFields"
+        QuestionExamine Examine.FacialExpression -> "HandMovements"
+        QuestionExamine Examine.Mastication -> "Fundus"
+        QuestionExamine Examine.Tongue -> "Snellen"
+        QuestionExamine Examine.OralMucosa -> "ECG"
         QuestionExamine Examine.HeartAuscultate -> "Pupils"
         QuestionExamine Examine.LungsAuscultate -> "FacialExpression"
         QuestionExamine Examine.LungsPercussion -> "Mastication"
@@ -397,17 +413,19 @@ toString enum =
         QuestionExamine Examine.SensationArms -> "LungsPercussion"
         QuestionExamine Examine.SensationLegs -> "Chest"
         QuestionExamine Examine.MentalState -> "Neck"
-        QuestionLocFeature LocFeature.When -> "PowerArms"
-        QuestionSeizureFeature SeizureFeature.Before -> "PowerLegs"
-        QuestionSputumFeature SputumFeature.Volume -> "SensationArms"
-        QuestionSputumFeature SputumFeature.Colour -> "SensationLegs"
-        QuestionPhx Phx.Hypertension -> "MentalState"
+        QuestionDyspnoeaFeature DyspnoeaFeature.Precipitants -> "PowerArms"
+        QuestionLocFeature LocFeature.When -> "PowerLegs"
+        QuestionSeizureFeature SeizureFeature.Before -> "SensationArms"
+        QuestionSputumFeature SputumFeature.Volume -> "SensationLegs"
+        QuestionSputumFeature SputumFeature.Colour -> "MentalState"
+        QuestionPhx Phx.Hypertension -> "Precipitants"
         QuestionPhx Phx.Diabetes -> "When"
-        QuestionPhx Phx.Surgery -> "Before"
-        QuestionPhx Phx.Immunisation -> "Volume"
-        QuestionDrugs Drugs.Regular -> "Colour"
-        QuestionDrugs Drugs.Otc -> "Hypertension"
-        QuestionDrugs Drugs.Recreational -> "Diabetes"
+        QuestionPhx Phx.DiabetesType -> "Before"
+        QuestionPhx Phx.Surgery -> "Volume"
+        QuestionPhx Phx.Immunisation -> "Colour"
+        QuestionDrugs Drugs.Regular -> "Hypertension"
+        QuestionDrugs Drugs.Otc -> "Diabetes"
+        QuestionDrugs Drugs.Recreational -> "DiabetesType"
         QuestionDrugs Drugs.Allergies -> "Surgery"
         QuestionAlcohol Alcohol.YesNo -> "Immunisation"
         QuestionAlcohol Alcohol.Quantity -> "Regular"
@@ -426,12 +444,14 @@ toString enum =
         QuestionShx Shx.Diet -> "Siblings"
         QuestionShx Shx.PhysicalExercise -> "SiblingsHealth"
         QuestionShx Shx.Driving -> "LivingPlace"
-        QuestionSign Sign.Brudzinski -> "LivingPeople"
-        QuestionSign Sign.Papilloedema -> "LivingPeople"
-        QuestionSign Sign.Kernig -> "Mood"
-        QuestionSign Sign.PeripheralCyanosis -> "Diet"
-        QuestionSign Sign.CentralCyanosis -> "PhysicalExercise"
-        QuestionSign Sign.CarotidBruits -> "Driving"
+        QuestionShx Shx.Hobbies -> "LivingPeople"
+        QuestionShx Shx.GP -> "LivingPeople"
+        QuestionSign Sign.Brudzinski -> "Mood"
+        QuestionSign Sign.Papilloedema -> "Diet"
+        QuestionSign Sign.Kernig -> "PhysicalExercise"
+        QuestionSign Sign.PeripheralCyanosis -> "Driving"
+        QuestionSign Sign.CentralCyanosis -> "Hobbies"
+        QuestionSign Sign.CarotidBruits -> "GP"
         QuestionSign Sign.Dysdiado -> "Brudzinski"
         QuestionSign Sign.IntentionTremo -> "Papilloedema"
 
@@ -504,6 +524,7 @@ list =
     , QuestionExamine Examine.Oxygen
     , QuestionExamine Examine.GCS
     , QuestionExamine Examine.Weight
+    , QuestionExamine Examine.Height
     , QuestionExamine Examine.Surroundings
     , QuestionExamine Examine.Nails
     , QuestionExamine Examine.Arms
@@ -512,6 +533,7 @@ list =
     , QuestionExamine Examine.HandMovements
     , QuestionExamine Examine.Fundus
     , QuestionExamine Examine.Snellen
+    , QuestionExamine Examine.ECG
     , QuestionExamine Examine.Pupils
     , QuestionExamine Examine.FacialExpression
     , QuestionExamine Examine.Mastication
@@ -527,12 +549,14 @@ list =
     , QuestionExamine Examine.SensationArms
     , QuestionExamine Examine.SensationLegs
     , QuestionExamine Examine.MentalState
+    , QuestionDyspnoeaFeature DyspnoeaFeature.Precipitants
     , QuestionLocFeature LocFeature.When
     , QuestionSeizureFeature SeizureFeature.Before
     , QuestionSputumFeature SputumFeature.Volume
     , QuestionSputumFeature SputumFeature.Colour
     , QuestionPhx Phx.Hypertension
     , QuestionPhx Phx.Diabetes
+    , QuestionPhx Phx.DiabetesType
     , QuestionPhx Phx.Surgery
     , QuestionPhx Phx.Immunisation
     , QuestionDrugs Drugs.Regular
@@ -556,6 +580,8 @@ list =
     , QuestionShx Shx.Diet
     , QuestionShx Shx.PhysicalExercise
     , QuestionShx Shx.Driving
+    , QuestionShx Shx.Hobbies
+    , QuestionShx Shx.GP
     , QuestionSign Sign.Brudzinski
     , QuestionSign Sign.Papilloedema
     , QuestionSign Sign.Kernig
@@ -615,13 +641,14 @@ optionList msg =
     , { value = QuestionExamine Examine.Rash, string = "Examine the rash.", onClick = msg (QuestionExamine Examine.Rash) "Examine the rash.", tags = "nan" }
     , { value = QuestionSymptom Symptom.ChestPain, string = "Do you have any chest pain?", onClick = msg (QuestionSymptom Symptom.ChestPain) "Do you have any chest pain?", tags = "nan" }
     , { value = QuestionSymptom Symptom.Dyspnoea, string = "Do you feel short of breath?", onClick = msg (QuestionSymptom Symptom.Dyspnoea) "Do you feel short of breath?", tags = "nan" }
+    , { value = QuestionDyspnoeaFeature DyspnoeaFeature.Precipitants, string = "What makes you short of breath?", onClick = msg (QuestionDyspnoeaFeature DyspnoeaFeature.Precipitants) "What makes you short of breath?", tags = "nan" }
     , { value = QuestionSymptom Symptom.Palpitations, string = "Do you feel like your heartbeat is abnormal?", onClick = msg (QuestionSymptom Symptom.Palpitations) "Do you feel like your heartbeat is abnormal?", tags = "nan" }
     , { value = QuestionSymptom Symptom.AnkleSwelling, string = "Have your ankles been swollen?", onClick = msg (QuestionSymptom Symptom.AnkleSwelling) "Have your ankles been swollen?", tags = "nan" }
     , { value = QuestionSymptom Symptom.IntermittentClaudication, string = "Do you have pain in your legs when you walk?", onClick = msg (QuestionSymptom Symptom.IntermittentClaudication) "Do you have pain in your legs when you walk?", tags = "nan" }
     , { value = QuestionSymptom Symptom.Orthopnoea, string = "Do you feel short of breath when you lie down?", onClick = msg (QuestionSymptom Symptom.Orthopnoea) "Do you feel short of breath when you lie down?", tags = "nan" }
     , { value = QuestionSymptom Symptom.Pnd, string = "Do you wake up at night gasping for breath?", onClick = msg (QuestionSymptom Symptom.Pnd) "Do you wake up at night gasping for breath?", tags = "nan" }
-    , { value = QuestionSymptom Symptom.Loc, string = "Have you fainted?", onClick = msg (QuestionSymptom Symptom.Loc) "Have you fainted?", tags = "nan" }
-    , { value = QuestionSymptom Symptom.Loc, string = "Have you lost consciousness?", onClick = msg (QuestionSymptom Symptom.Loc) "Have you lost consciousness?", tags = "nan" }
+    , { value = QuestionSymptom Symptom.Loc, string = "Have you fainted?", onClick = msg (QuestionSymptom Symptom.Loc) "Have you fainted?", tags = "syncope" }
+    , { value = QuestionSymptom Symptom.Loc, string = "Have you lost consciousness?", onClick = msg (QuestionSymptom Symptom.Loc) "Have you lost consciousness?", tags = "syncope" }
     , { value = QuestionLocFeature LocFeature.When, string = "When did you lose consciousness?", onClick = msg (QuestionLocFeature LocFeature.When) "When did you lose consciousness?", tags = "nan" }
     , { value = QuestionSymptom Symptom.Seizure, string = "Did you have a seizure?", onClick = msg (QuestionSymptom Symptom.Seizure) "Did you have a seizure?", tags = "nan" }
     , { value = QuestionSeizureFeature SeizureFeature.Before, string = "Have you had a seizure before?", onClick = msg (QuestionSeizureFeature SeizureFeature.Before) "Have you had a seizure before?", tags = "nan" }
@@ -638,24 +665,25 @@ optionList msg =
     , { value = QuestionOpen Open.Phx, string = "Do you have any medical conditions?", onClick = msg (QuestionOpen Open.Phx) "Do you have any medical conditions?", tags = "nan" }
     , { value = QuestionPhx Phx.Hypertension, string = "Do you have high blood pressure?", onClick = msg (QuestionPhx Phx.Hypertension) "Do you have high blood pressure?", tags = "nan" }
     , { value = QuestionPhx Phx.Diabetes, string = "Do you have diabetes?", onClick = msg (QuestionPhx Phx.Diabetes) "Do you have diabetes?", tags = "nan" }
+    , { value = QuestionPhx Phx.DiabetesType, string = "What type of diabetes do you have?", onClick = msg (QuestionPhx Phx.DiabetesType) "What type of diabetes do you have?", tags = "nan" }
     , { value = QuestionPhx Phx.Surgery, string = "Have you had any surgeries in the past?", onClick = msg (QuestionPhx Phx.Surgery) "Have you had any surgeries in the past?", tags = "nan" }
     , { value = QuestionPhx Phx.Immunisation, string = "Are your immunisations up to date?", onClick = msg (QuestionPhx Phx.Immunisation) "Are your immunisations up to date?", tags = "nan" }
-    , { value = QuestionDrugs Drugs.Regular, string = "Are you taking any regular medications?", onClick = msg (QuestionDrugs Drugs.Regular) "Are you taking any regular medications?", tags = "nan" }
-    , { value = QuestionDrugs Drugs.Otc, string = "Are you taking any over the counter medications?", onClick = msg (QuestionDrugs Drugs.Otc) "Are you taking any over the counter medications?", tags = "nan" }
+    , { value = QuestionDrugs Drugs.Regular, string = "Are you taking any regular medications?", onClick = msg (QuestionDrugs Drugs.Regular) "Are you taking any regular medications?", tags = "drugs" }
+    , { value = QuestionDrugs Drugs.Otc, string = "Are you taking any over the counter medications?", onClick = msg (QuestionDrugs Drugs.Otc) "Are you taking any over the counter medications?", tags = "drugs" }
     , { value = QuestionDrugs Drugs.Recreational, string = "Do you use any recreational drugs?", onClick = msg (QuestionDrugs Drugs.Recreational) "Do you use any recreational drugs?", tags = "nan" }
     , { value = QuestionDrugs Drugs.Allergies, string = "Do you have any allergies, and what reactions do you get?", onClick = msg (QuestionDrugs Drugs.Allergies) "Do you have any allergies, and what reactions do you get?", tags = "nan" }
     , { value = QuestionAlcohol Alcohol.YesNo, string = "Do you drink alcohol?", onClick = msg (QuestionAlcohol Alcohol.YesNo) "Do you drink alcohol?", tags = "nan" }
     , { value = QuestionAlcohol Alcohol.Quantity, string = "How much alcohol do you drink?", onClick = msg (QuestionAlcohol Alcohol.Quantity) "How much alcohol do you drink?", tags = "nan" }
-    , { value = QuestionSmoke Smoke.YesNo, string = "Do you smoke?", onClick = msg (QuestionSmoke Smoke.YesNo) "Do you smoke?", tags = "nan" }
+    , { value = QuestionSmoke Smoke.YesNo, string = "Do you smoke?", onClick = msg (QuestionSmoke Smoke.YesNo) "Do you smoke?", tags = "smoking" }
     , { value = QuestionSmoke Smoke.Duration, string = "How long have you smoked for?", onClick = msg (QuestionSmoke Smoke.Duration) "How long have you smoked for?", tags = "nan" }
     , { value = QuestionSmoke Smoke.History, string = "Have you ever smoked?", onClick = msg (QuestionSmoke Smoke.History) "Have you ever smoked?", tags = "nan" }
     , { value = QuestionSmoke Smoke.Quantity, string = "How many cigarettes a day do you or did you smoke?", onClick = msg (QuestionSmoke Smoke.Quantity) "How many cigarettes a day do you or did you smoke?", tags = "nan" }
-    , { value = QuestionOpen Open.Fhx, string = "Do any conditions run through the family?", onClick = msg (QuestionOpen Open.Fhx) "Do any conditions run through the family?", tags = "nan" }
-    , { value = QuestionFhx Fhx.ParentHealth, string = "How are your parents' health?", onClick = msg (QuestionFhx Fhx.ParentHealth) "How are your parents' health?", tags = "nan" }
-    , { value = QuestionFhx Fhx.Children, string = "Do you have any children?", onClick = msg (QuestionFhx Fhx.Children) "Do you have any children?", tags = "nan" }
-    , { value = QuestionFhx Fhx.ChildrenHealth, string = "How are your children's health?", onClick = msg (QuestionFhx Fhx.ChildrenHealth) "How are your children's health?", tags = "nan" }
-    , { value = QuestionFhx Fhx.Siblings, string = "Do you have any siblings?", onClick = msg (QuestionFhx Fhx.Siblings) "Do you have any siblings?", tags = "nan" }
-    , { value = QuestionFhx Fhx.SiblingsHealth, string = "How are your siblings' health?", onClick = msg (QuestionFhx Fhx.SiblingsHealth) "How are your siblings' health?", tags = "nan" }
+    , { value = QuestionOpen Open.Fhx, string = "Do any conditions run through the family?", onClick = msg (QuestionOpen Open.Fhx) "Do any conditions run through the family?", tags = "mom mum dad father mother brother sister " }
+    , { value = QuestionFhx Fhx.ParentHealth, string = "How are your parents' health?", onClick = msg (QuestionFhx Fhx.ParentHealth) "How are your parents' health?", tags = "mom mum dad father mother" }
+    , { value = QuestionFhx Fhx.Children, string = "Do you have any children?", onClick = msg (QuestionFhx Fhx.Children) "Do you have any children?", tags = "kids " }
+    , { value = QuestionFhx Fhx.ChildrenHealth, string = "How are your children's health?", onClick = msg (QuestionFhx Fhx.ChildrenHealth) "How are your children's health?", tags = "kids " }
+    , { value = QuestionFhx Fhx.Siblings, string = "Do you have any siblings?", onClick = msg (QuestionFhx Fhx.Siblings) "Do you have any siblings?", tags = "brother sister " }
+    , { value = QuestionFhx Fhx.SiblingsHealth, string = "How are your siblings' health?", onClick = msg (QuestionFhx Fhx.SiblingsHealth) "How are your siblings' health?", tags = "brother sister " }
     , { value = QuestionShx Shx.LivingPlace, string = "Where do you live at the moment?", onClick = msg (QuestionShx Shx.LivingPlace) "Where do you live at the moment?", tags = "nan" }
     , { value = QuestionShx Shx.LivingPeople, string = "Who do you live with at the moment?", onClick = msg (QuestionShx Shx.LivingPeople) "Who do you live with at the moment?", tags = "nan" }
     , { value = QuestionShx Shx.LivingPeople, string = "Do you live by yourself?", onClick = msg (QuestionShx Shx.LivingPeople) "Do you live by yourself?", tags = "nan" }
@@ -663,12 +691,15 @@ optionList msg =
     , { value = QuestionShx Shx.Diet, string = "What are do you usually eat day to day?", onClick = msg (QuestionShx Shx.Diet) "What are do you usually eat day to day?", tags = "nan" }
     , { value = QuestionShx Shx.PhysicalExercise, string = "Do you do physical exercise?", onClick = msg (QuestionShx Shx.PhysicalExercise) "Do you do physical exercise?", tags = "nan" }
     , { value = QuestionShx Shx.Driving, string = "Do you drive?", onClick = msg (QuestionShx Shx.Driving) "Do you drive?", tags = "nan" }
+    , { value = QuestionShx Shx.Hobbies, string = "What do you get up to in your spare time?", onClick = msg (QuestionShx Shx.Hobbies) "What do you get up to in your spare time?", tags = "hobbies what do you like interests interested" }
+    , { value = QuestionShx Shx.GP, string = "Who is your regular GP?", onClick = msg (QuestionShx Shx.GP) "Who is your regular GP?", tags = "general practitioner doctor primary practitioner usually see" }
     , { value = QuestionExamine Examine.Hands, string = "Examine the hands. ", onClick = msg (QuestionExamine Examine.Hands) "Examine the hands. ", tags = "nan" }
     , { value = QuestionExamine Examine.General, string = "Examine with general inspection.", onClick = msg (QuestionExamine Examine.General) "Examine with general inspection.", tags = "nan" }
-    , { value = QuestionExamine Examine.Vitals, string = "Examine the vital signs.", onClick = msg (QuestionExamine Examine.Vitals) "Examine the vital signs.", tags = "nan" }
+    , { value = QuestionExamine Examine.Vitals, string = "Examine the vital signs.", onClick = msg (QuestionExamine Examine.Vitals) "Examine the vital signs.", tags = "vitals hr heart rate bp blood pressure temperature rr respiratory rate" }
     , { value = QuestionExamine Examine.Oxygen, string = "Examine the oxygen saturation (SpO2).", onClick = msg (QuestionExamine Examine.Oxygen) "Examine the oxygen saturation (SpO2).", tags = "nan" }
     , { value = QuestionExamine Examine.GCS, string = "Examine the patient using the Glasgow Coma Scale (GCS).", onClick = msg (QuestionExamine Examine.GCS) "Examine the patient using the Glasgow Coma Scale (GCS).", tags = "nan" }
     , { value = QuestionExamine Examine.Weight, string = "Examine weight.", onClick = msg (QuestionExamine Examine.Weight) "Examine weight.", tags = "nan" }
+    , { value = QuestionExamine Examine.Height, string = "Examine height.", onClick = msg (QuestionExamine Examine.Height) "Examine height.", tags = "nan" }
     , { value = QuestionExamine Examine.Surroundings, string = "Examine the surroundings.", onClick = msg (QuestionExamine Examine.Surroundings) "Examine the surroundings.", tags = "nan" }
     , { value = QuestionExamine Examine.Nails, string = "Examine the nails.", onClick = msg (QuestionExamine Examine.Nails) "Examine the nails.", tags = "nan" }
     , { value = QuestionExamine Examine.Arms, string = "Examine the skin overlying the arms.", onClick = msg (QuestionExamine Examine.Arms) "Examine the skin overlying the arms.", tags = "nan" }
@@ -677,6 +708,7 @@ optionList msg =
     , { value = QuestionExamine Examine.HandMovements, string = "Examine hand movements.", onClick = msg (QuestionExamine Examine.HandMovements) "Examine hand movements.", tags = "nan" }
     , { value = QuestionExamine Examine.Fundus, string = "Examine the fundus with an ophthalmoscope.", onClick = msg (QuestionExamine Examine.Fundus) "Examine the fundus with an ophthalmoscope.", tags = "nan" }
     , { value = QuestionExamine Examine.Snellen, string = "Examine visual acuity with a Snellen chart.", onClick = msg (QuestionExamine Examine.Snellen) "Examine visual acuity with a Snellen chart.", tags = "nan" }
+    , { value = QuestionExamine Examine.ECG, string = "Examine electrocardiogram (ECG). ", onClick = msg (QuestionExamine Examine.ECG) "Examine electrocardiogram (ECG). ", tags = "nan" }
     , { value = QuestionSign Sign.Brudzinski, string = "Check for Brudzinski's sign.", onClick = msg (QuestionSign Sign.Brudzinski) "Check for Brudzinski's sign.", tags = "nan" }
     , { value = QuestionSign Sign.Papilloedema, string = "Check for papilloedema.", onClick = msg (QuestionSign Sign.Papilloedema) "Check for papilloedema.", tags = "nan" }
     , { value = QuestionSign Sign.Kernig, string = "Check for Kernig's sign.", onClick = msg (QuestionSign Sign.Kernig) "Check for Kernig's sign.", tags = "nan" }

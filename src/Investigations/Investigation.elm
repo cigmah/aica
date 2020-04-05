@@ -35,20 +35,21 @@ fromInt int =
         16 -> InvestigationBloods Bloods.TFTThyroidFunctionTests
         17 -> InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime
         18 -> InvestigationBloods Bloods.PTProthrombintime
-        19 -> InvestigationImaging Imaging.CXRChestXray
-        20 -> InvestigationImaging Imaging.AXRAbdominalXray
-        21 -> InvestigationImaging Imaging.CTBCTBrain
-        22 -> InvestigationImaging Imaging.MRIBrain
-        23 -> InvestigationImaging Imaging.CTAbdoPelvis
-        24 -> InvestigationOther Other.ECGElectrocardiogram
-        25 -> InvestigationOther Other.Spirometry
-        26 -> InvestigationOther Other.Echocardiogram
-        27 -> InvestigationOther Other.EEGElectroencephalography
-        28 -> InvestigationCSF CSF.CSFMCS
-        29 -> InvestigationCSF CSF.CSFcytology
-        30 -> InvestigationCSF CSF.CSFglucose
-        31 -> InvestigationCSF CSF.CSFelectrophoresis
-        32 -> InvestigationCSF CSF.CSFcellcount
+        19 -> InvestigationBloods Bloods.Hba1c
+        20 -> InvestigationImaging Imaging.CXRChestXray
+        21 -> InvestigationImaging Imaging.AXRAbdominalXray
+        22 -> InvestigationImaging Imaging.CTBCTBrain
+        23 -> InvestigationImaging Imaging.MRIBrain
+        24 -> InvestigationImaging Imaging.CTAbdoPelvis
+        25 -> InvestigationOther Other.ECGElectrocardiogram
+        26 -> InvestigationOther Other.Spirometry
+        27 -> InvestigationOther Other.Echocardiogram
+        28 -> InvestigationOther Other.EEGElectroencephalography
+        29 -> InvestigationCSF CSF.CSFMCS
+        30 -> InvestigationCSF CSF.CSFcytology
+        31 -> InvestigationCSF CSF.CSFglucose
+        32 -> InvestigationCSF CSF.CSFelectrophoresis
+        33 -> InvestigationCSF CSF.CSFcellcount
         _ -> InvestigationBloods Bloods.FBEFullBloodExamination
 
 toInt : Investigation -> Int
@@ -73,20 +74,21 @@ toInt enum =
         InvestigationBloods Bloods.TFTThyroidFunctionTests -> 16
         InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime -> 17
         InvestigationBloods Bloods.PTProthrombintime -> 18
-        InvestigationImaging Imaging.CXRChestXray -> 19
-        InvestigationImaging Imaging.AXRAbdominalXray -> 20
-        InvestigationImaging Imaging.CTBCTBrain -> 21
-        InvestigationImaging Imaging.MRIBrain -> 22
-        InvestigationImaging Imaging.CTAbdoPelvis -> 23
-        InvestigationOther Other.ECGElectrocardiogram -> 24
-        InvestigationOther Other.Spirometry -> 25
-        InvestigationOther Other.Echocardiogram -> 26
-        InvestigationOther Other.EEGElectroencephalography -> 27
-        InvestigationCSF CSF.CSFMCS -> 28
-        InvestigationCSF CSF.CSFcytology -> 29
-        InvestigationCSF CSF.CSFglucose -> 30
-        InvestigationCSF CSF.CSFelectrophoresis -> 31
-        InvestigationCSF CSF.CSFcellcount -> 32
+        InvestigationBloods Bloods.Hba1c -> 19
+        InvestigationImaging Imaging.CXRChestXray -> 20
+        InvestigationImaging Imaging.AXRAbdominalXray -> 21
+        InvestigationImaging Imaging.CTBCTBrain -> 22
+        InvestigationImaging Imaging.MRIBrain -> 23
+        InvestigationImaging Imaging.CTAbdoPelvis -> 24
+        InvestigationOther Other.ECGElectrocardiogram -> 25
+        InvestigationOther Other.Spirometry -> 26
+        InvestigationOther Other.Echocardiogram -> 27
+        InvestigationOther Other.EEGElectroencephalography -> 28
+        InvestigationCSF CSF.CSFMCS -> 29
+        InvestigationCSF CSF.CSFcytology -> 30
+        InvestigationCSF CSF.CSFglucose -> 31
+        InvestigationCSF CSF.CSFelectrophoresis -> 32
+        InvestigationCSF CSF.CSFcellcount -> 33
 
 toString : Investigation -> String
 toString enum = 
@@ -110,6 +112,7 @@ toString enum =
         InvestigationBloods Bloods.TFTThyroidFunctionTests -> "TFT (Thyroid Function Tests)"
         InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime -> "aPTT (Activated partial thromboplastin time)"
         InvestigationBloods Bloods.PTProthrombintime -> "PT (Prothrombin time)"
+        InvestigationBloods Bloods.Hba1c -> "Hba1c"
         InvestigationImaging Imaging.CXRChestXray -> "CXR (Chest X-ray)"
         InvestigationImaging Imaging.AXRAbdominalXray -> "AXR (Abdominal X-ray)"
         InvestigationImaging Imaging.CTBCTBrain -> "CTB (CT Brain)"
@@ -146,6 +149,7 @@ list =
     , InvestigationBloods Bloods.TFTThyroidFunctionTests
     , InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime
     , InvestigationBloods Bloods.PTProthrombintime
+    , InvestigationBloods Bloods.Hba1c
     , InvestigationImaging Imaging.CXRChestXray
     , InvestigationImaging Imaging.AXRAbdominalXray
     , InvestigationImaging Imaging.CTBCTBrain
@@ -182,6 +186,7 @@ optionList msg =
     , { value = InvestigationBloods Bloods.TFTThyroidFunctionTests, string = "TFT (Thyroid Function Tests)", onClick = msg (InvestigationBloods Bloods.TFTThyroidFunctionTests) "TFT (Thyroid Function Tests)", tags = "" }
     , { value = InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime, string = "aPTT (Activated partial thromboplastin time)", onClick = msg (InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime) "aPTT (Activated partial thromboplastin time)", tags = "" }
     , { value = InvestigationBloods Bloods.PTProthrombintime, string = "PT (Prothrombin time)", onClick = msg (InvestigationBloods Bloods.PTProthrombintime) "PT (Prothrombin time)", tags = "" }
+    , { value = InvestigationBloods Bloods.Hba1c, string = "Hba1c", onClick = msg (InvestigationBloods Bloods.Hba1c) "Hba1c", tags = "" }
     , { value = InvestigationImaging Imaging.CXRChestXray, string = "CXR (Chest X-ray)", onClick = msg (InvestigationImaging Imaging.CXRChestXray) "CXR (Chest X-ray)", tags = "" }
     , { value = InvestigationImaging Imaging.AXRAbdominalXray, string = "AXR (Abdominal X-ray)", onClick = msg (InvestigationImaging Imaging.AXRAbdominalXray) "AXR (Abdominal X-ray)", tags = "" }
     , { value = InvestigationImaging Imaging.CTBCTBrain, string = "CTB (CT Brain)", onClick = msg (InvestigationImaging Imaging.CTBCTBrain) "CTB (CT Brain)", tags = "" }

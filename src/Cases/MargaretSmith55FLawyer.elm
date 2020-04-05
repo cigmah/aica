@@ -86,7 +86,7 @@ scriptDict = Dict.fromList
     , (Question.toInt (QuestionOpen Open.Phx), """I think I've got high blood pressure or something like that.""")
     , (Question.toInt (QuestionOpen Open.Opening), """Well, I've got this absolutely terrible headache. Really terrible. I talked to my GP and he told me to come straight here. """)
     , (Question.toInt (QuestionPainFeature PainFeature.Quality), """It sort of feels like a thumping.""")
-    , (Question.toInt (QuestionPainFeature PainFeature.Activity), """I was just at home reading a bookit all happened so suddenly. I immediately rang my GP and managed to get an urgent appointment, then he told me to come here straight away. """)
+    , (Question.toInt (QuestionPainFeature PainFeature.Activity), """I was just at home reading a book.. it all happened so suddenly. I immediately rang my GP and managed to get an urgent appointment, then he told me to come here straight away. """)
     , (Question.toInt (QuestionPainFeature PainFeature.Quantity), """It's 10/10. I mean, I've had headaches before but this is something else - definitely the worst headache of my life.""")
     , (Question.toInt (QuestionPainFeature PainFeature.Triggers), """I've noticed it seems to be worse when I look into the lights. That really sets it off.""")
     , (Question.toInt (QuestionPainFeature PainFeature.Timing), """The damn thing has been there for about an hour now. I really can't concentrate.""")

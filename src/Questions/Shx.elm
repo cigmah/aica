@@ -6,4 +6,6 @@ type Shx = LivingPlace
     | Diet
     | PhysicalExercise
     | Driving
+    | Hobbies
+    | GP
 

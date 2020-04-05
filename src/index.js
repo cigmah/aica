@@ -3,6 +3,8 @@ import { Elm } from './Main.elm';
 
 import iconPath from "./Resources/icon.png";
 import margaretSmith from "./Resources/margaret_smith_55_f_lawyer.png";
+import larryBole from "./Resources/larry_bole_63_m_electrician.png";
+
 import * as serviceWorker from './serviceWorker';
 
 var storageKey = "aica_session";
@@ -22,7 +24,8 @@ var app = Elm.Main.init({
   flags: {
     logo: iconPath,
     profiles: [
-      { id: "margaret_smith_55_f_lawyer" , path: margaretSmith }
+      { id: "margaret_smith_55_f_lawyer", path: margaretSmith },
+      { id: "larry_bole_63_m_electrician", path: larryBole }
     ],
     storage: getStorageItems(localStorage.getItem(storageKey)),
   }
