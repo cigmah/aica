@@ -2,6 +2,7 @@ module Questions.PainFeature exposing (..)
 
 type PainFeature = Where
     | Side
+    | Activity
     | Onset
     | Timing
     | Quality

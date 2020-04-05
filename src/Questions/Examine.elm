@@ -4,6 +4,8 @@ type Examine = Rash
     | Hands
     | General
     | Vitals
+    | Oxygen
+    | GCS
     | Weight
     | Surroundings
     | Nails

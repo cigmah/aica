@@ -46,7 +46,7 @@ optionList msg =
 def process_string(string: str) -> str:
     """ Convert a string into a string safe to be used as an Elm type."""
     filtered = non_alpha.sub("", string)
-    titled = filtered[:1].upper() + filtered[1:]
+    titled = filtered[:1].upper().strip() + filtered[1:]
     return titled
 
 

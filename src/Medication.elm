@@ -95,6 +95,7 @@ type Medication = Acarbose
     | Isoniazid
     | Ivermectin
     | Ketamine
+    | Labetalol
     | Lactulose
     | Leflunomide
     | LevodopaCarbidopa
@@ -121,6 +122,7 @@ type Medication = Acarbose
     | Naloxone
     | Nicotine
     | Nifedipine
+    | Nimodipine
     | Nitrousoxide
     | Olanzapine
     | Ondansetron
@@ -171,7 +173,6 @@ type Medication = Acarbose
     | Verapamil
     | Warfarin
     | Zolpidem
-    | Nimodipine
 
 fromInt : Int -> Medication
 fromInt int = 
@@ -267,83 +268,84 @@ fromInt int =
         88 -> Isoniazid
         89 -> Ivermectin
         90 -> Ketamine
-        91 -> Lactulose
-        92 -> Leflunomide
-        93 -> LevodopaCarbidopa
-        94 -> Levonorgestrel
-        95 -> Levothyroxine
-        96 -> Lidocaine
-        97 -> Lithium
-        98 -> Loperamide
-        99 -> Loratadine
-        100 -> Magnesiumsulfate
-        101 -> Meloxicam
-        102 -> Metformin
-        103 -> Methadone
-        104 -> Methotrexate
-        105 -> Methoxyflurane
-        106 -> Metoclopramide
-        107 -> Metronidazole
-        108 -> Midazolam
-        109 -> Mirtazapine
-        110 -> Misoprostol
-        111 -> Moclobemide
-        112 -> Montelukast
-        113 -> Morphine
-        114 -> Naloxone
-        115 -> Nicotine
-        116 -> Nifedipine
-        117 -> Nitrousoxide
-        118 -> Olanzapine
-        119 -> Ondansetron
-        120 -> Orlistat
-        121 -> Oseltamivir
-        122 -> Oxybutynin
-        123 -> Oxytocin
-        124 -> Paracetamol
-        125 -> Perindopril
-        126 -> Phenytoin
-        127 -> Pramipexole
-        128 -> Prazosin
-        129 -> Prednisolone
-        130 -> Prochlorperazine
-        131 -> Promethazine
-        132 -> Propofol
-        133 -> Pyridostigmine
-        134 -> Quetiapine
-        135 -> Quinine
-        136 -> Ranitidine
-        137 -> Rifampicin
-        138 -> Risperidone
-        139 -> Ritonavir
-        140 -> Rocuronium
-        141 -> Salbutamol
-        142 -> Selegiline
-        143 -> Senna
-        144 -> Sevoflurane
-        145 -> Sildenafil
-        146 -> Sirolimus
-        147 -> Sitagliptin
-        148 -> Somatropin
-        149 -> Spironolactone
-        150 -> Sucralfate
-        151 -> Sulfasalazine
-        152 -> Suxamethonium
-        153 -> Tamoxifen
-        154 -> Tamsulosin
-        155 -> Tenofoviremtricitabine
-        156 -> Testosterone
-        157 -> Tetracaine
-        158 -> Thiopental
-        159 -> Tramadol
-        160 -> Trastuzumab
-        161 -> Valproate
-        162 -> Vancomycin
-        163 -> Venlafaxine
-        164 -> Verapamil
-        165 -> Warfarin
-        166 -> Zolpidem
-        167 -> Nimodipine
+        91 -> Labetalol
+        92 -> Lactulose
+        93 -> Leflunomide
+        94 -> LevodopaCarbidopa
+        95 -> Levonorgestrel
+        96 -> Levothyroxine
+        97 -> Lidocaine
+        98 -> Lithium
+        99 -> Loperamide
+        100 -> Loratadine
+        101 -> Magnesiumsulfate
+        102 -> Meloxicam
+        103 -> Metformin
+        104 -> Methadone
+        105 -> Methotrexate
+        106 -> Methoxyflurane
+        107 -> Metoclopramide
+        108 -> Metronidazole
+        109 -> Midazolam
+        110 -> Mirtazapine
+        111 -> Misoprostol
+        112 -> Moclobemide
+        113 -> Montelukast
+        114 -> Morphine
+        115 -> Naloxone
+        116 -> Nicotine
+        117 -> Nifedipine
+        118 -> Nimodipine
+        119 -> Nitrousoxide
+        120 -> Olanzapine
+        121 -> Ondansetron
+        122 -> Orlistat
+        123 -> Oseltamivir
+        124 -> Oxybutynin
+        125 -> Oxytocin
+        126 -> Paracetamol
+        127 -> Perindopril
+        128 -> Phenytoin
+        129 -> Pramipexole
+        130 -> Prazosin
+        131 -> Prednisolone
+        132 -> Prochlorperazine
+        133 -> Promethazine
+        134 -> Propofol
+        135 -> Pyridostigmine
+        136 -> Quetiapine
+        137 -> Quinine
+        138 -> Ranitidine
+        139 -> Rifampicin
+        140 -> Risperidone
+        141 -> Ritonavir
+        142 -> Rocuronium
+        143 -> Salbutamol
+        144 -> Selegiline
+        145 -> Senna
+        146 -> Sevoflurane
+        147 -> Sildenafil
+        148 -> Sirolimus
+        149 -> Sitagliptin
+        150 -> Somatropin
+        151 -> Spironolactone
+        152 -> Sucralfate
+        153 -> Sulfasalazine
+        154 -> Suxamethonium
+        155 -> Tamoxifen
+        156 -> Tamsulosin
+        157 -> Tenofoviremtricitabine
+        158 -> Testosterone
+        159 -> Tetracaine
+        160 -> Thiopental
+        161 -> Tramadol
+        162 -> Trastuzumab
+        163 -> Valproate
+        164 -> Vancomycin
+        165 -> Venlafaxine
+        166 -> Verapamil
+        167 -> Warfarin
+        168 -> Zolpidem
         _ -> Acarbose
 
 toInt : Medication -> Int
@@ -440,83 +442,84 @@ toInt enum =
         Isoniazid -> 88
         Ivermectin -> 89
         Ketamine -> 90
-        Lactulose -> 91
-        Leflunomide -> 92
-        LevodopaCarbidopa -> 93
-        Levonorgestrel -> 94
-        Levothyroxine -> 95
-        Lidocaine -> 96
-        Lithium -> 97
-        Loperamide -> 98
-        Loratadine -> 99
-        Magnesiumsulfate -> 100
-        Meloxicam -> 101
-        Metformin -> 102
-        Methadone -> 103
-        Methotrexate -> 104
-        Methoxyflurane -> 105
-        Metoclopramide -> 106
-        Metronidazole -> 107
-        Midazolam -> 108
-        Mirtazapine -> 109
-        Misoprostol -> 110
-        Moclobemide -> 111
-        Montelukast -> 112
-        Morphine -> 113
-        Naloxone -> 114
-        Nicotine -> 115
-        Nifedipine -> 116
-        Nitrousoxide -> 117
-        Olanzapine -> 118
-        Ondansetron -> 119
-        Orlistat -> 120
-        Oseltamivir -> 121
-        Oxybutynin -> 122
-        Oxytocin -> 123
-        Paracetamol -> 124
-        Perindopril -> 125
-        Phenytoin -> 126
-        Pramipexole -> 127
-        Prazosin -> 128
-        Prednisolone -> 129
-        Prochlorperazine -> 130
-        Promethazine -> 131
-        Propofol -> 132
-        Pyridostigmine -> 133
-        Quetiapine -> 134
-        Quinine -> 135
-        Ranitidine -> 136
-        Rifampicin -> 137
-        Risperidone -> 138
-        Ritonavir -> 139
-        Rocuronium -> 140
-        Salbutamol -> 141
-        Selegiline -> 142
-        Senna -> 143
-        Sevoflurane -> 144
-        Sildenafil -> 145
-        Sirolimus -> 146
-        Sitagliptin -> 147
-        Somatropin -> 148
-        Spironolactone -> 149
-        Sucralfate -> 150
-        Sulfasalazine -> 151
-        Suxamethonium -> 152
-        Tamoxifen -> 153
-        Tamsulosin -> 154
-        Tenofoviremtricitabine -> 155
-        Testosterone -> 156
-        Tetracaine -> 157
-        Thiopental -> 158
-        Tramadol -> 159
-        Trastuzumab -> 160
-        Valproate -> 161
-        Vancomycin -> 162
-        Venlafaxine -> 163
-        Verapamil -> 164
-        Warfarin -> 165
-        Zolpidem -> 166
-        Nimodipine -> 167
+        Labetalol -> 91
+        Lactulose -> 92
+        Leflunomide -> 93
+        LevodopaCarbidopa -> 94
+        Levonorgestrel -> 95
+        Levothyroxine -> 96
+        Lidocaine -> 97
+        Lithium -> 98
+        Loperamide -> 99
+        Loratadine -> 100
+        Magnesiumsulfate -> 101
+        Meloxicam -> 102
+        Metformin -> 103
+        Methadone -> 104
+        Methotrexate -> 105
+        Methoxyflurane -> 106
+        Metoclopramide -> 107
+        Metronidazole -> 108
+        Midazolam -> 109
+        Mirtazapine -> 110
+        Misoprostol -> 111
+        Moclobemide -> 112
+        Montelukast -> 113
+        Morphine -> 114
+        Naloxone -> 115
+        Nicotine -> 116
+        Nifedipine -> 117
+        Nimodipine -> 118
+        Nitrousoxide -> 119
+        Olanzapine -> 120
+        Ondansetron -> 121
+        Orlistat -> 122
+        Oseltamivir -> 123
+        Oxybutynin -> 124
+        Oxytocin -> 125
+        Paracetamol -> 126
+        Perindopril -> 127
+        Phenytoin -> 128
+        Pramipexole -> 129
+        Prazosin -> 130
+        Prednisolone -> 131
+        Prochlorperazine -> 132
+        Promethazine -> 133
+        Propofol -> 134
+        Pyridostigmine -> 135
+        Quetiapine -> 136
+        Quinine -> 137
+        Ranitidine -> 138
+        Rifampicin -> 139
+        Risperidone -> 140
+        Ritonavir -> 141
+        Rocuronium -> 142
+        Salbutamol -> 143
+        Selegiline -> 144
+        Senna -> 145
+        Sevoflurane -> 146
+        Sildenafil -> 147
+        Sirolimus -> 148
+        Sitagliptin -> 149
+        Somatropin -> 150
+        Spironolactone -> 151
+        Sucralfate -> 152
+        Sulfasalazine -> 153
+        Suxamethonium -> 154
+        Tamoxifen -> 155
+        Tamsulosin -> 156
+        Tenofoviremtricitabine -> 157
+        Testosterone -> 158
+        Tetracaine -> 159
+        Thiopental -> 160
+        Tramadol -> 161
+        Trastuzumab -> 162
+        Valproate -> 163
+        Vancomycin -> 164
+        Venlafaxine -> 165
+        Verapamil -> 166
+        Warfarin -> 167
+        Zolpidem -> 168
 
 toString : Medication -> String
 toString enum = 
@@ -612,6 +615,7 @@ toString enum =
         Isoniazid -> "Isoniazid"
         Ivermectin -> "Ivermectin"
         Ketamine -> "Ketamine"
+        Labetalol -> "Labetalol"
         Lactulose -> "Lactulose"
         Leflunomide -> "Leflunomide"
         LevodopaCarbidopa -> "Levodopa/Carbidopa"
@@ -638,6 +642,7 @@ toString enum =
         Naloxone -> "Naloxone"
         Nicotine -> "Nicotine"
         Nifedipine -> "Nifedipine"
+        Nimodipine -> "Nimodipine"
         Nitrousoxide -> "Nitrous oxide"
         Olanzapine -> "Olanzapine"
         Ondansetron -> "Ondansetron"
@@ -688,7 +693,6 @@ toString enum =
         Verapamil -> "Verapamil"
         Warfarin -> "Warfarin "
         Zolpidem -> "Zolpidem"
-        Nimodipine -> "Nimodipine"
 
 list : List Medication
 list = 
@@ -783,6 +787,7 @@ list =
     , Isoniazid
     , Ivermectin
     , Ketamine
+    , Labetalol
     , Lactulose
     , Leflunomide
     , LevodopaCarbidopa
@@ -809,6 +814,7 @@ list =
     , Naloxone
     , Nicotine
     , Nifedipine
+    , Nimodipine
     , Nitrousoxide
     , Olanzapine
     , Ondansetron
@@ -858,8 +864,7 @@ list =
     , Venlafaxine
     , Verapamil
     , Warfarin
-    , Zolpidem
-    , Nimodipine ]
+    , Zolpidem ]
 
 optionList : (Medication -> String -> msg) -> List (Option.Data Medication msg) 
 optionList msg = 
@@ -954,6 +959,7 @@ optionList msg =
     , { value = Isoniazid, string = "Isoniazid", onClick = msg (Isoniazid) "Isoniazid", tags = "" }
     , { value = Ivermectin, string = "Ivermectin", onClick = msg (Ivermectin) "Ivermectin", tags = "" }
     , { value = Ketamine, string = "Ketamine", onClick = msg (Ketamine) "Ketamine", tags = "" }
+    , { value = Labetalol, string = "Labetalol", onClick = msg (Labetalol) "Labetalol", tags = "" }
     , { value = Lactulose, string = "Lactulose", onClick = msg (Lactulose) "Lactulose", tags = "" }
     , { value = Leflunomide, string = "Leflunomide", onClick = msg (Leflunomide) "Leflunomide", tags = "" }
     , { value = LevodopaCarbidopa, string = "Levodopa/Carbidopa", onClick = msg (LevodopaCarbidopa) "Levodopa/Carbidopa", tags = "" }
@@ -980,6 +986,7 @@ optionList msg =
     , { value = Naloxone, string = "Naloxone", onClick = msg (Naloxone) "Naloxone", tags = "" }
     , { value = Nicotine, string = "Nicotine", onClick = msg (Nicotine) "Nicotine", tags = "" }
     , { value = Nifedipine, string = "Nifedipine", onClick = msg (Nifedipine) "Nifedipine", tags = "" }
+    , { value = Nimodipine, string = "Nimodipine", onClick = msg (Nimodipine) "Nimodipine", tags = "" }
     , { value = Nitrousoxide, string = "Nitrous oxide", onClick = msg (Nitrousoxide) "Nitrous oxide", tags = "" }
     , { value = Olanzapine, string = "Olanzapine", onClick = msg (Olanzapine) "Olanzapine", tags = "" }
     , { value = Ondansetron, string = "Ondansetron", onClick = msg (Ondansetron) "Ondansetron", tags = "" }
@@ -1029,8 +1036,7 @@ optionList msg =
     , { value = Venlafaxine, string = "Venlafaxine", onClick = msg (Venlafaxine) "Venlafaxine", tags = "" }
     , { value = Verapamil, string = "Verapamil", onClick = msg (Verapamil) "Verapamil", tags = "" }
     , { value = Warfarin, string = "Warfarin ", onClick = msg (Warfarin) "Warfarin ", tags = "" }
-    , { value = Zolpidem, string = "Zolpidem", onClick = msg (Zolpidem) "Zolpidem", tags = "" }
-    , { value = Nimodipine, string = "Nimodipine", onClick = msg (Nimodipine) "Nimodipine", tags = "" } ]
+    , { value = Zolpidem, string = "Zolpidem", onClick = msg (Zolpidem) "Zolpidem", tags = "" } ]
 
 
 

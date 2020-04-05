@@ -6,10 +6,12 @@ import Array exposing (Array)
 import Investigations.Bloods as Bloods exposing (..)
 import Investigations.Imaging as Imaging exposing (..)
 import Investigations.Other as Other exposing (..)
+import Investigations.CSF as CSF exposing (..)
 
 type Investigation = InvestigationBloods Bloods
     | InvestigationImaging Imaging
     | InvestigationOther Other
+    | InvestigationCSF CSF
 
 fromInt : Int -> Investigation
 fromInt int = 
@@ -42,6 +44,11 @@ fromInt int =
         25 -> InvestigationOther Other.Spirometry
         26 -> InvestigationOther Other.Echocardiogram
         27 -> InvestigationOther Other.EEGElectroencephalography
+        28 -> InvestigationCSF CSF.CSFMCS
+        29 -> InvestigationCSF CSF.CSFcytology
+        30 -> InvestigationCSF CSF.CSFglucose
+        31 -> InvestigationCSF CSF.CSFelectrophoresis
+        32 -> InvestigationCSF CSF.CSFcellcount
         _ -> InvestigationBloods Bloods.FBEFullBloodExamination
 
 toInt : Investigation -> Int
@@ -75,6 +82,11 @@ toInt enum =
         InvestigationOther Other.Spirometry -> 25
         InvestigationOther Other.Echocardiogram -> 26
         InvestigationOther Other.EEGElectroencephalography -> 27
+        InvestigationCSF CSF.CSFMCS -> 28
+        InvestigationCSF CSF.CSFcytology -> 29
+        InvestigationCSF CSF.CSFglucose -> 30
+        InvestigationCSF CSF.CSFelectrophoresis -> 31
+        InvestigationCSF CSF.CSFcellcount -> 32
 
 toString : Investigation -> String
 toString enum = 
@@ -107,6 +119,11 @@ toString enum =
         InvestigationOther Other.Spirometry -> "Spirometry"
         InvestigationOther Other.Echocardiogram -> "Echocardiogram"
         InvestigationOther Other.EEGElectroencephalography -> "EEG (Electroencephalography)"
+        InvestigationCSF CSF.CSFMCS -> "CSF M/C/S"
+        InvestigationCSF CSF.CSFcytology -> "CSF cytology"
+        InvestigationCSF CSF.CSFglucose -> "CSF glucose"
+        InvestigationCSF CSF.CSFelectrophoresis -> "CSF electrophoresis"
+        InvestigationCSF CSF.CSFcellcount -> "CSF cell count"
 
 list : List Investigation
 list = 
@@ -137,7 +154,12 @@ list =
     , InvestigationOther Other.ECGElectrocardiogram
     , InvestigationOther Other.Spirometry
     , InvestigationOther Other.Echocardiogram
-    , InvestigationOther Other.EEGElectroencephalography ]
+    , InvestigationOther Other.EEGElectroencephalography
+    , InvestigationCSF CSF.CSFMCS
+    , InvestigationCSF CSF.CSFcytology
+    , InvestigationCSF CSF.CSFglucose
+    , InvestigationCSF CSF.CSFelectrophoresis
+    , InvestigationCSF CSF.CSFcellcount ]
 
 optionList : (Investigation -> String -> msg) -> List (Option.Data Investigation msg)
 optionList msg =
@@ -168,5 +190,10 @@ optionList msg =
     , { value = InvestigationOther Other.ECGElectrocardiogram, string = "ECG (Electrocardiogram)", onClick = msg (InvestigationOther Other.ECGElectrocardiogram) "ECG (Electrocardiogram)", tags = "" }
     , { value = InvestigationOther Other.Spirometry, string = "Spirometry", onClick = msg (InvestigationOther Other.Spirometry) "Spirometry", tags = "" }
     , { value = InvestigationOther Other.Echocardiogram, string = "Echocardiogram", onClick = msg (InvestigationOther Other.Echocardiogram) "Echocardiogram", tags = "" }
-    , { value = InvestigationOther Other.EEGElectroencephalography, string = "EEG (Electroencephalography)", onClick = msg (InvestigationOther Other.EEGElectroencephalography) "EEG (Electroencephalography)", tags = "" } ]
+    , { value = InvestigationOther Other.EEGElectroencephalography, string = "EEG (Electroencephalography)", onClick = msg (InvestigationOther Other.EEGElectroencephalography) "EEG (Electroencephalography)", tags = "" }
+    , { value = InvestigationCSF CSF.CSFMCS, string = "CSF M/C/S", onClick = msg (InvestigationCSF CSF.CSFMCS) "CSF M/C/S", tags = "" }
+    , { value = InvestigationCSF CSF.CSFcytology, string = "CSF cytology", onClick = msg (InvestigationCSF CSF.CSFcytology) "CSF cytology", tags = "" }
+    , { value = InvestigationCSF CSF.CSFglucose, string = "CSF glucose", onClick = msg (InvestigationCSF CSF.CSFglucose) "CSF glucose", tags = "" }
+    , { value = InvestigationCSF CSF.CSFelectrophoresis, string = "CSF electrophoresis", onClick = msg (InvestigationCSF CSF.CSFelectrophoresis) "CSF electrophoresis", tags = "" }
+    , { value = InvestigationCSF CSF.CSFcellcount, string = "CSF cell count", onClick = msg (InvestigationCSF CSF.CSFcellcount) "CSF cell count", tags = "" } ]
 

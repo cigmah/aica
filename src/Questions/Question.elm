@@ -46,127 +46,131 @@ fromInt int =
     case int of
         0 -> QuestionDetails Details.Name
         1 -> QuestionDetails Details.Age
-        2 -> QuestionDetails Details.OccupationBrief
-        3 -> QuestionDetails Details.OccupationDescription
-        4 -> QuestionOpen Open.Greeting
-        5 -> QuestionOpen Open.Opening
-        6 -> QuestionOpen Open.Symptoms
-        7 -> QuestionOpen Open.Phx
-        8 -> QuestionOpen Open.Fhx
-        9 -> QuestionPainFeature PainFeature.Where
-        10 -> QuestionPainFeature PainFeature.Side
-        11 -> QuestionPainFeature PainFeature.Onset
-        12 -> QuestionPainFeature PainFeature.Timing
-        13 -> QuestionPainFeature PainFeature.Quality
-        14 -> QuestionPainFeature PainFeature.Quantity
-        15 -> QuestionPainFeature PainFeature.Before
-        16 -> QuestionPainFeature PainFeature.Triggers
-        17 -> QuestionPainFeature PainFeature.Radiation
-        18 -> QuestionSymptomFeature SymptomFeature.When
-        19 -> QuestionSymptomFeature SymptomFeature.Quantity
-        20 -> QuestionSymptomFeature SymptomFeature.Alleviating
-        21 -> QuestionSymptomFeature SymptomFeature.Aggravating
-        22 -> QuestionFeelings Feelings.Beliefs
-        23 -> QuestionFeelings Feelings.Impact
-        24 -> QuestionFeelings Feelings.Expectations
-        25 -> QuestionFeelings Feelings.Concerns
-        26 -> QuestionSymptom Symptom.Pain
-        27 -> QuestionSymptom Symptom.Nausea
-        28 -> QuestionSymptom Symptom.Vomiting
-        29 -> QuestionSymptom Symptom.NeckStiff
-        30 -> QuestionSymptom Symptom.Diplopia
-        31 -> QuestionSymptom Symptom.VisualChange
-        32 -> QuestionSymptom Symptom.Photophobia
-        33 -> QuestionSymptom Symptom.Rhinorrhoea
-        34 -> QuestionSymptom Symptom.Cough
-        35 -> QuestionSymptom Symptom.Headache
-        36 -> QuestionSymptom Symptom.Lacrimation
-        37 -> QuestionSymptom Symptom.RecentlyIll
-        38 -> QuestionSymptom Symptom.SickContact
-        39 -> QuestionSymptom Symptom.Fever
-        40 -> QuestionSymptom Symptom.Rash
-        41 -> QuestionSymptom Symptom.ChestPain
-        42 -> QuestionSymptom Symptom.Dyspnoea
-        43 -> QuestionSymptom Symptom.Palpitations
-        44 -> QuestionSymptom Symptom.AnkleSwelling
-        45 -> QuestionSymptom Symptom.IntermittentClaudication
-        46 -> QuestionSymptom Symptom.Orthopnoea
-        47 -> QuestionSymptom Symptom.Pnd
-        48 -> QuestionSymptom Symptom.Loc
-        49 -> QuestionSymptom Symptom.Seizure
-        50 -> QuestionSymptom Symptom.Fatigue
-        51 -> QuestionSymptom Symptom.Haemoptysis
-        52 -> QuestionSymptom Symptom.Sputum
-        53 -> QuestionSymptom Symptom.SoreThroat
-        54 -> QuestionSymptom Symptom.Diaphoresis
-        55 -> QuestionSymptom Symptom.JawClaudication
-        56 -> QuestionSymptom Symptom.VIsualChange
-        57 -> QuestionRashFeature RashFeature.Where
-        58 -> QuestionExamine Examine.Rash
-        59 -> QuestionExamine Examine.Hands
-        60 -> QuestionExamine Examine.General
-        61 -> QuestionExamine Examine.Vitals
-        62 -> QuestionExamine Examine.Weight
-        63 -> QuestionExamine Examine.Surroundings
-        64 -> QuestionExamine Examine.Nails
-        65 -> QuestionExamine Examine.Arms
-        66 -> QuestionExamine Examine.EyeMovements
-        67 -> QuestionExamine Examine.VisualFields
-        68 -> QuestionExamine Examine.HandMovements
-        69 -> QuestionExamine Examine.Fundus
-        70 -> QuestionExamine Examine.Snellen
-        71 -> QuestionExamine Examine.Pupils
-        72 -> QuestionExamine Examine.FacialExpression
-        73 -> QuestionExamine Examine.Mastication
-        74 -> QuestionExamine Examine.Tongue
-        75 -> QuestionExamine Examine.OralMucosa
-        76 -> QuestionExamine Examine.HeartAuscultate
-        77 -> QuestionExamine Examine.LungsAuscultate
-        78 -> QuestionExamine Examine.LungsPercussion
-        79 -> QuestionExamine Examine.Chest
-        80 -> QuestionExamine Examine.Neck
-        81 -> QuestionExamine Examine.PowerArms
-        82 -> QuestionExamine Examine.PowerLegs
-        83 -> QuestionExamine Examine.SensationArms
-        84 -> QuestionExamine Examine.SensationLegs
-        85 -> QuestionExamine Examine.MentalState
-        86 -> QuestionLocFeature LocFeature.When
-        87 -> QuestionSeizureFeature SeizureFeature.Before
-        88 -> QuestionSputumFeature SputumFeature.Volume
-        89 -> QuestionSputumFeature SputumFeature.Colour
-        90 -> QuestionPhx Phx.Hypertension
-        91 -> QuestionPhx Phx.Diabetes
-        92 -> QuestionPhx Phx.Surgery
-        93 -> QuestionPhx Phx.Immunisation
-        94 -> QuestionDrugs Drugs.Regular
-        95 -> QuestionDrugs Drugs.Otc
-        96 -> QuestionDrugs Drugs.Recreational
-        97 -> QuestionDrugs Drugs.Allergies
-        98 -> QuestionAlcohol Alcohol.YesNo
-        99 -> QuestionAlcohol Alcohol.Quantity
-        100 -> QuestionSmoke Smoke.YesNo
-        101 -> QuestionSmoke Smoke.Duration
-        102 -> QuestionSmoke Smoke.History
-        103 -> QuestionSmoke Smoke.Quantity
-        104 -> QuestionFhx Fhx.ParentHealth
-        105 -> QuestionFhx Fhx.Children
-        106 -> QuestionFhx Fhx.ChildrenHealth
-        107 -> QuestionFhx Fhx.Siblings
-        108 -> QuestionFhx Fhx.SiblingsHealth
-        109 -> QuestionShx Shx.LivingPlace
-        110 -> QuestionShx Shx.LivingPeople
-        111 -> QuestionShx Shx.Mood
-        112 -> QuestionShx Shx.Diet
-        113 -> QuestionShx Shx.PhysicalExercise
-        114 -> QuestionShx Shx.Driving
-        115 -> QuestionSign Sign.Brudzinski
-        116 -> QuestionSign Sign.Papilloedema
-        117 -> QuestionSign Sign.Kernig
-        118 -> QuestionSign Sign.PeripheralCyanosis
-        119 -> QuestionSign Sign.CentralCyanosis
-        120 -> QuestionSign Sign.CarotidBruits
-        121 -> QuestionSign Sign.Dysdiado
-        122 -> QuestionSign Sign.IntentionTremo
+        2 -> QuestionDetails Details.Dob
+        3 -> QuestionDetails Details.OccupationBrief
+        4 -> QuestionDetails Details.OccupationDescription
+        5 -> QuestionOpen Open.Greeting
+        6 -> QuestionOpen Open.Opening
+        7 -> QuestionOpen Open.Symptoms
+        8 -> QuestionOpen Open.Phx
+        9 -> QuestionOpen Open.Fhx
+        10 -> QuestionPainFeature PainFeature.Where
+        11 -> QuestionPainFeature PainFeature.Side
+        12 -> QuestionPainFeature PainFeature.Activity
+        13 -> QuestionPainFeature PainFeature.Onset
+        14 -> QuestionPainFeature PainFeature.Timing
+        15 -> QuestionPainFeature PainFeature.Quality
+        16 -> QuestionPainFeature PainFeature.Quantity
+        17 -> QuestionPainFeature PainFeature.Before
+        18 -> QuestionPainFeature PainFeature.Triggers
+        19 -> QuestionPainFeature PainFeature.Radiation
+        20 -> QuestionSymptomFeature SymptomFeature.When
+        21 -> QuestionSymptomFeature SymptomFeature.Quantity
+        22 -> QuestionSymptomFeature SymptomFeature.Alleviating
+        23 -> QuestionSymptomFeature SymptomFeature.Aggravating
+        24 -> QuestionFeelings Feelings.Beliefs
+        25 -> QuestionFeelings Feelings.Impact
+        26 -> QuestionFeelings Feelings.Expectations
+        27 -> QuestionFeelings Feelings.Concerns
+        28 -> QuestionSymptom Symptom.Pain
+        29 -> QuestionSymptom Symptom.Nausea
+        30 -> QuestionSymptom Symptom.Vomiting
+        31 -> QuestionSymptom Symptom.NeckStiff
+        32 -> QuestionSymptom Symptom.Diplopia
+        33 -> QuestionSymptom Symptom.VisualChange
+        34 -> QuestionSymptom Symptom.Photophobia
+        35 -> QuestionSymptom Symptom.Rhinorrhoea
+        36 -> QuestionSymptom Symptom.Cough
+        37 -> QuestionSymptom Symptom.Headache
+        38 -> QuestionSymptom Symptom.Lacrimation
+        39 -> QuestionSymptom Symptom.RecentlyIll
+        40 -> QuestionSymptom Symptom.SickContact
+        41 -> QuestionSymptom Symptom.Fever
+        42 -> QuestionSymptom Symptom.Rash
+        43 -> QuestionSymptom Symptom.ChestPain
+        44 -> QuestionSymptom Symptom.Dyspnoea
+        45 -> QuestionSymptom Symptom.Palpitations
+        46 -> QuestionSymptom Symptom.AnkleSwelling
+        47 -> QuestionSymptom Symptom.IntermittentClaudication
+        48 -> QuestionSymptom Symptom.Orthopnoea
+        49 -> QuestionSymptom Symptom.Pnd
+        50 -> QuestionSymptom Symptom.Loc
+        51 -> QuestionSymptom Symptom.Seizure
+        52 -> QuestionSymptom Symptom.Fatigue
+        53 -> QuestionSymptom Symptom.Haemoptysis
+        54 -> QuestionSymptom Symptom.Sputum
+        55 -> QuestionSymptom Symptom.SoreThroat
+        56 -> QuestionSymptom Symptom.Diaphoresis
+        57 -> QuestionSymptom Symptom.JawClaudication
+        58 -> QuestionSymptom Symptom.VIsualChange
+        59 -> QuestionRashFeature RashFeature.Where
+        60 -> QuestionExamine Examine.Rash
+        61 -> QuestionExamine Examine.Hands
+        62 -> QuestionExamine Examine.General
+        63 -> QuestionExamine Examine.Vitals
+        64 -> QuestionExamine Examine.Oxygen
+        65 -> QuestionExamine Examine.GCS
+        66 -> QuestionExamine Examine.Weight
+        67 -> QuestionExamine Examine.Surroundings
+        68 -> QuestionExamine Examine.Nails
+        69 -> QuestionExamine Examine.Arms
+        70 -> QuestionExamine Examine.EyeMovements
+        71 -> QuestionExamine Examine.VisualFields
+        72 -> QuestionExamine Examine.HandMovements
+        73 -> QuestionExamine Examine.Fundus
+        74 -> QuestionExamine Examine.Snellen
+        75 -> QuestionExamine Examine.Pupils
+        76 -> QuestionExamine Examine.FacialExpression
+        77 -> QuestionExamine Examine.Mastication
+        78 -> QuestionExamine Examine.Tongue
+        79 -> QuestionExamine Examine.OralMucosa
+        80 -> QuestionExamine Examine.HeartAuscultate
+        81 -> QuestionExamine Examine.LungsAuscultate
+        82 -> QuestionExamine Examine.LungsPercussion
+        83 -> QuestionExamine Examine.Chest
+        84 -> QuestionExamine Examine.Neck
+        85 -> QuestionExamine Examine.PowerArms
+        86 -> QuestionExamine Examine.PowerLegs
+        87 -> QuestionExamine Examine.SensationArms
+        88 -> QuestionExamine Examine.SensationLegs
+        89 -> QuestionExamine Examine.MentalState
+        90 -> QuestionLocFeature LocFeature.When
+        91 -> QuestionSeizureFeature SeizureFeature.Before
+        92 -> QuestionSputumFeature SputumFeature.Volume
+        93 -> QuestionSputumFeature SputumFeature.Colour
+        94 -> QuestionPhx Phx.Hypertension
+        95 -> QuestionPhx Phx.Diabetes
+        96 -> QuestionPhx Phx.Surgery
+        97 -> QuestionPhx Phx.Immunisation
+        98 -> QuestionDrugs Drugs.Regular
+        99 -> QuestionDrugs Drugs.Otc
+        100 -> QuestionDrugs Drugs.Recreational
+        101 -> QuestionDrugs Drugs.Allergies
+        102 -> QuestionAlcohol Alcohol.YesNo
+        103 -> QuestionAlcohol Alcohol.Quantity
+        104 -> QuestionSmoke Smoke.YesNo
+        105 -> QuestionSmoke Smoke.Duration
+        106 -> QuestionSmoke Smoke.History
+        107 -> QuestionSmoke Smoke.Quantity
+        108 -> QuestionFhx Fhx.ParentHealth
+        109 -> QuestionFhx Fhx.Children
+        110 -> QuestionFhx Fhx.ChildrenHealth
+        111 -> QuestionFhx Fhx.Siblings
+        112 -> QuestionFhx Fhx.SiblingsHealth
+        113 -> QuestionShx Shx.LivingPlace
+        114 -> QuestionShx Shx.LivingPeople
+        115 -> QuestionShx Shx.Mood
+        116 -> QuestionShx Shx.Diet
+        117 -> QuestionShx Shx.PhysicalExercise
+        118 -> QuestionShx Shx.Driving
+        119 -> QuestionSign Sign.Brudzinski
+        120 -> QuestionSign Sign.Papilloedema
+        121 -> QuestionSign Sign.Kernig
+        122 -> QuestionSign Sign.PeripheralCyanosis
+        123 -> QuestionSign Sign.CentralCyanosis
+        124 -> QuestionSign Sign.CarotidBruits
+        125 -> QuestionSign Sign.Dysdiado
+        126 -> QuestionSign Sign.IntentionTremo
         _ -> QuestionDetails Details.Name
 
 toInt : Question -> Int
@@ -174,259 +178,268 @@ toInt enum =
     case enum of 
         QuestionDetails Details.Name -> 0
         QuestionDetails Details.Age -> 1
-        QuestionDetails Details.OccupationBrief -> 2
-        QuestionDetails Details.OccupationDescription -> 3
-        QuestionOpen Open.Greeting -> 4
-        QuestionOpen Open.Opening -> 5
-        QuestionOpen Open.Symptoms -> 6
-        QuestionOpen Open.Phx -> 7
-        QuestionOpen Open.Fhx -> 8
-        QuestionPainFeature PainFeature.Where -> 9
-        QuestionPainFeature PainFeature.Side -> 10
-        QuestionPainFeature PainFeature.Onset -> 11
-        QuestionPainFeature PainFeature.Timing -> 12
-        QuestionPainFeature PainFeature.Quality -> 13
-        QuestionPainFeature PainFeature.Quantity -> 14
-        QuestionPainFeature PainFeature.Before -> 15
-        QuestionPainFeature PainFeature.Triggers -> 16
-        QuestionPainFeature PainFeature.Radiation -> 17
-        QuestionSymptomFeature SymptomFeature.When -> 18
-        QuestionSymptomFeature SymptomFeature.Quantity -> 19
-        QuestionSymptomFeature SymptomFeature.Alleviating -> 20
-        QuestionSymptomFeature SymptomFeature.Aggravating -> 21
-        QuestionFeelings Feelings.Beliefs -> 22
-        QuestionFeelings Feelings.Impact -> 23
-        QuestionFeelings Feelings.Expectations -> 24
-        QuestionFeelings Feelings.Concerns -> 25
-        QuestionSymptom Symptom.Pain -> 26
-        QuestionSymptom Symptom.Nausea -> 27
-        QuestionSymptom Symptom.Vomiting -> 28
-        QuestionSymptom Symptom.NeckStiff -> 29
-        QuestionSymptom Symptom.Diplopia -> 30
-        QuestionSymptom Symptom.VisualChange -> 31
-        QuestionSymptom Symptom.Photophobia -> 32
-        QuestionSymptom Symptom.Rhinorrhoea -> 33
-        QuestionSymptom Symptom.Cough -> 34
-        QuestionSymptom Symptom.Headache -> 35
-        QuestionSymptom Symptom.Lacrimation -> 36
-        QuestionSymptom Symptom.RecentlyIll -> 37
-        QuestionSymptom Symptom.SickContact -> 38
-        QuestionSymptom Symptom.Fever -> 39
-        QuestionSymptom Symptom.Rash -> 40
-        QuestionSymptom Symptom.ChestPain -> 41
-        QuestionSymptom Symptom.Dyspnoea -> 42
-        QuestionSymptom Symptom.Palpitations -> 43
-        QuestionSymptom Symptom.AnkleSwelling -> 44
-        QuestionSymptom Symptom.IntermittentClaudication -> 45
-        QuestionSymptom Symptom.Orthopnoea -> 46
-        QuestionSymptom Symptom.Pnd -> 47
-        QuestionSymptom Symptom.Loc -> 48
-        QuestionSymptom Symptom.Seizure -> 49
-        QuestionSymptom Symptom.Fatigue -> 50
-        QuestionSymptom Symptom.Haemoptysis -> 51
-        QuestionSymptom Symptom.Sputum -> 52
-        QuestionSymptom Symptom.SoreThroat -> 53
-        QuestionSymptom Symptom.Diaphoresis -> 54
-        QuestionSymptom Symptom.JawClaudication -> 55
-        QuestionSymptom Symptom.VIsualChange -> 56
-        QuestionRashFeature RashFeature.Where -> 57
-        QuestionExamine Examine.Rash -> 58
-        QuestionExamine Examine.Hands -> 59
-        QuestionExamine Examine.General -> 60
-        QuestionExamine Examine.Vitals -> 61
-        QuestionExamine Examine.Weight -> 62
-        QuestionExamine Examine.Surroundings -> 63
-        QuestionExamine Examine.Nails -> 64
-        QuestionExamine Examine.Arms -> 65
-        QuestionExamine Examine.EyeMovements -> 66
-        QuestionExamine Examine.VisualFields -> 67
-        QuestionExamine Examine.HandMovements -> 68
-        QuestionExamine Examine.Fundus -> 69
-        QuestionExamine Examine.Snellen -> 70
-        QuestionExamine Examine.Pupils -> 71
-        QuestionExamine Examine.FacialExpression -> 72
-        QuestionExamine Examine.Mastication -> 73
-        QuestionExamine Examine.Tongue -> 74
-        QuestionExamine Examine.OralMucosa -> 75
-        QuestionExamine Examine.HeartAuscultate -> 76
-        QuestionExamine Examine.LungsAuscultate -> 77
-        QuestionExamine Examine.LungsPercussion -> 78
-        QuestionExamine Examine.Chest -> 79
-        QuestionExamine Examine.Neck -> 80
-        QuestionExamine Examine.PowerArms -> 81
-        QuestionExamine Examine.PowerLegs -> 82
-        QuestionExamine Examine.SensationArms -> 83
-        QuestionExamine Examine.SensationLegs -> 84
-        QuestionExamine Examine.MentalState -> 85
-        QuestionLocFeature LocFeature.When -> 86
-        QuestionSeizureFeature SeizureFeature.Before -> 87
-        QuestionSputumFeature SputumFeature.Volume -> 88
-        QuestionSputumFeature SputumFeature.Colour -> 89
-        QuestionPhx Phx.Hypertension -> 90
-        QuestionPhx Phx.Diabetes -> 91
-        QuestionPhx Phx.Surgery -> 92
-        QuestionPhx Phx.Immunisation -> 93
-        QuestionDrugs Drugs.Regular -> 94
-        QuestionDrugs Drugs.Otc -> 95
-        QuestionDrugs Drugs.Recreational -> 96
-        QuestionDrugs Drugs.Allergies -> 97
-        QuestionAlcohol Alcohol.YesNo -> 98
-        QuestionAlcohol Alcohol.Quantity -> 99
-        QuestionSmoke Smoke.YesNo -> 100
-        QuestionSmoke Smoke.Duration -> 101
-        QuestionSmoke Smoke.History -> 102
-        QuestionSmoke Smoke.Quantity -> 103
-        QuestionFhx Fhx.ParentHealth -> 104
-        QuestionFhx Fhx.Children -> 105
-        QuestionFhx Fhx.ChildrenHealth -> 106
-        QuestionFhx Fhx.Siblings -> 107
-        QuestionFhx Fhx.SiblingsHealth -> 108
-        QuestionShx Shx.LivingPlace -> 109
-        QuestionShx Shx.LivingPeople -> 110
-        QuestionShx Shx.Mood -> 111
-        QuestionShx Shx.Diet -> 112
-        QuestionShx Shx.PhysicalExercise -> 113
-        QuestionShx Shx.Driving -> 114
-        QuestionSign Sign.Brudzinski -> 115
-        QuestionSign Sign.Papilloedema -> 116
-        QuestionSign Sign.Kernig -> 117
-        QuestionSign Sign.PeripheralCyanosis -> 118
-        QuestionSign Sign.CentralCyanosis -> 119
-        QuestionSign Sign.CarotidBruits -> 120
-        QuestionSign Sign.Dysdiado -> 121
-        QuestionSign Sign.IntentionTremo -> 122
+        QuestionDetails Details.Dob -> 2
+        QuestionDetails Details.OccupationBrief -> 3
+        QuestionDetails Details.OccupationDescription -> 4
+        QuestionOpen Open.Greeting -> 5
+        QuestionOpen Open.Opening -> 6
+        QuestionOpen Open.Symptoms -> 7
+        QuestionOpen Open.Phx -> 8
+        QuestionOpen Open.Fhx -> 9
+        QuestionPainFeature PainFeature.Where -> 10
+        QuestionPainFeature PainFeature.Side -> 11
+        QuestionPainFeature PainFeature.Activity -> 12
+        QuestionPainFeature PainFeature.Onset -> 13
+        QuestionPainFeature PainFeature.Timing -> 14
+        QuestionPainFeature PainFeature.Quality -> 15
+        QuestionPainFeature PainFeature.Quantity -> 16
+        QuestionPainFeature PainFeature.Before -> 17
+        QuestionPainFeature PainFeature.Triggers -> 18
+        QuestionPainFeature PainFeature.Radiation -> 19
+        QuestionSymptomFeature SymptomFeature.When -> 20
+        QuestionSymptomFeature SymptomFeature.Quantity -> 21
+        QuestionSymptomFeature SymptomFeature.Alleviating -> 22
+        QuestionSymptomFeature SymptomFeature.Aggravating -> 23
+        QuestionFeelings Feelings.Beliefs -> 24
+        QuestionFeelings Feelings.Impact -> 25
+        QuestionFeelings Feelings.Expectations -> 26
+        QuestionFeelings Feelings.Concerns -> 27
+        QuestionSymptom Symptom.Pain -> 28
+        QuestionSymptom Symptom.Nausea -> 29
+        QuestionSymptom Symptom.Vomiting -> 30
+        QuestionSymptom Symptom.NeckStiff -> 31
+        QuestionSymptom Symptom.Diplopia -> 32
+        QuestionSymptom Symptom.VisualChange -> 33
+        QuestionSymptom Symptom.Photophobia -> 34
+        QuestionSymptom Symptom.Rhinorrhoea -> 35
+        QuestionSymptom Symptom.Cough -> 36
+        QuestionSymptom Symptom.Headache -> 37
+        QuestionSymptom Symptom.Lacrimation -> 38
+        QuestionSymptom Symptom.RecentlyIll -> 39
+        QuestionSymptom Symptom.SickContact -> 40
+        QuestionSymptom Symptom.Fever -> 41
+        QuestionSymptom Symptom.Rash -> 42
+        QuestionSymptom Symptom.ChestPain -> 43
+        QuestionSymptom Symptom.Dyspnoea -> 44
+        QuestionSymptom Symptom.Palpitations -> 45
+        QuestionSymptom Symptom.AnkleSwelling -> 46
+        QuestionSymptom Symptom.IntermittentClaudication -> 47
+        QuestionSymptom Symptom.Orthopnoea -> 48
+        QuestionSymptom Symptom.Pnd -> 49
+        QuestionSymptom Symptom.Loc -> 50
+        QuestionSymptom Symptom.Seizure -> 51
+        QuestionSymptom Symptom.Fatigue -> 52
+        QuestionSymptom Symptom.Haemoptysis -> 53
+        QuestionSymptom Symptom.Sputum -> 54
+        QuestionSymptom Symptom.SoreThroat -> 55
+        QuestionSymptom Symptom.Diaphoresis -> 56
+        QuestionSymptom Symptom.JawClaudication -> 57
+        QuestionSymptom Symptom.VIsualChange -> 58
+        QuestionRashFeature RashFeature.Where -> 59
+        QuestionExamine Examine.Rash -> 60
+        QuestionExamine Examine.Hands -> 61
+        QuestionExamine Examine.General -> 62
+        QuestionExamine Examine.Vitals -> 63
+        QuestionExamine Examine.Oxygen -> 64
+        QuestionExamine Examine.GCS -> 65
+        QuestionExamine Examine.Weight -> 66
+        QuestionExamine Examine.Surroundings -> 67
+        QuestionExamine Examine.Nails -> 68
+        QuestionExamine Examine.Arms -> 69
+        QuestionExamine Examine.EyeMovements -> 70
+        QuestionExamine Examine.VisualFields -> 71
+        QuestionExamine Examine.HandMovements -> 72
+        QuestionExamine Examine.Fundus -> 73
+        QuestionExamine Examine.Snellen -> 74
+        QuestionExamine Examine.Pupils -> 75
+        QuestionExamine Examine.FacialExpression -> 76
+        QuestionExamine Examine.Mastication -> 77
+        QuestionExamine Examine.Tongue -> 78
+        QuestionExamine Examine.OralMucosa -> 79
+        QuestionExamine Examine.HeartAuscultate -> 80
+        QuestionExamine Examine.LungsAuscultate -> 81
+        QuestionExamine Examine.LungsPercussion -> 82
+        QuestionExamine Examine.Chest -> 83
+        QuestionExamine Examine.Neck -> 84
+        QuestionExamine Examine.PowerArms -> 85
+        QuestionExamine Examine.PowerLegs -> 86
+        QuestionExamine Examine.SensationArms -> 87
+        QuestionExamine Examine.SensationLegs -> 88
+        QuestionExamine Examine.MentalState -> 89
+        QuestionLocFeature LocFeature.When -> 90
+        QuestionSeizureFeature SeizureFeature.Before -> 91
+        QuestionSputumFeature SputumFeature.Volume -> 92
+        QuestionSputumFeature SputumFeature.Colour -> 93
+        QuestionPhx Phx.Hypertension -> 94
+        QuestionPhx Phx.Diabetes -> 95
+        QuestionPhx Phx.Surgery -> 96
+        QuestionPhx Phx.Immunisation -> 97
+        QuestionDrugs Drugs.Regular -> 98
+        QuestionDrugs Drugs.Otc -> 99
+        QuestionDrugs Drugs.Recreational -> 100
+        QuestionDrugs Drugs.Allergies -> 101
+        QuestionAlcohol Alcohol.YesNo -> 102
+        QuestionAlcohol Alcohol.Quantity -> 103
+        QuestionSmoke Smoke.YesNo -> 104
+        QuestionSmoke Smoke.Duration -> 105
+        QuestionSmoke Smoke.History -> 106
+        QuestionSmoke Smoke.Quantity -> 107
+        QuestionFhx Fhx.ParentHealth -> 108
+        QuestionFhx Fhx.Children -> 109
+        QuestionFhx Fhx.ChildrenHealth -> 110
+        QuestionFhx Fhx.Siblings -> 111
+        QuestionFhx Fhx.SiblingsHealth -> 112
+        QuestionShx Shx.LivingPlace -> 113
+        QuestionShx Shx.LivingPeople -> 114
+        QuestionShx Shx.Mood -> 115
+        QuestionShx Shx.Diet -> 116
+        QuestionShx Shx.PhysicalExercise -> 117
+        QuestionShx Shx.Driving -> 118
+        QuestionSign Sign.Brudzinski -> 119
+        QuestionSign Sign.Papilloedema -> 120
+        QuestionSign Sign.Kernig -> 121
+        QuestionSign Sign.PeripheralCyanosis -> 122
+        QuestionSign Sign.CentralCyanosis -> 123
+        QuestionSign Sign.CarotidBruits -> 124
+        QuestionSign Sign.Dysdiado -> 125
+        QuestionSign Sign.IntentionTremo -> 126
 
 toString : Question -> String
 toString enum = 
     case enum of
         QuestionDetails Details.Name -> "Name"
         QuestionDetails Details.Age -> "Age"
-        QuestionDetails Details.OccupationBrief -> "Age"
-        QuestionDetails Details.OccupationDescription -> "OccupationBrief"
-        QuestionOpen Open.Greeting -> "OccupationDescription"
-        QuestionOpen Open.Opening -> "Greeting"
+        QuestionDetails Details.Dob -> "Dob"
+        QuestionDetails Details.OccupationBrief -> "OccupationBrief"
+        QuestionDetails Details.OccupationDescription -> "OccupationDescription"
+        QuestionOpen Open.Greeting -> "Greeting"
+        QuestionOpen Open.Opening -> "Opening"
         QuestionOpen Open.Symptoms -> "Opening"
         QuestionOpen Open.Phx -> "Opening"
-        QuestionOpen Open.Fhx -> "Opening"
-        QuestionPainFeature PainFeature.Where -> "Symptoms"
-        QuestionPainFeature PainFeature.Side -> "Phx"
-        QuestionPainFeature PainFeature.Onset -> "Fhx"
-        QuestionPainFeature PainFeature.Timing -> "Where"
-        QuestionPainFeature PainFeature.Quality -> "Side"
-        QuestionPainFeature PainFeature.Quantity -> "Onset"
-        QuestionPainFeature PainFeature.Before -> "Timing"
-        QuestionPainFeature PainFeature.Triggers -> "Quality"
-        QuestionPainFeature PainFeature.Radiation -> "Quantity"
-        QuestionSymptomFeature SymptomFeature.When -> "Before"
-        QuestionSymptomFeature SymptomFeature.Quantity -> "Triggers"
-        QuestionSymptomFeature SymptomFeature.Alleviating -> "Radiation"
-        QuestionSymptomFeature SymptomFeature.Aggravating -> "When"
-        QuestionFeelings Feelings.Beliefs -> "Quantity"
-        QuestionFeelings Feelings.Impact -> "Alleviating"
-        QuestionFeelings Feelings.Expectations -> "Aggravating"
-        QuestionFeelings Feelings.Concerns -> "Beliefs"
-        QuestionSymptom Symptom.Pain -> "Impact"
-        QuestionSymptom Symptom.Nausea -> "Expectations"
-        QuestionSymptom Symptom.Vomiting -> "Concerns"
-        QuestionSymptom Symptom.NeckStiff -> "Pain"
-        QuestionSymptom Symptom.Diplopia -> "Nausea"
-        QuestionSymptom Symptom.VisualChange -> "Vomiting"
-        QuestionSymptom Symptom.Photophobia -> "NeckStiff"
-        QuestionSymptom Symptom.Rhinorrhoea -> "Diplopia"
-        QuestionSymptom Symptom.Cough -> "VisualChange"
-        QuestionSymptom Symptom.Headache -> "Photophobia"
-        QuestionSymptom Symptom.Lacrimation -> "Rhinorrhoea"
-        QuestionSymptom Symptom.RecentlyIll -> "Cough"
-        QuestionSymptom Symptom.SickContact -> "Headache"
-        QuestionSymptom Symptom.Fever -> "Lacrimation"
-        QuestionSymptom Symptom.Rash -> "RecentlyIll"
+        QuestionOpen Open.Fhx -> "Symptoms"
+        QuestionPainFeature PainFeature.Where -> "Phx"
+        QuestionPainFeature PainFeature.Side -> "Fhx"
+        QuestionPainFeature PainFeature.Activity -> "Where"
+        QuestionPainFeature PainFeature.Onset -> "Side"
+        QuestionPainFeature PainFeature.Timing -> "Activity"
+        QuestionPainFeature PainFeature.Quality -> "Onset"
+        QuestionPainFeature PainFeature.Quantity -> "Timing"
+        QuestionPainFeature PainFeature.Before -> "Quality"
+        QuestionPainFeature PainFeature.Triggers -> "Quantity"
+        QuestionPainFeature PainFeature.Radiation -> "Before"
+        QuestionSymptomFeature SymptomFeature.When -> "Triggers"
+        QuestionSymptomFeature SymptomFeature.Quantity -> "Radiation"
+        QuestionSymptomFeature SymptomFeature.Alleviating -> "When"
+        QuestionSymptomFeature SymptomFeature.Aggravating -> "Quantity"
+        QuestionFeelings Feelings.Beliefs -> "Alleviating"
+        QuestionFeelings Feelings.Impact -> "Aggravating"
+        QuestionFeelings Feelings.Expectations -> "Beliefs"
+        QuestionFeelings Feelings.Concerns -> "Impact"
+        QuestionSymptom Symptom.Pain -> "Expectations"
+        QuestionSymptom Symptom.Nausea -> "Concerns"
+        QuestionSymptom Symptom.Vomiting -> "Pain"
+        QuestionSymptom Symptom.NeckStiff -> "Nausea"
+        QuestionSymptom Symptom.Diplopia -> "Vomiting"
+        QuestionSymptom Symptom.VisualChange -> "NeckStiff"
+        QuestionSymptom Symptom.Photophobia -> "Diplopia"
+        QuestionSymptom Symptom.Rhinorrhoea -> "VisualChange"
+        QuestionSymptom Symptom.Cough -> "Photophobia"
+        QuestionSymptom Symptom.Headache -> "Rhinorrhoea"
+        QuestionSymptom Symptom.Lacrimation -> "Cough"
+        QuestionSymptom Symptom.RecentlyIll -> "Headache"
+        QuestionSymptom Symptom.SickContact -> "Lacrimation"
+        QuestionSymptom Symptom.Fever -> "RecentlyIll"
+        QuestionSymptom Symptom.Rash -> "SickContact"
         QuestionSymptom Symptom.ChestPain -> "SickContact"
-        QuestionSymptom Symptom.Dyspnoea -> "SickContact"
-        QuestionSymptom Symptom.Palpitations -> "Fever"
-        QuestionSymptom Symptom.AnkleSwelling -> "Rash"
-        QuestionSymptom Symptom.IntermittentClaudication -> "ChestPain"
-        QuestionSymptom Symptom.Orthopnoea -> "Dyspnoea"
-        QuestionSymptom Symptom.Pnd -> "Palpitations"
-        QuestionSymptom Symptom.Loc -> "AnkleSwelling"
-        QuestionSymptom Symptom.Seizure -> "IntermittentClaudication"
-        QuestionSymptom Symptom.Fatigue -> "Orthopnoea"
-        QuestionSymptom Symptom.Haemoptysis -> "Pnd"
+        QuestionSymptom Symptom.Dyspnoea -> "Fever"
+        QuestionSymptom Symptom.Palpitations -> "Rash"
+        QuestionSymptom Symptom.AnkleSwelling -> "ChestPain"
+        QuestionSymptom Symptom.IntermittentClaudication -> "Dyspnoea"
+        QuestionSymptom Symptom.Orthopnoea -> "Palpitations"
+        QuestionSymptom Symptom.Pnd -> "AnkleSwelling"
+        QuestionSymptom Symptom.Loc -> "IntermittentClaudication"
+        QuestionSymptom Symptom.Seizure -> "Orthopnoea"
+        QuestionSymptom Symptom.Fatigue -> "Pnd"
+        QuestionSymptom Symptom.Haemoptysis -> "Loc"
         QuestionSymptom Symptom.Sputum -> "Loc"
-        QuestionSymptom Symptom.SoreThroat -> "Loc"
-        QuestionSymptom Symptom.Diaphoresis -> "Seizure"
+        QuestionSymptom Symptom.SoreThroat -> "Seizure"
+        QuestionSymptom Symptom.Diaphoresis -> "Fatigue"
         QuestionSymptom Symptom.JawClaudication -> "Fatigue"
-        QuestionSymptom Symptom.VIsualChange -> "Fatigue"
-        QuestionRashFeature RashFeature.Where -> "Haemoptysis"
-        QuestionExamine Examine.Rash -> "Sputum"
-        QuestionExamine Examine.Hands -> "SoreThroat"
-        QuestionExamine Examine.General -> "Diaphoresis"
-        QuestionExamine Examine.Vitals -> "JawClaudication"
-        QuestionExamine Examine.Weight -> "VIsualChange"
-        QuestionExamine Examine.Surroundings -> "Where"
-        QuestionExamine Examine.Nails -> "Rash"
-        QuestionExamine Examine.Arms -> "Hands"
-        QuestionExamine Examine.EyeMovements -> "General"
-        QuestionExamine Examine.VisualFields -> "Vitals"
-        QuestionExamine Examine.HandMovements -> "Weight"
-        QuestionExamine Examine.Fundus -> "Surroundings"
-        QuestionExamine Examine.Snellen -> "Nails"
-        QuestionExamine Examine.Pupils -> "Arms"
-        QuestionExamine Examine.FacialExpression -> "EyeMovements"
-        QuestionExamine Examine.Mastication -> "VisualFields"
-        QuestionExamine Examine.Tongue -> "HandMovements"
-        QuestionExamine Examine.OralMucosa -> "Fundus"
-        QuestionExamine Examine.HeartAuscultate -> "Snellen"
-        QuestionExamine Examine.LungsAuscultate -> "Pupils"
-        QuestionExamine Examine.LungsPercussion -> "FacialExpression"
-        QuestionExamine Examine.Chest -> "Mastication"
-        QuestionExamine Examine.Neck -> "Tongue"
-        QuestionExamine Examine.PowerArms -> "OralMucosa"
-        QuestionExamine Examine.PowerLegs -> "HeartAuscultate"
-        QuestionExamine Examine.SensationArms -> "LungsAuscultate"
-        QuestionExamine Examine.SensationLegs -> "LungsPercussion"
-        QuestionExamine Examine.MentalState -> "Chest"
-        QuestionLocFeature LocFeature.When -> "Neck"
-        QuestionSeizureFeature SeizureFeature.Before -> "PowerArms"
-        QuestionSputumFeature SputumFeature.Volume -> "PowerLegs"
-        QuestionSputumFeature SputumFeature.Colour -> "SensationArms"
-        QuestionPhx Phx.Hypertension -> "SensationLegs"
-        QuestionPhx Phx.Diabetes -> "MentalState"
-        QuestionPhx Phx.Surgery -> "When"
-        QuestionPhx Phx.Immunisation -> "Before"
-        QuestionDrugs Drugs.Regular -> "Volume"
-        QuestionDrugs Drugs.Otc -> "Colour"
-        QuestionDrugs Drugs.Recreational -> "Hypertension"
-        QuestionDrugs Drugs.Allergies -> "Diabetes"
-        QuestionAlcohol Alcohol.YesNo -> "Surgery"
-        QuestionAlcohol Alcohol.Quantity -> "Immunisation"
-        QuestionSmoke Smoke.YesNo -> "Regular"
-        QuestionSmoke Smoke.Duration -> "Otc"
-        QuestionSmoke Smoke.History -> "Recreational"
-        QuestionSmoke Smoke.Quantity -> "Allergies"
-        QuestionFhx Fhx.ParentHealth -> "YesNo"
-        QuestionFhx Fhx.Children -> "Quantity"
-        QuestionFhx Fhx.ChildrenHealth -> "YesNo"
-        QuestionFhx Fhx.Siblings -> "Duration"
-        QuestionFhx Fhx.SiblingsHealth -> "History"
-        QuestionShx Shx.LivingPlace -> "Quantity"
-        QuestionShx Shx.LivingPeople -> "ParentHealth"
-        QuestionShx Shx.Mood -> "Children"
-        QuestionShx Shx.Diet -> "ChildrenHealth"
-        QuestionShx Shx.PhysicalExercise -> "Siblings"
-        QuestionShx Shx.Driving -> "SiblingsHealth"
-        QuestionSign Sign.Brudzinski -> "LivingPlace"
+        QuestionSymptom Symptom.VIsualChange -> "Haemoptysis"
+        QuestionRashFeature RashFeature.Where -> "Sputum"
+        QuestionExamine Examine.Rash -> "SoreThroat"
+        QuestionExamine Examine.Hands -> "Diaphoresis"
+        QuestionExamine Examine.General -> "JawClaudication"
+        QuestionExamine Examine.Vitals -> "VIsualChange"
+        QuestionExamine Examine.Oxygen -> "Where"
+        QuestionExamine Examine.GCS -> "Rash"
+        QuestionExamine Examine.Weight -> "Hands"
+        QuestionExamine Examine.Surroundings -> "General"
+        QuestionExamine Examine.Nails -> "Vitals"
+        QuestionExamine Examine.Arms -> "Oxygen"
+        QuestionExamine Examine.EyeMovements -> "GCS"
+        QuestionExamine Examine.VisualFields -> "Weight"
+        QuestionExamine Examine.HandMovements -> "Surroundings"
+        QuestionExamine Examine.Fundus -> "Nails"
+        QuestionExamine Examine.Snellen -> "Arms"
+        QuestionExamine Examine.Pupils -> "EyeMovements"
+        QuestionExamine Examine.FacialExpression -> "VisualFields"
+        QuestionExamine Examine.Mastication -> "HandMovements"
+        QuestionExamine Examine.Tongue -> "Fundus"
+        QuestionExamine Examine.OralMucosa -> "Snellen"
+        QuestionExamine Examine.HeartAuscultate -> "Pupils"
+        QuestionExamine Examine.LungsAuscultate -> "FacialExpression"
+        QuestionExamine Examine.LungsPercussion -> "Mastication"
+        QuestionExamine Examine.Chest -> "Tongue"
+        QuestionExamine Examine.Neck -> "OralMucosa"
+        QuestionExamine Examine.PowerArms -> "HeartAuscultate"
+        QuestionExamine Examine.PowerLegs -> "LungsAuscultate"
+        QuestionExamine Examine.SensationArms -> "LungsPercussion"
+        QuestionExamine Examine.SensationLegs -> "Chest"
+        QuestionExamine Examine.MentalState -> "Neck"
+        QuestionLocFeature LocFeature.When -> "PowerArms"
+        QuestionSeizureFeature SeizureFeature.Before -> "PowerLegs"
+        QuestionSputumFeature SputumFeature.Volume -> "SensationArms"
+        QuestionSputumFeature SputumFeature.Colour -> "SensationLegs"
+        QuestionPhx Phx.Hypertension -> "MentalState"
+        QuestionPhx Phx.Diabetes -> "When"
+        QuestionPhx Phx.Surgery -> "Before"
+        QuestionPhx Phx.Immunisation -> "Volume"
+        QuestionDrugs Drugs.Regular -> "Colour"
+        QuestionDrugs Drugs.Otc -> "Hypertension"
+        QuestionDrugs Drugs.Recreational -> "Diabetes"
+        QuestionDrugs Drugs.Allergies -> "Surgery"
+        QuestionAlcohol Alcohol.YesNo -> "Immunisation"
+        QuestionAlcohol Alcohol.Quantity -> "Regular"
+        QuestionSmoke Smoke.YesNo -> "Otc"
+        QuestionSmoke Smoke.Duration -> "Recreational"
+        QuestionSmoke Smoke.History -> "Allergies"
+        QuestionSmoke Smoke.Quantity -> "YesNo"
+        QuestionFhx Fhx.ParentHealth -> "Quantity"
+        QuestionFhx Fhx.Children -> "YesNo"
+        QuestionFhx Fhx.ChildrenHealth -> "Duration"
+        QuestionFhx Fhx.Siblings -> "History"
+        QuestionFhx Fhx.SiblingsHealth -> "Quantity"
+        QuestionShx Shx.LivingPlace -> "ParentHealth"
+        QuestionShx Shx.LivingPeople -> "Children"
+        QuestionShx Shx.Mood -> "ChildrenHealth"
+        QuestionShx Shx.Diet -> "Siblings"
+        QuestionShx Shx.PhysicalExercise -> "SiblingsHealth"
+        QuestionShx Shx.Driving -> "LivingPlace"
+        QuestionSign Sign.Brudzinski -> "LivingPeople"
         QuestionSign Sign.Papilloedema -> "LivingPeople"
-        QuestionSign Sign.Kernig -> "LivingPeople"
-        QuestionSign Sign.PeripheralCyanosis -> "Mood"
-        QuestionSign Sign.CentralCyanosis -> "Diet"
-        QuestionSign Sign.CarotidBruits -> "PhysicalExercise"
-        QuestionSign Sign.Dysdiado -> "Driving"
-        QuestionSign Sign.IntentionTremo -> "Brudzinski"
+        QuestionSign Sign.Kernig -> "Mood"
+        QuestionSign Sign.PeripheralCyanosis -> "Diet"
+        QuestionSign Sign.CentralCyanosis -> "PhysicalExercise"
+        QuestionSign Sign.CarotidBruits -> "Driving"
+        QuestionSign Sign.Dysdiado -> "Brudzinski"
+        QuestionSign Sign.IntentionTremo -> "Papilloedema"
 
 list : List Question
 list = 
     [ QuestionDetails Details.Name
     , QuestionDetails Details.Age
+    , QuestionDetails Details.Dob
     , QuestionDetails Details.OccupationBrief
     , QuestionDetails Details.OccupationDescription
     , QuestionOpen Open.Greeting
@@ -436,6 +449,7 @@ list =
     , QuestionOpen Open.Fhx
     , QuestionPainFeature PainFeature.Where
     , QuestionPainFeature PainFeature.Side
+    , QuestionPainFeature PainFeature.Activity
     , QuestionPainFeature PainFeature.Onset
     , QuestionPainFeature PainFeature.Timing
     , QuestionPainFeature PainFeature.Quality
@@ -487,6 +501,8 @@ list =
     , QuestionExamine Examine.Hands
     , QuestionExamine Examine.General
     , QuestionExamine Examine.Vitals
+    , QuestionExamine Examine.Oxygen
+    , QuestionExamine Examine.GCS
     , QuestionExamine Examine.Weight
     , QuestionExamine Examine.Surroundings
     , QuestionExamine Examine.Nails
@@ -553,7 +569,7 @@ optionList : (Question -> String -> msg) -> List (Option.Data Question msg)
 optionList msg =
     [ { value = QuestionDetails Details.Name, string = "What is your name?", onClick = msg (QuestionDetails Details.Name) "What is your name?", tags = "name" }
     , { value = QuestionDetails Details.Age, string = "How old are you?", onClick = msg (QuestionDetails Details.Age) "How old are you?", tags = "nan" }
-    , { value = QuestionDetails Details.Age, string = "When were you born?", onClick = msg (QuestionDetails Details.Age) "When were you born?", tags = "date of birth dob" }
+    , { value = QuestionDetails Details.Dob, string = "When were you born?", onClick = msg (QuestionDetails Details.Dob) "When were you born?", tags = "date of birth dob" }
     , { value = QuestionDetails Details.OccupationBrief, string = "Do you work?", onClick = msg (QuestionDetails Details.OccupationBrief) "Do you work?", tags = "employed job" }
     , { value = QuestionDetails Details.OccupationDescription, string = "What do you work as?", onClick = msg (QuestionDetails Details.OccupationDescription) "What do you work as?", tags = "job" }
     , { value = QuestionOpen Open.Greeting, string = "Hi. It's nice to meet you.", onClick = msg (QuestionOpen Open.Greeting) "Hi. It's nice to meet you.", tags = "hi hello nice to meet you" }
@@ -562,6 +578,7 @@ optionList msg =
     , { value = QuestionOpen Open.Opening, string = "How can I help you today?", onClick = msg (QuestionOpen Open.Opening) "How can I help you today?", tags = "nan" }
     , { value = QuestionPainFeature PainFeature.Where, string = "Where is the pain?", onClick = msg (QuestionPainFeature PainFeature.Where) "Where is the pain?", tags = "location site" }
     , { value = QuestionPainFeature PainFeature.Side, string = "Which side do you feel the pain on?", onClick = msg (QuestionPainFeature PainFeature.Side) "Which side do you feel the pain on?", tags = "unilateral bilateral " }
+    , { value = QuestionPainFeature PainFeature.Activity, string = "What were you doing when the pain started?", onClick = msg (QuestionPainFeature PainFeature.Activity) "What were you doing when the pain started?", tags = "doing at the time" }
     , { value = QuestionPainFeature PainFeature.Onset, string = "When did the pain start?", onClick = msg (QuestionPainFeature PainFeature.Onset) "When did the pain start?", tags = "onset time how long" }
     , { value = QuestionPainFeature PainFeature.Timing, string = "Has the pain gotten better or worse since it started?", onClick = msg (QuestionPainFeature PainFeature.Timing) "Has the pain gotten better or worse since it started?", tags = "improve progress timing course" }
     , { value = QuestionPainFeature PainFeature.Quality, string = "How would you describe the pain?", onClick = msg (QuestionPainFeature PainFeature.Quality) "How would you describe the pain?", tags = "quality character " }
@@ -649,10 +666,12 @@ optionList msg =
     , { value = QuestionExamine Examine.Hands, string = "Examine the hands. ", onClick = msg (QuestionExamine Examine.Hands) "Examine the hands. ", tags = "nan" }
     , { value = QuestionExamine Examine.General, string = "Examine with general inspection.", onClick = msg (QuestionExamine Examine.General) "Examine with general inspection.", tags = "nan" }
     , { value = QuestionExamine Examine.Vitals, string = "Examine the vital signs.", onClick = msg (QuestionExamine Examine.Vitals) "Examine the vital signs.", tags = "nan" }
+    , { value = QuestionExamine Examine.Oxygen, string = "Examine the oxygen saturation (SpO2).", onClick = msg (QuestionExamine Examine.Oxygen) "Examine the oxygen saturation (SpO2).", tags = "nan" }
+    , { value = QuestionExamine Examine.GCS, string = "Examine the patient using the Glasgow Coma Scale (GCS).", onClick = msg (QuestionExamine Examine.GCS) "Examine the patient using the Glasgow Coma Scale (GCS).", tags = "nan" }
     , { value = QuestionExamine Examine.Weight, string = "Examine weight.", onClick = msg (QuestionExamine Examine.Weight) "Examine weight.", tags = "nan" }
     , { value = QuestionExamine Examine.Surroundings, string = "Examine the surroundings.", onClick = msg (QuestionExamine Examine.Surroundings) "Examine the surroundings.", tags = "nan" }
     , { value = QuestionExamine Examine.Nails, string = "Examine the nails.", onClick = msg (QuestionExamine Examine.Nails) "Examine the nails.", tags = "nan" }
-    , { value = QuestionExamine Examine.Arms, string = "Examine the arms.", onClick = msg (QuestionExamine Examine.Arms) "Examine the arms.", tags = "nan" }
+    , { value = QuestionExamine Examine.Arms, string = "Examine the skin overlying the arms.", onClick = msg (QuestionExamine Examine.Arms) "Examine the skin overlying the arms.", tags = "nan" }
     , { value = QuestionExamine Examine.EyeMovements, string = "Examine the eye movements.", onClick = msg (QuestionExamine Examine.EyeMovements) "Examine the eye movements.", tags = "nan" }
     , { value = QuestionExamine Examine.VisualFields, string = "Examine the visual fields with a confrontation test.", onClick = msg (QuestionExamine Examine.VisualFields) "Examine the visual fields with a confrontation test.", tags = "nan" }
     , { value = QuestionExamine Examine.HandMovements, string = "Examine hand movements.", onClick = msg (QuestionExamine Examine.HandMovements) "Examine hand movements.", tags = "nan" }
@@ -671,8 +690,8 @@ optionList msg =
     , { value = QuestionExamine Examine.HeartAuscultate, string = "Examine the heart by auscultation.", onClick = msg (QuestionExamine Examine.HeartAuscultate) "Examine the heart by auscultation.", tags = "nan" }
     , { value = QuestionExamine Examine.LungsAuscultate, string = "Examine the lungs by auscultation.", onClick = msg (QuestionExamine Examine.LungsAuscultate) "Examine the lungs by auscultation.", tags = "nan" }
     , { value = QuestionExamine Examine.LungsPercussion, string = "Examine the lungs by percussion.", onClick = msg (QuestionExamine Examine.LungsPercussion) "Examine the lungs by percussion.", tags = "nan" }
-    , { value = QuestionExamine Examine.Chest, string = "Examine the chest.", onClick = msg (QuestionExamine Examine.Chest) "Examine the chest.", tags = "nan" }
-    , { value = QuestionExamine Examine.Neck, string = "Examine the neck.", onClick = msg (QuestionExamine Examine.Neck) "Examine the neck.", tags = "nan" }
+    , { value = QuestionExamine Examine.Chest, string = "Examine the external chest.", onClick = msg (QuestionExamine Examine.Chest) "Examine the external chest.", tags = "nan" }
+    , { value = QuestionExamine Examine.Neck, string = "Examine the external neck.", onClick = msg (QuestionExamine Examine.Neck) "Examine the external neck.", tags = "nan" }
     , { value = QuestionSign Sign.CarotidBruits, string = "Check for carotid bruits.", onClick = msg (QuestionSign Sign.CarotidBruits) "Check for carotid bruits.", tags = "nan" }
     , { value = QuestionExamine Examine.PowerArms, string = "Examine the power of the arms.", onClick = msg (QuestionExamine Examine.PowerArms) "Examine the power of the arms.", tags = "nan" }
     , { value = QuestionExamine Examine.PowerLegs, string = "Examine the power of the legs.", onClick = msg (QuestionExamine Examine.PowerLegs) "Examine the power of the legs.", tags = "nan" }

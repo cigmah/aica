@@ -27,6 +27,8 @@ type alias Details =
     , age : Int
     , gender : Gender
     , occupation : String
+    , writer : String
+    , illustrator : String
     }
 
 

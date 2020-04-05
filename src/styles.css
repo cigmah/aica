@@ -20,19 +20,22 @@
 }
 
 .markdown h1 {
-    @apply text-2xl font-bold mt-8 mb-2;
+    @apply text-3xl font-bold mt-12 mb-4;
+    letter-spacing: -1.5px;
 }
 
 .markdown h2 {
-    @apply text-xl font-bold mt-4;
+    @apply text-2xl font-bold mt-10;
+    letter-spacing: -1px;
 }
 
 .markdown h3 {
-    @apply text-lg font-bold mt-2;
+    @apply text-xl font-bold mt-8;
+    letter-spacing: -0.5px;
 }
 
 .markdown p {
-    @apply mb-2;
+    @apply mb-4 mt-4;
 }
 
 .markdown ul {
@@ -46,9 +49,26 @@
 }
 
 .markdown hr {
-    @apply my-8;
+    @apply my-12;
 }
 
 .markdown.low-headings h1, h2, h3 {
     @apply mt-2;
+}
+
+.max-w-900 {
+    max-width: 900px;
+}
+
+.markdown table {
+    @apply w-full my-4 text-sm;
+    margin: 1.5rem 0;
+    border-collapse: collapse;
+  }
+.markdown th {
+    @apply border-gray-300 border font-bold p-2 bg-gray-200;
+  }
+.markdown td {
+    @apply border-gray-300 border;
+    padding: 0.5rem;
 }

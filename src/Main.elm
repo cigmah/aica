@@ -833,6 +833,16 @@ update msg model =
 ---- VIEW ----
 
 
+markdown attributes =
+    Markdown.toHtmlWith
+        { githubFlavored = Just { tables = True, breaks = False }
+        , defaultHighlighting = Nothing
+        , sanitize = True
+        , smartypants = False
+        }
+        attributes
+
+
 genderToString : Gender -> String
 genderToString gender =
     case gender of
@@ -966,10 +976,14 @@ viewScreenCaseStart model data =
                 , tailwind "w-full xl:w-3/4 cursor-pointer p-2 border-l-8 border-olive-600 shadow hover:shadow-lg active:shadow-inner trans-all text-lg"
                 ]
                 [ text "Assess Patient" ]
+            , div
+                [ tailwind "mt-8 text-sm text-gray-700" ]
+                [ div [] [ text ("Case written by " ++ data.patient.details.writer) ]
+                , div [] [ text ("Case illustrated by " ++ data.patient.details.illustrator) ]
+                ]
             ]
-        , section [ tailwind "bg-white rounded-lg w-2/3 p-24 fade-in overflow-auto" ]
-            [ h1 [ tailwind "font-bold mt-0 text-4xl mb-6" ] [ text "Referral Letter" ]
-            , Markdown.toHtml [ class "markdown pb-32" ] data.patient.stem
+        , section [ tailwind "bg-white rounded-lg w-2/3 p-16 fade-in overflow-auto" ]
+            [ markdown [ class "markdown pb-32 max-w-900 m-auto" ] data.patient.stem
             ]
         ]
 
@@ -1407,8 +1421,8 @@ viewScreenCaseFeedback model data =
         [ section [ tailwind "h-screen w-full bg-white flex justify-center items-center fade-in" ]
             [ section [ tailwind "w-2/3 flex justify-center flex-col items-center", style "height" "75%" ]
                 [ h1 [ tailwind "text-5xl font-bold" ] [ text "Thank you for helping ", text data.patient.details.firstName, text "." ]
-                , section [ tailwind "bg-white w-2/3 overflow-auto border border-gray-300 rounded p-4 my-8", style "height" "70%" ]
-                    [ Markdown.toHtml [ class "markdown" ] data.patient.commentary ]
+                , section [ tailwind "bg-white w-2/3 overflow-auto border border-gray-300 rounded px-4 my-8", style "height" "70%" ]
+                    [ markdown [ class "markdown" ] data.patient.commentary ]
                 , button [ onClick ClickedGoHome, tailwind "w-2/3 shadow border-l-4 border-olive-500 hover:shadow-lg active:shadow-inner trans-all text-lg p-2 mb-4" ] [ text "Return Home" ]
                 , h3 [ tailwind "text-sm text-gray-800" ] [ text "Or compare your answers with the exemplar below." ]
                 ]

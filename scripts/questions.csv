@@ -1,7 +1,7 @@
 ﻿option_string,category,subcategory,tags
 What is your name?,Details,Name,name
 How old are you?,Details,Age,
-When were you born?,Details,Age,date of birth dob
+When were you born?,Details,Dob,date of birth dob
 Do you work?,Details,OccupationBrief,employed job
 What do you work as?,Details,OccupationDescription,job
 Hi. It's nice to meet you.,Open,Greeting,hi hello nice to meet you
@@ -10,6 +10,7 @@ Why have you come to see us today?,Open,Opening,
 How can I help you today?,Open,Opening,
 Where is the pain?,PainFeature,Where,location site
 Which side do you feel the pain on?,PainFeature,Side,unilateral bilateral 
+What were you doing when the pain started?,PainFeature,Activity,doing at the time
 When did the pain start?,PainFeature,Onset,onset time how long
 Has the pain gotten better or worse since it started?,PainFeature,Timing,improve progress timing course
 How would you describe the pain?,PainFeature,Quality,quality character 
@@ -97,10 +98,12 @@ Do you drive?,Shx,Driving,
 Examine the hands. ,Examine,Hands,
 Examine with general inspection.,Examine,General,
 Examine the vital signs.,Examine,Vitals,
+Examine the oxygen saturation (SpO2).,Examine,Oxygen,
+Examine the patient using the Glasgow Coma Scale (GCS).,Examine,GCS,
 Examine weight.,Examine,Weight,
 Examine the surroundings.,Examine,Surroundings,
 Examine the nails.,Examine,Nails,
-Examine the arms.,Examine,Arms,
+Examine the skin overlying the arms.,Examine,Arms,
 Examine the eye movements.,Examine,EyeMovements,
 Examine the visual fields with a confrontation test.,Examine,VisualFields,
 Examine hand movements.,Examine,HandMovements,
@@ -119,8 +122,8 @@ Check for central cyanosis.,Sign,CentralCyanosis,
 Examine the heart by auscultation.,Examine,HeartAuscultate,
 Examine the lungs by auscultation.,Examine,LungsAuscultate,
 Examine the lungs by percussion.,Examine,LungsPercussion,
-Examine the chest.,Examine,Chest,
-Examine the neck.,Examine,Neck,
+Examine the external chest.,Examine,Chest,
+Examine the external neck.,Examine,Neck,
 Check for carotid bruits.,Sign,CarotidBruits,
 Examine the power of the arms.,Examine,PowerArms,
 Examine the power of the legs.,Examine,PowerLegs,

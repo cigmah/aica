@@ -64,6 +64,8 @@ details =
     , age = {age}
     , gender = {gender}
     , occupation = "{occupation}"
+    , writer = "{writer}"
+    , illustrator = "{illustrator}"
     }}
 
 
@@ -71,7 +73,7 @@ patient : Case
 patient =
     {{ details = details
     , script = script
-    , stem = "{stem}"
+    , stem = """{stem}"""
     , openingGreeting = """{opening_greeting}"""
     , exemplarNote = """{exemplar_note}"""
     , exemplarDiagnosis = {exemplar_diagnosis}
@@ -165,6 +167,8 @@ def generate_case(case_file, data):
     gender = process_gender(gender_string)
     occupation = data["core"]["occupation"].title()
     opening_greeting = data["core"]["openingGreeting"]
+    writer = data["core"]["writer"]
+    illustrator = data["core"]["illustrator"]
 
     filename = "{name}{age}{gender_string}{occupation}".format(
         name=name, age=str(age), gender_string=gender_string, occupation=occupation,
@@ -190,6 +194,8 @@ def generate_case(case_file, data):
         age=age,
         gender=gender,
         occupation=occupation,
+        writer=writer,
+        illustrator=illustrator,
         opening_greeting=opening_greeting,
         stem=stem,
         exemplar_note=exemplar_note,
@@ -260,7 +266,10 @@ def run_generate_cases():
     case_ids = []
     for _, case_file in enumerate(case_files):
         df = pd.read_csv(
-            case_file, header=None, names=["category", "subcategory", "value"],
+            case_file,
+            header=None,
+            names=["category", "subcategory", "value"],
+            encoding="ISO-8859-1",
         )
         data = dfToDict(df)
         filename, output = generate_case(case_file, data)
@@ -272,7 +281,7 @@ def run_generate_cases():
             outfile.write(output.encode("utf-8"))
 
     # Assert that all case ids are unique
-    assert(len(set(case_ids)) == len(case_ids))
+    assert len(set(case_ids)) == len(case_ids)
 
     with open("../src/Cases/List.elm", "w") as outfile:
         outfile.write(generate_case_list_file(cases))
