@@ -1,106 +1,20 @@
 ﻿option_string,category,subcategory,tags
+Do you drink alcohol?,Alcohol,YesNo,
+How much alcohol do you drink?,Alcohol,Quantity,
 What is your name?,Details,Name,name
 How old are you?,Details,Age,
 When were you born?,Details,Dob,date of birth dob
 Do you work?,Details,OccupationBrief,employed job
-What do you work as?,Details,OccupationDescription,job
-Hi. It's nice to meet you.,Open,Greeting,hi hello nice to meet you
-What's brought you in today?,Open,Opening,
-Why have you come to see us today?,Open,Opening,
-How can I help you today?,Open,Opening,
-Where is the pain?,PainFeature,Where,location site
-Which side do you feel the pain on?,PainFeature,Side,unilateral bilateral 
-What were you doing when the pain started?,PainFeature,Activity,doing at the time
-When did the pain start?,PainFeature,Onset,onset time how long
-Has the pain gotten better or worse since it started?,PainFeature,Timing,improve progress timing course
-How would you describe the pain?,PainFeature,Quality,quality character 
-How would you rate the pain out of 10?,PainFeature,Quantity,severity severe quantity
-Have you had this pain before?,PainFeature,Before,
-What triggers the pain?,PainFeature,Triggers,
-Does the pain radiate or go anywhere else?,PainFeature,Radiation,
-When did your symptoms start?,SymptomFeature,When,
-How severe are your symptoms?,SymptomFeature,Quantity,
-Does anything make it better?,SymptomFeature,Alleviating,
-Does anything make it worse?,SymptomFeature,Aggravating,
-What other symptoms do you have?,Open,Symptoms,
-What do you believe is causing your symptoms?,Feelings,Beliefs,
-How are your symptoms impacting you?,Feelings,Impact,
-What are you expectations from our consultation today?,Feelings,Expectations,
-What are you most concerned about?,Feelings,Concerns,
-Do you have any pain?,Symptom,Pain,
-Do you feel nauseous?,Symptom,Nausea,
-Have you vomited?,Symptom,Vomiting,
-Do you have a stiff neck?,Symptom,NeckStiff,
-Do you have double vision?,Symptom,Diplopia,
-Are there any changes to your vision?,Symptom,VisualChange,
-Do lights make your pain worse?,Symptom,Photophobia,
-Do you have a runny nose?,Symptom,Rhinorrhoea,
-Do you have a cough?,Symptom,Cough,
-Do you have a headache?,Symptom,Headache,
-Are your eyes teary?,Symptom,Lacrimation,
-Have you been sick recently?,Symptom,RecentlyIll,
-Has anyone around you been sick recently?,Symptom,SickContact,
-Have you been in contact with anyone sick?,Symptom,SickContact,
-Do you have a fever?,Symptom,Fever,
-Do you have a rash?,Symptom,Rash,
-Where is the rash?,RashFeature,Where,
-Examine the rash.,Examine,Rash,
-Do you have any chest pain?,Symptom,ChestPain,
-Do you feel short of breath?,Symptom,Dyspnoea,short of breath sob soboe dyspnoea dyspnea
-What makes you short of breath?,DyspnoeaFeature,Precipitants,precipitate
-Do you feel like your heartbeat is abnormal?,Symptom,Palpitations,palpitations
-Have your ankles been swollen?,Symptom,AnkleSwelling,
-Do you have pain in your legs when you walk?,Symptom,IntermittentClaudication,intermittent claudication
-Do you feel short of breath when you lie down?,Symptom,Orthopnoea,orthopnoea
-Do you wake up at night gasping for breath?,Symptom,Pnd,pnd paroxysmal nocturnal dyspnoea
-Have you fainted?,Symptom,Loc,syncope
-Have you lost consciousness?,Symptom,Loc,syncope
-When did you lose consciousness?,LocFeature,When,
-Did you have a seizure?,Symptom,Seizure,
-Have you had a seizure before?,SeizureFeature,Before,
-Do you feel fatigued?,Symptom,Fatigue,
-Do you feel tired?,Symptom,Fatigue,
-Have you coughed up any blood?,Symptom,Haemoptysis,
-Have you coughed up any sputum?,Symptom,Sputum,
-How much sputum comes up?,SputumFeature,Volume,
-What colour is the sputum?,SputumFeature,Colour,
-Do you have a sore throat?,Symptom,SoreThroat,
-Do you feel sweaty?,Symptom,Diaphoresis,
-Do you feel any pain when you chew?,Symptom,JawClaudication,
-How is your vision?,Symptom,VIsualChange,
-Do you have any medical conditions?,Open,Phx,
-Do you have high blood pressure?,Phx,Hypertension,
-Do you have diabetes?,Phx,Diabetes,
-What type of diabetes do you have?,Phx,DiabetesType,
-Have you had any surgeries in the past?,Phx,Surgery,
-Are your immunisations up to date?,Phx,Immunisation,
+What do you work as?,Details,OccupationDescription,job what do you do for work what's your job what are you employed as
 Are you taking any regular medications?,Drugs,Regular,drugs
 Are you taking any over the counter medications?,Drugs,Otc,drugs
 Do you use any recreational drugs?,Drugs,Recreational,
-"Do you have any allergies, and what reactions do you get?",Drugs,Allergies,
-Do you drink alcohol?,Alcohol,YesNo,
-How much alcohol do you drink?,Alcohol,Quantity,
-Do you smoke?,Smoke,YesNo,smoking
-How long have you smoked for?,Smoke,Duration,
-Have you ever smoked?,Smoke,History,
-How many cigarettes a day do you or did you smoke?,Smoke,Quantity,
-Do any conditions run through the family?,Open,Fhx,mom mum dad father mother brother sister 
-How are your parents' health?,Fhx,ParentHealth,mom mum dad father mother
-Do you have any children?,Fhx,Children,kids 
-How are your children's health?,Fhx,ChildrenHealth,kids 
-Do you have any siblings?,Fhx,Siblings,brother sister 
-How are your siblings' health?,Fhx,SiblingsHealth,brother sister 
-Where do you live at the moment?,Shx,LivingPlace,
-Who do you live with at the moment?,Shx,LivingPeople,
-Do you live by yourself?,Shx,LivingPeople,
-How is your mood?,Shx,Mood,
-What are do you usually eat day to day?,Shx,Diet,
-Do you do physical exercise?,Shx,PhysicalExercise,
-Do you drive?,Shx,Driving,
-What do you get up to in your spare time?,Shx,Hobbies,hobbies what do you like interests interested
-Who is your regular GP?,Shx,GP,general practitioner doctor primary practitioner usually see
+"Do you have any allergies, and what reactions do you get?",Drugs,Allergies,are you allergic allergy adverse drug reaction
+What makes you short of breath?,DyspnoeaFeature,Precipitants,precipitate
+Examine the rash.,Examine,Rash,
 Examine the hands. ,Examine,Hands,
 Examine with general inspection.,Examine,General,
+Examine the patient's airway.,Examine,Airway,airway
 Examine the vital signs.,Examine,Vitals,vitals hr heart rate bp blood pressure temperature rr respiratory rate
 Examine the oxygen saturation (SpO2).,Examine,Oxygen,
 Examine the patient using the Glasgow Coma Scale (GCS).,Examine,GCS,
@@ -115,26 +29,127 @@ Examine hand movements.,Examine,HandMovements,
 Examine the fundus with an ophthalmoscope.,Examine,Fundus,
 Examine visual acuity with a Snellen chart.,Examine,Snellen,
 Examine electrocardiogram (ECG). ,Examine,ECG,
-Check for Brudzinski's sign.,Sign,Brudzinski,
-Check for papilloedema.,Sign,Papilloedema,
-Check for Kernig's sign.,Sign,Kernig,
 Examine the pupil reflexes.,Examine,Pupils,
 Examine the muscles of facial expression.,Examine,FacialExpression,
 Examine the muscles of mastication.,Examine,Mastication,
 Examine the tongue.,Examine,Tongue,
 Examine the oral mucosa.,Examine,OralMucosa,
-Check for peripheral cyanosis.,Sign,PeripheralCyanosis,
-Check for central cyanosis.,Sign,CentralCyanosis,
-Examine the heart by auscultation.,Examine,HeartAuscultate,
-Examine the lungs by auscultation.,Examine,LungsAuscultate,
+Examine the heart by auscultation.,Examine,HeartAuscultate,auscultate listen to the chest 
+Examine the lungs by auscultation.,Examine,LungsAuscultate,auscultate listen to the chest 
 Examine the lungs by percussion.,Examine,LungsPercussion,
 Examine the external chest.,Examine,Chest,
 Examine the external neck.,Examine,Neck,
-Check for carotid bruits.,Sign,CarotidBruits,
 Examine the power of the arms.,Examine,PowerArms,
 Examine the power of the legs.,Examine,PowerLegs,
 Examine the sensation over the arms.,Examine,SensationArms,
+Examine the abdomen by inspecting.,Examine,AbdomenInspect,
+Examine the abdomen with superficial and deep palpation.,Examine,AbdomenPalpate,
 Examine the sensation over the legs.,Examine,SensationLegs,
-Check for dysdiadochokinesia.,Sign,Dysdiado,
-Check for intention tremor.,Sign,IntentionTremo,
 Examine the mental state of the patient.,Examine,MentalState,
+Test the patient's random blood glucose.,Examine,BloodGlucose,glucometer bsl glucose sugars
+What do you believe is causing your symptoms?,Feelings,Beliefs,
+How are your symptoms impacting you?,Feelings,Impact,
+What are you expectations from our consultation today?,Feelings,Expectations,
+What are you most concerned about?,Feelings,Concerns,
+How are your parents' health?,Fhx,ParentHealth,mom mum dad father mother
+Do you have any children?,Fhx,Children,kids 
+How are your children's health?,Fhx,ChildrenHealth,kids 
+Do you have any siblings?,Fhx,Siblings,brother sister 
+How are your siblings' health?,Fhx,SiblingsHealth,brother sister 
+When did you lose consciousness?,LocFeature,When,
+Hi. It's nice to meet you.,Open,Greeting,hi hello nice to meet you good morning good afternoon
+What's brought you in today?,Open,Opening,what brought you how can I help
+Why have you come to see us today?,Open,Opening,why did you come
+How can I help you today?,Open,Opening,
+Tell me more.,Open,More,
+What other symptoms do you have?,Open,Symptoms,
+Do you have any medical conditions?,Open,Phx,
+Do any conditions run through the family?,Open,Fhx,mom mum dad father mother brother sister 
+Where is the pain?,PainFeature,Where,location site
+Which side do you feel the pain on?,PainFeature,Side,unilateral bilateral 
+What were you doing when the pain started?,PainFeature,Activity,doing at the time
+When did the pain start?,PainFeature,Onset,onset time how long
+Has the pain gotten better or worse since it started?,PainFeature,Timing,improve progress timing course
+How would you describe the pain?,PainFeature,Quality,quality character 
+How would you rate the pain out of 10?,PainFeature,Quantity,severity severe quantity
+Have you had this pain before?,PainFeature,Before,
+What triggers the pain?,PainFeature,Triggers,
+Does the pain radiate or go anywhere else?,PainFeature,Radiation,
+Do you have high blood pressure?,Phx,Hypertension,
+Do you have diabetes?,Phx,Diabetes,
+What type of diabetes do you have?,Phx,DiabetesType,
+Do you have any issues with your liver?,Phx,Liver,liver disease cirrhosis 
+Have you had any surgeries in the past?,Phx,Surgery,
+Are your immunisations up to date?,Phx,Immunisation,
+Where is the rash?,RashFeature,Where,
+Have you had a seizure before?,SeizureFeature,Before,
+Where do you live at the moment?,Shx,LivingPlace,
+Who do you live with at the moment?,Shx,LivingPeople,
+Do you live by yourself?,Shx,LivingPeople,
+How is your mood?,Shx,Mood,
+What are do you usually eat day to day?,Shx,Diet,
+Do you do physical exercise?,Shx,PhysicalExercise,
+Do you drive?,Shx,Driving,
+What do you get up to in your spare time?,Shx,Hobbies,hobbies what do you like interests interested
+Who is your regular GP?,Shx,GP,general practitioner doctor primary practitioner usually see
+Check for Brudzinski's sign.,Sign,Brudzinski,
+Check for papilloedema.,Sign,Papilloedema,
+Check for Kernig's sign.,Sign,Kernig,
+Check for peripheral cyanosis.,Sign,PeripheralCyanosis,
+Check for central cyanosis.,Sign,CentralCyanosis,
+Check for carotid bruits.,Sign,CarotidBruits,
+Check for dysdiadochokinesia.,Sign,Dysdiado,
+Check for intention tremor.,Sign,IntentionTremor,
+Do you smoke?,Smoke,YesNo,smoking
+How long have you smoked for?,Smoke,Duration,
+Have you ever smoked?,Smoke,History,
+How many cigarettes a day do you or did you smoke?,Smoke,Quantity,
+How much sputum comes up?,SputumFeature,Volume,
+What colour is the sputum?,SputumFeature,Colour,
+When are or were you incontinent of urine?,UrinaryFeature,IncontinenceWhen,frequency urge stress incontinence
+Do you have any pain?,Symptom,Pain,
+Do you feel nauseous?,Symptom,Nausea,
+Have you vomited?,Symptom,Vomiting,
+Do you have a stiff neck?,Symptom,NeckStiff,
+Do you have double vision?,Symptom,Diplopia,
+Are there any changes to your vision?,Symptom,VisualChange,
+Do lights make your pain worse?,Symptom,Photophobia,
+Do you have a runny nose?,Symptom,Rhinorrhoea,
+Do you have a cough?,Symptom,Cough,
+Do you have a headache?,Symptom,Headache,
+Are your eyes teary?,Symptom,Lacrimation,
+Have you been sick recently?,Symptom,RecentlyIll,
+Have you been in contact with anyone sick?,Symptom,SickContact,close contact sick contact
+Have you been travelling recently?,Symptom,Travel,have you been overseas flights plane country
+Do you have a fever?,Symptom,Fever,
+Have you had any blood in your stools?,Symptom,BloodyStools,gi bleeding poo melaena melena bleeding per rectum
+Do you have a rash?,Symptom,Rash,
+Have you had any changes to your bowel habits?,Symptom,BowelHabits,diarrhoea constipation diarrhea constipated frequency bowel motions go to the toilet poo 
+Have you noticed any pain when you urinate?,Symptom,Dysuria,dysuria pain on urination pee go to the toilet 
+Do you have any chest pain?,Symptom,ChestPain,
+Do you feel short of breath?,Symptom,Dyspnoea,short of breath sob soboe dyspnoea dyspnea
+Do you feel like your heartbeat is abnormal?,Symptom,Palpitations,palpitations
+Have your ankles been swollen?,Symptom,AnkleSwelling,
+Do you have pain in your legs when you walk?,Symptom,IntermittentClaudication,intermittent claudication
+Do you feel short of breath when you lie down?,Symptom,Orthopnoea,orthopnoea
+Do you wake up at night gasping for breath?,Symptom,Pnd,pnd paroxysmal nocturnal dyspnoea
+Have you fainted?,Symptom,Loc,syncope
+Have you lost consciousness?,Symptom,Loc,syncope
+Did you have a seizure?,Symptom,Seizure,
+Do you feel fatigued?,Symptom,Fatigue,
+Do you feel tired?,Symptom,Fatigue,
+Have you coughed up any blood?,Symptom,Haemoptysis,
+Have you coughed up any sputum?,Symptom,Sputum,
+Do you have a sore throat?,Symptom,SoreThroat,
+Do you feel sweaty?,Symptom,Diaphoresis,
+Do you feel any pain when you chew?,Symptom,JawClaudication,
+How is your vision?,Symptom,VisualChange,
+Have you lost weight recently?,Symptom,WeightLoss,have you noticed any weight loss weight change
+Have you noticed any blood in your urine?,Symptom,BloodyUrine,haematuria hematuria
+Have you been incontinent of urine?,Symptom,UrinaryIncontinence,incontinence frequency urge dribble
+When did your symptoms start?,SymptomFeature,When,
+Did anything happen around the time your symptoms started?,SymptomFeature,Precipitants,precipitate what were you doing when start
+How severe are your symptoms?,SymptomFeature,Quantity,
+Does anything make it better?,SymptomFeature,Alleviating,
+Does anything make it worse?,SymptomFeature,Aggravating,
+Have you ever had these symtoms before?,SymptomFeature,Before,

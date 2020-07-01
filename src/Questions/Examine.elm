@@ -3,6 +3,7 @@ module Questions.Examine exposing (..)
 type Examine = Rash
     | Hands
     | General
+    | Airway
     | Vitals
     | Oxygen
     | GCS
@@ -30,6 +31,9 @@ type Examine = Rash
     | PowerArms
     | PowerLegs
     | SensationArms
+    | AbdomenInspect
+    | AbdomenPalpate
     | SensationLegs
     | MentalState
+    | BloodGlucose
 

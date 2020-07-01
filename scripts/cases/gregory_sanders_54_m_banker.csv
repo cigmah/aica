@@ -1,0 +1,199 @@
+core,firstName,Gregory
+core,lastName,Sanders
+core,age,54
+core,gender,M
+core,stem,"# ED Streaming Note
+
+Date: 08/04/2020
+
+You are an intern in the ED of the Royal St Queens Hospital in metropolitan Victoria. A new patient has come in and you've been asked to see them by your consultant. Below is their ED Streaming Note. 
+
+**Please see them and address their presenting complaint**.
+
+## Basic Details
+
+| Detail | Value |
+|---|---|
+| Name | Gregory Sanders |
+| DOB | 05/02/1966 |
+| Age | 54 |
+| Gender | Male | 
+| Reason| 3/7 DIZZINESS AND MELAENA ON 2/12 EPIGASTRIC PAIN. FROM HOME.  |
+| Triage category | 3 - Semi-Urgent |
+| Is this patient currently in pain? | Yes |
+
+## Vital Signs
+
+| Vital Sign | Value | 
+|---|---|
+| Heart rate | 124bpm |
+| Blood pressure | 108/72 |
+| Temp | 37.2C | 
+| Respiratory rate | 18 |"
+core,occupation,Banker
+core,openingGreeting,Urgh. Hi Doctor. 
+core,writer,jwu202
+core,illustrator,jyuu0055
+answer,exemplarNote,"2020/04/08 15:24
+Emergency Medical Note
+B. Wayne (Intern)
+
+PC:
+54M with 3 days of weakness & melaena on background of 2 months epigastric pain. 
+
+HoPC: 
+
+# Epigastric pain
+- Began approx 2 months ago
+- Gradual onset, no identifiable precipitant
+- Epigastric without radiation
+- Rated 6/10, interrmittent and dull
+- Alleviated by ibuprofen
+- Aggravated by eating
+
+# Melaena + weakness
+- Noticed melaena this week
+- Progressively weaker past few days
+- Associated with mild nausea
+- No prior episodes 
+
+Systems Review: 
+- Nil chest pain
+- Nil shortness of breath
+- Nil fever
+- Nil weight loss
+- Nil vomiting / haematemesis
+- Nil constipation
+- Nil steatorrhoea
+- Nil dysuria / other urinary symptoms
+- Nil sick contacts
+- Nil overseas travel
+
+PMHx:
+- COPD
+- GORD
+
+FHx:
+- Mother passed away from stroke at 86
+- Father has dementia, unspecified heart & lung issues
+
+Medications: 
+- Seretide
+- OTC ibuprofen for frequent headaches
+
+Allergies:
+- Shellfish (causes rash)
+
+Alcohol & Smoking:
+- Drinks 2-3 bottles of wine / week, possibly more recently
+- Current smoker with 17 pack year history
+
+SHx:
+- Living at home with wife and two daughters
+- Works as banker in customer-facing role
+
+Examination: 
+
+Patient alert but tired, lying in bed. 
+- A: own, patent
+- B: SpO2 96% on RA, lungs clear bilaterally
+- C: HR 130, BP 102/74, JVP at base of neck, heart sounds dual, no murmurs
+- D: PEARL, GCS 15
+
+Abdomen: 
+- Nil skin changes / bruising / overt distention
+- Nil tenderness on superficial or deep palpation
+- Nil palpable masses
+
+Impression: 
+? acute bleeding peptic ulcer and dehydration
+
+Plan: 
+1. Bloods
+2. IV fluids
+3. IV omeprazole
+4. Dicuss with gastro for admission and upper GI endoscopy "
+answer,exemplarDiagnosis,Peptic ulcer disease
+answer,exemplarInvestigations,Bloods FBEFullBloodExamination | Bloods UECUreaElectrolytesandCreatinine | Bloods LFTLiverFunctionTests | Bloods GroupandHold | Other UpperGIEndoscopy
+answer,exemplarPrescriptions,Esomeprazole 80mg IV 30min-bolus
+answer,commentary,
+Alcohol,Quantity,I go through maybe 2 or 3 bottles of wine a week. But I've been really under the pump recently so…it's been a bit more.
+Alcohol,YesNo,"Yes, I do. Helps you get through…you know?"
+Details,OccupationBrief,I work as a banker.
+Details,Name,"I'm Gregory Sanders, nice to meet you."
+Details,Age,I'm 54 years old.
+Details,Dob,I was born on the 5th February 1966. I'm certainly getting old…
+Details,OccupationDescription,"I do a lot of customer-facing work. It's not very fun, but I can make a living. "
+Drugs,Otc,"Oh, I usually get bad headaches after work so I usually need a bit of Nurofen after work every couple of days or so. It's been particularly bad recently, I think I've just been stressed."
+Drugs,Recreational,"No, never."
+Drugs,Regular,"I used to take some antacid for my GORD, but stopped a few years ago. Haven't really tried since I've got the Nurofen for my headaches anyway, might as well use that. And I've got a Seretide puffer for my lungs."
+Drugs,Allergies,I'm allergic to shellfish. They give me a terrible rash.
+Examine,Airway,The patient is speaking to you.
+Examine,Chest,"Dual heart sounds, no murmurs. The heart rate is quite high though, you can hear it thumping."
+Examine,Nails,"Capillary refill is a bit delayed, around 4s."
+Examine,LungsAuscultate,Lung sounds clear.
+Examine,Neck,The JVP is just visible at the base of the neck. 
+Examine,GCS,"He's conversing with you spontaneously, and he walked into the room by himself."
+Examine,Tongue,The mucus membranes appear noticeably dry.
+Examine,Vitals,"HR 130bpm, BP 102/74, RR 18, Temp 37 C."
+Examine,Surroundings,The room appears normal.
+Examine,Oxygen,96% on room air.
+Examine,General,You see a middle-aged man who seems very tired. He's of normal body habitus and lying in bed.
+Examine,OralMucosa,The oral mucosa appears quite dry.
+Examine,Weight,He weighs 64kg.
+Examine,HeartAuscultate,"Dual heart sounds, no murmurs. The heart rate is quite high though, you can hear it thumping."
+Examine,Height,You can't measure that right now.
+Examine,ECG,You haven't set that up yet.
+Examine,AbdomenPalpate,"No tenderness to superficial or deep palpation, no palpable masses."
+Examine,AbdomenInspect,"No skin changes, rashes, or bruising over the abdomen. It does not look distended."
+Feelings,Expectations,I'd really just like to know what's going on.
+Feelings,Beliefs,I have no idea.
+Feelings,Impact,I'm just not feeling very good.
+Feelings,Concerns,Nothing in particular.
+Fhx,ChildrenHealth,They're well.
+Fhx,Siblings,I've got a brother and a sister.
+Fhx,ParentHealth,"My dad's got a lot of problems - heart problems, lung problems, you name it. My mom had diabetes before she passed."
+Fhx,Children,I've got two daughters.
+Fhx,SiblingsHealth,"I wouldn't know, I don't really ask them."
+Open,Fhx,"My mom passed away from a stroke when she was 86. My dad's still going at 90, but he's got a bit of dementia. He's living in a nursing home at the moment."
+Open,More,"Well, at the moment, I'm just feeling weak and a bit dizzy. I've been battling a stomach ache as well for about two months."
+Open,Opening,I'm not feeling right. 
+Open,Symptoms,I'm feeling a bit light-headed Doc. I just know I'm crook.
+Open,Phx,"I used to have a bit of GORD, but I never really took much for it. It settled down for a bit but seems to be flaring up recently. Got a bit of a smoker's cough, I think my GP said I had COPD, but not much else."
+Open,Greeting,Are you one of the doctors? Thanks for seeing me. 
+PainFeature,Side,Maybe a little to the left.
+PainFeature,Quality,Maybe a bit of a dullish pain.
+PainFeature,Before,Not really.
+PainFeature,Activity,Nothing out of the ordinary.
+PainFeature,Triggers,Eating seems to make it worse sometimes.
+PainFeature,Where,Around my stomach. 
+PainFeature,Onset,I'd say it started maybe 2 months ago.
+PainFeature,Radiation,Doesn't seem to go anywhere.
+PainFeature,Timing,Hard to tell. Maybe a little worse.
+PainFeature,Quantity,Maybe a 6/10 at its worst. It's not there all the time. 
+Phx,Surgery,None.
+Phx,Immunisation,I think so.
+Shx,LivingPlace,I live at home. 
+Shx,Diet,"My wife cooks all our meals. It's usually pretty healthy stuff, vegetables and that."
+Shx,PhysicalExercise,"I'm not much into that. I used to do a bit of tennis when I was younger, but I haven't had time since having kids."
+Shx,GP,"I visit the clinic up the road, usually see Dr Rick. "
+Shx,LivingPeople,I live with my wife and my two daughters. 
+Shx,Driving,"Yes, I drive."
+Shx,Hobbies,"Nothing very exciting. Reading, a bit of bridge. "
+Shx,Mood,"I guess it's been alright. My work gets me down sometimes, but nothing out of the usual."
+Smoke,YesNo,Yeah.
+Smoke,Quantity,Maybe a half pack a day. 
+Smoke,History,"Yes, and I still do."
+Smoke,Duration,Probably since I was about 20 or so.
+Symptom,ChestPain,"Not in the chest, no, it's a bit further down than that."
+Symptom,Fatigue,I do usually feel quite exhausted after work. That's been a long-term thing though.
+Symptom,SickContact,"I mean, some people at work had a bit of a cough recently. But I wouldn't say I've had close-close contact. "
+Symptom,Nausea,Maybe a little. Hard to say though.
+Symptom,BloodyStools,"I don't know if it's blood per se, but it's definitely very black and tarry. There's no bright red blood or anything though."
+Symptom,Pain,"Yeah, just some pain around my stomach region."
+SymptomFeature,Alleviating,"Yeah, I sometimes pop a few Nurofen and the pain seems to get a bit better. "
+SymptomFeature,When,"My stomach started aching around 2 months ago, on and off. I think I've just been getting a bit weaker over the past few days though. My stools have been getting quite tarry over this week too."
+SymptomFeature,Precipitants,Not that I can think of. 
+SymptomFeature,Quantity,They're bearable I would say. The pain's maybe a 6/10.
+SymptomFeature,Aggravating,The stomach pain usually gets worse after eating. 
+SymptomFeature,Before,"I've had some of the stomach pain before, but I don't think I've felt this weak before. Or had any stools like this before too."

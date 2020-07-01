@@ -20,4 +20,5 @@ type Bloods = FBEFullBloodExamination
     | APTTActivatedpartialthromboplastintime
     | PTProthrombintime
     | Hba1c
+    | GroupandHold
 

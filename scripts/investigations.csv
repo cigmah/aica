@@ -18,15 +18,19 @@ Bloods,TFT (Thyroid Function Tests)
 Bloods,aPTT (Activated partial thromboplastin time)
 Bloods,PT (Prothrombin time)
 Bloods,Hba1c
+Bloods,Group and Hold
 Imaging,CXR (Chest X-ray)
 Imaging,AXR (Abdominal X-ray)
 Imaging,CTB (CT Brain)
 Imaging,MRI Brain
 Imaging,CT Abdo Pelvis
+Stool,Stool M/C/S
 Other,ECG (Electrocardiogram)
 Other,Spirometry
 Other,Echocardiogram
 Other,EEG (Electroencephalography)
+Other,Urease Breath Teast
+Other,Upper GI Endoscopy
 CSF,CSF M/C/S
 CSF,CSF cytology
 CSF,CSF glucose

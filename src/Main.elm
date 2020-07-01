@@ -1062,11 +1062,11 @@ viewFilteredQuestions data =
 
         else
             div [ tailwind "text-gray-600" ]
-                [ text "There no questions matching what you've typed. Try typing something less specific, like 'when' or 'where', or a symptom like 'fever' or 'rash'!" ]
+                [ text "There no questions matching what you've typed. We suggest typing one word indicating broadly what you'd like to know, such as 'when' or 'where', a symptom like 'fever' or 'rash', or parts to examine such as 'heart' or 'power'!" ]
 
     else
         div [ tailwind "text-gray-600 text-sm" ]
-            [ text "Type in at least 4 characters to search possible questions you can ask or examination findings you can check." ]
+            [ text "Type in at least 4 characters to search possible questions you can ask or examination findings you can check, such as 'job', 'dyspnoea', or 'auscultate'." ]
 
 
 viewFilteredOption : Option.Data Question Msg -> Html Msg

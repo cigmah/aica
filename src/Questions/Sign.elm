@@ -7,5 +7,5 @@ type Sign = Brudzinski
     | CentralCyanosis
     | CarotidBruits
     | Dysdiado
-    | IntentionTremo
+    | IntentionTremor
 

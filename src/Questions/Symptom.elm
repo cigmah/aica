@@ -13,8 +13,12 @@ type Symptom = Pain
     | Lacrimation
     | RecentlyIll
     | SickContact
+    | Travel
     | Fever
+    | BloodyStools
     | Rash
+    | BowelHabits
+    | Dysuria
     | ChestPain
     | Dyspnoea
     | Palpitations
@@ -30,5 +34,7 @@ type Symptom = Pain
     | SoreThroat
     | Diaphoresis
     | JawClaudication
-    | VIsualChange
+    | WeightLoss
+    | BloodyUrine
+    | UrinaryIncontinence
 

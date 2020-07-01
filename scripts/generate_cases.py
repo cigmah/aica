@@ -44,13 +44,13 @@ script questionId =
                     "No."
 
                 QuestionExamine _ ->
-                    "On gross examination, you didn't notice anything abnormal. But you might need to be more specific."
+                    "Seems grossly normal. But you might need to be more specific."
 
                 QuestionSign _ ->
                     "No abnormality detected."
 
                 _ ->
-                    "Sorry, I'm not sure about that."
+                    "I'm not sure."
 
 scriptDict : Dict Int String
 scriptDict = Dict.fromList 

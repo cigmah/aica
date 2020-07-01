@@ -4,6 +4,7 @@ import { Elm } from './Main.elm';
 import iconPath from "./Resources/icon.png";
 import margaretSmith from "./Resources/margaret_smith_55_f_lawyer.png";
 import larryBole from "./Resources/larry_bole_63_m_electrician.png";
+import gregorySanders from "./Resources/gregory_sanders_54_m_banker.png"
 
 import * as serviceWorker from './serviceWorker';
 
@@ -25,7 +26,8 @@ var app = Elm.Main.init({
     logo: iconPath,
     profiles: [
       { id: "margaret_smith_55_f_lawyer", path: margaretSmith },
-      { id: "larry_bole_63_m_electrician", path: larryBole }
+      { id: "larry_bole_63_m_electrician", path: larryBole },
+      { id: "gregory_sanders_54_m_banker", path: gregorySanders }
     ],
     storage: getStorageItems(localStorage.getItem(storageKey)),
   }

@@ -5,11 +5,13 @@ import Array exposing (Array)
 
 import Investigations.Bloods as Bloods exposing (..)
 import Investigations.Imaging as Imaging exposing (..)
+import Investigations.Stool as Stool exposing (..)
 import Investigations.Other as Other exposing (..)
 import Investigations.CSF as CSF exposing (..)
 
 type Investigation = InvestigationBloods Bloods
     | InvestigationImaging Imaging
+    | InvestigationStool Stool
     | InvestigationOther Other
     | InvestigationCSF CSF
 
@@ -36,20 +38,24 @@ fromInt int =
         17 -> InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime
         18 -> InvestigationBloods Bloods.PTProthrombintime
         19 -> InvestigationBloods Bloods.Hba1c
-        20 -> InvestigationImaging Imaging.CXRChestXray
-        21 -> InvestigationImaging Imaging.AXRAbdominalXray
-        22 -> InvestigationImaging Imaging.CTBCTBrain
-        23 -> InvestigationImaging Imaging.MRIBrain
-        24 -> InvestigationImaging Imaging.CTAbdoPelvis
-        25 -> InvestigationOther Other.ECGElectrocardiogram
-        26 -> InvestigationOther Other.Spirometry
-        27 -> InvestigationOther Other.Echocardiogram
-        28 -> InvestigationOther Other.EEGElectroencephalography
-        29 -> InvestigationCSF CSF.CSFMCS
-        30 -> InvestigationCSF CSF.CSFcytology
-        31 -> InvestigationCSF CSF.CSFglucose
-        32 -> InvestigationCSF CSF.CSFelectrophoresis
-        33 -> InvestigationCSF CSF.CSFcellcount
+        20 -> InvestigationBloods Bloods.GroupandHold
+        21 -> InvestigationImaging Imaging.CXRChestXray
+        22 -> InvestigationImaging Imaging.AXRAbdominalXray
+        23 -> InvestigationImaging Imaging.CTBCTBrain
+        24 -> InvestigationImaging Imaging.MRIBrain
+        25 -> InvestigationImaging Imaging.CTAbdoPelvis
+        26 -> InvestigationStool Stool.StoolMCS
+        27 -> InvestigationOther Other.ECGElectrocardiogram
+        28 -> InvestigationOther Other.Spirometry
+        29 -> InvestigationOther Other.Echocardiogram
+        30 -> InvestigationOther Other.EEGElectroencephalography
+        31 -> InvestigationOther Other.UreaseBreathTeast
+        32 -> InvestigationOther Other.UpperGIEndoscopy
+        33 -> InvestigationCSF CSF.CSFMCS
+        34 -> InvestigationCSF CSF.CSFcytology
+        35 -> InvestigationCSF CSF.CSFglucose
+        36 -> InvestigationCSF CSF.CSFelectrophoresis
+        37 -> InvestigationCSF CSF.CSFcellcount
         _ -> InvestigationBloods Bloods.FBEFullBloodExamination
 
 toInt : Investigation -> Int
@@ -75,20 +81,24 @@ toInt enum =
         InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime -> 17
         InvestigationBloods Bloods.PTProthrombintime -> 18
         InvestigationBloods Bloods.Hba1c -> 19
-        InvestigationImaging Imaging.CXRChestXray -> 20
-        InvestigationImaging Imaging.AXRAbdominalXray -> 21
-        InvestigationImaging Imaging.CTBCTBrain -> 22
-        InvestigationImaging Imaging.MRIBrain -> 23
-        InvestigationImaging Imaging.CTAbdoPelvis -> 24
-        InvestigationOther Other.ECGElectrocardiogram -> 25
-        InvestigationOther Other.Spirometry -> 26
-        InvestigationOther Other.Echocardiogram -> 27
-        InvestigationOther Other.EEGElectroencephalography -> 28
-        InvestigationCSF CSF.CSFMCS -> 29
-        InvestigationCSF CSF.CSFcytology -> 30
-        InvestigationCSF CSF.CSFglucose -> 31
-        InvestigationCSF CSF.CSFelectrophoresis -> 32
-        InvestigationCSF CSF.CSFcellcount -> 33
+        InvestigationBloods Bloods.GroupandHold -> 20
+        InvestigationImaging Imaging.CXRChestXray -> 21
+        InvestigationImaging Imaging.AXRAbdominalXray -> 22
+        InvestigationImaging Imaging.CTBCTBrain -> 23
+        InvestigationImaging Imaging.MRIBrain -> 24
+        InvestigationImaging Imaging.CTAbdoPelvis -> 25
+        InvestigationStool Stool.StoolMCS -> 26
+        InvestigationOther Other.ECGElectrocardiogram -> 27
+        InvestigationOther Other.Spirometry -> 28
+        InvestigationOther Other.Echocardiogram -> 29
+        InvestigationOther Other.EEGElectroencephalography -> 30
+        InvestigationOther Other.UreaseBreathTeast -> 31
+        InvestigationOther Other.UpperGIEndoscopy -> 32
+        InvestigationCSF CSF.CSFMCS -> 33
+        InvestigationCSF CSF.CSFcytology -> 34
+        InvestigationCSF CSF.CSFglucose -> 35
+        InvestigationCSF CSF.CSFelectrophoresis -> 36
+        InvestigationCSF CSF.CSFcellcount -> 37
 
 toString : Investigation -> String
 toString enum = 
@@ -113,15 +123,19 @@ toString enum =
         InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime -> "aPTT (Activated partial thromboplastin time)"
         InvestigationBloods Bloods.PTProthrombintime -> "PT (Prothrombin time)"
         InvestigationBloods Bloods.Hba1c -> "Hba1c"
+        InvestigationBloods Bloods.GroupandHold -> "Group and Hold"
         InvestigationImaging Imaging.CXRChestXray -> "CXR (Chest X-ray)"
         InvestigationImaging Imaging.AXRAbdominalXray -> "AXR (Abdominal X-ray)"
         InvestigationImaging Imaging.CTBCTBrain -> "CTB (CT Brain)"
         InvestigationImaging Imaging.MRIBrain -> "MRI Brain"
         InvestigationImaging Imaging.CTAbdoPelvis -> "CT Abdo Pelvis"
+        InvestigationStool Stool.StoolMCS -> "Stool M/C/S"
         InvestigationOther Other.ECGElectrocardiogram -> "ECG (Electrocardiogram)"
         InvestigationOther Other.Spirometry -> "Spirometry"
         InvestigationOther Other.Echocardiogram -> "Echocardiogram"
         InvestigationOther Other.EEGElectroencephalography -> "EEG (Electroencephalography)"
+        InvestigationOther Other.UreaseBreathTeast -> "Urease Breath Teast"
+        InvestigationOther Other.UpperGIEndoscopy -> "Upper GI Endoscopy"
         InvestigationCSF CSF.CSFMCS -> "CSF M/C/S"
         InvestigationCSF CSF.CSFcytology -> "CSF cytology"
         InvestigationCSF CSF.CSFglucose -> "CSF glucose"
@@ -150,15 +164,19 @@ list =
     , InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime
     , InvestigationBloods Bloods.PTProthrombintime
     , InvestigationBloods Bloods.Hba1c
+    , InvestigationBloods Bloods.GroupandHold
     , InvestigationImaging Imaging.CXRChestXray
     , InvestigationImaging Imaging.AXRAbdominalXray
     , InvestigationImaging Imaging.CTBCTBrain
     , InvestigationImaging Imaging.MRIBrain
     , InvestigationImaging Imaging.CTAbdoPelvis
+    , InvestigationStool Stool.StoolMCS
     , InvestigationOther Other.ECGElectrocardiogram
     , InvestigationOther Other.Spirometry
     , InvestigationOther Other.Echocardiogram
     , InvestigationOther Other.EEGElectroencephalography
+    , InvestigationOther Other.UreaseBreathTeast
+    , InvestigationOther Other.UpperGIEndoscopy
     , InvestigationCSF CSF.CSFMCS
     , InvestigationCSF CSF.CSFcytology
     , InvestigationCSF CSF.CSFglucose
@@ -187,15 +205,19 @@ optionList msg =
     , { value = InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime, string = "aPTT (Activated partial thromboplastin time)", onClick = msg (InvestigationBloods Bloods.APTTActivatedpartialthromboplastintime) "aPTT (Activated partial thromboplastin time)", tags = "" }
     , { value = InvestigationBloods Bloods.PTProthrombintime, string = "PT (Prothrombin time)", onClick = msg (InvestigationBloods Bloods.PTProthrombintime) "PT (Prothrombin time)", tags = "" }
     , { value = InvestigationBloods Bloods.Hba1c, string = "Hba1c", onClick = msg (InvestigationBloods Bloods.Hba1c) "Hba1c", tags = "" }
+    , { value = InvestigationBloods Bloods.GroupandHold, string = "Group and Hold", onClick = msg (InvestigationBloods Bloods.GroupandHold) "Group and Hold", tags = "" }
     , { value = InvestigationImaging Imaging.CXRChestXray, string = "CXR (Chest X-ray)", onClick = msg (InvestigationImaging Imaging.CXRChestXray) "CXR (Chest X-ray)", tags = "" }
     , { value = InvestigationImaging Imaging.AXRAbdominalXray, string = "AXR (Abdominal X-ray)", onClick = msg (InvestigationImaging Imaging.AXRAbdominalXray) "AXR (Abdominal X-ray)", tags = "" }
     , { value = InvestigationImaging Imaging.CTBCTBrain, string = "CTB (CT Brain)", onClick = msg (InvestigationImaging Imaging.CTBCTBrain) "CTB (CT Brain)", tags = "" }
     , { value = InvestigationImaging Imaging.MRIBrain, string = "MRI Brain", onClick = msg (InvestigationImaging Imaging.MRIBrain) "MRI Brain", tags = "" }
     , { value = InvestigationImaging Imaging.CTAbdoPelvis, string = "CT Abdo Pelvis", onClick = msg (InvestigationImaging Imaging.CTAbdoPelvis) "CT Abdo Pelvis", tags = "" }
+    , { value = InvestigationStool Stool.StoolMCS, string = "Stool M/C/S", onClick = msg (InvestigationStool Stool.StoolMCS) "Stool M/C/S", tags = "" }
     , { value = InvestigationOther Other.ECGElectrocardiogram, string = "ECG (Electrocardiogram)", onClick = msg (InvestigationOther Other.ECGElectrocardiogram) "ECG (Electrocardiogram)", tags = "" }
     , { value = InvestigationOther Other.Spirometry, string = "Spirometry", onClick = msg (InvestigationOther Other.Spirometry) "Spirometry", tags = "" }
     , { value = InvestigationOther Other.Echocardiogram, string = "Echocardiogram", onClick = msg (InvestigationOther Other.Echocardiogram) "Echocardiogram", tags = "" }
     , { value = InvestigationOther Other.EEGElectroencephalography, string = "EEG (Electroencephalography)", onClick = msg (InvestigationOther Other.EEGElectroencephalography) "EEG (Electroencephalography)", tags = "" }
+    , { value = InvestigationOther Other.UreaseBreathTeast, string = "Urease Breath Teast", onClick = msg (InvestigationOther Other.UreaseBreathTeast) "Urease Breath Teast", tags = "" }
+    , { value = InvestigationOther Other.UpperGIEndoscopy, string = "Upper GI Endoscopy", onClick = msg (InvestigationOther Other.UpperGIEndoscopy) "Upper GI Endoscopy", tags = "" }
     , { value = InvestigationCSF CSF.CSFMCS, string = "CSF M/C/S", onClick = msg (InvestigationCSF CSF.CSFMCS) "CSF M/C/S", tags = "" }
     , { value = InvestigationCSF CSF.CSFcytology, string = "CSF cytology", onClick = msg (InvestigationCSF CSF.CSFcytology) "CSF cytology", tags = "" }
     , { value = InvestigationCSF CSF.CSFglucose, string = "CSF glucose", onClick = msg (InvestigationCSF CSF.CSFglucose) "CSF glucose", tags = "" }

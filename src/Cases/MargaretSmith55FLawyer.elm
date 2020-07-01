@@ -43,13 +43,13 @@ script questionId =
                     "No."
 
                 QuestionExamine _ ->
-                    "On gross examination, you didn't notice anything abnormal. But you might need to be more specific."
+                    "Seems grossly normal. But you might need to be more specific."
 
                 QuestionSign _ ->
                     "No abnormality detected."
 
                 _ ->
-                    "Sorry, I'm not sure about that."
+                    "I'm not sure."
 
 scriptDict : Dict Int String
 scriptDict = Dict.fromList 
@@ -83,6 +83,7 @@ scriptDict = Dict.fromList
     , (Question.toInt (QuestionOpen Open.Greeting), """It's a pleasure to meet you too. I just wish it were under different circumstances...""")
     , (Question.toInt (QuestionOpen Open.Symptoms), """My head's a bit fuzzy at the moment, could you name some sympoms? """)
     , (Question.toInt (QuestionOpen Open.Fhx), """Well what would you like to know?""")
+    , (Question.toInt (QuestionOpen Open.More), """I'm sorry, you'll have to be more specific. My head's just aching terribly.""")
     , (Question.toInt (QuestionOpen Open.Phx), """I think I've got high blood pressure or something like that.""")
     , (Question.toInt (QuestionOpen Open.Opening), """Well, I've got this absolutely terrible headache. Really terrible. I talked to my GP and he told me to come straight here. """)
     , (Question.toInt (QuestionPainFeature PainFeature.Quality), """It sort of feels like a thumping.""")

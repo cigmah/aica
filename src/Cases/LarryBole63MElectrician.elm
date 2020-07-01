@@ -43,13 +43,13 @@ script questionId =
                     "No."
 
                 QuestionExamine _ ->
-                    "On gross examination, you didn't notice anything abnormal. But you might need to be more specific."
+                    "Seems grossly normal. But you might need to be more specific."
 
                 QuestionSign _ ->
                     "No abnormality detected."
 
                 _ ->
-                    "Sorry, I'm not sure about that."
+                    "I'm not sure."
 
 scriptDict : Dict Int String
 scriptDict = Dict.fromList 
@@ -91,6 +91,7 @@ scriptDict = Dict.fromList
     , (Question.toInt (QuestionLocFeature LocFeature.When), """It's only happened like once, when I was walking up all those stairs about a month ago. Got really puffed. """)
     , (Question.toInt (QuestionOpen Open.Phx), """Nahh, not really. Got a bit of diabetes but I think that's about it.""")
     , (Question.toInt (QuestionOpen Open.Fhx), """I think my dad had some heart troubles. """)
+    , (Question.toInt (QuestionOpen Open.More), """Well it all started maybe half a year ago. I used to be able to walk okay, but since then I've been getting more puffed on my way to work. Had a few times when I think I almost fainted.""")
     , (Question.toInt (QuestionOpen Open.Opening), """Well I've been getting a bit puffed out of the past few months. Never was very fit, but it's been getting real bad recently.""")
     , (Question.toInt (QuestionOpen Open.Symptoms), """Uhhmm..not sure off the top of my head. Maybe you could ask me some specifically.""")
     , (Question.toInt (QuestionOpen Open.Greeting), """Yeah, nice to meet ya too. Hope you're doing okay, I heard on the news the other night that the docs are really under the pump right now. """)
@@ -117,7 +118,7 @@ scriptDict = Dict.fromList
     , (Question.toInt (QuestionSmoke Smoke.History), """Yeah, I still do.""")
     , (Question.toInt (QuestionSmoke Smoke.YesNo), """Yeah, I smoke. Just a bit though.""")
     , (Question.toInt (QuestionSymptom Symptom.SickContact), """I haven't been out of the house for about a week, except for the odd groceries here and there. Barely see anyone nowadays, it's like a ghost town. """)
-    , (Question.toInt (QuestionSymptom Symptom.Cough), """No, nothing of that. I would have stayed home and called ahead if I did! I know the drill.""")
+    , (Question.toInt (QuestionSymptom Symptom.Cough), """No, none of that. I would have stayed home and called ahead if I did! I know the drill.""")
     , (Question.toInt (QuestionSymptom Symptom.Fatigue), """Nothing different to the usual. Used to have a bit of trouble sleeping but not much anymore.""")
     , (Question.toInt (QuestionSymptom Symptom.Dyspnoea), """Yeah, short of breath a lot. It's been really bothering me. """)
     , (Question.toInt (QuestionSymptom Symptom.ChestPain), """You know, sometimes I do get a bit of a twinge in the chest when I go up the stairs. It goes away after I stop and rest though.""")

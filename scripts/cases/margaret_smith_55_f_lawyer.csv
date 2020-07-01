@@ -163,6 +163,7 @@ LocFeature,When,"It was just a bit earlier today. I don't know how long I was ou
 Open,Greeting,It's a pleasure to meet you too. I just wish it were under different circumstances...
 Open,Symptoms,"My head's a bit fuzzy at the moment, could you name some sympoms? "
 Open,Fhx,Well what would you like to know?
+Open,More,"I'm sorry, you'll have to be more specific. My head's just aching terribly."
 Open,Phx,I think I've got high blood pressure or something like that.
 Open,Opening,"Well, I've got this absolutely terrible headache. Really terrible. I talked to my GP and he told me to come straight here. "
 PainFeature,Quality,It sort of feels like a thumping.
