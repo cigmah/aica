@@ -1,41 +1,10 @@
 import './main.css';
 import { Elm } from './Main.elm';
-
-import iconPath from "./Resources/icon.png";
-import margaretSmith from "./Resources/margaret_smith_55_f_lawyer.png";
-import larryBole from "./Resources/larry_bole_63_m_electrician.png";
-import gregorySanders from "./Resources/gregory_sanders_54_m_banker.png"
-
 import * as serviceWorker from './serviceWorker';
 
-var storageKey = "aica_session";
-
-function getStorageItems(jsonString) {
-  if (jsonString == null) {
-    var jsonObject = { "completed": [] };
-    return jsonObject;
-  } else {
-    var jsonObject = JSON.parse(jsonString);
-    return jsonObject;
-  };
-};
-
-var app = Elm.Main.init({
-  node: document.getElementById('root'),
-  flags: {
-    logo: iconPath,
-    profiles: [
-      { id: "margaret_smith_55_f_lawyer", path: margaretSmith },
-      { id: "larry_bole_63_m_electrician", path: larryBole },
-      { id: "gregory_sanders_54_m_banker", path: gregorySanders }
-    ],
-    storage: getStorageItems(localStorage.getItem(storageKey)),
-  }
+Elm.Main.init({
+  node: document.getElementById('root')
 });
-
-app.ports.cache.subscribe(function (data) {
-  localStorage.setItem(storageKey, JSON.stringify(data));
-})
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
