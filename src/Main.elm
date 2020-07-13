@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Dict exposing (Dict)
-import Html exposing (Html, button, div, input, option, select, span, text)
+import Html exposing (Html, button, div, input, option, select, span, text, textarea)
 import Html.Attributes exposing (disabled, placeholder, selected, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Http
@@ -36,6 +36,7 @@ type alias Patient =
     , diagnosisId : Maybe String
     , exampleMedications : List PatientMedication
     , exampleInvestigations : List PatientInvestigation
+    , previousNotes : List PreviousNote
     }
 
 
@@ -53,6 +54,7 @@ defaultPatient =
     , diagnosisId = Nothing
     , exampleMedications = []
     , exampleInvestigations = []
+    , previousNotes = []
     }
 
 
@@ -80,6 +82,19 @@ type InvestigationMode
 type alias Investigation =
     { investigation : String
     , mode : InvestigationMode
+    }
+
+
+type alias PreviousNote =
+    { noteBrief : String
+    , note : String
+    }
+
+
+defaultPreviousNote : PreviousNote
+defaultPreviousNote =
+    { noteBrief = ""
+    , note = ""
     }
 
 
@@ -208,6 +223,7 @@ type alias Model =
     , medications : RemoteData (Dict String String)
     , newPatientInvestigation : Maybe PatientInvestigation
     , newPatientMedication : Maybe PatientMedication
+    , newPreviousNote : PreviousNote
     }
 
 
@@ -221,6 +237,7 @@ init =
       , medications = Loading
       , newPatientInvestigation = Nothing
       , newPatientMedication = Nothing
+      , newPreviousNote = defaultPreviousNote
       }
     , getAll ()
     )
@@ -240,6 +257,7 @@ type Msg
     | GotMedications (Result Http.Error (Dict String String))
     | ChangedNewPatientInvestigation PatientInvestigationField
     | ChangedNewPatientMedication PatientMedicationField
+    | ChangedNewPreviousNote PreviousNoteField
 
 
 type PatientField
@@ -253,10 +271,12 @@ type PatientField
     | Explanation String
     | ExampleNote String
     | DiagnosisId String
-    | AddMedication PatientMedication
     | AddInvestigation PatientInvestigation
+    | AddMedication PatientMedication
+    | AddPreviousNote PreviousNote
     | DeletedInvestigation PatientInvestigation
     | DeletedMedication PatientMedication
+    | DeletedPreviousNote PreviousNote
 
 
 type PatientMedicationField
@@ -271,12 +291,17 @@ type PatientInvestigationField
     | InvestigationResult String
 
 
+type PreviousNoteField
+    = NoteBrief String
+    | Note String
+
+
 
 -- Messages
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg ({ patient, newPatientInvestigation, newPatientMedication } as model) =
+update msg ({ patient, newPatientInvestigation, newPatientMedication, newPreviousNote } as model) =
     case msg of
         ChangedDiagnosis diagnosis ->
             ( { model | diagnosis = diagnosis }, Cmd.none )
@@ -369,6 +394,19 @@ update msg ({ patient, newPatientInvestigation, newPatientMedication } as model)
                     , Cmd.none
                     )
 
+                AddPreviousNote previousNote ->
+                    ( { model
+                        | patient =
+                            { patient
+                                | previousNotes =
+                                    append patient.previousNotes
+                                        [ previousNote ]
+                            }
+                        , newPreviousNote = defaultPreviousNote
+                      }
+                    , Cmd.none
+                    )
+
                 DeletedInvestigation patientInvestigation ->
                     ( { model
                         | patient =
@@ -390,6 +428,19 @@ update msg ({ patient, newPatientInvestigation, newPatientMedication } as model)
                                     List.filter
                                         (\eM -> eM /= patientMedication)
                                         patient.exampleMedications
+                            }
+                      }
+                    , Cmd.none
+                    )
+
+                DeletedPreviousNote previousNote ->
+                    ( { model
+                        | patient =
+                            { patient
+                                | previousNotes =
+                                    List.filter
+                                        (\pN -> pN /= previousNote)
+                                        patient.previousNotes
                             }
                       }
                     , Cmd.none
@@ -550,6 +601,28 @@ update msg ({ patient, newPatientInvestigation, newPatientMedication } as model)
                             , Cmd.none
                             )
 
+        ChangedNewPreviousNote previousNoteField ->
+            case previousNoteField of
+                NoteBrief noteBrief ->
+                    ( { model
+                        | newPreviousNote =
+                            { newPreviousNote
+                                | noteBrief = noteBrief
+                            }
+                      }
+                    , Cmd.none
+                    )
+
+                Note note ->
+                    ( { model
+                        | newPreviousNote =
+                            { newPreviousNote
+                                | note = note
+                            }
+                      }
+                    , Cmd.none
+                    )
+
 
 view : Model -> Html Msg
 view model =
@@ -637,9 +710,6 @@ view model =
         , div []
             [ text "Medications"
             , div [] []
-            , viewExampleMedications
-                model.patient.exampleMedications
-                (ChangedPatient << DeletedMedication)
             , newPatientMedicationInputGroup
                 { remoteData = model.medications
                 , maybeNewPatientMedication = model.newPatientMedication
@@ -651,13 +721,13 @@ view model =
                 , onChangeFrequency = ChangedNewPatientMedication << Frequency
                 , onSubmit = ChangedPatient << AddMedication
                 }
+            , viewExampleMedications
+                model.patient.exampleMedications
+                (ChangedPatient << DeletedMedication)
             ]
         , div []
             [ text "Investigations"
             , div [] []
-            , viewExampleInvestigations
-                model.patient.exampleInvestigations
-                (ChangedPatient << DeletedInvestigation)
             , newInvestigationInputGroup
                 { remoteData = model.investigations
                 , maybeNewPatientInvestigation = model.newPatientInvestigation
@@ -669,6 +739,36 @@ view model =
                     ChangedNewPatientInvestigation << InvestigationResult
                 , onSubmit = ChangedPatient << AddInvestigation
                 }
+            , viewExampleInvestigations
+                model.patient.exampleInvestigations
+                (ChangedPatient << DeletedInvestigation)
+            ]
+        , div []
+            [ text "Previous Notes"
+            , div [] []
+            , input
+                [ type_ "text"
+                , onInput (ChangedNewPreviousNote << NoteBrief)
+                , placeholder "Note brief"
+                , value model.newPreviousNote.noteBrief
+                ]
+                []
+            , textarea
+                [ onInput (ChangedNewPreviousNote << Note)
+                , placeholder "Note"
+                , value model.newPreviousNote.note
+                ]
+                []
+            , button
+                [ onClick
+                    ((ChangedPatient << AddPreviousNote)
+                        model.newPreviousNote
+                    )
+                ]
+                [ text "+" ]
+            , viewPreviousNotes
+                model.patient.previousNotes
+                (ChangedPatient << DeletedPreviousNote)
             ]
         ]
 
@@ -787,7 +887,7 @@ viewExampleInvestigation : (PatientInvestigation -> msg) -> PatientInvestigation
 viewExampleInvestigation onDelete ({ investigationName, investigationResult } as patientInvestigation) =
     div []
         [ text investigationName
-        , text ", "
+        , text " | "
         , text investigationResult
         , button [ onClick (onDelete patientInvestigation) ] [ text "-" ]
         ]
@@ -957,11 +1057,11 @@ viewExampleMedication : (PatientMedication -> msg) -> PatientMedication -> Html 
 viewExampleMedication onDelete ({ medicationName, dose, route, frequency } as patientInvestigation) =
     div []
         [ text medicationName
-        , text ", "
+        , text " | "
         , text dose
-        , text ", "
+        , text " | "
         , text route
-        , text ", "
+        , text " | "
         , text frequency
         , button [ onClick (onDelete patientInvestigation) ] [ text "-" ]
         ]
@@ -974,6 +1074,22 @@ viewExampleMedications :
 viewExampleMedications exampleMedications onDelete =
     div []
         (List.map (viewExampleMedication onDelete) exampleMedications)
+
+
+viewPreviousNote : (PreviousNote -> msg) -> PreviousNote -> Html msg
+viewPreviousNote onDelete ({ noteBrief, note } as previousNote) =
+    div []
+        [ text noteBrief
+        , text " | "
+        , text note
+        , button [ onClick (onDelete previousNote) ] [ text "-" ]
+        ]
+
+
+viewPreviousNotes : List PreviousNote -> (PreviousNote -> msg) -> Html msg
+viewPreviousNotes previousNotes onDelete =
+    div []
+        (List.map (viewPreviousNote onDelete) previousNotes)
 
 
 
