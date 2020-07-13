@@ -13,65 +13,6 @@ import String exposing (String)
 
 
 
--- APIS
-
-
-getAll : () -> Cmd Msg
-getAll () =
-    Cmd.batch [ getDiagnoses (), getMedications () ]
-
-
-getDiagnoses : () -> Cmd Msg
-getDiagnoses () =
-    Http.get
-        { url = "https://aica-cigmah.firebaseio.com/diagnoses.json"
-        , expect = Http.expectJson GotDiagnoses diagnosesDecoder
-        }
-
-
-getMedications : () -> Cmd Msg
-getMedications () =
-    Http.get
-        { url = "https://aica-cigmah.firebaseio.com/medications.json"
-        , expect = Http.expectJson GotMedications medicationsDecoder
-        }
-
-
-
--- APIS
--- Decoders/
-
-
-diagnosesDecoder : Decoder (Dict String String)
-diagnosesDecoder =
-    Decode.keyValuePairs (Decode.field "diagnosis" Decode.string)
-        |> Decode.map Dict.fromList
-
-
-medicationsDecoder : Decoder (Dict String String)
-medicationsDecoder =
-    Decode.keyValuePairs (Decode.field "medication" Decode.string)
-        |> Decode.map Dict.fromList
-
-
-idDecoder : Decoder String
-idDecoder =
-    Decode.field "name" Decode.string
-
-
-
--- Decoders
--- Encoders
-
-
-diagnosisEncoder : String -> Value
-diagnosisEncoder diagnosis =
-    Encode.object
-        [ ( "diagnosis", Encode.string diagnosis ) ]
-
-
-
--- Endoders
 -- Custom Definitions
 
 
@@ -94,6 +35,7 @@ type alias Patient =
     , exampleNote : String
     , diagnosisId : Maybe String
     , exampleMedications : List PatientMedication
+    , exampleInvestigations : List PatientInvestigation
     }
 
 
@@ -110,6 +52,7 @@ defaultPatient =
     , exampleNote = ""
     , diagnosisId = Nothing
     , exampleMedications = []
+    , exampleInvestigations = []
     }
 
 
@@ -122,12 +65,148 @@ type alias PatientMedication =
     }
 
 
+type alias PatientInvestigation =
+    { investigationId : String
+    , investigationName : String
+    , investigationResult : String
+    }
+
+
+type InvestigationMode
+    = Radiology
+    | Pathology
+
+
+type alias Investigation =
+    { investigation : String
+    , mode : InvestigationMode
+    }
+
+
+
+-- Custom Definitions
+-- APIS
+
+
+getAll : () -> Cmd Msg
+getAll () =
+    Cmd.batch [ getDiagnoses (), getInvestigations (), getMedications () ]
+
+
+getDiagnoses : () -> Cmd Msg
+getDiagnoses () =
+    Http.get
+        { url = "https://aica-cigmah.firebaseio.com/diagnoses.json"
+        , expect = Http.expectJson GotDiagnoses diagnosesDecoder
+        }
+
+
+getInvestigations : () -> Cmd Msg
+getInvestigations () =
+    Http.get
+        { url = "https://aica-cigmah.firebaseio.com/investigations.json"
+        , expect = Http.expectJson GotInvestigations investigationsDecoder
+        }
+
+
+getMedications : () -> Cmd Msg
+getMedications () =
+    Http.get
+        { url = "https://aica-cigmah.firebaseio.com/medications.json"
+        , expect = Http.expectJson GotMedications medicationsDecoder
+        }
+
+
+
+-- APIS
+-- Decoders
+
+
+{-| Decoder for a diagnosis from Firebase.
+
+The data will look like:
+
+    { "012345668978": { diagnosis: "description" },
+      "ABCDEFGHIJKL": { diagnosis: "description" }
+    }
+
+-}
+diagnosesDecoder : Decoder (Dict String String)
+diagnosesDecoder =
+    Decode.dict (Decode.field "diagnosis" Decode.string)
+
+
+modeDecoder : Decoder InvestigationMode
+modeDecoder =
+    Decode.string
+        |> Decode.andThen
+            (\s ->
+                case s of
+                    "radiology" ->
+                        Decode.succeed Radiology
+
+                    "pathology" ->
+                        Decode.succeed Pathology
+
+                    _ ->
+                        Decode.fail "Invalid investigation mode"
+            )
+
+
+{-| Decoder for an investigation from Firebase.
+
+The data will look like:
+
+    { "012345668978": { investigation: "description", mode: "radiology" },
+      "ABCDEFGHIJKL": { investigation: "description", mode: "pathology" }
+    }
+
+-}
+investigationDecoder : Decoder Investigation
+investigationDecoder =
+    Decode.map2 Investigation
+        (Decode.field "investigation" Decode.string)
+        (Decode.field "mode" modeDecoder)
+
+
+investigationsDecoder : Decoder (Dict String Investigation)
+investigationsDecoder =
+    Decode.dict investigationDecoder
+
+
+medicationsDecoder : Decoder (Dict String String)
+medicationsDecoder =
+    Decode.dict (Decode.field "medication" Decode.string)
+
+
+idDecoder : Decoder String
+idDecoder =
+    Decode.field "name" Decode.string
+
+
+
+-- Decoders
+-- Encoders
+
+
+diagnosisEncoder : String -> Value
+diagnosisEncoder diagnosis =
+    Encode.object
+        [ ( "diagnosis", Encode.string diagnosis ) ]
+
+
+
+-- Endoders
+
+
 type alias Model =
     { diagnosis : String
     , id : String
     , patient : Patient
     , diagnoses : RemoteData (Dict String String)
+    , investigations : RemoteData (Dict String Investigation)
     , medications : RemoteData (Dict String String)
+    , newPatientInvestigation : Maybe PatientInvestigation
     , newPatientMedication : Maybe PatientMedication
     }
 
@@ -138,7 +217,9 @@ init =
       , id = "Not submitted"
       , patient = defaultPatient
       , diagnoses = Loading
+      , investigations = Loading
       , medications = Loading
+      , newPatientInvestigation = Nothing
       , newPatientMedication = Nothing
       }
     , getAll ()
@@ -155,7 +236,9 @@ type Msg
     | SubmittedDiagnosis
     | GotDiagnosisId (Result Http.Error String)
     | GotDiagnoses (Result Http.Error (Dict String String))
+    | GotInvestigations (Result Http.Error (Dict String Investigation))
     | GotMedications (Result Http.Error (Dict String String))
+    | ChangedNewPatientInvestigation PatientInvestigationField
     | ChangedNewPatientMedication PatientMedicationField
 
 
@@ -171,6 +254,9 @@ type PatientField
     | ExampleNote String
     | DiagnosisId String
     | AddMedication PatientMedication
+    | AddInvestigation PatientInvestigation
+    | DeletedInvestigation PatientInvestigation
+    | DeletedMedication PatientMedication
 
 
 type PatientMedicationField
@@ -180,12 +266,17 @@ type PatientMedicationField
     | Frequency String
 
 
+type PatientInvestigationField
+    = InvestigationIdentity String String
+    | InvestigationResult String
+
+
 
 -- Messages
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg ({ patient, newPatientMedication } as model) =
+update msg ({ patient, newPatientInvestigation, newPatientMedication } as model) =
     case msg of
         ChangedDiagnosis diagnosis ->
             ( { model | diagnosis = diagnosis }, Cmd.none )
@@ -265,6 +356,45 @@ update msg ({ patient, newPatientMedication } as model) =
                     , Cmd.none
                     )
 
+                AddInvestigation patientInvestigation ->
+                    ( { model
+                        | patient =
+                            { patient
+                                | exampleInvestigations =
+                                    append patient.exampleInvestigations
+                                        [ patientInvestigation ]
+                            }
+                        , newPatientInvestigation = Nothing
+                      }
+                    , Cmd.none
+                    )
+
+                DeletedInvestigation patientInvestigation ->
+                    ( { model
+                        | patient =
+                            { patient
+                                | exampleInvestigations =
+                                    List.filter
+                                        (\eI -> eI /= patientInvestigation)
+                                        patient.exampleInvestigations
+                            }
+                      }
+                    , Cmd.none
+                    )
+
+                DeletedMedication patientMedication ->
+                    ( { model
+                        | patient =
+                            { patient
+                                | exampleMedications =
+                                    List.filter
+                                        (\eM -> eM /= patientMedication)
+                                        patient.exampleMedications
+                            }
+                      }
+                    , Cmd.none
+                    )
+
         SubmittedDiagnosis ->
             ( model
             , Http.post
@@ -291,6 +421,16 @@ update msg ({ patient, newPatientMedication } as model) =
 
                 Err e ->
                     ( { model | diagnoses = Failure e }, Cmd.none )
+
+        GotInvestigations result ->
+            case result of
+                Ok investigations ->
+                    ( { model | investigations = Success investigations }
+                    , Cmd.none
+                    )
+
+                Err e ->
+                    ( { model | investigations = Failure e }, Cmd.none )
 
         GotMedications result ->
             case result of
@@ -330,6 +470,9 @@ update msg ({ patient, newPatientMedication } as model) =
                                         { patientMedication
                                             | medicationId = medicationId
                                             , medicationName = medicationName
+                                            , dose = ""
+                                            , route = ""
+                                            , frequency = ""
                                         }
                               }
                             , Cmd.none
@@ -357,6 +500,51 @@ update msg ({ patient, newPatientMedication } as model) =
                                     Just
                                         { patientMedication
                                             | frequency = frequency
+                                        }
+                              }
+                            , Cmd.none
+                            )
+
+        ChangedNewPatientInvestigation patientInvestigationField ->
+            case newPatientInvestigation of
+                Nothing ->
+                    case patientInvestigationField of
+                        InvestigationIdentity investigationId investigationName ->
+                            ( { model
+                                | newPatientInvestigation =
+                                    Just
+                                        { investigationId = investigationId
+                                        , investigationName = investigationName
+                                        , investigationResult = ""
+                                        }
+                              }
+                            , Cmd.none
+                            )
+
+                        _ ->
+                            ( model, Cmd.none )
+
+                Just patientInvestigation ->
+                    case patientInvestigationField of
+                        InvestigationIdentity investigationId investigationName ->
+                            ( { model
+                                | newPatientInvestigation =
+                                    Just
+                                        { investigationId = investigationId
+                                        , investigationName = investigationName
+                                        , investigationResult = ""
+                                        }
+                              }
+                            , Cmd.none
+                            )
+
+                        InvestigationResult investigationResult ->
+                            ( { model
+                                | newPatientInvestigation =
+                                    Just
+                                        { patientInvestigation
+                                            | investigationResult =
+                                                investigationResult
                                         }
                               }
                             , Cmd.none
@@ -449,16 +637,38 @@ view model =
         , div []
             [ text "Medications"
             , div [] []
-            , viewExampleMedications model.patient.exampleMedications
-            , newPatientMedicationInputGroup model.medications
-                model.newPatientMedication
-                (\id name ->
-                    ChangedNewPatientMedication (MedicationIdentity id name)
-                )
-                (ChangedNewPatientMedication << Dose)
-                (ChangedNewPatientMedication << Route)
-                (ChangedNewPatientMedication << Frequency)
-                (ChangedPatient << AddMedication)
+            , viewExampleMedications
+                model.patient.exampleMedications
+                (ChangedPatient << DeletedMedication)
+            , newPatientMedicationInputGroup
+                { remoteData = model.medications
+                , maybeNewPatientMedication = model.newPatientMedication
+                , onChangeMedication =
+                    \id name ->
+                        ChangedNewPatientMedication (MedicationIdentity id name)
+                , onChangeDose = ChangedNewPatientMedication << Dose
+                , onChangeRoute = ChangedNewPatientMedication << Route
+                , onChangeFrequency = ChangedNewPatientMedication << Frequency
+                , onSubmit = ChangedPatient << AddMedication
+                }
+            ]
+        , div []
+            [ text "Investigations"
+            , div [] []
+            , viewExampleInvestigations
+                model.patient.exampleInvestigations
+                (ChangedPatient << DeletedInvestigation)
+            , newInvestigationInputGroup
+                { remoteData = model.investigations
+                , maybeNewPatientInvestigation = model.newPatientInvestigation
+                , onChangeInvestigation =
+                    \id name ->
+                        ChangedNewPatientInvestigation
+                            (InvestigationIdentity id name)
+                , onChangeInvestigationResult =
+                    ChangedNewPatientInvestigation << InvestigationResult
+                , onSubmit = ChangedPatient << AddInvestigation
+                }
             ]
         ]
 
@@ -472,16 +682,139 @@ viewInput t p v toMsg =
     input [ type_ t, placeholder p, value v, onInput toMsg ] []
 
 
-newPatientMedicationInputGroup :
-    RemoteData (Dict String String)
-    -> Maybe PatientMedication
+type alias NewInvestigationInputGroupData msg =
+    { remoteData : RemoteData (Dict String Investigation)
+    , maybeNewPatientInvestigation : Maybe PatientInvestigation
+    , onChangeInvestigation : String -> String -> msg
+    , onChangeInvestigationResult : String -> msg
+    , onSubmit : PatientInvestigation -> msg
+    }
+
+
+newInvestigationInputGroup : NewInvestigationInputGroupData msg -> Html msg
+newInvestigationInputGroup { remoteData, maybeNewPatientInvestigation, onChangeInvestigation, onChangeInvestigationResult, onSubmit } =
+    case remoteData of
+        NotAsked ->
+            div [] []
+
+        Loading ->
+            div [] [ text "Loading" ]
+
+        Failure _ ->
+            div [] [ text "Failure" ]
+
+        Success investigations ->
+            let
+                textInputs =
+                    case maybeNewPatientInvestigation of
+                        Nothing ->
+                            span []
+                                [ input
+                                    [ disabled True
+                                    , placeholder "Investigation Result"
+                                    ]
+                                    []
+                                , button [ disabled True ] [ text "+" ]
+                                ]
+
+                        Just newPatientInvestigation ->
+                            span []
+                                [ input
+                                    [ type_ "text"
+                                    , placeholder "Investigation Result"
+                                    , value
+                                        newPatientInvestigation.investigationResult
+                                    , onInput onChangeInvestigationResult
+                                    ]
+                                    []
+                                , button
+                                    [ onClick (onSubmit newPatientInvestigation) ]
+                                    [ text "+" ]
+                                ]
+            in
+            div []
+                [ investigationSelectInput
+                    investigations
+                    maybeNewPatientInvestigation
+                    onChangeInvestigation
+                , textInputs
+                ]
+
+
+investigationSelectInput :
+    Dict String Investigation
+    -> Maybe PatientInvestigation
     -> (String -> String -> msg)
-    -> (String -> msg)
-    -> (String -> msg)
-    -> (String -> msg)
-    -> (PatientMedication -> msg)
     -> Html msg
-newPatientMedicationInputGroup remoteData maybeNewPatientMedication onChangeMedication onChangeDose onChangeRoute onChangeFrequency onSubmit =
+investigationSelectInput investgations maybeNewPatientInvestigation toMsg =
+    let
+        msg investigationId =
+            let
+                maybeInvestigation =
+                    Dict.get investigationId investgations
+            in
+            case maybeInvestigation of
+                Just investigation ->
+                    toMsg investigationId investigation.investigation
+
+                Nothing ->
+                    toMsg investigationId "error loading investigation"
+
+        selectArgs =
+            case maybeNewPatientInvestigation of
+                Just newPatientInvestigation ->
+                    [ value newPatientInvestigation.investigationId
+                    , onInput msg
+                    ]
+
+                Nothing ->
+                    [ onInput msg ]
+    in
+    select selectArgs
+        (option [ selected True, disabled True ]
+            [ text "Select an option" ]
+            :: (investgations
+                    |> Dict.toList
+                    |> List.map
+                        (\( k, v ) ->
+                            option [ value k ] [ text v.investigation ]
+                        )
+               )
+        )
+
+
+viewExampleInvestigation : (PatientInvestigation -> msg) -> PatientInvestigation -> Html msg
+viewExampleInvestigation onDelete ({ investigationName, investigationResult } as patientInvestigation) =
+    div []
+        [ text investigationName
+        , text ", "
+        , text investigationResult
+        , button [ onClick (onDelete patientInvestigation) ] [ text "-" ]
+        ]
+
+
+viewExampleInvestigations :
+    List PatientInvestigation
+    -> (PatientInvestigation -> msg)
+    -> Html msg
+viewExampleInvestigations exampleInvestigations onDelete =
+    div []
+        (List.map (viewExampleInvestigation onDelete) exampleInvestigations)
+
+
+type alias NewMedicationInputGroupData msg =
+    { remoteData : RemoteData (Dict String String)
+    , maybeNewPatientMedication : Maybe PatientMedication
+    , onChangeMedication : String -> String -> msg
+    , onChangeDose : String -> msg
+    , onChangeRoute : String -> msg
+    , onChangeFrequency : String -> msg
+    , onSubmit : PatientMedication -> msg
+    }
+
+
+newPatientMedicationInputGroup : NewMedicationInputGroupData msg -> Html msg
+newPatientMedicationInputGroup { remoteData, maybeNewPatientMedication, onChangeMedication, onChangeDose, onChangeRoute, onChangeFrequency, onSubmit } =
     case remoteData of
         NotAsked ->
             div [] []
@@ -535,7 +868,9 @@ newPatientMedicationInputGroup remoteData maybeNewPatientMedication onChangeMedi
                                     , onInput onChangeFrequency
                                     ]
                                     []
-                                , button [ onClick (onSubmit newPatientMedication) ] [ text "+" ]
+                                , button
+                                    [ onClick (onSubmit newPatientMedication) ]
+                                    [ text "+" ]
                                 ]
             in
             div []
@@ -556,7 +891,7 @@ medicationSelectInput medications maybeNewPatientMedication toMsg =
     let
         msg medicationId =
             Dict.get medicationId medications
-                |> Maybe.withDefault ""
+                |> Maybe.withDefault "error loading medication"
                 |> (\name -> toMsg medicationId name)
 
         selectArgs =
@@ -571,10 +906,10 @@ medicationSelectInput medications maybeNewPatientMedication toMsg =
         (option [ selected True, disabled True ]
             [ text "Select an option" ]
             :: (medications
-                |> Dict.toList
-                |> List.map (\( k, v ) -> option [ value k ] [ text v ]
-                )
-            )
+                    |> Dict.toList
+                    |> List.map
+                        (\( k, v ) -> option [ value k ] [ text v ])
+               )
         )
 
 
@@ -618,18 +953,31 @@ diagnosisSelectInput remoteData maybeId toMsg =
             div [] [ text "Failure" ]
 
 
-viewExampleMedication : PatientMedication -> Html msg
-viewExampleMedication { medicationName, dose, route, frequency } =
+viewExampleMedication : (PatientMedication -> msg) -> PatientMedication -> Html msg
+viewExampleMedication onDelete ({ medicationName, dose, route, frequency } as patientInvestigation) =
     div []
-        [ text medicationName, text ", ", text dose, text ", ", text route, text ", ", text frequency  ]
+        [ text medicationName
+        , text ", "
+        , text dose
+        , text ", "
+        , text route
+        , text ", "
+        , text frequency
+        , button [ onClick (onDelete patientInvestigation) ] [ text "-" ]
+        ]
 
 
 viewExampleMedications :
     List PatientMedication
+    -> (PatientMedication -> msg)
     -> Html msg
-viewExampleMedications exampleMedications =
+viewExampleMedications exampleMedications onDelete =
     div []
-        (List.map viewExampleMedication exampleMedications)
+        (List.map (viewExampleMedication onDelete) exampleMedications)
+
+
+
+-- UI
 
 
 main : Program () Model Msg

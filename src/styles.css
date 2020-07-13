@@ -1,0 +1,21 @@
+/* input {
+    display: block;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: 900px;
+    padding: 0.5rem 1rem;
+    background: #eeeeee;
+    font-size: inherit;
+    transition: 0.2s all;
+    box-shadow: none;
+    border: none;
+}
+
+input:hover {
+    background: white;
+}
+
+input:active {
+    background: white;
+    border: 2px solid blue;
+} */
