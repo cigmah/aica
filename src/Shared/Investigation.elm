@@ -1,4 +1,4 @@
-module Shared.Investigation exposing (InProgress, Index, Investigation, defaultInProgress, dictDecoder, encodeInProgress)
+module Shared.Investigation exposing (InProgress, Index, Investigation, Mode(..), defaultInProgress, dictDecoder, encodeInProgress, modeToString, stringToMode, validate)
 
 {-| Type representing an investigation, like a Chest X-Ray or FBE.
 -}
@@ -7,6 +7,7 @@ import Dict exposing (Dict)
 import Json.Decode as Decode exposing (Decoder, Value)
 import Json.Encode as Encode
 import Shared.Diagnosis exposing (defaultInProgress)
+import Shared.Validating exposing (Validating(..))
 
 
 type Mode
@@ -56,6 +57,7 @@ modeDecoder =
 -}
 type alias InProgress =
     { name : String
+    , brief : String
     , mode : Mode
     }
 
@@ -63,14 +65,29 @@ type alias InProgress =
 defaultInProgress : InProgress
 defaultInProgress =
     { name = ""
+    , brief = ""
     , mode = Pathology
     }
+
+
+validate : InProgress -> Validating InProgress
+validate data =
+    let
+        nameLongerThan2 =
+            (data.name |> String.trim |> String.length) > 2
+    in
+    if nameLongerThan2 then
+        Valid data
+
+    else
+        Invalid [ "Name must be at least 3 characters." ]
 
 
 encodeInProgress : InProgress -> Value
 encodeInProgress data =
     Encode.object
         [ ( "name", Encode.string data.name )
+        , ( "brief", Encode.string data.brief )
         , ( "mode", Encode.string (modeToString data.mode) )
         ]
 
@@ -78,6 +95,7 @@ encodeInProgress data =
 type alias Investigation =
     { id : String
     , name : String
+    , brief : String
     , mode : Mode
     }
 
@@ -89,16 +107,17 @@ type alias Index =
 dictDecoder : Decoder Index
 dictDecoder =
     let
-        tempInvestigation name mode =
-            { name = name, mode = mode }
+        tempInvestigation name brief mode =
+            { name = name, brief = brief, mode = mode }
 
         tempDecoder =
-            Decode.map2 tempInvestigation
+            Decode.map3 tempInvestigation
                 (Decode.field "name" Decode.string)
+                (Decode.field "brief" Decode.string)
                 (Decode.field "mode" modeDecoder)
 
-        makeInvestigation id { name, mode } =
-            { id = id, name = name, mode = mode }
+        makeInvestigation id { name, brief, mode } =
+            { id = id, name = name, brief = brief, mode = mode }
     in
     Decode.dict tempDecoder
         |> Decode.map (Dict.map makeInvestigation)

@@ -15,6 +15,7 @@ import Shared.Note as Note exposing (Note)
 import Shared.Patient as Patient exposing (Patient)
 import Shared.Prescription as Prescription exposing (Prescription)
 import Shared.Result as Result exposing (Result)
+import Shared.Validating as Validating exposing (Validating(..))
 import String exposing (String)
 
 
@@ -82,9 +83,10 @@ type Msg
       -- Adding new diagnosis to backend
     | ChangedNewDiagnosisName String
     | SubmittedNewDiagnosis
-    | GotDiagnosisId (RemoteData String)
+    | GotNewDiagnosisId (RemoteData String)
       -- Adding new investigation to backend
     | ChangedNewInvestigationName String
+    | ChangedNewInvestigationBrief String
     | ChangedNewInvestigationMode String
     | SubmittedNewInvestigation
     | GotNewInvestigationId (RemoteData String)
@@ -176,37 +178,59 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
                 |> withCmdNone
 
         SubmittedNewDiagnosis ->
-            if (model.newDiagnosis.name |> String.trim |> String.length) >= 3 then
-                { model | newDiagnosisId = Loading }
-                    |> withCmd (Api.postDiagnosis model.newDiagnosis GotDiagnosisId)
+            case Diagnosis.validate newDiagnosis of
+                Valid diagnosis ->
+                    { model | newDiagnosisId = Loading }
+                        |> withCmd (Api.postDiagnosis diagnosis GotNewDiagnosisId)
 
-            else
-                todo
+                Invalid errors ->
+                    todo
 
-        GotDiagnosisId remoteData ->
+        GotNewDiagnosisId remoteData ->
             { model | newDiagnosisId = remoteData }
                 |> withCmdNone
 
         ChangedNewInvestigationName string ->
-            todo
+            { model | newInvestigation = { newInvestigation | name = string } }
+                |> withCmdNone
+
+        ChangedNewInvestigationBrief string ->
+            { model | newInvestigation = { newInvestigation | brief = string } }
+                |> withCmdNone
 
         ChangedNewInvestigationMode string ->
-            todo
+            { model | newInvestigation = { newInvestigation | mode = Investigation.stringToMode string |> Maybe.withDefault Investigation.Pathology } }
+                |> withCmdNone
 
         SubmittedNewInvestigation ->
-            todo
+            case Investigation.validate newInvestigation of
+                Valid investigation ->
+                    { model | newInvestigationId = Loading }
+                        |> withCmd (Api.postInvestigation investigation GotNewInvestigationId)
 
-        GotNewInvestigationId string ->
-            todo
+                Invalid errors ->
+                    todo
+
+        GotNewInvestigationId remoteData ->
+            { model | newInvestigationId = remoteData }
+                |> withCmdNone
 
         ChangedNewMedicationName string ->
-            todo
+            { model | newMedication = { newMedication | name = string } }
+                |> withCmdNone
 
         SubmittedMedication ->
-            todo
+            case Medication.validate newMedication of
+                Valid medication ->
+                    { model | newMedicationId = Loading }
+                        |> withCmd (Api.postMedication medication GotNewMedicationId)
 
-        GotNewMedicationId string ->
-            todo
+                Invalid errors ->
+                    todo
+
+        GotNewMedicationId remoteData ->
+            { model | newMedicationId = remoteData }
+                |> withCmdNone
 
         -- Editing patient
         ChangedPatient patientMsg ->

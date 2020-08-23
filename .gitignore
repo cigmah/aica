@@ -13,23 +13,9 @@ node_modules
 # Desktop Services Store on macOS
 .DS_Store
 
-# All generated files
-src/Cases/*
-!src/Cases/Case.elm
-!src/Cases/List.elm
-src/Investigations/*
-!src/Investigations/Investigation.elm
-src/Questions/*
-!src/Questions/Question.elm
-src/Diagnosis.elm
-src/Medication.elm
-
 settings.json
 .vscode
 __pycache__
 
 main.css
-
-index.html
-
 src/Config.elm

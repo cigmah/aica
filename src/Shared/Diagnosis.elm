@@ -1,4 +1,4 @@
-module Shared.Diagnosis exposing (Diagnosis, InProgress, Index, defaultInProgress, dictDecoder, encodeInProgress)
+module Shared.Diagnosis exposing (Diagnosis, InProgress, Index, defaultInProgress, dictDecoder, encodeInProgress, validate)
 
 {-| Type representing a medical diagnosis, like STEMI or asthma
 -}
@@ -6,6 +6,7 @@ module Shared.Diagnosis exposing (Diagnosis, InProgress, Index, defaultInProgres
 import Dict exposing (Dict)
 import Json.Decode as Decode exposing (Decoder, Value)
 import Json.Encode as Encode
+import Shared.Validating exposing (Validating(..))
 
 
 type alias InProgress =
@@ -15,6 +16,19 @@ type alias InProgress =
 defaultInProgress : InProgress
 defaultInProgress =
     { name = "" }
+
+
+validate : InProgress -> Validating InProgress
+validate data =
+    let
+        nameLongerThan2 =
+            (data.name |> String.trim |> String.length) > 2
+    in
+    if nameLongerThan2 then
+        Valid data
+
+    else
+        Invalid [ "Name must be at least 3 characters." ]
 
 
 encodeInProgress : InProgress -> Value
