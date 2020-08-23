@@ -31,3 +31,5 @@ __pycache__
 main.css
 
 index.html
+
+src/Config.elm

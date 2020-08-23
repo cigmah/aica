@@ -14,16 +14,16 @@ Run:
 npm run build-css
 ```
 
-# Important Note on Code Generation
+# Configuration
 
-To save on boilerplate, some of the Elm code is generated using Python scripts. 
+Configuration should be set in a file `Config.elm` in the `src/` directory. An example is below:
 
-The `Question`, `Investigation`, `Diagnosis` and `Medication` types are all currently generated from `.csv` files located in `scripts`. 
+```
+module Config exposing (backendUrl)
 
-To regenerate the types and related functions:
 
-1. `cd ./scripts` from the home directory
-2. Make additions and edits as required to the `questions.csv`, `investigations.csv`, `diagnosis.csv`, or `medications.csv` files.
-3. `python generate_all.py` to generate all code files at once. 
+backendUrl : String
+backendUrl =
+    "https://my-backend-url.com/"
 
-Once the code is generated, any breaking changes will throw a compile error on the next attempt to build or run the app.
+```
