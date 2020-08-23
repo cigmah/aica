@@ -1,4 +1,4 @@
-module Shared.Medication exposing (InProgress, Index, Medication, defaultInProgress, dictDecoder, encodeInProgress, validate)
+module Shared.Medication exposing (InProgress, Index, Medication, defaultInProgress, dictDecoder, encodeInProgress, fromInProgress, validate)
 
 {-| Type representing a medication (name only), like perindopril or ventolin.
 -}
@@ -41,6 +41,11 @@ type alias Medication =
     { id : String
     , name : String
     }
+
+
+fromInProgress : String -> InProgress -> Medication
+fromInProgress id { name } =
+    { id = id, name = name }
 
 
 type alias Index =

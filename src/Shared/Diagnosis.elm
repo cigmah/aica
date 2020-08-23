@@ -1,4 +1,4 @@
-module Shared.Diagnosis exposing (Diagnosis, InProgress, Index, defaultInProgress, dictDecoder, encodeInProgress, validate)
+module Shared.Diagnosis exposing (Diagnosis, InProgress, Index, defaultInProgress, dictDecoder, encodeInProgress, fromInProgress, validate)
 
 {-| Type representing a medical diagnosis, like STEMI or asthma
 -}
@@ -41,6 +41,11 @@ type alias Diagnosis =
     { id : String
     , name : String
     }
+
+
+fromInProgress : String -> InProgress -> Diagnosis
+fromInProgress id { name } =
+    { id = id, name = name }
 
 
 type alias Index =

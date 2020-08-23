@@ -1,4 +1,4 @@
-module Shared.Investigation exposing (InProgress, Index, Investigation, Mode(..), defaultInProgress, dictDecoder, encodeInProgress, modeToString, stringToMode, validate)
+module Shared.Investigation exposing (InProgress, Index, Investigation, Mode(..), defaultInProgress, dictDecoder, encodeInProgress, fromInProgress, modeOptions, modeToString, stringToMode, validate)
 
 {-| Type representing an investigation, like a Chest X-Ray or FBE.
 -}
@@ -8,6 +8,7 @@ import Json.Decode as Decode exposing (Decoder, Value)
 import Json.Encode as Encode
 import Shared.Diagnosis exposing (defaultInProgress)
 import Shared.Validating exposing (Validating(..))
+import String.Extra
 
 
 type Mode
@@ -36,6 +37,19 @@ modeToString mode =
 
         Pathology ->
             "pathology"
+
+
+modeToOption : Mode -> { value : String, text : String }
+modeToOption mode =
+    { value = modeToString mode
+    , text = modeToString mode |> String.Extra.toSentenceCase
+    }
+
+
+modeOptions : List { value : String, text : String }
+modeOptions =
+    List.map modeToOption
+        [ Pathology, Radiology ]
 
 
 modeDecoder : Decoder Mode
@@ -104,20 +118,19 @@ type alias Index =
     Dict String Investigation
 
 
+fromInProgress : String -> InProgress -> Investigation
+fromInProgress id { name, brief, mode } =
+    { id = id, name = name, brief = brief, mode = mode }
+
+
 dictDecoder : Decoder Index
 dictDecoder =
     let
-        tempInvestigation name brief mode =
-            { name = name, brief = brief, mode = mode }
-
         tempDecoder =
-            Decode.map3 tempInvestigation
+            Decode.map3 InProgress
                 (Decode.field "name" Decode.string)
                 (Decode.field "brief" Decode.string)
                 (Decode.field "mode" modeDecoder)
-
-        makeInvestigation id { name, brief, mode } =
-            { id = id, name = name, brief = brief, mode = mode }
     in
     Decode.dict tempDecoder
-        |> Decode.map (Dict.map makeInvestigation)
+        |> Decode.map (Dict.map fromInProgress)

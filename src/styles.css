@@ -3,6 +3,23 @@
 @tailwind utilities;
 @tailwind screens;
 
+.trans-all {
+    transition: 0.2s all;
+}
+
+.trans-bg {
+    transition: background 0.2s;
+}
+
+input[type="text"]:disabled {
+    @apply bg-gray-300 cursor-not-allowed;
+}
+
+button:disabled {
+    @apply bg-gray-300 cursor-not-allowed;
+    transition: none;
+}
+
 /* input {
     display: block;
     margin: 1rem auto;

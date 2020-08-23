@@ -2,9 +2,12 @@ module Maker.Main exposing (..)
 
 import Browser
 import Dict exposing (Dict)
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import Element.AddDiagnosisGroup
+import Element.AddInvestigationGroup
+import Element.AddMedicationGroup
+import Element.MajorMinorColumn
+import Element.PageContainer
+import Html exposing (Html, div, text)
 import Http
 import List
 import List.Extra
@@ -93,7 +96,7 @@ type Msg
     | GotNewInvestigationId (RemoteData String)
       -- Adding new medication to backend
     | ChangedNewMedicationName String
-    | SubmittedMedication
+    | SubmittedNewMedication
     | GotNewMedicationId (RemoteData String)
       -- Editing patient
     | ChangedPatient PatientMsg
@@ -154,6 +157,10 @@ withCmd cmd model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
+    let
+        ignore =
+            ( model, Cmd.none )
+    in
     case msg of
         -- Receiving initial data on load
         GotDiagnoses remoteData ->
@@ -170,8 +177,13 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
 
         -- Adding new diagnosis to backend
         ChangedNewDiagnosisName string ->
-            { model | newDiagnosis = { newDiagnosis | name = string } }
-                |> withCmdNone
+            case model.diagnoses of
+                Loading ->
+                    ignore
+
+                _ ->
+                    { model | newDiagnosis = { newDiagnosis | name = string } }
+                        |> withCmdNone
 
         SubmittedNewDiagnosis ->
             case Diagnosis.validate newDiagnosis of
@@ -185,20 +197,45 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
                         |> withCmdNone
 
         GotNewDiagnosisId remoteData ->
-            { model | newDiagnosisId = remoteData }
-                |> withCmdNone
+            case ( remoteData, model.diagnoses ) of
+                ( Success diagnosisId, Success diagnoses ) ->
+                    { model
+                        | newDiagnosisId = remoteData
+                        , diagnoses = Success (Dict.insert diagnosisId (Diagnosis.fromInProgress diagnosisId newDiagnosis) diagnoses)
+                        , newDiagnosis = Diagnosis.defaultInProgress
+                    }
+                        |> withCmdNone
+
+                _ ->
+                    { model | newDiagnosisId = remoteData }
+                        |> withCmdNone
 
         ChangedNewInvestigationName string ->
-            { model | newInvestigation = { newInvestigation | name = string } }
-                |> withCmdNone
+            case model.investigations of
+                Loading ->
+                    ignore
+
+                _ ->
+                    { model | newInvestigation = { newInvestigation | name = string } }
+                        |> withCmdNone
 
         ChangedNewInvestigationBrief string ->
-            { model | newInvestigation = { newInvestigation | brief = string } }
-                |> withCmdNone
+            case model.investigations of
+                Loading ->
+                    ignore
+
+                _ ->
+                    { model | newInvestigation = { newInvestigation | brief = string } }
+                        |> withCmdNone
 
         ChangedNewInvestigationMode string ->
-            { model | newInvestigation = { newInvestigation | mode = Investigation.stringToMode string |> Maybe.withDefault Investigation.Pathology } }
-                |> withCmdNone
+            case model.investigations of
+                Loading ->
+                    ignore
+
+                _ ->
+                    { model | newInvestigation = { newInvestigation | mode = Investigation.stringToMode string |> Maybe.withDefault Investigation.Pathology } }
+                        |> withCmdNone
 
         SubmittedNewInvestigation ->
             case Investigation.validate newInvestigation of
@@ -211,14 +248,29 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
                         |> withCmdNone
 
         GotNewInvestigationId remoteData ->
-            { model | newInvestigationId = remoteData }
-                |> withCmdNone
+            case ( remoteData, model.investigations ) of
+                ( Success investigationId, Success investigations ) ->
+                    { model
+                        | newInvestigationId = remoteData
+                        , investigations = Success (Dict.insert investigationId (Investigation.fromInProgress investigationId newInvestigation) investigations)
+                        , newInvestigation = Investigation.defaultInProgress
+                    }
+                        |> withCmdNone
+
+                _ ->
+                    { model | newInvestigationId = remoteData }
+                        |> withCmdNone
 
         ChangedNewMedicationName string ->
-            { model | newMedication = { newMedication | name = string } }
-                |> withCmdNone
+            case model.medications of
+                Loading ->
+                    ignore
 
-        SubmittedMedication ->
+                _ ->
+                    { model | newMedication = { newMedication | name = string } }
+                        |> withCmdNone
+
+        SubmittedNewMedication ->
             case Medication.validate newMedication of
                 Valid medication ->
                     { model | newMedicationId = Loading }
@@ -229,8 +281,18 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
                         |> withCmdNone
 
         GotNewMedicationId remoteData ->
-            { model | newMedicationId = remoteData }
-                |> withCmdNone
+            case ( remoteData, model.medications ) of
+                ( Success medicationId, Success medications ) ->
+                    { model
+                        | newMedicationId = remoteData
+                        , medications = Success (Dict.insert medicationId (Medication.fromInProgress medicationId newMedication) medications)
+                        , newMedication = Medication.defaultInProgress
+                    }
+                        |> withCmdNone
+
+                _ ->
+                    { model | newMedicationId = remoteData, diagnoses = Loading }
+                        |> withCmdNone
 
         -- Editing patient
         ChangedPatient patientMsg ->
@@ -433,14 +495,40 @@ subscriptions model =
 -- | VIEW
 
 
-tailwind : String -> Attribute msg
-tailwind =
-    class
-
-
 view : Model -> Html Msg
 view model =
-    div [] []
+    Element.PageContainer.view
+        { body =
+            [ Element.MajorMinorColumn.view
+                { major = [ div [] [ text "major" ] ]
+                , minor =
+                    [ Element.AddDiagnosisGroup.view
+                        { diagnosis = model.newDiagnosis
+                        , diagnoses = model.diagnoses
+                        , remoteId = model.newDiagnosisId
+                        , onChangeName = ChangedNewDiagnosisName
+                        , onSubmit = SubmittedNewDiagnosis
+                        }
+                    , Element.AddInvestigationGroup.view
+                        { investigation = model.newInvestigation
+                        , investigations = model.investigations
+                        , remoteId = model.newInvestigationId
+                        , onChangeName = ChangedNewInvestigationName
+                        , onChangeBrief = ChangedNewInvestigationBrief
+                        , onChangeMode = ChangedNewInvestigationMode
+                        , onSubmit = SubmittedNewInvestigation
+                        }
+                    , Element.AddMedicationGroup.view
+                        { medication = model.newMedication
+                        , medications = model.medications
+                        , remoteId = model.newMedicationId
+                        , onChangeName = ChangedNewMedicationName
+                        , onSubmit = SubmittedNewMedication
+                        }
+                    ]
+                }
+            ]
+        }
 
 
 

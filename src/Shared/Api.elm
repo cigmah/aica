@@ -1,4 +1,4 @@
-module Shared.Api exposing (RemoteData(..), decodeId, getDiagnoses, getInvestigations, getMedications, postDiagnosis, postInvestigation, postMedication)
+module Shared.Api exposing (RemoteData(..), decodeId, errorToString, getDiagnoses, getInvestigations, getMedications, isLoading, postDiagnosis, postInvestigation, postMedication)
 
 import Config
 import Http exposing (Error(..))
@@ -16,11 +16,40 @@ type RemoteData a
     | Failure Error
 
 
+isLoading : RemoteData a -> Bool
+isLoading remoteData =
+    case remoteData of
+        Loading ->
+            True
+
+        _ ->
+            False
+
+
+errorToString : Error -> String
+errorToString error =
+    case error of
+        BadUrl url ->
+            "The provided URL was invalid: " ++ url
+
+        Timeout ->
+            "The request timed out."
+
+        NetworkError ->
+            "There was a network error."
+
+        BadStatus code ->
+            "There was a bad status with status code: " ++ String.fromInt code
+
+        BadBody string ->
+            "The response was unable to be decoded: \n\n" ++ string
+
+
 {-| Convenience decoder for a single ID when adding new items to backend
 -}
 decodeId : Decoder String
 decodeId =
-    Decode.field "id" Decode.string
+    Decode.field "name" Decode.string
 
 
 resultToRemoteData : Result Error a -> RemoteData a
