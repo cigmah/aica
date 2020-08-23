@@ -6,7 +6,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
-import List exposing (append)
+import List
+import List.Extra
 import Shared.Api as Api exposing (RemoteData(..))
 import Shared.Diagnosis as Diagnosis exposing (Diagnosis)
 import Shared.Investigation as Investigation exposing (Investigation)
@@ -109,7 +110,7 @@ type PatientMsg
     | ChangedVisitDateTime String
     | ChangedUrn String
     | ChangedStem String
-    | AddedPreviousNote Note
+    | AddedPreviousNote
     | DeletedPreviousNote Note
     | ChangedExplanation String
     | ChangedExampleNote String
@@ -121,14 +122,14 @@ type PatientMsg
 
 
 type PatientPrescriptionMsg
-    = ChangedMedication String String
+    = ChangedMedication Medication
     | ChangedDose String
     | ChangedRoute String
     | ChangedFrequency String
 
 
 type PatientResultMsg
-    = ChangedInvestigation String String
+    = ChangedInvestigation Investigation
     | ChangedResult String
 
 
@@ -153,11 +154,6 @@ withCmd cmd model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
-    let
-        -- Temporary ignore only
-        todo =
-            ( model, Cmd.none )
-    in
     case msg of
         -- Receiving initial data on load
         GotDiagnoses remoteData ->
@@ -184,7 +180,9 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
                         |> withCmd (Api.postDiagnosis diagnosis GotNewDiagnosisId)
 
                 Invalid errors ->
-                    todo
+                    -- TODO: change this to proper handling, maybe using Response in RemoteData type instead of Error
+                    { model | newDiagnosisId = Failure (Http.BadStatus 400) }
+                        |> withCmdNone
 
         GotNewDiagnosisId remoteData ->
             { model | newDiagnosisId = remoteData }
@@ -209,7 +207,8 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
                         |> withCmd (Api.postInvestigation investigation GotNewInvestigationId)
 
                 Invalid errors ->
-                    todo
+                    { model | newDiagnosisId = Failure (Http.BadStatus 400) }
+                        |> withCmdNone
 
         GotNewInvestigationId remoteData ->
             { model | newInvestigationId = remoteData }
@@ -226,7 +225,8 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
                         |> withCmd (Api.postMedication medication GotNewMedicationId)
 
                 Invalid errors ->
-                    todo
+                    { model | newDiagnosisId = Failure (Http.BadStatus 400) }
+                        |> withCmdNone
 
         GotNewMedicationId remoteData ->
             { model | newMedicationId = remoteData }
@@ -247,9 +247,9 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
 
 
 updatePatient : PatientMsg -> Model -> ( Model, Cmd Msg )
-updatePatient msg ({ patient, newPatientPreviousNote } as model) =
+updatePatient msg ({ patient, newPatientPreviousNote, newPatientResult, newPatientPrescription } as model) =
     let
-        todo =
+        ignore =
             ( model, Cmd.none )
     in
     case msg of
@@ -281,15 +281,21 @@ updatePatient msg ({ patient, newPatientPreviousNote } as model) =
             { model | patient = { patient | stem = string } }
                 |> withCmdNone
 
-        AddedPreviousNote note ->
-            { model
-                | patient = { patient | previousNotes = newPatientPreviousNote :: patient.previousNotes }
-                , newPatientPreviousNote = Note.default
-            }
-                |> withCmdNone
+        AddedPreviousNote ->
+            case Note.validate newPatientPreviousNote of
+                Valid validNote ->
+                    { model
+                        | patient = { patient | previousNotes = validNote :: patient.previousNotes }
+                        , newPatientPreviousNote = Note.default
+                    }
+                        |> withCmdNone
+
+                Invalid _ ->
+                    ignore
 
         DeletedPreviousNote note ->
-            todo
+            { model | patient = { patient | previousNotes = List.Extra.remove note patient.previousNotes } }
+                |> withCmdNone
 
         ChangedExplanation string ->
             { model | patient = { patient | explanation = string } }
@@ -304,49 +310,62 @@ updatePatient msg ({ patient, newPatientPreviousNote } as model) =
                 |> withCmdNone
 
         AddedResult result ->
-            if List.member result.investigation (List.map .investigation patient.exampleResults) then
-                todo
+            case Result.validate result patient.exampleResults of
+                Valid validResult ->
+                    { model
+                        | patient = { patient | exampleResults = validResult :: patient.exampleResults }
+                        , newPatientResult = Nothing
+                    }
+                        |> withCmdNone
 
-            else
-                { model
-                    | patient = { patient | exampleResults = result :: patient.exampleResults }
-                    , newPatientResult = Nothing
-                }
-                    |> withCmdNone
+                Invalid _ ->
+                    ignore
 
         DeletedResult result ->
             { model
-                | patient = { patient | exampleResults = List.filter (\x -> x /= result) patient.exampleResults }
+                | patient = { patient | exampleResults = List.Extra.remove result patient.exampleResults }
             }
                 |> withCmdNone
 
         AddedPrescription prescription ->
-            todo
+            case Prescription.validate prescription patient.examplePrescriptions of
+                Valid validPrescription ->
+                    { model
+                        | patient = { patient | examplePrescriptions = validPrescription :: patient.examplePrescriptions }
+                        , newPatientPrescription = Nothing
+                    }
+                        |> withCmdNone
+
+                Invalid _ ->
+                    ignore
 
         DeletedPrescription prescription ->
-            todo
+            { model
+                | patient = { patient | examplePrescriptions = List.Extra.remove prescription patient.examplePrescriptions }
+            }
+                |> withCmdNone
 
 
 updateNewPatientPrescription : PatientPrescriptionMsg -> Model -> ( Model, Cmd Msg )
 updateNewPatientPrescription msg ({ newPatientPrescription } as model) =
     let
-        todo =
+        ignore =
             ( model, Cmd.none )
     in
     case newPatientPrescription of
         Nothing ->
             case msg of
-                ChangedMedication id name ->
-                    { model | newPatientPrescription = Just (Prescription.withDefaults id name) }
+                ChangedMedication medication ->
+                    { model | newPatientPrescription = Just (Prescription.withDefaults medication) }
                         |> withCmdNone
 
                 _ ->
-                    todo
+                    ignore
 
         Just prescription ->
             case msg of
-                ChangedMedication id name ->
-                    { model | newPatientPrescription = Just { prescription | medication = { id = id, name = name } } }
+                ChangedMedication medication ->
+                    { model | newPatientPrescription = Just { prescription | medication = medication } }
                         |> withCmdNone
 
                 ChangedDose string ->
@@ -363,31 +382,42 @@ updateNewPatientPrescription msg ({ newPatientPrescription } as model) =
 
 
 updateNewPatientResult : PatientResultMsg -> Model -> ( Model, Cmd Msg )
-updateNewPatientResult msg model =
+updateNewPatientResult msg ({ newPatientResult } as model) =
     let
-        todo =
+        ignore =
             ( model, Cmd.none )
     in
-    case msg of
-        ChangedInvestigation id name ->
-            todo
+    case newPatientResult of
+        Nothing ->
+            case msg of
+                ChangedInvestigation investigation ->
+                    { model | newPatientResult = Just (Result.withDefaults investigation) }
+                        |> withCmdNone
 
-        ChangedResult string ->
-            todo
+                _ ->
+                    ignore
+
+        Just result ->
+            case msg of
+                ChangedInvestigation investigation ->
+                    { model | newPatientResult = Just { result | investigation = investigation } }
+                        |> withCmdNone
+
+                ChangedResult string ->
+                    { model | newPatientResult = Just { result | result = string } }
+                        |> withCmdNone
 
 
 updateNewPreviousNote : PreviousNoteMsg -> Model -> ( Model, Cmd Msg )
-updateNewPreviousNote msg model =
-    let
-        todo =
-            ( model, Cmd.none )
-    in
+updateNewPreviousNote msg ({ newPatientPreviousNote } as model) =
     case msg of
         ChangedBrief string ->
-            todo
+            { model | newPatientPreviousNote = { newPatientPreviousNote | brief = string } }
+                |> withCmdNone
 
         ChangedFull string ->
-            todo
+            { model | newPatientPreviousNote = { newPatientPreviousNote | full = string } }
+                |> withCmdNone
 
 
 
