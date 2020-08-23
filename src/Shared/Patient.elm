@@ -1,9 +1,13 @@
-module Shared.Patient exposing (InProgress, Patient, defaultInProgress)
+module Shared.Patient exposing (InProgress, Patient, defaultInProgress, urnGenerator)
 
 {-| Type representing a full patient case.
 -}
 
+import Random exposing (Generator)
+import Random.Char
+import Random.String
 import Shared.Diagnosis exposing (Diagnosis)
+import Shared.Gender exposing (Gender(..))
 import Shared.Investigation exposing (Investigation)
 import Shared.Medication exposing (Medication)
 import Shared.Note exposing (Note)
@@ -13,11 +17,11 @@ import Shared.Result exposing (Result)
 
 type alias InProgress =
     { firstName : String
-    , middleName : String
     , lastName : String
     , dob : String
-    , visitDateTime : String
+    , gender : Gender
     , urn : String
+    , visitDateTime : String
     , stem : String
     , previousNotes : List Note
     , explanation : String
@@ -28,14 +32,19 @@ type alias InProgress =
     }
 
 
+urnGenerator : Generator String
+urnGenerator =
+    Random.String.string 10 (Random.Char.char 48 57)
+
+
 defaultInProgress : InProgress
 defaultInProgress =
     { firstName = ""
-    , middleName = ""
     , lastName = ""
     , dob = ""
-    , visitDateTime = ""
-    , urn = ""
+    , gender = Unspecified
+    , urn = "Generating..."
+    , visitDateTime = "2020-03-02T09:30:00"
     , stem = ""
     , previousNotes = []
     , explanation = ""
@@ -49,11 +58,11 @@ defaultInProgress =
 type alias Patient =
     { id : String
     , firstName : String
-    , middleName : String
     , lastName : String
     , dob : String
-    , visitDateTime : String
+    , gender : Gender
     , urn : String
+    , visitDateTime : String
     , stem : String
     , previousNotes : List Note
     , explanation : String

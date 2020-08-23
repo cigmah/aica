@@ -5,14 +5,17 @@ import Dict exposing (Dict)
 import Element.AddDiagnosisGroup
 import Element.AddInvestigationGroup
 import Element.AddMedicationGroup
+import Element.EditPatientBasicGroup
 import Element.MajorMinorColumn
 import Element.PageContainer
 import Html exposing (Html, div, text)
 import Http
 import List
 import List.Extra
+import Random
 import Shared.Api as Api exposing (RemoteData(..))
 import Shared.Diagnosis as Diagnosis exposing (Diagnosis)
+import Shared.Gender as Gender exposing (Gender(..))
 import Shared.Investigation as Investigation exposing (Investigation)
 import Shared.Medication as Medication exposing (Medication)
 import Shared.Note as Note exposing (Note)
@@ -71,6 +74,7 @@ init () =
         [ Api.getDiagnoses GotDiagnoses
         , Api.getInvestigations GotInvestigations
         , Api.getMedications GotMedications
+        , Random.generate GotRandomUrn Patient.urnGenerator
         ]
     )
 
@@ -84,6 +88,7 @@ type Msg
       GotDiagnoses (RemoteData Diagnosis.Index)
     | GotInvestigations (RemoteData Investigation.Index)
     | GotMedications (RemoteData Medication.Index)
+    | GotRandomUrn String
       -- Adding new diagnosis to backend
     | ChangedNewDiagnosisName String
     | SubmittedNewDiagnosis
@@ -107,9 +112,9 @@ type Msg
 
 type PatientMsg
     = ChangedFirstName String
-    | ChangedMiddleName String
     | ChangedLastName String
     | ChangedDob String
+    | ChangedGender String
     | ChangedVisitDateTime String
     | ChangedUrn String
     | ChangedStem String
@@ -156,7 +161,7 @@ withCmd cmd model =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
+update msg ({ newDiagnosis, newInvestigation, newMedication, patient } as model) =
     let
         ignore =
             ( model, Cmd.none )
@@ -173,6 +178,10 @@ update msg ({ newDiagnosis, newInvestigation, newMedication } as model) =
 
         GotMedications remoteData ->
             { model | medications = remoteData }
+                |> withCmdNone
+
+        GotRandomUrn urn ->
+            { model | patient = { patient | urn = urn } }
                 |> withCmdNone
 
         -- Adding new diagnosis to backend
@@ -319,16 +328,16 @@ updatePatient msg ({ patient, newPatientPreviousNote, newPatientResult, newPatie
             { model | patient = { patient | firstName = string } }
                 |> withCmdNone
 
-        ChangedMiddleName string ->
-            { model | patient = { patient | middleName = string } }
-                |> withCmdNone
-
         ChangedLastName string ->
             { model | patient = { patient | lastName = string } }
                 |> withCmdNone
 
         ChangedDob string ->
             { model | patient = { patient | dob = string } }
+                |> withCmdNone
+
+        ChangedGender string ->
+            { model | patient = { patient | gender = string |> Gender.fromString |> Maybe.withDefault Unspecified } }
                 |> withCmdNone
 
         ChangedVisitDateTime string ->
@@ -500,7 +509,17 @@ view model =
     Element.PageContainer.view
         { body =
             [ Element.MajorMinorColumn.view
-                { major = [ div [] [ text "major" ] ]
+                { major =
+                    [ Element.EditPatientBasicGroup.view
+                        { patient = model.patient
+                        , onChangeFirstName = ChangedPatient << ChangedFirstName
+                        , onChangeLastName = ChangedPatient << ChangedLastName
+                        , onChangeDob = ChangedPatient << ChangedDob
+                        , onChangeGender = ChangedPatient << ChangedGender
+                        , onChangeUrn = ChangedPatient << ChangedUrn
+                        , onChangeVisitDateTime = ChangedPatient << ChangedVisitDateTime
+                        }
+                    ]
                 , minor =
                     [ Element.AddDiagnosisGroup.view
                         { diagnosis = model.newDiagnosis

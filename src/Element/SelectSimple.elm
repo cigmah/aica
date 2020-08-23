@@ -30,10 +30,10 @@ viewOption data =
 view : Data msg -> Html msg
 view data =
     article
-        [ tailwind "flex flex-col" ]
+        [ tailwind "flex flex-col m-1 w-full" ]
         [ label
             [ for data.label
-            , tailwind "text-xs text-bold text-grey-600 mb-1 mt-2"
+            , tailwind "text-xs text-bold text-grey-600 mb-1"
             ]
             [ text data.label ]
         , select

@@ -19,9 +19,9 @@ type alias Data msg =
 view : Data msg -> Html msg
 view data =
     article
-        [ tailwind "flex flex-col" ]
+        [ tailwind "flex flex-col w-full m-1" ]
         [ label
-            [ tailwind "text-xs text-bold text-grey-600 mb-1 mt-2"
+            [ tailwind "text-xs text-bold text-grey-600 mb-1"
             , for data.label
             ]
             [ text data.label ]
