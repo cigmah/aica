@@ -23,6 +23,13 @@ type alias Data msg =
     }
 
 
+displayNoteItem : Note -> Html msg
+displayNoteItem note =
+    article
+        []
+        []
+
+
 view : Data msg -> Html msg
 view data =
     section []
