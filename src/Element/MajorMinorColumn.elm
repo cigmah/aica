@@ -20,12 +20,12 @@ view data =
         ]
         [ section
             [ class "major-column"
-            , tailwind "w-2/3 bg-white m-2 p-4 shadow rounded"
+            , tailwind "w-3/4 bg-white m-2 p-4 shadow rounded"
             ]
             data.major
         , section
             [ class "minor-column"
-            , tailwind "w-1/3 bg-white m-2 p-4 shadow rounded"
+            , tailwind "w-1/4 bg-white m-2 p-4 shadow rounded"
             ]
             data.minor
         ]

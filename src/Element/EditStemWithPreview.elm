@@ -34,7 +34,7 @@ view data =
                 [ tailwind "text-xs text-bold text-grey-600 mb-1" ]
                 [ text "Scenario Stem Markdown Preview" ]
             , section
-                [ tailwind "border p-1 flex-grow" ]
+                [ tailwind "border p-4 flex-grow" ]
                 [ Markdown.toHtml data.patient.stem ]
             ]
         ]

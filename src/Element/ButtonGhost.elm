@@ -20,6 +20,6 @@ view data =
         [ type_ data.type_
         , onClick data.onClick
         , disabled data.disabled
-        , tailwind "my-2 bg-white shadow hover:shadow-lg trans-all py-2 px-4 active:shadow-none"
+        , tailwind "my-2 bg-white shadow hover:shadow-lg trans-all py-2 px-4 active:shadow-none w-full"
         ]
         [ text data.text ]

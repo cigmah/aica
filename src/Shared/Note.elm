@@ -9,6 +9,7 @@ import Shared.Validating exposing (Validating(..))
 type alias Note =
     { brief : String
     , full : String
+    , date : String
     }
 
 
@@ -16,6 +17,7 @@ default : Note
 default =
     { brief = ""
     , full = ""
+    , date = "2020-02-25"
     }
 
 
@@ -27,8 +29,11 @@ validate note =
 
         briefGreaterThan8 =
             (note.brief |> String.trim |> String.length) > 8
+
+        dateExists =
+            (note.brief |> String.trim |> String.length) > 1
     in
-    if fullGreaterThan8 && briefGreaterThan8 then
+    if fullGreaterThan8 && briefGreaterThan8 && dateExists then
         Valid note
 
     else

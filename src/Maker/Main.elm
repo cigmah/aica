@@ -6,9 +6,11 @@ import Element.AddDiagnosisGroup
 import Element.AddInvestigationGroup
 import Element.AddMedicationGroup
 import Element.EditPatientBasicGroup
+import Element.EditPreviousNotes
 import Element.EditStemWithPreview
 import Element.MajorMinorColumn
 import Element.PageContainer
+import Element.Tailwind exposing (tailwind)
 import Html exposing (Html, hr)
 import Http
 import List
@@ -145,6 +147,7 @@ type PatientResultMsg
 type PreviousNoteMsg
     = ChangedBrief String
     | ChangedFull String
+    | ChangedDate String
 
 
 
@@ -491,6 +494,10 @@ updateNewPreviousNote msg ({ newPatientPreviousNote } as model) =
             { model | newPatientPreviousNote = { newPatientPreviousNote | full = string } }
                 |> withCmdNone
 
+        ChangedDate string ->
+            { model | newPatientPreviousNote = { newPatientPreviousNote | date = string } }
+                |> withCmdNone
+
 
 
 -- | SUBSCRIPTIONS
@@ -520,9 +527,20 @@ view model =
                         , onChangeUrn = ChangedPatient << ChangedUrn
                         , onChangeVisitDateTime = ChangedPatient << ChangedVisitDateTime
                         }
+                    , hr [ tailwind "my-4" ] []
                     , Element.EditStemWithPreview.view
                         { patient = model.patient
                         , onChangeStem = ChangedPatient << ChangedStem
+                        }
+                    , hr [ tailwind "my-4" ] []
+                    , Element.EditPreviousNotes.view
+                        { patient = model.patient
+                        , newNote = model.newPatientPreviousNote
+                        , onChangeNewDate = ChangedNewPreviousNote << ChangedDate
+                        , onChangeNewBrief = ChangedNewPreviousNote << ChangedBrief
+                        , onChangeNewFull = ChangedNewPreviousNote << ChangedFull
+                        , onAddNote = ChangedPatient AddedPreviousNote
+                        , onDeleteNote = ChangedPatient << DeletedPreviousNote
                         }
                     ]
                 , minor =
