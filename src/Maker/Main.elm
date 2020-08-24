@@ -6,9 +6,10 @@ import Element.AddDiagnosisGroup
 import Element.AddInvestigationGroup
 import Element.AddMedicationGroup
 import Element.EditPatientBasicGroup
+import Element.EditStemWithPreview
 import Element.MajorMinorColumn
 import Element.PageContainer
-import Html exposing (Html, div, text)
+import Html exposing (Html, hr)
 import Http
 import List
 import List.Extra
@@ -518,6 +519,10 @@ view model =
                         , onChangeGender = ChangedPatient << ChangedGender
                         , onChangeUrn = ChangedPatient << ChangedUrn
                         , onChangeVisitDateTime = ChangedPatient << ChangedVisitDateTime
+                        }
+                    , Element.EditStemWithPreview.view
+                        { patient = model.patient
+                        , onChangeStem = ChangedPatient << ChangedStem
                         }
                     ]
                 , minor =
