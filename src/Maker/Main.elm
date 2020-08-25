@@ -360,7 +360,7 @@ updatePatient msg ({ patient, newPatientPreviousNote, newPatientResult, newPatie
             case Note.validate newPatientPreviousNote of
                 Valid validNote ->
                     { model
-                        | patient = { patient | previousNotes = validNote :: patient.previousNotes }
+                        | patient = { patient | previousNotes = List.sortBy .date (validNote :: patient.previousNotes) }
                         , newPatientPreviousNote = Note.default
                     }
                         |> withCmdNone

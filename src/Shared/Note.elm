@@ -25,13 +25,13 @@ validate : Note -> Validating Note
 validate note =
     let
         fullGreaterThan8 =
-            (note.full |> String.trim |> String.length) > 8
+            (note.full |> String.trim |> String.length) > 3
 
         briefGreaterThan8 =
-            (note.brief |> String.trim |> String.length) > 8
+            (note.brief |> String.trim |> String.length) > 3
 
         dateExists =
-            (note.brief |> String.trim |> String.length) > 1
+            (note.brief |> String.trim |> String.length) > 0
     in
     if fullGreaterThan8 && briefGreaterThan8 && dateExists then
         Valid note

@@ -24,6 +24,10 @@ button:disabled {
     font-weight: bold; 
 }
 
+summary:hover {
+    cursor: pointer;
+}
+
 /* input {
     display: block;
     margin: 1rem auto;
